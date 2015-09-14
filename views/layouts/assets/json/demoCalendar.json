@@ -1,0 +1,30 @@
+[{
+            title: 'Networking',
+            start: new Date(y, m, d, 20, 0),
+            end: new Date(y, m, d, 21, 0),
+            css: 'event-job',
+            category: 'Job',
+            allDay: false,
+            content: 'Out to design conference'
+        }, {
+            title: 'Bootstrap Seminar',
+            start: new Date(y, m, d - 5),
+            end: new Date(y, m, d - 2),
+            css: 'event-offsite',
+            category: 'Off-site work',
+            allDay: true
+        }, {
+            title: 'Lunch with Nicole',
+            start: new Date(y, m, d - 3, 12, 0),
+            end: new Date(y, m, d - 3, 12, 30),
+            css: 'event-generic',
+            category: 'Generic',
+            allDay: false
+        }, {
+            title: 'Corporate Website Redesign',
+            start: new Date(y, m, d + 5),
+            end: new Date(y, m, d + 10),
+            css: 'event-todo',
+            category: 'To Do',
+            allDay: true
+        }]
