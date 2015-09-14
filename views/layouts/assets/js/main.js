@@ -16,6 +16,9 @@ var isIE8 = false,
     mainContent = $(".main-content"),
     footer = $(".main-wrapper > footer"),
     language='<?php echo $this->language;?>';
+	var t = function(key){
+		return i18n.t(key.toLowerCase());
+	};
 var thisSlider, actualItemWidth, newItemWidth, activeAnimation = false,
     hoverSideBar = false;;
 	$.urlParam = function(name){
@@ -148,6 +151,16 @@ var Main = function() {
         }
 
     };
+	var runTranslate=function(){
+				$.getJSON('/data/default/trad', function(data){ 
+					var option={    resStore: data.store, lng: data.lng , 
+									useLocalStorage: true  ,
+									localStorageExpirationTime: 86400  // in ms, default 1 week
+								};
+					i18n.init(option);
+					console.log( 'Offsite 1 ', data.lng, i18n.t("offsite"),  t("Offsite") );		
+				});			
+	};
     //function to get viewport/window size (width and height)
     var viewport = function() {
         var e = window,
@@ -681,7 +694,7 @@ var Main = function() {
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     backdrop.remove();
-                    element.html("<h4>Le contenu n'a pu �tre charg�.</h4>").addClass("shake");
+                    element.html("<h4>Le contenu n'a pu être chargé.</h4>").addClass("shake");
 
                 }
             });
@@ -1459,10 +1472,13 @@ var Main = function() {
     		} );
     	}
     };
+
+
     return {
         //main function to initiate template pages
         init: function() {
-            runWIndowResize();
+            runTranslate();
+			runWIndowResize();
             runInit();
             runQuickChat();
             runToggleSideBars();

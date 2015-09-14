@@ -33,20 +33,9 @@ class DefaultController extends Action {
 		$lang=($this->language=="fr")?"fr_FR":$this->language;
 		foreach($translationObjects as $t):
 	 	if ( $t->getTranslation($lang) and $t->getKey() ) 
- 	 		$tab[$this->language]["translation"][$t->getKey()]=$t->getTranslation($lang);//getTranslations();
+ 	 		$tab['store'][$this->language]["translation"][$t->getKey()]=$t->getTranslation($lang);//getTranslations();
 		endforeach;
-/*		$tab=array();
-		$tab["fr"]["translation"]=array(
-				"name"=>"nom",
-				"send"=>"envoyer",
-				"tabConfig"=>array(
-						"name"=>"nom"
-				)
-				
-		);
-		if($this->language!= "fr"):
-		endif;
-*/
+		$tab['lng'] = $this->language;
 		$this->getResponse()
 			->setHeader('Content-Type', 'text/javascript')
 			->appendBody( \Zend_Json::encode( $tab ) );

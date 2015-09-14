@@ -90,9 +90,9 @@ var Calendar = function() {
                 newEvent.end = moment(new Date(date)).add('hours', 1);
                 newEvent.allDay = true;
                 newEvent.className = $categoryClass;
-                newEvent.category = $category;
+                newEvent.category = t($category);
                 newEvent.content = "";
-
+				console.log("save event dropped",$category, t($category));
 				saveEvent(newEvent);
 
              //   $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
@@ -238,8 +238,8 @@ var Calendar = function() {
                         eventCategory = demoCalendar[i].category;
                     }
                     $('.form-full-event .event-categories option').filter(function() {
-                    	console.log(i18n.t(eventCategory), eventCategory, $(this).text());
-                        return ($(this).text() == i18n.t(eventCategory) );
+                    	console.log(t(eventCategory), eventCategory, $(this).text());
+                        return ($(this).text().toLowerCase() == t(eventCategory) );
                     }).prop('selected', true);
                     $('.form-full-event .event-categories').selectpicker('render');
                     if (typeof demoCalendar[i].content !== "undefined" && demoCalendar[i].content !== "") {

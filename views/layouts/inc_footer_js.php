@@ -82,11 +82,7 @@
 		 
 			jQuery(document).ready(function() {
 			 	TableExport.init();
-				$.getJSON('/data/default/trad', function(data){ 
-					var option={ resStore: data, lng: '<?php echo $this->language;?>' };
-					i18n.init(option);
-				});
-//				console.log( 'delete <?php echo $this->language;?> ',i18n.t("delete") );			
+				console.log( 'Offsite 2 <?php echo $this->language;?> ',i18n.t("offsite") );	
 			});
 		 
 		</script>
