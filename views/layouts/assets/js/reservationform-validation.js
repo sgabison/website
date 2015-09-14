@@ -27,24 +27,75 @@ var ReservationFormValidator = function () {
 	var thisDay=today.getDay();
 	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 	var offdays = $('#offdays').val().split(',');
-	console.log( offdays );
-	console.log( days );
+	var closeddays = $('#closeddays').val();
+	var inRange=false;
+/*
+	$('#tel').blur(function(){
+		if($(this).val().length == 10){
+			$.blockUI({
+				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
+			});
+			$.ajax({
+				url: '/data/guest/getguest?tel='+$(this).val(),
+				dataType: 'json',
+				type:'POST', //obligatoire
+				contentType: "application/json; charset=utf-8",
+				success: function(json) {
+					$.unblockUI();
+					if (json.success || json.success == 'true') {
+						$('#firstlastname').val(json.data.lastname);
+						$( "#firstlastname" ).focus();
+						$('#email').val(json.data.email);
+						$( "#email" ).focus();
+						$( ".panel-collapse" ).focus();
+						if( json.data.bookingnotes != ""){
+							$('.panel-collapse').removeClass('expand');
+							$('.panel-collapse').addClass('collapses');
+							$('#tagpanel').show();
+							$('.panel-collapse').find("span").text("Collapses");
+							$('#tagpanel').focus();
+							$('#tags_1').addTag( json.data.bookingnotes );
+						}
+					} else {
+						$('#firstlastname').val('');
+						$('#email').val('');
+					}
+				},
+				error: function (request, status, error) {
+					alert(error);
+					//alert(JSON.stringify(request));
+				}        
+			});
+		}
+	});
+*/
 	$('.input-group.date').datepicker({ 
-		startDate: '0d', 
-		todayBtn: 'linked', 
-		todayHighlight: true, 
+		startDate: "0d",
+		language: $("#language").val(),
+		todayBtn: "linked", 
+		todayHighlight: false, 
 		defaultDate: new Date(), 
-		autoclose: true, 
-		//datesDisabled: offdays, 
-		format: 'dd-mm-yyyy',
+		autoclose: true,
+		datesDisabled: offdays, 
+		format: "dd-mm-yyyy",
+		orientation: "bottom-left",
 		beforeShowDay: function (date){
 			if( $.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0){
 				console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
 				return {
-					tooltip: 'Restaurant is closed',
+					tooltip: 'Le Restaurant est fermé',
                     classes: 'today',
                     enabled: false
 				}
+			}
+			var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
+			var dayFormat = date.getDay();
+			console.log( dayFormat );
+			if( date == today ){
+			  return {classes: 'activeDayClass', tooltip: 'today'};
+			}
+			if( closeddays.search(dayFormat) >= 0){ 
+			  return {classes: 'disabled today', tooltip: 'Aucun service ce jour'};
 			}
 		}
 	});
@@ -70,7 +121,7 @@ var ReservationFormValidator = function () {
 			, newReservation.bookingnotes = $("#tags_1").val()
 			, newReservation.METHOD = $("#method").val();
 			$.blockUI({
-				message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
 			});
 			var reponse= new Object; // object(id,method =(PUT,GET,POST,DELETE),data)
 			reponse.data=newReservation;
@@ -153,16 +204,16 @@ var ReservationFormValidator = function () {
 					j++;
 					var res=nyckel.split("-");
 					var classresult;
-					if( res[2] != 'ok' ){
+					if( res[2] == 'ok' ){
 						classresult = 'disabled';
-					}else if( res[3] != 'ok' ){
+					}else if( res[3] == 'ok' ){
 						classresult = 'disabled';
 					}else if( res[4] != 'selected' ){
 						classresult = 'btn-light-orange';
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success'> "+res[2]+" </span><span class='badge badge-danger'> "+res[3]+" </span><br>"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
@@ -195,7 +246,6 @@ var ReservationFormValidator = function () {
 		$('.bookbutton').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
 		$('#calendarbox').addClass('no-display');
-		$('#locationbox').addClass('no-display');
 		$('#locationlink').removeClass('no-display');
 		var locationid=$('#select_location').val();
 		var locationname=$('#select_location option:selected' ).text();
@@ -268,13 +318,11 @@ var ReservationFormValidator = function () {
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
         $.validator.addMethod("FullDate", function () {
-            //if all values are selected
-            if ($("#dd").val() != "" && $("#mm").val() != "" && $("#yyyy").val() != "") {
-                return true;
-            } else {
-                return false;
-            }
+            if ($("#dd").val() != "" && $("#mm").val() != "" && $("#yyyy").val() != "") { return true; } else { return false; }
         }, 'Please select a day, month, and year');
+        $.validator.addMethod("fulltel", function () {
+		    return /^(\d{10})( - )(.*)$/.test(value); 
+		}, 'Please enter a valid telephone number on 10 digits.');
         form1.validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
@@ -365,6 +413,66 @@ var ReservationFormValidator = function () {
 			$('#tags_1').addTag( $(this).val() );
 		});
 	};
+	$('input.typeahead').typeahead({
+		onSelect: function(item) {
+           	$('.telephone').removeClass('fa-refresh fa-spin');
+           	$('.telephone').addClass('fa-phone');
+	        console.log('selecteditem',item.value);
+	        var completeset=item.value.split("----");
+	        console.log( 'tel', completeset[0] );
+	        $('#tel').val( completeset[0] );
+	        $( "#tel" ).focus();     
+			$('#firstlastname').val( completeset[1] );
+			$( "#firstlastname" ).focus();
+			$('#email').val( completeset[2] );
+			$( "#email" ).focus();
+			$( ".panel-collapse" ).focus();
+			if( completeset[3] != ""){
+				$('.panel-collapse').removeClass('expand');
+				$('.panel-collapse').addClass('collapses');
+				$('#tagpanel').show();
+				$('.panel-collapse').find("span").text("Collapses");
+				$('#tagpanel').focus();
+				$('#tags_1').addTag( completeset[3] );
+			}else{
+				$('.panel-collapse').addClass('expand');
+				$('.panel-collapse').removeClass('collapses');				
+				$('#tagpanel').hide();
+				$('.panel-collapse').find("span").text("Expand");
+				$('#tags_1_tagsinput').val('');
+			}
+	    },
+	    ajax: {
+	        url: "/data/guest/get-guest-tel",
+	        timeout: 0,
+	        displayField: "tel",
+	        valueField: "complete",
+	        triggerLength: 3,
+	        method: "get",
+	        loadingClass: "loading-circle",
+	        preDispatch: function (query) {
+	            //showLoadingMask(true);
+	            $('.telephone').addClass('fa-refresh fa-spin');
+	            $('.telephone').removeClass('fa-phone');
+	            return {
+	                search: query
+	            }
+	        },
+	        preProcess: function (data) {
+	            //showLoadingMask(false);
+	            if (data.success === false) {
+	            	$('.telephone').removeClass('fa-refresh fa-spin');
+	            	$('.telephone').addClass('fa-phone');
+					$('#firstlastname').val('');
+					$('#email').val('');
+	                return false;
+	            }
+	            // We good!
+	            return data.data;
+	        }
+	    }
+	});
+	
     return {
         //main function to initiate template pages
         init: function () {

@@ -737,8 +737,6 @@ body.outlook p {
     <tr>
         <td class="center" align="center" valign="top">
             <center>
-
-
                 <table class="row header">
                     <tr>
                         <td class="center" align="center" style="border-bottom: 1px solid #999; padding-bottom: 10px;">
@@ -747,11 +745,12 @@ body.outlook p {
                                 <table class="container">
                                     <tr>
                                         <td class="wrapper last">
-
                                             <table class="twelve columns">
                                                 <tr>
                                                     <td class="six sub-columns">
+<!--
                                                         <img style="width: 180px;" width="180" src="http://demo.pimcore.org/website/static/img/logo-standard.png">
+-->
                                                     </td>
                                                     <td class="expander"></td>
                                                 </tr>
@@ -788,78 +787,16 @@ body.outlook p {
                                     </td>
                                 </tr>
                             </table>
-
-
-                            <table class="row footer">
-                                <tr>
-                                    <td class="wrapper">
-
-                                        <table class="six columns">
-                                            <tr>
-                                                <td class="left-text-pad">
-
-                                                    <h5>Connect With Us:</h5>
-
-                                                    <table class="tiny-button facebook">
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#">Facebook</a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-
-                                                    <br>
-
-                                                    <table class="tiny-button twitter">
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#">Twitter</a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-
-                                                    <br>
-
-                                                    <table class="tiny-button google-plus">
-                                                        <tr>
-                                                            <td>
-                                                                <a href="#">Google +</a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-
-                                                </td>
-                                                <td class="expander"></td>
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                    <td class="wrapper last">
-
-                                        <table class="six columns">
-                                            <tr>
-                                                <td class="last right-text-pad">
-                                                    <?= $this->wysiwyg("contactInfo") ?>
-                                                </td>
-                                                <td class="expander"></td>
-                                            </tr>
-                                        </table>
-
-                                    </td>
-                                </tr>
-                            </table>
-
-
+<!--
                             <table class="row">
                                 <tr>
                                     <td class="wrapper last">
-
                                         <table class="twelve columns">
                                             <tr>
                                                 <td align="center">
                                                     <center>
                                                         <p style="text-align:center;">
-                                                            <?= $this->link("footerLink1") ?> |
+                                                           < <?= $this->link("footerLink1") ?> |
                                                             <?= $this->link("footerLink2") ?> |
                                                             <?= $this->link("footerLink3") ?>
                                                         </p>
@@ -868,11 +805,10 @@ body.outlook p {
                                                 <td class="expander"></td>
                                             </tr>
                                         </table>
-
                                     </td>
                                 </tr>
                             </table>
-
+-->
                             <!-- container end below -->
                         </td>
                     </tr>

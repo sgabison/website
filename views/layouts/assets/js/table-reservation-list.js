@@ -1,10 +1,12 @@
 var TableReservationList = function () {
 	"use strict";
-	var guestid='test'; 
+	var table;
 	var locationid;
 	var editor;
 	var calendar=$('#calendar').val();
 	var servingid=$('#servingid').val();
+	var guestid=$('#guestid').val(); 
+	var cancelled=$('#cancelled').val(); 
 	var runInputLimiter = function() {
 		$('.limited').inputlimiter({
 			remText: 'You only have %n character%s remaining...',
@@ -15,6 +17,27 @@ var TableReservationList = function () {
 //	if( $('#warning').val() == 'search' ){
 //		window.location.href = '/liste-reservations-search';
 //	}
+	$(".search-select").select2({
+		placeholder: "Select a State",
+		allowClear: false
+	});
+	// START-----INITIAL ROW SELECTION CRITERIA
+	$("input[type='checkbox'].make-switch").bootstrapSwitch();
+	if( $('#arrived').val() == 1){
+		$('#checkarrived').prop( "checked", true );
+	}
+	if( $('#cancelled').val() == 1){
+		$('#checkcancelled').prop( "checked", true );
+	}
+    // END------INITIAL ROW SELECTION CRITERIA	
+	// START-----INITIAL COLUMN SELECTION CRITERIA
+ 	$(".search-select").on("select2-removed", function(e) {
+    	console.log(e.val);
+    })
+	$(".search-select").on("select2-selecting", function(e) {
+    	console.log(e.val);
+    })
+    // END------INITIAL COLUMN SELECTION CRITERIA
 	$.urlParam = function(name){
 	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 	    if (results==null){
@@ -24,24 +47,20 @@ var TableReservationList = function () {
 	       return results[1] || 0;
 	    }
 	}
-	if( $.urlParam('selectedLocationId') ){
-		locationid=$.urlParam('selectedLocationId');
+	//START-----DISPLAY GUEST BOX OR INFO BOX
+	if( $.urlParam('guestid') ){
+		$('.actionitems').addClass('no-display');
+		$('.guestactionitems').removeClass('no-display');
 	}else{
-		locationid=$('#defaultlocationid').val();
+		$('.actionitems').removeClass('no-display');
+		$('.guestactionitems').addClass('no-display');
 	}
+    var locationid=$('#selectedLocationId').val();
+	// END-----DISPLAY GUEST BOX OR INFO BOX
 	var initModals = function() {
 		$.fn.modalmanager.defaults.resize = true;
 		$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
 		var $modal = $('#ajax-modal');
-//		$('.demo').on('click', function() {
-//			// create the backdrop and wait for next modal to be triggered
-//			$('body').modalmanager('loading');
-//			setTimeout(function() {
-//				$modal.load('/send-mail-message', '', function() {
-//					$modal.modal();
-//				});
-//			}, 1000);
-//		});
 		$modal.on('click', '.update', function() {
 			$modal.modal('loading');
 			setTimeout(function() {
@@ -60,12 +79,12 @@ var TableReservationList = function () {
 	        '<tr>'+
 	            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
 	            '<td><b>'+d.guestemail.toUpperCase()+'</b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" class="sendmail btn btn-xs btn-blue"><i class="fa fa-lg fa-envelope-o"></i> Send MAIL</a></td>'+
+				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-xs btn-blue"><i class="fa fa-lg fa-envelope-o"></i> Send MAIL</a></td>'+
 	        '</tr>'+
 	        '<tr>'+
 	            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
 	            '<td><b>'+d.guesttel+'<b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" class="sendtext btn btn-xs btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> Send SMS</a></td>'+
+				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-xs btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> Send SMS</a></td>'+
 	        '</tr>'+
 	        '<tr>'+
 	            '<td>Notes:</td>'+  '<td colspan="2">' + html + '</td>'+
@@ -76,58 +95,60 @@ var TableReservationList = function () {
 		var backdrop = $('.ajax-white-backdrop');
 		backdrop.remove();
 		var oTable=$("#reservationList");
-		var url ="/data/reservation/get-list?locationid="+locationid+"&guestid="+guestid+"&calendar="+calendar+"&servingid="+servingid;
+		var url ="/data/reservation/get-list?locationid="+locationid+"&guestid="+guestid+"&calendar="+calendar+"&servingid="+servingid+"&cancelled="+cancelled;
 		var editor = new $.fn.dataTable.Editor( {
-				ajax: url,
-				table: "#reservationList",
-				fields: [ {
-						label: "start:",
-						name: "start",
-						type: "readonly"
-					}, {
-						label: "extra:",
-						name: null
-					}, {
-						label: "ID:",
-						name: "id"
-					}, {
-						label: "guestname:",
-						name: "guestname"
-					}, {
-						label: "partysize:",
-						name: "partysize"
-					}, {
-						label: "BookingRef:",
-						name: "bookingref",
-						type: "hidden"
-					}, {
-						label: "BookingNotes:",
-						name: "bookingnotes"
-					}, {
-						label: "Status:",
-						name: "status",
-						type:  "select",
-						options: ['Telephone', 'Internet', 'Fullfilled', 'Cancelled']
-					}, {
-		                label:     "Arrived:",
-		                name:      "arrived",
-		                type:      "checkbox",
-		                separator: "|",
-		                options:   [
-		                    { label: '', value: 1 }
-		                ]
-            		}, {
-						label: "Guestid:",
-						name: "guestid",
-						type: "hidden"
-					}, {
-						name: "guestemail",
-						type: "hidden"
-					}, {
-						name: "guesttel",
-						type: "hidden"
-					}
-				]
+			ajax: url,
+			table: "#reservationList",
+			fields: [ {
+					name: "datereservation",
+					type: "hidden"
+				}, {
+					label: "start:",
+					name: "start",
+					type: "readonly"
+				}, {
+					label: "extra:",
+					name: null
+				}, {
+					label: "ID:",
+					name: "id"
+				}, {
+					label: "guestname:",
+					name: "guestname"
+				}, {
+					label: "partysize:",
+					name: "partysize"
+				}, {
+					label: "BookingRef:",
+					name: "bookingref",
+					type: "hidden"
+				}, {
+					label: "BookingNotes:",
+					name: "bookingnotes"
+				}, {
+					label: "Status:",
+					name: "status",
+					type:  "select",
+					options: ['Telephone', 'Internet', 'Fullfilled', 'Cancelled']
+				}, {
+	                label:     "Arrived:",
+	                name:      "arrived",
+	                type:      "checkbox",
+	                separator: "|",
+	                options:   [
+	                    { label: '', value: 1 }
+	                ]
+           		}, {
+					label: "Guestid:",
+					name: "guestid",
+					type: "hidden"
+				}, {
+					name: "guestemail",
+					type: "hidden"
+				}, {
+					name: "guesttel",
+					type: "hidden"
+				} ]
 			} );
 			// Edit record 
 			oTable.on('click', 'a.editor_edit', function (e) {
@@ -147,22 +168,11 @@ var TableReservationList = function () {
 					buttons: 'Delete'
 				} );
 			} );
-//			oTable.on( 'dblclick', 'tbody tr', function () {
-//			  console.log( $(this).attr('id') );
-//				$('body').modalmanager('loading');
-//				setTimeout(function() {
-//					var $modal = $('#ajax-modal');
-//					$modal.load('/send-mail-message', '', function() {
-//						$modal.modal();
-//					});
-//				}, 1000);			  
-//			} );
-		    oTable.on( 'change', 'input.editor-active', function () {
-		        editor
-		            .edit( $(this).closest('tr'), false )
-		            .set( 'arrived', $(this).prop( 'checked' ) ? 1 : 0 )
-		            .submit();
-		        toastr.success("reussi" + ' ' +"merci");
+		    oTable.on( 'switchChange.bootstrapSwitch', 'input.editor-active', function () {
+		        editor.edit( $(this).closest('tr'), false ).set( 'arrived', $(this).bootstrapSwitch('state') ? 1 : 0 ).submit();
+		        //if( $(this).bootstrapSwitch('state') ){ $('input.editor-active').prop('checked', true);}
+		        console.log( 'input.editor-active'+$('input.editor-active').val() );
+		        //toastr.success("reussi" + ' ' +"merci");
 		    } );
 			// Activate an inline edit on click of a oTable cell
 			$('a.editor_create').on('click', function (e) {
@@ -197,11 +207,11 @@ var TableReservationList = function () {
 				$('.sendmail').on('click', function(e) {
 					// create the backdrop and wait for next modal to be triggered
 					$('body').modalmanager('loading');
-					setTimeout(function() {
-						$modal.load('/send-mail-message?guestemail='+$(e.target).attr('data'), '', function() {
+					//setTimeout(function() {
+						$modal.load('/send-mail-message?guestemail='+$(e.target).attr('data')+'&resaid='+$(e.target).attr('resa'), '', function() {
 							$modal.modal();
 						});
-					}, 1000);
+					//}, 1000);
 				});	        
 				$('.sendtext').on('click', function(e) {
 					// create the backdrop and wait for next modal to be triggered
@@ -213,7 +223,15 @@ var TableReservationList = function () {
 					}, 1000);
 				});	 
 		    } );
-			var table = oTable.DataTable( {
+		 	$(".search-select").on("select2-removed", function(e) {
+		        var column = table.column( e.val );
+		        column.visible( ! column.visible() );
+		    })
+			$(".search-select").on("select2-selecting", function(e) {
+		        var column = table.column( e.val );
+		        column.visible( ! column.visible() );
+		    })
+			table = oTable.DataTable( {
 				fnCreatedRow: function( row, data, dataIndex ) {
 					if ( data['status'] === 'Cancelled' ){
 						console.log( row.id );
@@ -237,6 +255,10 @@ var TableReservationList = function () {
 		                "data":           null,
 		                "defaultContent": ''
 		            },
+					{ 
+						"data": "datereservation", 
+						"visible": false
+					},
 					{ data: "start" },
 					{ data: "id" },
 					{ 
@@ -251,7 +273,7 @@ var TableReservationList = function () {
 							if ( cellData > 3 ) {
 					        	$(td).css('color', 'red');
 					      	}
-						    }
+						}
 					},
 					{ 
 						"data": "bookingref", 
@@ -275,17 +297,24 @@ var TableReservationList = function () {
 		                	},
 		                "className": "dt-body-center"	
 					},
-					{ data: "status" },
+					{ 
+						"data": "status",
+						"className": "cancelstatus"
+					},
 					{
 		                "data":   "arrived",
 		                "render": function ( data, type, row ) {
-							//$("input[type='checkbox'].make-switch").bootstrapSwitch();
-		                    if ( type === 'display' ) {
-		                        //return '<label class="checkbox-inline"><input type="checkbox" class="checkbox editor-active make-switch"></label>';
-		                        return '<input type="checkbox" class="checkbox editor-active make-switch">';
-		                    }
-		                    return data;
-		                	},
+		                	if( row.status !="Cancelled" ){
+								$("input[type='checkbox'].make-switch").bootstrapSwitch();
+								if( data == 1 ){
+			                    	return '<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>';
+								}else{
+									return '<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch">';
+								}
+		                	}else{
+		                		return '';
+		                	}
+		                },
 		                "className": "dt-body-center"
 					},
 					{ 
@@ -333,11 +362,50 @@ var TableReservationList = function () {
 					]
 				},
 				rowCallback: function ( row, data ) {
-		            // Set the checked state of the checkbox in the table
-		            $('input.editor-active', row).prop( 'checked', data.arrived == 1 );
+		        	var $row=$(row);
+		            if( data.arrived == '1'){
+						$row.addClass('success');
+		            }else{
+		            	$row.removeClass('success');
+		            }
 		        }
+
 			} );
 	};
+    $('#checkcancelled').on('switchChange.bootstrapSwitch', function() {
+    	$("#reservationList").dataTable().fnDraw();
+    	return false;
+    });
+    $('#checkarrived').on('switchChange.bootstrapSwitch', function() {
+    	$("#reservationList").dataTable().fnDraw();
+    	return false;
+    });
+	$.fn.dataTableExt.afnFiltering.push(
+   		function( oSettings, aData, iDataIndex ) {
+			var nTr = oSettings.aoData[ iDataIndex ].nTr;
+			console.log( 'checkarrived', $('#checkarrived').is(":checked") );
+			console.log( 'arrived', aData[10] );
+			console.log( 'checkcancelled', $('#checkcancelled').is(":checked") );
+			console.log( 'cancelled', aData[9] );
+			if( aData[10]=='<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>' ){
+				if( $('#checkarrived').is(":checked") ){
+					return false;
+				}else{
+					return true;
+				}
+			} else {
+				if( aData[9]=='Cancelled' ){
+					if( $('#checkcancelled').is(":checked") ){
+						return false;
+					}else{
+						return true;
+					}					
+				}{
+					return true;
+				}
+			}
+   		}
+	);
     return {
         //main function to initiate template pages
         init: function () {

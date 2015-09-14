@@ -1,25 +1,5 @@
 var ServingFormValidator = function () {
 	"use strict";
-	var initModals = function() {
-		$.fn.modalmanager.defaults.resize = true;
-		$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
-		var $modal = $('#ajax-modal');
-		$('.demo').on('click', function() {
-			// create the backdrop and wait for next modal to be triggered
-			$('body').modalmanager('loading');
-			setTimeout(function() {
-				$modal.load('http://demo.gabison.com/fr/booking/servingsetup?servingid=98', '', function() {
-					$modal.modal();
-				});
-			}, 1000);
-		});
-		$modal.on('click', '.update', function() {
-			$modal.modal('loading');
-			setTimeout(function() {
-				$modal.modal('loading').find('.modal-body').prepend('<div class="alert alert-info fade in">' + 'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' + '</div>');
-			}, 1000);
-		});
-	};
 	$.urlParam = function(name){
 	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 	    if (results==null){
@@ -30,6 +10,17 @@ var ServingFormValidator = function () {
 	    }
 	};
 	$("input[type='checkbox'].make-switch").bootstrapSwitch();
+	
+	$('.initiate').timepicker({showMeridian: false});
+	
+	$('#copytimeslot').click( function(e){
+		e.preventDefault();
+		$('#initiateserving').addClass("no-display");
+		$('#noserving').removeClass("no-display");
+		$(".copystartinitiate").val( $('#startday').val() );
+		$(".copyendinitiate").val( $('#endday').val() );
+	});
+	
 	$.each([ 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' ], function( index, value ) {
 		$('#timestart'+value).timepicker({showMeridian: false});
 		$('#timeend'+value).timepicker({showMeridian: false});
@@ -50,7 +41,7 @@ var ServingFormValidator = function () {
 		});
 	});
 	var servingDataLoad = function () {
-		$('#formsubmit').click( function(){
+//		$('#formsubmit').click( function(){
 			$.each([ 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' ], function( index, value ) {
 				if( $('input[name="closed'+value+'"]').is(':checked') ){ $('#closed'+value).val(0);}else{ $('#closed'+value).val(1);}
 			});
@@ -98,7 +89,7 @@ var ServingFormValidator = function () {
 			, serving.maxtablessunday = $("#maxtablessunday").val()
 			, serving.METHOD = 'PUT';
 			$.blockUI({
-				message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+				message: '<i class="fa fa-spinner fa-spin"></i> Please wait...'
 			});
 			var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 			reponse.data=serving;
@@ -123,7 +114,7 @@ var ServingFormValidator = function () {
 					//alert(JSON.stringify(request));
 				}        
 			});
-		});
+//		});
 	};
 	var validateCheckRadio = function (val) {
         $("input[type='radio'], input[type='checkbox']").on('ifChecked', function(event) {
@@ -135,14 +126,6 @@ var ServingFormValidator = function () {
         var form1 = $('#servingform');
         var errorHandler1 = $('.errorHandler', form1);
         var successHandler1 = $('.successHandler', form1);
-        $.validator.addMethod("FullDate", function () {
-            //if all values are selected
-            if ($("#dd").val() != "" && $("#mm").val() != "" && $("#yyyy").val() != "") {
-                return true;
-            } else {
-                return false;
-            }
-        }, 'Please select a day, month, and year');
         $('#servingform').validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
@@ -254,7 +237,7 @@ var ServingFormValidator = function () {
                 successHandler1.show();
                 errorHandler1.hide();
                 //submit form
-                form1.submit();
+                servingDataLoad();
                 //alert('submitform');
             }
         });
@@ -262,10 +245,8 @@ var ServingFormValidator = function () {
     return {
         //main function to initiate template pages
         init: function () {
-        	initModals();
-            validateCheckRadio();
             runValidator1();
-            servingDataLoad();
+            
         }
     };
 }();

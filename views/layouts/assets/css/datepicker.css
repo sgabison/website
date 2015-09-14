@@ -1,0 +1,441 @@
+/* ---------------------------------------------------------------------- */
+/*  jQuery Tags Input
+/* ---------------------------------------------------------------------- */
+/* line 4, ../sass/vendor/_tags-input.scss */
+div.tagsinput span.tag {
+  background: #e8edf1;
+  border-radius: 8px;
+  color: #555555;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 14px;
+  border: none;
+}
+
+/* line 16, ../sass/vendor/_tags-input.scss */
+div.tagsinput span.tag a {
+  color: #555555;
+  font-size: 14px;
+  font-weight: bold;
+  color: transparent;
+  position: relative;
+}
+
+/* line 24, ../sass/vendor/_tags-input.scss */
+div.tagsinput span.tag a:before {
+  color: #94a1b2;
+  content: "\f00d";
+  font-family: 'FontAwesome';
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+/* line 33, ../sass/vendor/_tags-input.scss */
+div.tagsinput input {
+  font-size: 14px;
+  width: 90px;
+}
+
+/* line 37, ../sass/vendor/_tags-input.scss */
+.not_valid {
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* jQuery Input Limiter
+/* ---------------------------------------------------------------------- */
+/* line 5, ../sass/vendor/_inputlimiter.scss */
+.limiterBox {
+  border-top: 0;
+  background-color: #65BCDA !important;
+  padding: 3px 6px;
+  font-size: 12px;
+  color: #FFF;
+  margin-top: 6px;
+}
+
+/* line 13, ../sass/vendor/_inputlimiter.scss */
+.limiterBox:after {
+  display: none;
+}
+
+/* line 16, ../sass/vendor/_inputlimiter.scss */
+.limiterBox:before {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -8px;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent;
+  border-style: solid;
+  border-bottom-color: #65BCDA;
+  border-width: 0 8px 8px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Bootstrap Datepicker
+/* ---------------------------------------------------------------------- */
+/* line 4, ../sass/vendor/_date-picker.scss */
+.datepicker {
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 10px 16px;
+}
+
+/* line 9, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .datepicker-switch {
+  color: #6f7b8a;
+  font-size: 13px;
+}
+
+/* line 13, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .prev {
+  color: #0090d9;
+  content: "";
+  font-size: 0;
+}
+
+/* line 18, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .prev:before {
+  color: #0090d9;
+  content: "\f053";
+  font-family: 'FontAwesome';
+  font-size: 13px;
+}
+
+/* line 24, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .next {
+  color: #0090d9;
+  content: "";
+  font-size: 0;
+}
+
+/* line 29, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .next:before {
+  color: #0090d9;
+  content: "\f054";
+  font-family: 'FontAwesome';
+  font-size: 13px;
+}
+
+/* line 35, ../sass/vendor/_date-picker.scss */
+.datepicker thead tr .dow {
+  color: #0090d9;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* line 40, ../sass/vendor/_date-picker.scss */
+.datepicker tbody tr .odd {
+  color: #d0d3d8;
+}
+
+/* line 43, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td.day:hover {
+  background: none repeat scroll 0 0 #eeeeee;
+  opacity: 0.65;
+}
+
+/* line 47, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td span {
+  border-radius: 4px;
+}
+
+/* line 50, ../sass/vendor/_date-picker.scss */
+.datepicker th, .datepicker td {
+  padding: 5.5px !important;
+}
+
+/* line 53, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td.old, .datepicker table tr td.new {
+  color: #d0d3d8;
+}
+
+/* line 56, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+  background-image: none;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+/* line 61, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td.today, .datepicker table tr td.today:hover, .datepicker table tr td.today.disabled, .datepicker table tr td.today.disabled:hover {
+  background-color: #e5e9ec;
+  background-image: none;
+  color: #ffffff;
+}
+
+/* line 66, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active.active:hover, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled.disabled:hover, .datepicker table tr td.active[disabled], .datepicker table tr td.active[disabled]:hover, .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active.disabled[disabled]:hover {
+  background-color: #0090d9;
+}
+
+/* line 69, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+  background-image: none;
+  border: medium none;
+  text-shadow: none;
+}
+
+/* line 74, ../sass/vendor/_date-picker.scss */
+.datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.active, .datepicker table tr td span.active.active:hover, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled.disabled:hover, .datepicker table tr td span.active[disabled], .datepicker table tr td span.active[disabled]:hover, .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active.disabled[disabled]:hover {
+  background-color: #0090d9;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Bootstrap Datepicker
+/* ---------------------------------------------------------------------- */
+/* line 4, ../sass/vendor/_time-picker.scss */
+.bootstrap-timepicker-widget table td a i {
+  color: #0090d9;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Bootstrap Date Range Picker
+/* ---------------------------------------------------------------------- */
+/* line 4, ../sass/vendor/_date-range-picker.scss */
+.daterangepicker .calendar th {
+  color: #0090d9;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Calendar
+/* ---------------------------------------------------------------------- */
+/* line 4, ../sass/vendor/_calendar.scss */
+#calendar {
+  position: relative;
+}
+
+/* line 7, ../sass/vendor/_calendar.scss */
+.fc-event, #event-categories .event-category {
+  padding: 2px 5px;
+  background: #edeef0 !important;
+  border: 1px solid #e8e9ec !important;
+  color: #8B91A0 !important;
+}
+
+/* line 13, ../sass/vendor/_calendar.scss */
+#event-categories .event-category {
+  cursor: move;
+}
+
+/* line 16, ../sass/vendor/_calendar.scss */
+.fc-day-number {
+  margin: 2px 2px 0 0;
+}
+
+/* line 19, ../sass/vendor/_calendar.scss */
+.fc-header-title h2 {
+  color: #8B91A0;
+  font-weight: 200;
+  letter-spacing: -1px;
+}
+
+/* line 24, ../sass/vendor/_calendar.scss */
+.fc-today .fc-day-number {
+  font-weight: bold;
+}
+
+/* line 28, ../sass/vendor/_calendar.scss */
+.fc-state-highlight {
+  background: #F5F5F5 !important;
+}
+
+/* line 31, ../sass/vendor/_calendar.scss */
+.fc-button {
+  color: #858585 !important;
+  height: 40px !important;
+  line-height: 40px;
+  opacity: 0.6;
+}
+
+/* line 37, ../sass/vendor/_calendar.scss */
+.fc-button:hover {
+  opacity: 1;
+}
+
+/* line 40, ../sass/vendor/_calendar.scss */
+.fc-button-prev, .fc-button-next {
+  padding: 0;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  text-indent: -9999px;
+}
+
+/* line 48, ../sass/vendor/_calendar.scss */
+.fc-button-prev .fc-text-arrow, .fc-button-next .fc-text-arrow {
+  font-weight: bold;
+}
+
+/* line 51, ../sass/vendor/_calendar.scss */
+.fc-button-prev:after, .fc-button-next:after {
+  font-family: FontAwesome;
+  text-indent: 0;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* line 60, ../sass/vendor/_calendar.scss */
+.fc-button-prev:after {
+  content: "\f104";
+}
+
+/* line 63, ../sass/vendor/_calendar.scss */
+.fc-button-next:after {
+  content: "\f105";
+}
+
+/* line 66, ../sass/vendor/_calendar.scss */
+.fc-state-default {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border-color: #DDDDDD !important;
+  box-shadow: none !important;
+  color: #666666;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* line 75, ../sass/vendor/_calendar.scss */
+.fc-state-down, .fc-state-active {
+  opacity: 1;
+}
+
+/* line 78, ../sass/vendor/_calendar.scss */
+.fc-header-left {
+  position: absolute !important;
+  top: 0;
+  left: 15px;
+  width: 50% !important;
+}
+
+/* line 84, ../sass/vendor/_calendar.scss */
+.fc-header-right {
+  position: absolute !important;
+  top: 0;
+  right: 15px;
+  width: 50% !important;
+}
+
+/* line 90, ../sass/vendor/_calendar.scss */
+.fc-header-center {
+  display: block !important;
+  padding-top: 60px !important;
+}
+
+/* line 94, ../sass/vendor/_calendar.scss */
+.event-category {
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+
+/* line 101, ../sass/vendor/_calendar.scss */
+.fc-border-separate tr.fc-last th {
+  border-top: none !important;
+  border-left: none !important;
+}
+
+/* line 105, ../sass/vendor/_calendar.scss */
+.fc-border-separate th.fc-last {
+  border-right: none !important;
+}
+
+/* line 108, ../sass/vendor/_calendar.scss */
+.fc-grid th {
+  text-align: right;
+}
+
+/* line 111, ../sass/vendor/_calendar.scss */
+.fc-event {
+  background-color: #F0F0F0;
+  border: none;
+  color: #333333;
+  font-size: 12px;
+}
+
+/* line 117, ../sass/vendor/_calendar.scss */
+.fc-event .fc-content > span:first-child:before, .event-category:before {
+  content: "\f111";
+  font-family: FontAwesome;
+  font-size: 6px;
+  line-height: 16px;
+  padding-right: 5px;
+  color: #00AEFF;
+  float: left;
+}
+
+/* line 126, ../sass/vendor/_calendar.scss */
+.event-category {
+  color: #858585;
+}
+
+/* line 129, ../sass/vendor/_calendar.scss */
+.event-category:before {
+  line-height: 20px;
+}
+
+/* line 132, ../sass/vendor/_calendar.scss */
+.event-cancelled .fc-content > span:first-child:before, .event-category.event-cancelled:before {
+  color: #E6C800;
+}
+
+/* line 135, ../sass/vendor/_calendar.scss */
+.event-home .fc-content > span:first-child:before, .event-category.event-home:before {
+  color: #FF2968;
+}
+
+/* line 138, ../sass/vendor/_calendar.scss */
+.event-overtime .fc-content > span:first-child:before, .event-category.event-overtime:before {
+  color: #711A76;
+}
+
+/* line 141, ../sass/vendor/_calendar.scss */
+.event-generic .fc-content > span:first-child:before, .event-category.event-generic:before {
+  color: #00AEFF;
+}
+
+/* line 144, ../sass/vendor/_calendar.scss */
+.event-job .fc-content > span:first-child:before, .event-category.event-job:before {
+  color: #882F00;
+}
+
+/* line 147, ../sass/vendor/_calendar.scss */
+.event-offsite .fc-content > span:first-child:before, .event-category.event-offsite:before {
+  color: #44A703;
+}
+
+/* line 150, ../sass/vendor/_calendar.scss */
+.event-todo .fc-content > span:first-child:before, .event-category.event-todo:before {
+  color: #FF3B30;
+}
+
+/* line 153, ../sass/vendor/_calendar.scss */
+.fc-view-month .fc-event-time {
+  display: none;
+}
+
+/* line 156, ../sass/vendor/_calendar.scss */
+.fc-icon-fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.33333333em;
+}

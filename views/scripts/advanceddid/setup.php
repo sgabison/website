@@ -177,8 +177,65 @@
 		<div class="col-md-12">
 			<!-- start: FORM VALIDATION 1 PANEL -->
 			<div class="panel panel-white">
+			
+			
+			
+												<div class="tabbable">
+													<ul id="myTab2" class="nav nav-tabs">
+														<li class="active">
+															<a href="#myTab2_example1" data-toggle="tab">
+																Tab 1
+															</a>
+														</li>
+														<li>
+															<a href="#myTab2_example2" data-toggle="tab">
+																Tab 2
+															</a>
+														</li>
+														<li>
+															<a href="#myTab2_example3" data-toggle="tab">
+																Tab 3
+															</a>
+														</li>
+													</ul>
+													<div class="tab-content">
+														<div class="tab-pane fade in active" id="myTab2_example1">
+															<p>
+																Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.
+															</p>
+															<p>
+																Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+															</p>
+														</div>
+														<div class="tab-pane fade" id="myTab2_example2">
+															<p>
+																Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
+															</p>
+															<p>
+																<a href="#myTab2_example3" class="btn btn-blue show-tab">
+																	Go to tab 3
+																</a>
+															</p>
+														</div>
+														<div class="tab-pane fade" id="myTab2_example3">
+															<p>
+																Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.
+															</p>
+															<p>
+																<a href="#myTab2_example1" class="btn btn-purple show-tab">
+																	Return to tab 1
+																</a>
+															</p>
+														</div>
+													</div>
+												</div>			
+			
+			
+			
+			
+			
 				<div class="panel-heading">
-					<h4 class="panel-title">Set up <span class="text-bold">Global values</span></h4>
+					<h4 class="panel-title">Set up <span class="text-bold">Global Default values</span></h4>
 					<div class="panel-tools">
 						<div class="dropdown">
 							<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
@@ -225,94 +282,82 @@
 									<i class="fa fa-ok"></i> Your form validation is successful!
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
+							<div class="col-md-12">
+								<div class="col-md-12 form-group">
 									<label class="control-label">
-										Maximum number of seats <span class="symbol required"></span>
+										Company presentation
 									</label>
-									<input type="number" placeholder="Insert the maximum number of seats" class="form-control" id="maxseats" name="maxseats">
-								</div>
-								<div class="form-group">
-									<label class="control-label">
-										Maximum number of tables <span class="symbol required"></span>
-									</label>
-									<input type="number" placeholder="Insert the maximum number of tables" class="form-control" id="maxtables" name="maxtables">
-								</div>
-								<div class="form-group">
-									<label class="control-label">
-										Unit of time for reservations <span class="symbol required"></span>
-									</label>
-									<select class="form-control" id="resaUnit" name="resaUnit">
-										<option value='15'>15</option>
-										<option value='30'>30</option>
-										<option value='45'>45</option>
-										<option value='60'>60</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label class="control-label">
-										Max Reservations per time unit<span class="symbol required"></span>
-									</label>
-									<input type="number" class="form-control" name="maxResaPerUnit" id="maxResaPerUnit">
-								</div>
-								<div class="form-group">
-									<label class="control-label">
-										Length of the meal<span class="symbol required"></span>
-									</label>
-									<input type="number" class="form-control" name="meallength" id="meallength">
+									<input type="text" placeholder="Text Field" name="presentation" id="presentation" class="form-control limited" maxlength="100">
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label">
-										Gender <span class="symbol required"></span>
-									</label>
-									<div>
-										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="gender" id="gender_female">
-											Female
+								<div class="col-md-12 form-group">
+									<div class="col-md-6">
+										<label class="control-label">
+											Maximum number of seats <span class="symbol required"></span>
 										</label>
-										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="gender"  id="gender_male">
-											Male
-										</label>
+									</div>
+									<div class="col-md-6">
+										<span class="input-icon">
+											<input type="number" placeholder="Indicate the maximum number of seats" class="form-control" id="maxseats" name="maxseats" style="width=20px">
+											<i class="fa fa-hand-o-right"></i>
+										</span>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label">
-												Zip Code <span class="symbol required"></span>
-											</label>
-											<input class="form-control" type="text" name="zipcode" id="zipcode">
-										</div>
+								<div class="col-md-12 form-group">
+									<div class="col-md-6">
+										<label class="control-label">
+											Maximum number of tables <span class="symbol required"></span>
+										</label>
 									</div>
-									<div class="col-md-8">
-										<div class="form-group">
-											<label class="control-label">
-												City <span class="symbol required"></span>
-											</label>
-											<input class="form-control tooltips" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="city" id="city">
-										</div>
+									<div class="col-md-6">										
+										<span class="input-icon">
+										<input type="number" placeholder="Insert the maximum number of tables" class="form-control" id="maxtables" name="maxtables" style="width=20px">
+											<i class="fa fa-hand-o-right"></i>
+										</span>
 									</div>
 								</div>
-								<div class="form-group">
-									<hr>
-									<label class="control-label">
-										<strong>Signup for Rapido Emails</strong> <span class="symbol required"></span>
-									</label>
-									<p>
-										Would you like to review Rapido emails?
-									</p>
-									<div>
-										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="newsletter">
-											No
+								<div class="col-md-12 form-group">
+									<div class="col-md-6">
+										<label class="control-label">
+											Unit of time for reservations <span class="symbol required"></span>
 										</label>
-										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="newsletter">
-											Yes
+									</div>
+									<div class="col-md-6">																				
+										<select class="form-control" id="resaUnit" name="resaUnit">
+											<option value='15'>15</option>
+											<option value='30'>30</option>
+											<option value='45'>45</option>
+											<option value='60'>60</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12 form-group">
+									<div class="col-md-6">
+										<label class="control-label">
+											Max Reservations per time unit<span class="symbol required"></span>
 										</label>
+									</div>
+									<div class="col-md-6">																				
+										<span class="input-icon">
+											<input type="number" placeholder="Indicate the maximum number of reservation per time unit" class="form-control" name="maxResaPerUnit" id="maxResaPerUnit">
+											<i class="fa fa-hand-o-right"></i>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-12 form-group">
+									<div class="col-md-6">
+										<label class="control-label">
+											Length of the meal<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-6">																				
+										<span class="input-icon">
+											<input type="number" placeholder="Indicate the length of the meal"  class="form-control" name="meallength" id="meallength">
+											<i class="fa fa-hand-o-right"></i>
+										</span>
 									</div>
 								</div>
 							</div>
@@ -327,9 +372,6 @@
 						</div>
 						<div class="row">
 							<div class="col-md-8">
-								<p>
-									By clicking REGISTER, you are agreeing to the Policy and Terms &amp; Conditions.
-								</p>
 							</div>
 							<div class="col-md-4">
 								<button class="btn btn-yellow btn-block" type="submit">

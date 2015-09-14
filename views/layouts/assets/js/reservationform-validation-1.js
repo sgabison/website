@@ -19,21 +19,23 @@ var ReservationFormValidator1 = function () {
 	var getDate2=function(date) {
 	    var day = date.getDate();
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
-	}  
-	var	today=new Date();
-	var thisDay=today.getDay();
-	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-	var offdays = $('#offdays').val().split(',');
-	console.log( offdays );
-	console.log( days );	
+	}	
 	var reservationSubmit= function(){
+		var	today=new Date();
+		var thisDay=today.getDay();
+		var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+		var offdays = $('#offdays').val().split(',');
+		var closeddays = $('#closeddays').val();
+		var inRange=false;
 		$('.input-group.date').datepicker({ 
-			startDate: '0d', 
-			todayBtn: 'linked', 
-			todayHighlight: true, 
+			startDate: "0d",
+			language: $("#language").val(),
+			todayBtn: "linked", 
+			todayHighlight: false, 
 			defaultDate: new Date(), 
-			autoclose: true, 
-			format: 'dd-mm-yyyy',
+			autoclose: true,
+			datesDisabled: offdays, 
+			format: "dd-mm-yyyy",
 			beforeShowDay: function (date){
 				if( $.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0){
 					console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
@@ -42,6 +44,15 @@ var ReservationFormValidator1 = function () {
 	                    classes: 'today',
 	                    enabled: false
 					}
+				}
+				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
+				var dayFormat = date.getDay();
+				console.log( dayFormat );
+				if( date == today ){
+				  return {classes: 'activeDayClass', tooltip: 'today'};
+				}
+				if( closeddays.search(dayFormat) >= 0){ 
+				  return {classes: 'disabled today', tooltip: 'No serving this day'};
 				}
 			}
 		});
@@ -90,21 +101,20 @@ var ReservationFormValidator1 = function () {
 					j++;
 					var res=nyckel.split("-");
 					var classresult;
-					if( res[2] != 'ok' ){
+					if( res[2] == 'ok' ){
 						classresult = 'disabled';
-					}else if( res[3] != 'ok' ){
+					}else if( res[3] == 'ok' ){
 						classresult = 'disabled';
 					}else if( res[4] != 'selected' ){
-						classresult = 'btn-dark-orange';
-					}else {classresult = 'btn-dark-green';
+						classresult = 'btn-light-orange';
+					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success'> "+res[2]+" </span><span class='badge badge-danger'> "+res[3]+" </span><br>"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
-		});
-		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
+		});		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
 			$( document ).one( slotButton(locationid, selectedid) );
 			$('.slotbutton').bind( 'click', {locationid: locationid}, myfunc2);
 		}else{

@@ -8,7 +8,7 @@
 						</a>
 						<!-- start: LOGO -->
 						<a class="navbar-brand" href="index.html">
-							<img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/logo.png" alt="RésaRapido"/>
+							<img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/logo.png" alt="ResaExpress"/>
 						</a>
 						<!-- end: LOGO -->
 					</div>
@@ -16,41 +16,48 @@
 						<!-- start: TOP NAVIGATION MENU -->
 						<ul class="nav navbar-right">
 							<!-- start: USER DROPDOWN -->
-							<?php if ($this->person instanceof Pimcore\Model\Object\Person) :?>
 							<li class="dropdown current-user">
 								<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
 									<img src="<?php if($this->person->getAvatar() instanceof \Asset) : echo $this->person->getAvatar()->getThumbnail('avatarxs') ; else : echo '#'; endif; ?>" class="img-circle" alt=""> <span class="username hidden-xs"><?= $this->person->getName();?></span> <i class="fa fa-caret-down "></i>
 								</a>
 								<ul class="dropdown-menu dropdown-dark">
 									<li>
-										<a href="/website/views/layouts/pages_user_profile.html">
-											My Profile
+										<a href="/profil">
+											<?php echo $this->t('TXT_MY_PROFILE')?>
+										</a>
+									</li>
+<!--
+									<li>
+										<a href="pages_calendar.html">
+											Mon Calendrier
 										</a>
 									</li>
 									<li>
-										<a href="/website/views/layouts/pages_calendar.html">
-											My Calendar
+										<a href="pages_messages.html">
+											Mes Messages (3)
 										</a>
 									</li>
 									<li>
-										<a href="/website/views/layouts/pages_messages.html">
-											My Messages (3)
-										</a>
-									</li>
-									<li>
-										<a href="/website/views/layouts/utility_lock_screen.html">
+										<a href="utility_lock_screen.html">
 											Lock Screen
 										</a>
 									</li>
+-->
 									<li>
 										<a href="/data/login/logout">
-											Log Out
+											<?php echo $this->t('TXT_LOGOUT')?>
 										</a>
 									</li>
 								</ul>
 							</li>
-							<?php endif;?>
 							<!-- end: USER DROPDOWN -->
+<!--							
+							<li class="right-menu-toggle">
+								<a href="#" class="sb-toggle-right">
+									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
+								</a>
+							</li>
+-->
 						</ul>
 						<!-- end: TOP NAVIGATION MENU -->
 					</div>

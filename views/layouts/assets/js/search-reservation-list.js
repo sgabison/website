@@ -28,12 +28,20 @@ var SearchReservationList = function () {
 		$('#servingbutton').val( $(this).val() );
 		$('#servingid').val( $(this).val() );
 	});
+	//INITIATION
+	$('#calendar').val( currentDate );
+
+	$('#mycalendar').change( function(){
+		$('#calendar').val( $('.mycalendar').val() );
+	});
 	var searchDataLoad = function () {
 		var form1 = $('#searchform');
 		form1.attr('action','/liste-reservations'); 
 		form1.attr('method','POST');
-		$('#submit').click( function(){
-	   		console.log("Submitted");
+		$('#submit').click( function(event){
+			var str = $( "form" ).serialize();
+			event.preventDefault();
+	   		form1.submit();
 		});
 	};
 	return {

@@ -29,7 +29,7 @@
 								<a href="/booking"><i class="fa fa-bar-chart-o"></i> <span class="title"> <?php echo $this->t('TXT_DASHBOARD')?> </span><span class="label label-default pull-right "><?php echo $this->t('TXT_LABEL_DASHBOARD')?></span> </a>
 							</li>
 							<li>
-								<a href="/societe#myTab2_example3"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
+								<a href="/societe#<?php echo strtolower( $this->translate('TXT_SOCIETE_LOCATIONS_TAB') );?>"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
 							</li>
 							<li>
 								<a href="/reserver"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_PRENDRE_RESERVATION')?></span> </a>
@@ -39,13 +39,15 @@
 							</li>
 							<li>
 								<a href="/evenements"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_TITLE_EVENT')?></span> </a>
-							</li>
+							</li>							
+<!--
 							<li>
 								<a href="/communication-setup"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_COMMUNICATION')?></span> </a>
 							</li>
 							<li>
 								<a href="/offers-setup"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_OFFERS')?></span> </a>
-							</li>							
+							</li>
+-->
 						</ul>
 						<!-- end: MAIN NAVIGATION MENU -->
 					</div>
@@ -54,12 +56,12 @@
 				<div class="slide-tools">
 					<div class="col-xs-6 text-left no-padding">
 						<a class="btn btn-sm status" href="#">
-							Status <i class="fa fa-dot-circle-o text-green"></i> <span>Online</span>
+							<?php echo $this->t('TXT_HEADER_STATUS')?> <i class="fa fa-dot-circle-o text-green"></i> <span>Online</span>
 						</a>
 					</div>
 					<div class="col-xs-6 text-right no-padding">
 						<a class="btn btn-sm log-out text-right" href="/data/login/logout">
-							<i class="fa fa-power-off"></i> Log Out
+							<i class="fa fa-power-off"></i> <?php echo $this->t('TXT_LOGOUT')?>
 						</a>
 					</div>
 				</div>

@@ -7,13 +7,16 @@ namespace Website\Tool;
 
 
 class Reponse {
-    public $success, $data, $debug, $message, $errors, $tid, $trace, $callback,$items, $isTree,$format ;
+    public $success, $data, $row, $debug, $message, $errors, $tid, $trace, $callback,$items, $isTree,$format ;
 
     public function __construct($params = array()) {
         $this->success  = isset($params["success"]) ? $params["success"] : false;
         $this->format  = isset($params["format"]) ? $params["format"] : 'jsonp';
         $this->message  = isset($params["message"]) ? $params["message"] : '';
         $this->data     = isset($params["data"])    ? $params["data"]    : array();
+        $this->row     = isset($params["row"])    ? $params["row"]    : array();
+        $this->error     = isset($params["error"])    ? $params["error"]    : array();
+        $this->fieldErrors     = isset($params["fieldErrors"])    ? $params["fieldErrors"]    : array();
         $this->callback = isset($params["callback"]) ? $params["callback"]    : array();
         $this->items    = isset($params["items"]) ? $params["items"]    : array();
         $this->isTree    = isset($params["isTree"]) ? $params["isTree"]    : false ;
@@ -23,20 +26,50 @@ class Reponse {
     public function to_json() {
         return \Zend_Json::encode( $this->to_array() );
     }
+
+    public function to_datatable() {
+        return \Zend_Json::encode( $this->to_array() );
+    }
 	
 	public function to_array() {
 		if(! $this->isTree):
-		return array(
-            'success'   => $this->success,
-            'message'   => \Zend_Registry::get('Zend_Translate')->translate($this->message),
-            'data'      => $this->data,
-			'debug'      => $this->debug
-        );
+			if( !empty($this->error) ){
+				if( !empty($this->fieldErrors) ){
+					return array(
+			            'success'   => $this->success,
+			            'message'   => \Zend_Registry::get('Zend_Translate')->translate($this->message),
+			            'fieldErrors' => $this->fieldErrors,
+						'debug'      => $this->debug
+			        );
+				} else {
+					return array(
+			            'success'   => $this->success,
+			            'message'   => \Zend_Registry::get('Zend_Translate')->translate($this->message),
+			            'error'      => $this->error,
+						'debug'      => $this->debug
+			        );				
+				}
+			} else {
+				if( !empty($this->fieldErrors) ){				
+					return array(
+			            'fieldErrors' => $this->fieldErrors
+			        );
+				} else {
+					return array(
+			            'success'   => $this->success,
+			            'message'   => \Zend_Registry::get('Zend_Translate')->translate($this->message),
+			            'data'      => $this->data,
+			            'row'      => $this->row,
+						'debug'      => $this->debug
+			        );				
+				}			
+			}
 		else:
 		return array(
             'success'   => $this->success,
             'message'   => \Zend_Registry::get('Zend_Translate')->translate($this->message),
             'data'      => $this->data,
+            'row'      => $this->row,
 			'items'     => $this->items,
 			'debug'      => $this->debug
         );

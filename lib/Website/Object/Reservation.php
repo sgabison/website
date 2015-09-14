@@ -76,7 +76,7 @@ class Reservation extends \Object\Concrete {
 		        $guest=\Object\Guest::getByEmail($data['email'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
-		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date , 'location'=>$location ) );
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'] ) );
 		        }
 			}
         }

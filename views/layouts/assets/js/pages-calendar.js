@@ -11,8 +11,9 @@ var Calendar = function() {
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-		var start = new Date(y, m-1, d),
-            end = new Date(y, m+1, d );
+		var start = new Date(y, m-1, d);
+        //var end = new Date(y, m+1, d );
+        var end = new Date(y+1, m, d );
 		loadEvents (start, end );
     };
     //function to initiate Full Calendar
@@ -63,6 +64,8 @@ var Calendar = function() {
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
+            weekends: true,
+            firstDay: 1,
             events: demoCalendar,
             editable: true,
             eventLimit: true, // allow "more" link when too many events
@@ -235,7 +238,8 @@ var Calendar = function() {
                         eventCategory = demoCalendar[i].category;
                     }
                     $('.form-full-event .event-categories option').filter(function() {
-                        return ($(this).text() == eventCategory);
+                    	console.log(i18n.t(eventCategory), eventCategory, $(this).text());
+                        return ($(this).text() == i18n.t(eventCategory) );
                     }).prop('selected', true);
                     $('.form-full-event .event-categories').selectpicker('render');
                     if (typeof demoCalendar[i].content !== "undefined" && demoCalendar[i].content !== "") {

@@ -75,7 +75,7 @@ var SetupFormValidator = function () {
 			, newLocation.closingDateEnd = $("#closingDateEnd").val()
 			, newLocation.METHOD = 'PUT';
 			$.blockUI({
-				message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
 			});
 			var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 			reponse.data=newLocation;
@@ -148,7 +148,7 @@ var SetupFormValidator = function () {
 			, serving.maxtablessunday = $("#maxtablessunday").val()
 			, serving.METHOD = 'PUT';
 			$.blockUI({
-				message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
 			});
 			var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 			reponse.data=serving;

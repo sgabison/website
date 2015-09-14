@@ -198,6 +198,7 @@ class UserreservationController extends Action
 					$i=0;
 					while($timestart<=$endtime){
 						$i++;
+						echo $i;echo"<br>";
 						$timeslot=date("H", $timestart).":".date("i", $timestart);
 						$orderswarning="";
 						$seatswarning="";
@@ -235,7 +236,7 @@ class UserreservationController extends Action
 						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_'.$closed]=$resatime;
 					}
 			}
-			//exit;
+			exit;
 			$reponse = new Reponse();
 			$reponse->data=$resafinal;
 			$reponse->message=$date;
@@ -255,56 +256,6 @@ class UserreservationController extends Action
 	public function arrayToString($array){
 		$result = implode(',', $array);
 		return $result;		
-	}
-	public function cancelreservationAction() {
-		$this->layout()->setLayout('portal');
-		if( $this->getParam('reservationid') ){
-			$reservationid=$this->getParam('reservationid');
-			$reservation=Object\Reservation::getById($reservationid,1);
-			if( $reservation instanceof Object\Reservation ){
-				$this->view->warning="off";
-				$this->view->reservation=$reservation;
-				if( $this->getParam("confirmcancellation") =="yes" ){
-					$reservation->setStatus('Cancelled');
-					$reservation->save();
-					$reservationarray=$reservation->toArray();
-					$this->sendCancellation($reservationarray);
-				}
-			}else{
-				$this->view->warning="on";
-			}
-		}else{
-			$this->view->warning="on";
-		}
-	}
-	public function sendCancellation($array){
-		$email=$array['email'];
-		$sellocation=Object\Location::getById($array['locationid'],1);
-		$parameters = array(
-			'bookingref'=>$array['id'], 
-			'partysize'=>$array['partysize'], 
-			'serving'=>$array['servingtitle'], 
-			'location'=>$array['locationname'],  
-			'date'=>$array['start']->get('dd-MM-YYYY'), 
-			'slot'=>$array['start']->get('HH:mm'), 
-			'locationaddress'=>$sellocation->getAddress(),
-			'locationzip'=>$sellocation->getZip(),
-			'locationcity'=>$sellocation->getCity(),
-			'locationtel'=>$sellocation->getTel(), 
-			'locationemail'=>$sellocation->getEmail(), 
-			'locationcity'=>$sellocation->getCity(), 
-			'locationurl'=>$sellocation->getUrl(), 
-			'guestname'=>$array['firstlastname']);
-		$mail = new Pimcore_Mail ();
-		$subject='Cancellation of Reservation';
-		$mail->setParams($parameters);
-		$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
-		$mail->setSubject($subject);
-		$mail->setDocument('/fr/booking/cancellation-confirmation');
-		// $mail->setBody($body);
-		$mail->addTo($email);
-		$mail->addBcc('didier.rechatin@gmail.com');
-		$mail->Send();
 	}
 	public function checkClosedServings(){
 		$servings=$this->selectedLocation->getServings();
@@ -327,6 +278,7 @@ class UserreservationController extends Action
 	}
     public function userreservationAction() {
 		//SET RESACHANGE TO FALSE
+		$this->layout()->setLayout('reservation_layout_registration');
 		if ( $this->getParam("lg") ){
     		$locale = new \Zend_Locale($this->_getParam ( "lg" ));
     		\Zend_Registry::set("Zend_Locale", $locale);
@@ -528,181 +480,5 @@ class UserreservationController extends Action
 			$res->message = "Failed to destroy";
 		}
 		return $res;
-	}
-	public function listreservationsearchAction(){
-		$this->layout()->setLayout('portal');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/search-reservation-list.js');
-		$societe=$this->societe;
-		$locationarray=$societe->getLocations();
-		$this->view->selectedLocation=$this->selectedLocation;
-		$this->view->selectedLocationId=$this->selectedLocation->getId();
-	}
-	public function listreservationAction(){
-		$this->layout()->setLayout('portal'); // listreservation_layout
-		$guesttext=$this->getParam('guesttext');
-		$calendar=$this->getParam('calendar');
-		if( $calendar=='' ){ $date=new Zend_date(); $calendar=$date->get('dd-MM-YYYY'); }
-		$this->view->calendar=$calendar;
-		$myservingid=$this->getParam('servingid');
-		$servingsearch=Object\Serving::getById( $myservingid , 1 );
-		if( $servingsearch instanceof Object\Serving ){
-			$servingname=$servingsearch->getTitle();
-			$this->view->servingname=$servingname;
-		}
-		if ( $myservingid=='' || $calendar=="" ){
-			$this->view->warning="search";
-		}else{
-			$this->view->warning="nosearch";
-		}
-		$this->reservationsArray();
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/table-reservation-list.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js');
-		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
-					Main.init();
-					TableReservationList.init();
-        			SVExamples.init();
-        			PagesUserProfile.init();
-				});', 'text/javascript', array (
-								'noescape' => true
-		) );
-	}
-	public function reservationsArray(){
-		//get societe/location and serving
-		$reponse = new Reponse();
-		$date=new Zend_Date();
-		$dateres=$date->get('dd-MM-YYYY');
-		$datestart=new Zend_Date( $dateres.' 00:00:00', 'dd-MM-YYYY HH:mm:ss');
-		$dateend=new Zend_Date( $dateres.' 23:59:59', 'dd-MM-YYYY HH:mm:ss');
-		$start=$datestart->getTimestamp();
-		$end=$dateend->getTimestamp();
-
-		$mylocation = $this->selectedLocation;
-		if( $mylocation instanceof Object_Location ){
-			$this->view->reservations= $mylocation->getResource()->getReservationsByDate($start,$end);
-		}
-	}
-	public function reformatDate($data){
-		$chosenresa=Object\Reservation::getById( $data['id'], 1 );
-		$chosenday=$chosenresa->getStart()->get('dd-MM-YYYY');
-		$start=new \Zend_Date( $chosenday.' '.$data['start'], 'dd-MM-YYYY HH:mm' );
-		return $data['id'];
-	}
-	public function getListAction(){
-		//get societe/location and serving
-		$reponse = new Reponse();
-		$mylocationid= $this->getParam('locationid');
-		$myservingid= $this->getParam('servingid');
-		$calendar= $this->getParam('calendar');
-		$guestid= $this->getParam('guestid');
-		$mylocation=Object\Location::getById( $mylocationid, 1 );
-		if( $mylocation instanceof Object\Location ){
-			//we check if we are in the Editor
-			if( $_POST['action'] ){
-				//if REMOVE
-				if($_POST['action'] =="remove"){
-					foreach( $_POST['id'] as $id){
-						$myreservation=Object\Reservation::getById( $id, 1);
-						if( $myreservation instanceof Object\Reservation){
-							$myreservation->SetStatus('Cancelled');
-							$myreservation->save();
-						}
-					}
-					$reponse->message='TXT_RESERVATION_LIST';
-					$reponse->success=true;
-					$reponse->data ='';
-				}
-				//if EDIT
-				if($_POST['action'] =="edit"){
-					$myreservation=Object_Reservation::getById( $_POST['data']['id'], 1 );
-					if( $_POST['data']['guestid'] ){
-						$guest=Object_Guest::getById( $_POST['data']['guestid'], 1);
-						if($guest instanceof Object_Guest){
-							$guest->setLastname($_POST['data']['guestname']);
-							$guest->setTel($_POST['data']['guesttel']);
-							$guest->save();
-						}
-					}
-					//date update needs to be reworked
-					//$myreservation->setStart( $this->reformatDate($_POST['data']) );
-					$myreservation->setPartysize($_POST['data']['partysize']);
-					$myreservation->setBookingref($_POST['data']['bookingref']);
-					$myreservation->setBookingnotes($_POST['data']['bookingnotes']);
-					$myreservation->setStatus($_POST['data']['status']);
-					if( $_POST['data']['arrived'] == '1' ){ $arrived = 1; }else{ $arrived = 0; }
-					$myreservation->setArrived($_POST['data']['arrived']);
-					$myreservation->save();
-					$data=$_POST['data'];
-					$data['DT_RowId']="row_".$_POST['data']['id'];
-					$reponse->message='TXT_RESERVATION_LIST';
-					$reponse->success=true;
-					$reponse->row =$data;
-					$reponse->debug= $this->reformatDate($_POST['data']);
-				}
-			}else{
-				if( !$calendar ){ $date=new Zend_date(); $calendar=$date->get('dd-MM-YYYY'); }
-				$calendarstart=$calendar.' '.'00:00:00';
-				$calendarend=$calendar.' '.'23:59:59';
-				$calendarstart=new Zend_Date( $calendarstart, 'dd-MM-YYYY HH:mm:ss');
-				$calendarend=new Zend_Date( $calendarend, 'dd-MM-YYYY HH:mm:ss');
-				$reservations=$mylocation->getResource()->getReservationsByDate( $calendarstart->getTimestamp(), $calendarend->getTimestamp() );
-				$data=array();
-				$i=0;
-				foreach( $reservations as $key=>$reservation ){
-					$i++;
-					$resa=$this->formatReservation( $reservation );
-					array_push($data, $resa);
-				}
-				$reponse->message='TXT_RESERVATION_LIST';
-				$reponse->success=true;
-				$reponse->data =$data;
-			}
-		} else {
-			$data=array();
-			$reponse->message='TXT_NOT_RESERVATION_LIST';
-			$reponse->success=false;
-			$reponse->data =$data;
-			$reponse->debug = 'debug:'.$this->getParam('q');;
-		}
-		$this->render($reponse);
-	}
-	public function formatReservation( $reservation ){
-		if( $reservation->getLocation() instanceof Object_Location ){
-			$resa['locationid']=$reservation->getLocation()->getId();
-			$resa['locationname']=$reservation->getLocation()->getName();
-		}else{
-			$resa['locationid']=''; $resa['locationname']='';
-		}
-		if( $reservation->getGuest() instanceof Object_Guest ){
-			$resa['guestid']=$reservation->getGuest()->getId();
-			$resa['guestname']=$reservation->getGuest()->getLastname();
-			$resa['guestemail']=$reservation->getGuest()->getEmail();
-			$resa['guesttel']=$reservation->getGuest()->getTel();
-		}else{
-			$resa['guestid']=''; $resa['guestname']=''; $resa['guestemail']='';$resa['guesttel']='';
-		}
-		if( $reservation->getPerson() instanceof Object_Person ){
-			$resa['personid']=$reservation->getPerson()->getId();
-			$resa['personfirstname']=$reservation->getPerson()->getFirstname();
-			$resa['personlastname']=$reservation->getPerson()->getLastname();
-		}else{
-			$resa['personid']=''; $resa['personfirstname']=''; $resa['personlastname']='';
-		}
-		if( $reservation->getServing() instanceof Object_Serving ){
-			$resa['servingid']=$reservation->getServing()->getId();
-			$resa['servingtitle']=$reservation->getServing()->getTitle();
-		}else{
-			$resa['servingid']=''; $resa['servingtitle']='';
-		}
-		$resa['datereservation']=$reservation->getDatereservation()->get('dd-MM-YYY');
-		$resa['start']=$reservation->getStart()->get('HH:mm');
-		//DT_RowId identifies the id for the datatable
-		$resa['DT_RowId']=$reservation->getId();
-		$resa['id']=$reservation->getId();
-		$resa['status']=$reservation->getStatus();
-		$resa['arrived']=$reservation->getArrived();
-		$resa['partysize']=$reservation->getPartysize();
-		$resa['bookingref']=$reservation->getBookingref();
-		$resa['bookingnotes']=$reservation->getBookingnotes();
-		return $resa;
 	}
 }

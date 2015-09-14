@@ -5,3 +5,7 @@ td.details-control {
 tr.shown td.details-control {
     background: url('../../images/details_close.png') no-repeat center center;
 }
+.activeDayClass{
+    background: #5F8295;
+    color: #FFFFFF
+}

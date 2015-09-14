@@ -134,7 +134,7 @@ var PagesReservationList = function () {
 
                         if (result) {
                             $.blockUI({
-                                message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+                                message: '<i class="fa fa-spinner fa-spin"></i> Please wait...'
                             });
 							var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 							
@@ -345,7 +345,7 @@ var PagesReservationList = function () {
 				, newReservation.message = $(".reservation-message").val()
 				, newReservation.method = $(".reservation-form-method").val();
                 $.blockUI({
-                    message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+                    message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
                 });
 				var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 				reponse.data=newReservation;

@@ -14,8 +14,8 @@
 								<img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/avatar-1.jpg" alt="">
 							</div>
 							<div class="inline-block">
-								<h5 class="no-margin"> Welcome </h5>
-								<h4 class="no-margin"> Peter Clark </h4>
+								<h5 class="no-margin"> <?= $this->translate('WELCOME')?> </h5>
+								<h4 class="no-margin"> <?= $this->translate('TO_RESAEXPRESS')?> </h4>
 								<a class="btn user-options sb_toggle">
 									<i class="fa fa-cog"></i>
 								</a>

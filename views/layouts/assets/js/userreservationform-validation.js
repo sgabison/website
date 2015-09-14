@@ -1,5 +1,6 @@
 var ReservationFormValidator = function () {
 	"use strict";
+	var URL = "http://demo.gabison.com";
 	var backdrop = $('.ajax-white-backdrop2');
 	backdrop.remove();
 	$.urlParam = function(name){
@@ -15,6 +16,13 @@ var ReservationFormValidator = function () {
 	  var dArr = dateStr.split("-");  // ex input "2010-01-18"
 	  return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0]; //ex out: "18/01/10"
 	}
+	$.formattedDate=function(exampledate, today){
+		if(exampledate==null || exampledate===false){
+			return getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
+		}else{
+			return getDate2(exampledate)+'-'+getMonth2(exampledate)+'-'+exampledate.getFullYear();	
+		}
+	}
 	var getMonth2=function(date) {
 	    var month = date.getMonth() + 1;
 	    return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
@@ -22,25 +30,35 @@ var ReservationFormValidator = function () {
 	var getDate2=function(date) {
 	    var day = date.getDate();
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
-	}  
+	}
+	var confirmationNavigation=function(){
+		$('.displaymore').click( function(){
+			$('.confirmation1').addClass('no-display');
+			$('.confirmation2').removeClass('no-display');
+		});
+		$('.displayless').click( function(){
+			$('.confirmation1').removeClass('no-display');
+			$('.confirmation2').addClass('no-display');
+		});
+	}
 	var	today=new Date();
-	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear()
-	$('#mycalendar').val( formattedtoday );
+	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
+	$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
 	var thisDay=today.getDay();
 	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-	console.log( 'offdays' );
-	console.log( $('#offdays').val() );
 	var offdays = $('#offdays').val().split(',');
-	console.log( 'offdaysafter'+offdays );
-	console.log( days );
-	$('.input-group.date').datepicker({ 
-		startDate: '0d', 
-		todayBtn: 'linked', 
-		todayHighlight: true, 
+	var closeddays = $('#closeddays').val();
+	var inRange=false;
+	$('#mycalendar').datepicker({ 
+		startDate: "0d",
+		language: $("#language").val(),
+		todayBtn: "linked", 
+		todayHighlight: false, 
 		defaultDate: new Date(), 
-		autoclose: true, 
-		//datesDisabled: offdays, 
-		format: 'dd-mm-yyyy',
+		autoclose: true,
+		datesDisabled: offdays, 
+		format: "dd-mm-yyyy",
+		container: '#example-widget-container',
 		beforeShowDay: function (date){
 			if( $.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0){
 				console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
@@ -50,15 +68,29 @@ var ReservationFormValidator = function () {
                     enabled: false
 				}
 			}
+			var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
+			var dayFormat = date.getDay();
+			console.log( dayFormat );
+			if( date == today ){
+			  return {classes: 'activeDayClass', tooltip: 'today'};
+			}
+			if( closeddays.search(dayFormat) >= 0){ 
+			  return {classes: 'disabled today', tooltip: 'No serving this day'};
+			}
 		}
+	});
+	$('#mycalendar').datepicker('show');
+	//INITIATE DATE SUMMARY
+	$('#mycalendar').datepicker().on('changeDate', function (ev) {
+	    $('#calendarlinkdata').text( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
 	});
 	var reservationDataLoad = function () {
 		var form1 = $('#bookingform');
 		console.log( 'select_location'+$('#select_location').val() );
-		console.log( 'mycalendar: '+$('#mycalendar').val() );
-		form1.attr('action','http://demo.gabison.com/data/userreservation/get-data'); 
+		console.log( 'mycalendar: '+$.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
+		form1.attr('action',URL+'/data/userreservation/get-data'); 
 		form1.attr('method','POST');
-		$('#submit').click( function(event){
+		$('#submit2').click( function(event){
 			event.preventDefault();
 			console.log( 'submitted' );
 			var newReservation = new Object;
@@ -150,6 +182,10 @@ var ReservationFormValidator = function () {
 		console.log( 'elementid: '+elementid);
 		console.log( 'locationid: '+locationid);
 		console.log( 'reservationid: '+reservationid);
+		$('#slotgroup').removeClass('no-display');
+		$('#servinggroup').addClass('no-display');
+		$('#servinglinkdata').text( ", for "+$('#'+elementid).text() );
+		$('#servinglinkdata').css( 'cursor', 'pointer' );
 		$('#slots').html(function(){ return '';});
 		$('.servingbutton').removeClass('btn-light-orange');
 		$('.servingbutton').removeClass('btn-dark-orange');
@@ -187,16 +223,20 @@ var ReservationFormValidator = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
+			$('#slotgroup').addClass('no-display');
+			$('#slotlinkdata').text( $('#'+elementid).text() );
+			$('#slotlinkdata').css( 'cursor', 'pointer' );
 			$('#slotinput').val( $('#'+elementid).attr("value") );
 			$('#locationinput').val( locationid );
 			$('#reservationinput').val( reservationid );
-			$('#reservationdateinput').val($('#mycalendar').val());
+			$('#reservationdateinput').val( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
 			$('#id').val( reservationid );
 			console.log( 'elementid: '+elementid);
 			console.log( 'locationid: '+locationid);
 			$('.slotbutton').removeClass('btn-light-orange');
 			$('.slotbutton').removeClass('btn-dark-orange');
 			$('.registergroup').removeClass('no-display');
+			$('.registergroup1').removeClass('no-display');
 			$('#'+elementid).addClass('btn-dark-orange');
 			var backdrop = $('.ajax-white-backdrop');
 			backdrop.remove();
@@ -205,25 +245,27 @@ var ReservationFormValidator = function () {
 		$('.bookbutton').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
 		$('#calendarbox').addClass('no-display');
-		$('#locationbox').addClass('no-display');
 		$('#locationlink').removeClass('no-display');
+		$('#peopleselectiongroup').addClass('no-display');
 		var locationid=$('#select_location').val();
 		var locationname=$('#select_location option:selected' ).text();
-		var resadate=$('.mycalendar').val();
+		var resadate=$.formattedDate( $('#mycalendar').datepicker("getDate"), today );
+		var persondata=$('#party').val();
 		//updatelink();
 		$('#calendarlinkdata').text(resadate);
+		$('#personlinkdata').text(persondata);
 		$('#locationlinkdata').text(locationname); 
 		var i=0;
 		//clear up the divs
 		i++;
-		console.log( $('.mycalendar').val() );
+		console.log( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
 		console.log( i );
 		$('#servings').html(function(){ return '';});
 		$('#slots').html(function(){ return '';});
 		$('#inputs').html(function(){ return '';});
 		if( reservationid ){ var suffix='&reservationid='+reservationid }else{ var suffix=''}
 		$.ajax({
-			url: "http://demo.gabison.com/data/userreservation/resaslot?locationid="+locationid+"&date="+$('.mycalendar').val()+suffix,
+			url: URL+"/data/userreservation/resaslot?locationid="+locationid+"&date="+$.formattedDate($('#mycalendar').datepicker("getDate"), today)+suffix,
 			dataType: "json",
 			success: function(data) {
 				var $log = $( "#servings" );
@@ -294,7 +336,7 @@ var ReservationFormValidator = function () {
                 } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
                     error.insertAfter($(element).closest('.form-group').children('div'));
                 } else {
-                    error.insertAfter(element);
+                    // error.insertAfter(element);
                     // for other inputs, just perform default behavior
                 }
             },
@@ -326,8 +368,8 @@ var ReservationFormValidator = function () {
                 }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
-                successHandler1.hide();
-                errorHandler1.show();
+                //successHandler1.hide();
+                //errorHandler1.show();
             },
             highlight: function (element) {
                 $(element).closest('.help-block').removeClass('valid');
@@ -340,12 +382,19 @@ var ReservationFormValidator = function () {
                 // set error class to the control group
             },
             success: function (label, element) {
-                label.addClass('help-block valid');
+                //label.addClass('help-block valid');
                 // mark the current input as valid and display OK icon
                 $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+                $('#submit').click( function(){
+					$('.registergroup1').addClass('no-display');
+					$('.registergroup2').removeClass('no-display');
+					$('#reg-lastname').html( $('#firstlastname').val() );
+					$('#reg-tel').html( $('#tel').val() );
+					$('#reg-email').html( $('#email').val() );		
+				});
             },
             submitHandler: function (form) {
-                successHandler1.show();
+               // successHandler1.show();
                 errorHandler1.hide();
                 //submit form
                 //form.submit();
@@ -378,6 +427,7 @@ var ReservationFormValidator = function () {
     return {
         //main function to initiate template pages
         init: function () {
+        	confirmationNavigation();
             runValidator1();
 			reservationSubmit();
 			runTagsInput();

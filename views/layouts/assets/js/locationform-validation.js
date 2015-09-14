@@ -13,7 +13,7 @@ var LocationFormValidator = function () {
 			// create the backdrop and wait for next modal to be triggered
 			$('body').modalmanager('loading');
 			setTimeout(function() {
-				$modal.load('/serving-setup.html?servingid=98', '', function() {
+				$modal.load('/serving-setup?servingid=98', '', function() {
 					$modal.modal();
 				});
 			}, 1000);
@@ -37,7 +37,7 @@ var LocationFormValidator = function () {
 	var locationid;
 	if( $.urlParam('locationid') ){ locationid=$.urlParam('locationid');}else{locationid=$.urlParam('selectedLocationId');}
 	var locationsetupDataLoad = function(){
-		$('#locationformsubmit').click( function(){
+		//$('#locationformsubmit').click( function(){
 			var newLocation = new Object;
 			  newLocation.id= locationid 
 			, newLocation.name = $("#name").val()  
@@ -57,7 +57,7 @@ var LocationFormValidator = function () {
 			, newLocation.closingDateEnd = $("#closingDateEnd").val()
 			, newLocation.METHOD = 'PUT';
 			$.blockUI({
-				message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
 			});
 			var reponse= new Object; // object(id,METHOD =(PUT,GET,POST,DELETE),data)
 			reponse.data=newLocation;
@@ -82,7 +82,7 @@ var LocationFormValidator = function () {
 					//alert(JSON.stringify(request));
 				}        
 			});
-		});
+		//});
 	};
 
     // Edit record
@@ -141,7 +141,7 @@ var LocationFormValidator = function () {
     } );
 	editor.on( 'postCreate', function ( e, json, data ) {
 		var id = json.row.DT_RowId;
-	    window.location.href="/serving-setup.html?servingid="+id;
+	    window.location.href="/serving-setup?servingid="+id;
 	} );
     $('#servinglist').on( 'click', 'tbody td:not(:first-child)', function (e) {
     	if ( $(this).index() < 5 ) {
@@ -168,10 +168,10 @@ var LocationFormValidator = function () {
 			"data": "id",
 			"orderable": false,
 		    "render": function ( data, type, full, meta ) {
-		      	return '<a href="/serving-setup.html?servingid='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+		      	return '<a href="/serving-setup?servingid='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> Modif</a>';
 			}
 		  },
-          { data: null, defaultContent: '<!--<a href="serving-setup.html?servingid=" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a> / --><a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>'}
+          { data: null, defaultContent: '<!--<a href="serving-setup?servingid=" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a> / --><a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> Sup</a>'}
 		],
 		order: [ 1, 'asc' ],
 		tableTools: {
@@ -232,9 +232,6 @@ var LocationFormValidator = function () {
                 tel: {
                     required: true
                 },
-                fax: {
-                    required: true
-                },
                 resaUnit: {
                     required: true,
                     number: true
@@ -262,7 +259,6 @@ var LocationFormValidator = function () {
                 city: "Please enter a city",
                 email: "Please enter a correct email address",
                 tel: "Please enter a telephone number on 10 digits, a numeric value",
-                fax: "Please enter a fax number on 10 digits, a numeric value",
                 resaUnit: "Please enter a Reservation Unit, a numeric value",
                 maxSeats: "Please enter a maximum seats value, a numeric value",
                 maxTables: "Please enter a maximum tables value, a numeric value",
@@ -292,7 +288,7 @@ var LocationFormValidator = function () {
                 successHandler2.show();
                 errorHandler2.hide();
                 //submit form
-                //form.submit();
+                locationsetupDataLoad();
                 //alert('submitform');
             }
         });
@@ -303,7 +299,7 @@ var LocationFormValidator = function () {
         	initModals();
             validateCheckRadio();
             runValidator2();
-            locationsetupDataLoad();
+            //locationsetupDataLoad();
             changeLocation();
         }
     };

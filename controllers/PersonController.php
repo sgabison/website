@@ -13,12 +13,39 @@ use Website\Tool\UploadHandler;
 
 class PersonController extends Useraware
 {
-	public function personsAction(){
-	 	$this->layout()->setLayout('layouts_single_page');
+    public function init() {
+        parent::init();
 
-		
-		$this->view->locations=$this->societe->getLocations();
-		$this->view->employes= $this->societe->getPersons();
+        // do something on initialization //-> see Zend Framework
+
+        // in our case we enable the layout engine (Zend_Layout) for all actions
+        $this->enableLayout();
+    }
+
+    public function preDispatch() {
+        parent::preDispatch();
+
+    }
+
+    public function postDispatch() {
+        parent::postDispatch();
+
+
+        // do something after the action is called //-> see Zend Framework
+    }
+	public function testAction(){
+	
+				// Send JSON to the client.
+		$reponse = new Reponse();
+ 
+		$reponse->data=$this->person->toArray(); //$input_arrays;
+		// $this->societe->save();
+
+		$reponse->message="TXT_PERSON_SENT";
+		$reponse->success=true;
+ 
+		$this->render($reponse);
+
 	}
     public function indexAction() {
 
@@ -260,21 +287,34 @@ class PersonController extends Useraware
         // assign the status to the view
         $this->view->success = $success;
     }
+	public function personsAction(){
+		$this->layout()->setLayout('layouts_single_page');
 
-  
-
+		$this->view->locations=$this->societe->getLocations();
+		$this->view->employes= $this->societe->getPersons();
+	}
+	public function profilAction(){
+		$this->layout()->setLayout('portal');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/userprofile-validation.js');
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+					Main.init();
+        			SVExamples.init();
+        			UserProfileValidation.init();
+				});', 'text/javascript', array (
+								'noescape' => true
+		) );
+		$this->view->locations=$this->societe->getLocations();
+		$this->view->employes= $this->societe->getPersons();
+	}
 	public function personListAction(){
 		$reponse = new Reponse();
 		$data=array();
 		$employes= $this->societe->getPersons();
-		var_dump($employes); 
 		if($employes):
 		foreach($employes as $e):
-		var_dump($e);
 		$data[]=$e->toArray();
 		endforeach;
 		endif;
-		exit;
 		$reponse->message='TXT_PERSONS_UPDATED';
 		$reponse->success=true;
 		$reponse->data =$data;

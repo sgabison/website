@@ -85,6 +85,7 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery.pulsate/jquery.pulsate.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/pages-reservation-list.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-inputlimiter/js/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/initiate-reservation-list.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/select2/select2.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/subview-reservation.js"></script>

@@ -21,9 +21,7 @@ class Request {
 
 			if (isset($params['METHOD'])) {
                 $this->method =  $params['METHOD'];     
-            } else {
-				$this->method =  $params['data']['METHOD'];
-			}
+            } 
             if (isset($params['data'])) {
                 $this->params =  $params['data'] ;		
             } else {

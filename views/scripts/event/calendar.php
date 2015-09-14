@@ -51,12 +51,14 @@
 													<?php echo $this->t($category)?>
 												</div>
 											<?php endforeach ; ?>
+											<!--
 												<div class="checkbox">
 													<label>
 														<input type="checkbox" class="grey" id="drop-remove" />
 														Remove after drop
 													</label>
 												</div>
+											-->
 											</div>
 											<?php endif; ?>
 										</div>

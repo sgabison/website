@@ -92,10 +92,11 @@ class Resource extends \Object\Concrete\Resource {
     		return $folder;
     	}   	
     }
-    public function getReservationsByGuest(){
+    
+    public function getReservationsByGuest($start){
 		$result=array();
 		if($this->model->getId() >0 ):
-		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_12` r join object_query_12 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'guest' " , $this->model->getId());
+		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_11` r join object_query_11 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'guest' AND o.`start`>= '%e' " , $this->model->getId(), $start);
 		$data =$this->db->FetchAll($sql);
 		endif;
 		foreach ($data as $key=>$row){
@@ -104,6 +105,7 @@ class Resource extends \Object\Concrete\Resource {
 		}
     	return $result;
     }
+   
     public static function correctClassname($name) {
     	$tmpFilename = $name;
     	$validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.";

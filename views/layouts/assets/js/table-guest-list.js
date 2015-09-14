@@ -50,9 +50,9 @@ var GuestList = function () {
 					} );
 				} );	 
 				// Activate an inline edit on click of a table cell
-				oTable.on( 'click', 'tbody td:not(:first-child)', function (e) {
-					editor.inline( this );
-				} );
+//				oTable.on( 'click', 'tbody td:not(:first-child)', function (e) {
+//					editor.inline( this );
+//				} );
 				oTable.DataTable( {
 					dom: "Tfrtip",
 					ajax: {
@@ -81,7 +81,7 @@ var GuestList = function () {
 						"data": "o_id",
 						"orderable": false,
 						"render": function ( data, type, full, meta ) {
-							return '<a href="/data/reservation/get-by-guest?id='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Modify"><i class="fa fa-share"></i></a>';
+							return '<a href="/data/reservation/listreservation?guestid='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Modify"><i class="fa fa-share"></i></a>';
 							}
 						}
 					],

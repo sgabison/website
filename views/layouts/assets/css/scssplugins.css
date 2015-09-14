@@ -1,0 +1,1515 @@
+div#example-widget-container > * {
+  /*plugins.css*/
+  /* line 7, ../sass/vendor/_owl-carousel.scss */
+  /* line 11, ../sass/vendor/_owl-carousel.scss */
+  /* line 14, ../sass/vendor/_owl-carousel.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  NDV3 CHART
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_nvd3.scss */
+  /* line 10, ../sass/vendor/_nvd3.scss */
+  /* line 15, ../sass/vendor/_nvd3.scss */
+  /* line 19, ../sass/vendor/_nvd3.scss */
+  /* line 23, ../sass/vendor/_nvd3.scss */
+  /* line 30, ../sass/vendor/_nvd3.scss */
+  /* line 37, ../sass/vendor/_nvd3.scss */
+  /* line 44, ../sass/vendor/_nvd3.scss */
+  /* line 48, ../sass/vendor/_nvd3.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Easy Pie Chart
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_easy-pie-chart.scss */
+  /* line 7, ../sass/vendor/_easy-pie-chart.scss */
+  /* line 14, ../sass/vendor/_easy-pie-chart.scss */
+  /* line 20, ../sass/vendor/_easy-pie-chart.scss */
+  /* line 24, ../sass/vendor/_easy-pie-chart.scss */
+  /* line 30, ../sass/vendor/_easy-pie-chart.scss */
+  /***
+  Bootstrap Daterangepicker
+  ***/
+  /* line 5, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 9, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 13, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 19, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 24, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 30, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 35, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 39, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 43, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 47, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* line 54, ../sass/vendor/_bootstrap-daterangepicker.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Nestable List
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_nestable.scss */
+  /* line 14, ../sass/vendor/_nestable.scss */
+  /* line 21, ../sass/vendor/_nestable.scss */
+  /* line 24, ../sass/vendor/_nestable.scss */
+  /* line 28, ../sass/vendor/_nestable.scss */
+  /* line 38, ../sass/vendor/_nestable.scss */
+  /* line 53, ../sass/vendor/_nestable.scss */
+  /* line 58, ../sass/vendor/_nestable.scss */
+  /* line 77, ../sass/vendor/_nestable.scss */
+  /* line 85, ../sass/vendor/_nestable.scss */
+  /* line 89, ../sass/vendor/_nestable.scss */
+  /* line 98, ../sass/vendor/_nestable.scss */
+  /* line 109, ../sass/vendor/_nestable.scss */
+  /* line 114, ../sass/vendor/_nestable.scss */
+  /* line 117, ../sass/vendor/_nestable.scss */
+  /**
+   * Nestable Extras
+   */
+  /* line 124, ../sass/vendor/_nestable.scss */
+  /* line 133, ../sass/vendor/_nestable.scss */
+  /* line 137, ../sass/vendor/_nestable.scss */
+  /* line 145, ../sass/vendor/_nestable.scss */
+  /* line 150, ../sass/vendor/_nestable.scss */
+  /* line 153, ../sass/vendor/_nestable.scss */
+  /* line 156, ../sass/vendor/_nestable.scss */
+  /**
+   * Nestable Draggable Handles
+   */
+  /* line 162, ../sass/vendor/_nestable.scss */
+  /* line 177, ../sass/vendor/_nestable.scss */
+  /* line 181, ../sass/vendor/_nestable.scss */
+  /* line 184, ../sass/vendor/_nestable.scss */
+  /* line 187, ../sass/vendor/_nestable.scss */
+  /* line 202, ../sass/vendor/_nestable.scss */
+  /* line 216, ../sass/vendor/_nestable.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Jstree
+  /* ---------------------------------------------------------------------- */
+  /* line 5, ../sass/vendor/_jstree.scss */
+  /* line 11, ../sass/vendor/_jstree.scss */
+  /* line 17, ../sass/vendor/_jstree.scss */
+  /* line 25, ../sass/vendor/_jstree.scss */
+  /* line 32, ../sass/vendor/_jstree.scss */
+  /* line 36, ../sass/vendor/_jstree.scss */
+  /* line 41, ../sass/vendor/_jstree.scss */
+  /* line 46, ../sass/vendor/_jstree.scss */
+  /* line 57, ../sass/vendor/_jstree.scss */
+  /* line 60, ../sass/vendor/_jstree.scss */
+  /* line 64, ../sass/vendor/_jstree.scss */
+  /* line 67, ../sass/vendor/_jstree.scss */
+  /* line 71, ../sass/vendor/_jstree.scss */
+  /* line 78, ../sass/vendor/_jstree.scss */
+  /* line 85, ../sass/vendor/_jstree.scss */
+  /* line 91, ../sass/vendor/_jstree.scss */
+  /* line 97, ../sass/vendor/_jstree.scss */
+  /* line 104, ../sass/vendor/_jstree.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Form Wizard
+   /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_form-wizard.scss */
+  /* line 12, ../sass/vendor/_form-wizard.scss */
+  /* line 17, ../sass/vendor/_form-wizard.scss */
+  /* line 29, ../sass/vendor/_form-wizard.scss */
+  /* line 33, ../sass/vendor/_form-wizard.scss */
+  /* line 37, ../sass/vendor/_form-wizard.scss */
+  /* line 40, ../sass/vendor/_form-wizard.scss */
+  /* line 54, ../sass/vendor/_form-wizard.scss */
+  /* line 57, ../sass/vendor/_form-wizard.scss */
+  /* line 63, ../sass/vendor/_form-wizard.scss */
+  /* line 74, ../sass/vendor/_form-wizard.scss */
+  /* line 79, ../sass/vendor/_form-wizard.scss */
+  /* line 82, ../sass/vendor/_form-wizard.scss */
+  /* line 93, ../sass/vendor/_form-wizard.scss */
+  /* line 96, ../sass/vendor/_form-wizard.scss */
+  /* line 99, ../sass/vendor/_form-wizard.scss */
+  /* line 102, ../sass/vendor/_form-wizard.scss */
+  /* line 105, ../sass/vendor/_form-wizard.scss */
+  /* line 108, ../sass/vendor/_form-wizard.scss */
+  /* line 111, ../sass/vendor/_form-wizard.scss */
+  /* line 114, ../sass/vendor/_form-wizard.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  jQRangeSlider
+  /* ---------------------------------------------------------------------- */
+  /* line 5, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 8, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 13, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 26, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 34, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 37, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 44, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 47, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 54, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 58, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 61, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 64, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 67, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 70, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 76, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 79, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 83, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 86, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 89, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 95, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 98, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 102, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 105, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 108, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 114, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 117, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 121, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 124, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 127, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 133, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 136, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 140, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 143, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 146, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 152, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 155, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 159, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 162, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 165, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 171, ../sass/vendor/_jQRangeSlider.scss */
+  /* line 174, ../sass/vendor/_jQRangeSlider.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Jcrop - Crop Image
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_jcrop.scss */
+  /* line 7, ../sass/vendor/_jcrop.scss */
+  /* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+  /* line 26, ../sass/vendor/_jcrop.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Select2
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_select2.scss */
+  /* line 12, ../sass/vendor/_select2.scss */
+  /* line 16, ../sass/vendor/_select2.scss */
+  /* line 19, ../sass/vendor/_select2.scss */
+  /* line 27, ../sass/vendor/_select2.scss */
+  /* line 31, ../sass/vendor/_select2.scss */
+  /* line 35, ../sass/vendor/_select2.scss */
+  /* line 38, ../sass/vendor/_select2.scss */
+  /* line 43, ../sass/vendor/_select2.scss */
+  /* line 51, ../sass/vendor/_select2.scss */
+  /* line 58, ../sass/vendor/_select2.scss */
+  /* line 63, ../sass/vendor/_select2.scss */
+  /* line 71, ../sass/vendor/_select2.scss */
+  /* line 75, ../sass/vendor/_select2.scss */
+  /* line 78, ../sass/vendor/_select2.scss */
+  /* line 81, ../sass/vendor/_select2.scss */
+  /* line 84, ../sass/vendor/_select2.scss */
+  /* line 88, ../sass/vendor/_select2.scss */
+  /* line 91, ../sass/vendor/_select2.scss */
+  /* line 100, ../sass/vendor/_select2.scss */
+  /* line 115, ../sass/vendor/_select2.scss */
+  /* line 120, ../sass/vendor/_select2.scss */
+  /* line 131, ../sass/vendor/_select2.scss */
+  /* line 135, ../sass/vendor/_select2.scss */
+  /* line 138, ../sass/vendor/_select2.scss */
+  /* line 141, ../sass/vendor/_select2.scss */
+  /* line 146, ../sass/vendor/_select2.scss */
+  /* line 149, ../sass/vendor/_select2.scss */
+  /* line 155, ../sass/vendor/_select2.scss */
+  /* line 158, ../sass/vendor/_select2.scss */
+  /* line 163, ../sass/vendor/_select2.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  jQuery Tags Input
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_tags-input.scss */
+  /* line 16, ../sass/vendor/_tags-input.scss */
+  /* line 24, ../sass/vendor/_tags-input.scss */
+  /* line 33, ../sass/vendor/_tags-input.scss */
+  /* line 37, ../sass/vendor/_tags-input.scss */
+  /* ---------------------------------------------------------------------- */
+  /* jQuery Input Limiter
+  /* ---------------------------------------------------------------------- */
+  /* line 5, ../sass/vendor/_inputlimiter.scss */
+  /* line 13, ../sass/vendor/_inputlimiter.scss */
+  /* line 16, ../sass/vendor/_inputlimiter.scss */
+  /* ---------------------------------------------------------------------- */
+  /* Bootstrap Datepicker
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_date-picker.scss */
+  /* line 9, ../sass/vendor/_date-picker.scss */
+  /* line 13, ../sass/vendor/_date-picker.scss */
+  /* line 18, ../sass/vendor/_date-picker.scss */
+  /* line 24, ../sass/vendor/_date-picker.scss */
+  /* line 29, ../sass/vendor/_date-picker.scss */
+  /* line 35, ../sass/vendor/_date-picker.scss */
+  /* line 40, ../sass/vendor/_date-picker.scss */
+  /* line 43, ../sass/vendor/_date-picker.scss */
+  /* line 47, ../sass/vendor/_date-picker.scss */
+  /* line 50, ../sass/vendor/_date-picker.scss */
+  /* line 53, ../sass/vendor/_date-picker.scss */
+  /* line 56, ../sass/vendor/_date-picker.scss */
+  /* line 61, ../sass/vendor/_date-picker.scss */
+  /* line 66, ../sass/vendor/_date-picker.scss */
+  /* line 69, ../sass/vendor/_date-picker.scss */
+  /* line 74, ../sass/vendor/_date-picker.scss */
+  /* ---------------------------------------------------------------------- */
+  /* Bootstrap Datepicker
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_time-picker.scss */
+  /* ---------------------------------------------------------------------- */
+  /* Bootstrap Date Range Picker
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_date-range-picker.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Calendar
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_calendar.scss */
+  /* line 7, ../sass/vendor/_calendar.scss */
+  /* line 13, ../sass/vendor/_calendar.scss */
+  /* line 16, ../sass/vendor/_calendar.scss */
+  /* line 19, ../sass/vendor/_calendar.scss */
+  /* line 24, ../sass/vendor/_calendar.scss */
+  /* line 28, ../sass/vendor/_calendar.scss */
+  /* line 31, ../sass/vendor/_calendar.scss */
+  /* line 37, ../sass/vendor/_calendar.scss */
+  /* line 40, ../sass/vendor/_calendar.scss */
+  /* line 48, ../sass/vendor/_calendar.scss */
+  /* line 51, ../sass/vendor/_calendar.scss */
+  /* line 60, ../sass/vendor/_calendar.scss */
+  /* line 63, ../sass/vendor/_calendar.scss */
+  /* line 66, ../sass/vendor/_calendar.scss */
+  /* line 75, ../sass/vendor/_calendar.scss */
+  /* line 78, ../sass/vendor/_calendar.scss */
+  /* line 84, ../sass/vendor/_calendar.scss */
+  /* line 90, ../sass/vendor/_calendar.scss */
+  /* line 94, ../sass/vendor/_calendar.scss */
+  /* line 101, ../sass/vendor/_calendar.scss */
+  /* line 105, ../sass/vendor/_calendar.scss */
+  /* line 108, ../sass/vendor/_calendar.scss */
+  /* line 111, ../sass/vendor/_calendar.scss */
+  /* line 117, ../sass/vendor/_calendar.scss */
+  /* line 126, ../sass/vendor/_calendar.scss */
+  /* line 129, ../sass/vendor/_calendar.scss */
+  /* line 132, ../sass/vendor/_calendar.scss */
+  /* line 135, ../sass/vendor/_calendar.scss */
+  /* line 138, ../sass/vendor/_calendar.scss */
+  /* line 141, ../sass/vendor/_calendar.scss */
+  /* line 144, ../sass/vendor/_calendar.scss */
+  /* line 147, ../sass/vendor/_calendar.scss */
+  /* line 150, ../sass/vendor/_calendar.scss */
+  /* line 153, ../sass/vendor/_calendar.scss */
+  /* line 156, ../sass/vendor/_calendar.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Inline Editor
+  /* ---------------------------------------------------------------------- */
+  /* line 5, ../sass/vendor/_ckeditor.scss */
+  /* line 8, ../sass/vendor/_ckeditor.scss */
+  /* line 13, ../sass/vendor/_ckeditor.scss */
+  /* line 19, ../sass/vendor/_ckeditor.scss */
+  /* line 24, ../sass/vendor/_ckeditor.scss */
+  /* line 28, ../sass/vendor/_ckeditor.scss */
+  /* line 34, ../sass/vendor/_ckeditor.scss */
+  /* line 40, ../sass/vendor/_ckeditor.scss */
+  /* line 46, ../sass/vendor/_ckeditor.scss */
+  /* line 50, ../sass/vendor/_ckeditor.scss */
+  /* line 53, ../sass/vendor/_ckeditor.scss */
+  /* line 57, ../sass/vendor/_ckeditor.scss */
+  /* line 62, ../sass/vendor/_ckeditor.scss */
+  /* line 70, ../sass/vendor/_ckeditor.scss */
+  /* line 86, ../sass/vendor/_ckeditor.scss */
+  /* line 90, ../sass/vendor/_ckeditor.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Summernote
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_summernote.scss */
+  /* line 9, ../sass/vendor/_summernote.scss */
+  /* line 12, ../sass/vendor/_summernote.scss */
+  /* line 17, ../sass/vendor/_summernote.scss */
+  /* line 25, ../sass/vendor/_summernote.scss */
+  /* line 28, ../sass/vendor/_summernote.scss */
+  /* line 1, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 6, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 10, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 17, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 20, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 23, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 26, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 29, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 32, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 39, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 45, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 48, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 51, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 54, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 57, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 60, ../sass/vendor/_bootstrap-sliders.scss */
+  /* line 63, ../sass/vendor/_bootstrap-sliders.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Multiple File Upload
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_multiple-upload.scss */
+  /* line 7, ../sass/vendor/_multiple-upload.scss */
+  /* line 12, ../sass/vendor/_multiple-upload.scss */
+  /* line 16, ../sass/vendor/_multiple-upload.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Perfect Scrollbar
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_perfect-scrollbar.scss */
+  /* line 8, ../sass/vendor/_perfect-scrollbar.scss */
+  /* line 13, ../sass/vendor/_perfect-scrollbar.scss */
+  /* line 17, ../sass/vendor/_perfect-scrollbar.scss */
+  /* line 21, ../sass/vendor/_perfect-scrollbar.scss */
+  /* line 28, ../sass/vendor/_perfect-scrollbar.scss */
+  /* ---------------------------------------------------------------------- */
+  /*  Bootstrap File Upload
+  /* ---------------------------------------------------------------------- */
+  /* line 4, ../sass/vendor/_file-upload.scss */
+  /* line 8, ../sass/vendor/_file-upload.scss */ }
+  div#example-widget-container > * .panel .owl-item {
+    overflow: hidden; }
+  div#example-widget-container > * .owl-theme .owl-controls .owl-page span, div#example-widget-container > * .owl-theme .owl-controls .owl-buttons div {
+    background: rgba(255, 255, 255, 0.4) !important; }
+  div#example-widget-container > * .panel-white .owl-theme .owl-controls .owl-page span, div#example-widget-container > * .panel-white .owl-theme .owl-controls .owl-buttons div, div#example-widget-container > * .partition-white .owl-theme .owl-controls .owl-page span, div#example-widget-container > * .partition-white .owl-theme .owl-controls .owl-buttons div {
+    background: rgba(0, 0, 0, 0.2) !important; }
+  div#example-widget-container > * .panel-note .owl-theme .owl-controls .owl-page span, div#example-widget-container > * .panel-note .owl-theme .owl-controls .owl-buttons div, div#example-widget-container > * .partition-note .owl-theme .owl-controls .owl-page span, div#example-widget-container > * .partition-note .owl-theme .owl-controls .owl-buttons div {
+    background: rgba(0, 0, 0, 0.2) !important; }
+  div#example-widget-container > * #chart1, div#example-widget-container > * #chart4 {
+    height: 100%;
+    margin: 0;
+    min-width: 100px;
+    min-height: 100px; }
+  div#example-widget-container > * #chart4 .nvd3 .nv-axis line {
+    fill: none;
+    shape-rendering: crispedges;
+    stroke: #1eb29e !important; }
+  div#example-widget-container > * #chart4 svg text {
+    fill: #ffffff !important;
+    font-size: 11px !important; }
+  div#example-widget-container > * #chart1 svg text {
+    fill: #8B91A0 !important;
+    font-size: 11px !important; }
+  div#example-widget-container > * .nvtooltip {
+    background-color: black !important;
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+    text-align: left; }
+  div#example-widget-container > * .nvtooltip h3 {
+    font-size: 14px !important;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    text-align: center;
+    border-bottom: 1px solid #333 !important; }
+  div#example-widget-container > * #chart3 {
+    height: 200px;
+    width: 100%;
+    margin: 0;
+    min-width: 100px;
+    min-height: 100px; }
+  div#example-widget-container > * #chart3 .nvd3.nv-pie path {
+    stroke: #894550 !important; }
+  div#example-widget-container > * #chart3 svg text {
+    font: 400 12px Arial;
+    fill: #ffffff !important; }
+  div#example-widget-container > * .easy-pie-chart {
+    position: relative;
+    text-align: center; }
+  div#example-widget-container > * .easy-pie-chart .number {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    text-align: center; }
+  div#example-widget-container > * .easy-pie-chart canvas {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  div#example-widget-container > * .percent {
+    display: inline-block;
+    line-height: 70px;
+    z-index: 2; }
+  div#example-widget-container > * .percent:after {
+    content: '%';
+    margin-left: 0.1em;
+    font-size: .8em; }
+  div#example-widget-container > * .label-chart {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 300;
+    display: inline;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap; }
+  div#example-widget-container > * .modal-open .daterangepicker {
+    z-index: 10055 !important; }
+  div#example-widget-container > * .daterangepicker td {
+    text-shadow: none; }
+  div#example-widget-container > * .daterangepicker td.active {
+    background-color: #4b8df8;
+    background-image: none;
+    filter: none; }
+  div#example-widget-container > * .daterangepicker th {
+    font-weight: 400;
+    font-size: 14px; }
+  div#example-widget-container > * .daterangepicker .ranges input[type="text"] {
+    width: 70px !important;
+    font-size: 11px;
+    vertical-align: middle; }
+  div#example-widget-container > * .daterangepicker .ranges label {
+    font-weight: 300;
+    display: block; }
+  div#example-widget-container > * .daterangepicker .ranges .btn {
+    margin-top: 10px; }
+  div#example-widget-container > * .daterangepicker.dropdown-menu {
+    padding: 5px; }
+  div#example-widget-container > * .daterangepicker .ranges li {
+    color: #333; }
+  div#example-widget-container > * .daterangepicker .ranges li.active,
+  div#example-widget-container > * .daterangepicker .ranges li:hover {
+    background: #4b8df8 !important;
+    border: 1px solid #4b8df8 !important;
+    color: #fff; }
+  div#example-widget-container > * .daterangepicker .range_inputs input {
+    margin-bottom: 0 !important; }
+  div#example-widget-container > * .dd {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    line-height: 20px; }
+  div#example-widget-container > * .dd-list {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  div#example-widget-container > * .dd-list .dd-list {
+    padding-left: 30px; }
+  div#example-widget-container > * .dd-collapsed .dd-list {
+    display: none; }
+  div#example-widget-container > * .dd-item, div#example-widget-container > * .dd-empty, div#example-widget-container > * .dd-placeholder {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
+    font-size: 13px;
+    line-height: 20px; }
+  div#example-widget-container > * .dd-handle {
+    display: block;
+    height: 30px;
+    margin: 5px 0;
+    padding: 5px 10px;
+    color: #8B91A0;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #a7acb7;
+    background: #ffffff;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; }
+  div#example-widget-container > * .dd-handle:hover {
+    color: #707788;
+    background: #fafafa; }
+  div#example-widget-container > * .dd-item > button {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    width: 25px;
+    height: 20px;
+    margin: 5px 0;
+    padding: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    font-weight: bold; }
+  div#example-widget-container > * .dd-item > button:before {
+    content: '+';
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    text-indent: 0; }
+  div#example-widget-container > * .dd-item > button[data-action="collapse"]:before {
+    content: '-'; }
+  div#example-widget-container > * .dd-placeholder, div#example-widget-container > * .dd-empty {
+    margin: 5px 0;
+    padding: 0;
+    min-height: 30px;
+    background: #f2fbff;
+    border: 1px dashed #b6bcbf;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; }
+  div#example-widget-container > * .dd-empty {
+    border: 1px dashed #bbb;
+    min-height: 100px;
+    background-color: #e5e5e5;
+    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff), linear-gradient(45deg, #ffffff 25%, transparent 25%, transparent 75%, #ffffff 75%, #ffffff);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px; }
+  div#example-widget-container > * .dd-dragel {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999; }
+  div#example-widget-container > * .dd-dragel > .dd-item .dd-handle {
+    margin-top: 0; }
+  div#example-widget-container > * .dd-dragel .dd-handle {
+    -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1); }
+  div#example-widget-container > * .nestable-lists {
+    display: block;
+    clear: both;
+    padding: 30px 0;
+    width: 100%;
+    border: 0;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd; }
+  div#example-widget-container > * #nestable-menu {
+    padding: 0;
+    margin: 20px 0; }
+  div#example-widget-container > * #nestable-output, div#example-widget-container > * #nestable2-output {
+    width: 100%;
+    height: 7em;
+    font-size: 13px;
+    line-height: 1.333333em;
+    padding: 5px;
+    margin-bottom: 5px; }
+  div#example-widget-container > * #nestable2 .dd-handle {
+    color: #ffffff;
+    border: 1px solid #8B91A0;
+    background: #8B91A0; }
+  div#example-widget-container > * #nestable2 .dd-handle:hover {
+    background: #707788; }
+  div#example-widget-container > * #nestable2 .dd-item > button:before {
+    color: #fff; }
+  div#example-widget-container > * .dd-hover > .dd-handle {
+    background: #707788 !important; }
+  div#example-widget-container > * .dd3-content {
+    display: block;
+    height: 30px;
+    margin: 5px 0;
+    padding: 5px 10px 5px 40px;
+    color: #8B91A0;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #a7acb7;
+    background: #ffffff;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; }
+  div#example-widget-container > * .dd3-content:hover {
+    color: #707788;
+    background: #fafafa; }
+  div#example-widget-container > * .dd-dragel > .dd3-item > .dd3-content {
+    margin: 0; }
+  div#example-widget-container > * .dd3-item > button {
+    margin-left: 30px; }
+  div#example-widget-container > * .dd3-handle {
+    position: absolute;
+    margin: 0;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    width: 30px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid #8B91A0;
+    background: #8B91A0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
+  div#example-widget-container > * .dd3-handle:before {
+    content: '\f0c9';
+    display: block;
+    font-family: FontAwesome;
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 100%;
+    text-align: center;
+    text-indent: 0;
+    color: #fff;
+    font-size: 10px;
+    font-weight: normal; }
+  div#example-widget-container > * .dd3-handle:hover {
+    background: #707788; }
+  div#example-widget-container > * .jstree-default .jstree-clicked {
+    border: 0;
+    background-color: #e1e1e1;
+    box-shadow: none; }
+  div#example-widget-container > * .jstree-default .jstree-hovered {
+    border: 0;
+    background-color: #eee;
+    box-shadow: none; }
+  div#example-widget-container > * .jstree-default .jstree-wholerow-clicked,
+  div#example-widget-container > * .jstree-wholerow .jstree-wholerow-clicked {
+    background: none;
+    border: 0;
+    background-color: #e1e1e1;
+    box-shadow: none; }
+  div#example-widget-container > * .jstree-default .jstree-wholerow-hovered,
+  div#example-widget-container > * .jstree-wholerow .jstree-wholerow-hovered {
+    border: 0;
+    background-color: #eee;
+    box-shadow: none; }
+  div#example-widget-container > * .jstree-icon.icon-lg {
+    margin-top: 1px; }
+  div#example-widget-container > * .jstree-open > .jstree-anchor > .fa-folder:before {
+    margin-left: 2px;
+    content: "\f07c"; }
+  div#example-widget-container > * .jstree-default.jstree-rtl .jstree-last {
+    background: transparent;
+    background-repeat: no-repeat; }
+  div#example-widget-container > * .vakata-context,
+  div#example-widget-container > * .vakata-context ul {
+    padding: 0;
+    min-width: 125px;
+    background-color: #ffffff;
+    font-size: 14px;
+    font-family: "Segoe UI",Helvetica, Arial, sans-serif;
+    box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
+    border: 1px solid #efefef; }
+  div#example-widget-container > * .vakata-context li {
+    border: 0; }
+  div#example-widget-container > * .vakata-context li a {
+    padding: 0 10px;
+    border: 0; }
+  div#example-widget-container > * .vakata-context li a i {
+    display: none; }
+  div#example-widget-container > * .vakata-context li a .vakata-contextmenu-sep {
+    display: none; }
+  div#example-widget-container > * .vakata-context .vakata-context-hover > a,
+  div#example-widget-container > * .vakata-context li a:hover {
+    background-color: #eee;
+    color: #333;
+    box-shadow: none;
+    margin: 0; }
+  div#example-widget-container > * .vakata-context .vakata-context-hover > a .span,
+  div#example-widget-container > * .vakata-context .vakata-context-hover > a .ins,
+  div#example-widget-container > * .vakata-context li a:hover .span,
+  div#example-widget-container > * .vakata-context li a:hover .ins {
+    border: 0 !important; }
+  div#example-widget-container > * .vakata-context li a span,
+  div#example-widget-container > * .vakata-context li a ins {
+    display: none;
+    border: 0 !important; }
+  div#example-widget-container > * .vakata-context .vakata-context-separator a,
+  div#example-widget-container > * .vakata-context-rtl .vakata-context-separator a {
+    margin: 0;
+    border: 0; }
+  div#example-widget-container > * .jstree-rename-input {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e5e5 !important;
+    outline: none !important;
+    padding: 2px 6px !important;
+    margin-right: -4px !important; }
+  div#example-widget-container > * #jstree-marker {
+    z-index: 1049; }
+  div#example-widget-container > * .swMain > ul {
+    display: table;
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    position: relative;
+    width: 100%; }
+  div#example-widget-container > * .swMain > ul li {
+    display: table-cell;
+    text-align: center;
+    width: 1%; }
+  div#example-widget-container > * .swMain > ul li > a:before {
+    border-top: 4px solid #CED1D6;
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 1px;
+    overflow: hidden;
+    position: relative;
+    top: 21px;
+    width: 100%;
+    z-index: 1; }
+  div#example-widget-container > * .swMain > ul li:first-child > a:before {
+    left: 50%;
+    max-width: 51%; }
+  div#example-widget-container > * .swMain > ul li:last-child > a:before {
+    max-width: 50%;
+    width: 50%; }
+  div#example-widget-container > * .swMain > ul li > a.selected:before, div#example-widget-container > * .swMain li > a.done:before {
+    border-color: #5293C4; }
+  div#example-widget-container > * .swMain > ul .stepNumber {
+    background-color: #ffffff;
+    border: 5px solid #CED1D6;
+    border-radius: 100% 100% 100% 100%;
+    color: #546474;
+    display: inline-block;
+    font-size: 15px;
+    height: 40px;
+    line-height: 30px;
+    position: relative;
+    text-align: center;
+    width: 40px;
+    z-index: 2; }
+  div#example-widget-container > * .swMain > ul li > a.selected .stepNumber {
+    border-color: #5293C4; }
+  div#example-widget-container > * .swMain ul li > a.done .stepNumber {
+    border-color: #5293C4;
+    background-color: #5293C4;
+    color: #fff;
+    text-indent: -9999px; }
+  div#example-widget-container > * .swMain ul li > a.done .stepNumber:before {
+    content: "\f00c";
+    display: inline;
+    float: right;
+    font-family: FontAwesome;
+    font-weight: 300;
+    height: auto;
+    text-shadow: none;
+    margin-right: 7px;
+    text-indent: 0; }
+  div#example-widget-container > * .swMain ul li > a.done.wait .stepNumber {
+    background-color: #F6F6F6 !important;
+    color: #CCCCCC !important;
+    text-indent: -0px !important; }
+  div#example-widget-container > * .swMain ul li > a.done.wait .stepNumber:before {
+    content: "" !important; }
+  div#example-widget-container > * .swMain > ul li .stepDesc {
+    color: #8B91A0;
+    display: block;
+    font-size: 14px;
+    margin-top: 4px;
+    max-width: 100%;
+    table-layout: fixed;
+    text-align: center;
+    word-wrap: break-word;
+    z-index: 104; }
+  div#example-widget-container > * .swMain > ul li > a.selected .stepDesc, div#example-widget-container > * .swMain li > a.done .stepDesc {
+    color: #2B3D53; }
+  div#example-widget-container > * .swMain > ul li > a:hover {
+    text-decoration: none; }
+  div#example-widget-container > * .swMain > ul li > a.disabled {
+    cursor: default; }
+  div#example-widget-container > * .swMain .progress {
+    margin-bottom: 30px; }
+  div#example-widget-container > * .swMain .stepContainer {
+    height: auto !important; }
+  div#example-widget-container > * .swMain .loader {
+    display: none; }
+  div#example-widget-container > * .swMain [class^="button"], div#example-widget-container > * .swMain [class*=" button"] {
+    display: none; }
+  div#example-widget-container > * .swMain .close {
+    display: none; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-bar {
+    height: 18px !important; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-label {
+    padding: 3px 6px !important;
+    bottom: 25px !important;
+    background: none !important; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-label:after {
+    content: "\f0d7";
+    display: inline;
+    float: right;
+    font-family: FontAwesome;
+    font-size: 16px;
+    margin: 0 -6px;
+    width: 100%;
+    bottom: -14px;
+    position: absolute;
+    text-align: center;
+    text-shadow: none; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-arrow {
+    height: 14px !important;
+    margin: 3px 0 !important;
+    font-size: 20px;
+    line-height: 14px;
+    cursor: pointer; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-arrow.ui-rangeSlider-leftArrow {
+    background-image: none !important; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-arrow.ui-rangeSlider-leftArrow:before {
+    content: "\f0d9";
+    display: inline;
+    float: right;
+    font-family: FontAwesome;
+    margin-right: 5px; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-arrow.ui-rangeSlider-rightArrow {
+    background-image: none !important; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-arrow.ui-rangeSlider-rightArrow:before {
+    content: "\f0da";
+    display: inline;
+    float: right;
+    font-family: FontAwesome;
+    margin-right: 5px; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-innerBar {
+    height: 14px !important; }
+  div#example-widget-container > * [class^="slider-"] .ui-rangeSlider-handle {
+    height: 20px !important; }
+  div#example-widget-container > * [class^="slider-"].ui-rangeSlider-disabled {
+    opacity: 0.5; }
+  div#example-widget-container > * .slider-teal .ui-rangeSlider-bar {
+    background: rgba(86, 144, 153, 0.6) !important; }
+  div#example-widget-container > * .slider-teal .ui-rangeSlider-handle {
+    background: rgba(86, 144, 153, 0.8) !important; }
+  div#example-widget-container > * .slider-teal .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #569099 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #000000; }
+  div#example-widget-container > * .slider-teal .ui-rangeSlider-label:after {
+    color: #569099 !important; }
+  div#example-widget-container > * .slider-teal .ui-rangeSlider-arrow {
+    color: #4D8189; }
+  div#example-widget-container > * .slider-bricky .ui-rangeSlider-bar {
+    background: rgba(200, 58, 42, 0.6) !important; }
+  div#example-widget-container > * .slider-bricky .ui-rangeSlider-handle {
+    background: rgba(200, 58, 42, 0.8) !important; }
+  div#example-widget-container > * .slider-bricky .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #C83A2A !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #000000; }
+  div#example-widget-container > * .slider-bricky .ui-rangeSlider-label:after {
+    color: #C83A2A !important; }
+  div#example-widget-container > * .slider-bricky .ui-rangeSlider-arrow {
+    color: #B33426; }
+  div#example-widget-container > * .slider-purple .ui-rangeSlider-bar {
+    background: rgba(87, 81, 123, 0.6) !important; }
+  div#example-widget-container > * .slider-purple .ui-rangeSlider-handle {
+    background: rgba(87, 81, 123, 0.8) !important; }
+  div#example-widget-container > * .slider-purple .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #57517B !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #000000; }
+  div#example-widget-container > * .slider-purple .ui-rangeSlider-label:after {
+    color: #57517B !important; }
+  div#example-widget-container > * .slider-purple .ui-rangeSlider-arrow {
+    color: #413D5C; }
+  div#example-widget-container > * .slider-green .ui-rangeSlider-bar {
+    background: rgba(61, 148, 0, 0.6) !important; }
+  div#example-widget-container > * .slider-green .ui-rangeSlider-handle {
+    background: rgba(61, 148, 0, 0.8) !important; }
+  div#example-widget-container > * .slider-green .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #3D9400 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #000000; }
+  div#example-widget-container > * .slider-green .ui-rangeSlider-label:after {
+    color: #3D9400 !important; }
+  div#example-widget-container > * .slider-green .ui-rangeSlider-arrow {
+    color: #327B00; }
+  div#example-widget-container > * .slider-yellow .ui-rangeSlider-bar {
+    background: rgba(255, 167, 34, 0.6) !important; }
+  div#example-widget-container > * .slider-yellow .ui-rangeSlider-handle {
+    background: rgba(255, 167, 34, 0.8) !important; }
+  div#example-widget-container > * .slider-yellow .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #FFA722 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #482C00; }
+  div#example-widget-container > * .slider-yellow .ui-rangeSlider-label:after {
+    color: #FFB848 !important; }
+  div#example-widget-container > * .slider-yellow .ui-rangeSlider-arrow {
+    color: #FFAE2F; }
+  div#example-widget-container > * .slider-blue .ui-rangeSlider-bar {
+    background: rgba(54, 79, 106, 0.6) !important; }
+  div#example-widget-container > * .slider-blue .ui-rangeSlider-handle {
+    background: rgba(54, 79, 106, 0.8) !important; }
+  div#example-widget-container > * .slider-blue .ui-rangeSlider-label {
+    background-image: none !important;
+    background-color: #364F6A !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 0 #000000; }
+  div#example-widget-container > * .slider-blue .ui-rangeSlider-label:after {
+    color: #364F6A !important; }
+  div#example-widget-container > * .slider-blue .ui-rangeSlider-arrow {
+    color: #2D4259; }
+  div#example-widget-container > * .crop-image form {
+    margin: 1.5em 0; }
+  div#example-widget-container > * .jcrop-holder #preview-pane {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    right: -280px;
+    padding: 6px;
+    border: 1px rgba(0, 0, 0, 0.4) solid;
+    background-color: white;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2); }
+  div#example-widget-container > * #preview-pane .preview-container {
+    width: 250px;
+    height: 170px;
+    overflow: hidden; }
+  div#example-widget-container > * .select2-container .select2-choice {
+    background-image: none;
+    border: 1px solid #e6e8e8;
+    border-radius: 2px;
+    height: 35px;
+    padding: 3px 9px;
+    transition: border 0.2s linear 0s; }
+  div#example-widget-container > * .select2-container .select2-choice .select2-arrow {
+    background: none repeat scroll 0 0 transparent;
+    border-left: 0 none; }
+  div#example-widget-container > * .select2-container .select2-choice .select2-arrow b {
+    background: none; }
+  div#example-widget-container > * .select2-container .select2-choice .select2-arrow b:before {
+    content: "\f0d7";
+    font-family: 'FontAwesome';
+    font-size: 12px;
+    position: relative;
+    left: 2px;
+    top: 2px; }
+  div#example-widget-container > * .select2-container.select2-drop-above .select2-choice {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px; }
+  div#example-widget-container > * .select2-dropdown-open.select2-drop-above .select2-choice, div#example-widget-container > * .select2-dropdown-open.select2-drop-above .select2-choices {
+    background: F8F8F8;
+    border: 1px solid #e6e8e8; }
+  div#example-widget-container > * .select2-dropdown-open .select2-choice .select2-arrow b {
+    transform: scale(1, -1); }
+  div#example-widget-container > * .select2-drop.select2-drop-above {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: none; }
+  div#example-widget-container > * .select2-drop.select2-drop-above.select2-drop-active {
+    border-color: #e6e8e8;
+    border-image: none;
+    border-radius: 2px;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    padding-top: 0; }
+  div#example-widget-container > * .select2-container-active .select2-choice, div#example-widget-container > * .select2-container-active .select2-choices {
+    background: #f4f5f7;
+    border: 1px solid #e5e9ec;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: none; }
+  div#example-widget-container > * .select2-search {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px; }
+  div#example-widget-container > * .select2-search input {
+    border: 1px solid #e6e8e8 !important;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 28px;
+    vertical-align: baseline; }
+  div#example-widget-container > * .select2-search input:focus {
+    background: #ffffff !important;
+    border: 1px solid #e6e8e8 !important; }
+  div#example-widget-container > * .select2-results {
+    margin: 3px 10px 10px 3px; }
+  div#example-widget-container > * .select2-results li {
+    color: #6f7b8a; }
+  div#example-widget-container > * .select2-results li.select2-result-with-children > .select2-result-label {
+    color: #282323; }
+  div#example-widget-container > * .select2-results .select2-highlighted {
+    background: #0090d9;
+    border-radius: 3px; }
+  div#example-widget-container > * .select2-results .select2-highlighted .select2-result-label {
+    color: #ffffff; }
+  div#example-widget-container > * .select2-results .select2-no-results, div#example-widget-container > * .select2-results .select2-searching, div#example-widget-container > * .select2-results .select2-selection-limit {
+    background: none;
+    color: #6f7b8a;
+    font-size: 12px;
+    padding-left: 8px;
+    padding-top: 0;
+    position: relative;
+    top: -5px; }
+  div#example-widget-container > * .select2-drop-active {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-color: #e6e8e8;
+    border-image: none;
+    border-left: 1px solid #e6e8e8;
+    border-right: 1px solid #e6e8e8;
+    border-style: none solid;
+    border-width: medium 1px;
+    padding-top: 5px; }
+  div#example-widget-container > * .select2-container-multi .select2-choices {
+    background-image: none;
+    border: 1px solid #dae0e4;
+    border-radius: 2px; }
+  div#example-widget-container > * .select2-container-multi .select2-choices .select2-search-choice {
+    background-color: #e8edf1;
+    background-image: none;
+    border: medium none;
+    border-radius: 8px;
+    box-shadow: none;
+    color: inherit;
+    direction: ltr;
+    margin: 8px -5px 7px 10px;
+    padding: 4px 8px 4px 21px; }
+  div#example-widget-container > * .select2-container-multi.select2-container-active .select2-choices {
+    border: 1px solid #dae0e4;
+    box-shadow: none; }
+  div#example-widget-container > * .select2-container-multi.select2-container-active .select2-search-choice {
+    background-color: #ffffff !important; }
+  div#example-widget-container > * .select2-container-multi .select2-search-choice-close {
+    left: 6px; }
+  div#example-widget-container > * .select2-search-choice-close {
+    background: none;
+    right: 0;
+    top: 4px; }
+  div#example-widget-container > * .select2-search-choice-close:hover {
+    text-decoration: none; }
+  div#example-widget-container > * .select2-search-choice-close:before {
+    color: #94a1b2;
+    content: "\f00d";
+    font-family: 'FontAwesome';
+    font-size: 12px; }
+  div#example-widget-container > * .select2-drop-multi .select2-results .select2-no-results, div#example-widget-container > * .select2-drop-multi .select2-results .select2-searching, div#example-widget-container > * .select2-drop-multi .select2-results .select2-selection-limit {
+    top: 0; }
+  div#example-widget-container > * .select2-container-multi .select2-choices .select2-search-field input {
+    min-height: 37px;
+    padding: 6px 11px !important;
+    background: none !important; }
+  div#example-widget-container > * .select2.form-control {
+    border: 0 none;
+    box-shadow: none;
+    padding: 0; }
+  div#example-widget-container > * div.tagsinput span.tag {
+    background: #e8edf1;
+    border-radius: 8px;
+    color: #555555;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 14px;
+    border: none; }
+  div#example-widget-container > * div.tagsinput span.tag a {
+    color: #555555;
+    font-size: 14px;
+    font-weight: bold;
+    color: transparent;
+    position: relative; }
+  div#example-widget-container > * div.tagsinput span.tag a:before {
+    color: #94a1b2;
+    content: "\f00d";
+    font-family: 'FontAwesome';
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    right: 0; }
+  div#example-widget-container > * div.tagsinput input {
+    font-size: 14px;
+    width: 90px; }
+  div#example-widget-container > * .not_valid {
+    border-radius: 8px; }
+  div#example-widget-container > * .limiterBox {
+    border-top: 0;
+    background-color: #65BCDA !important;
+    padding: 3px 6px;
+    font-size: 12px;
+    color: #FFF;
+    margin-top: 6px; }
+  div#example-widget-container > * .limiterBox:after {
+    display: none; }
+  div#example-widget-container > * .limiterBox:before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -8px;
+    left: 50%;
+    margin-left: -5px;
+    border-color: transparent;
+    border-style: solid;
+    border-bottom-color: #65BCDA;
+    border-width: 0 8px 8px; }
+  div#example-widget-container > * .datepicker {
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 10px 16px; }
+  div#example-widget-container > * .datepicker thead tr .datepicker-switch {
+    color: #6f7b8a;
+    font-size: 13px; }
+  div#example-widget-container > * .datepicker thead tr .prev {
+    color: #0090d9;
+    content: "";
+    font-size: 0; }
+  div#example-widget-container > * .datepicker thead tr .prev:before {
+    color: #0090d9;
+    content: "\f053";
+    font-family: 'FontAwesome';
+    font-size: 13px; }
+  div#example-widget-container > * .datepicker thead tr .next {
+    color: #0090d9;
+    content: "";
+    font-size: 0; }
+  div#example-widget-container > * .datepicker thead tr .next:before {
+    color: #0090d9;
+    content: "\f054";
+    font-family: 'FontAwesome';
+    font-size: 13px; }
+  div#example-widget-container > * .datepicker thead tr .dow {
+    color: #0090d9;
+    font-size: 11px;
+    text-transform: uppercase; }
+  div#example-widget-container > * .datepicker tbody tr .odd {
+    color: #d0d3d8; }
+  div#example-widget-container > * .datepicker table tr td.day:hover {
+    background: none repeat scroll 0 0 #eeeeee;
+    opacity: 0.65; }
+  div#example-widget-container > * .datepicker table tr td span {
+    border-radius: 4px; }
+  div#example-widget-container > * .datepicker th, div#example-widget-container > * .datepicker td {
+    padding: 5.5px !important; }
+  div#example-widget-container > * .datepicker table tr td.old, div#example-widget-container > * .datepicker table tr td.new {
+    color: #d0d3d8; }
+  div#example-widget-container > * .datepicker table tr td.active, div#example-widget-container > * .datepicker table tr td.active:hover, div#example-widget-container > * .datepicker table tr td.active.disabled, div#example-widget-container > * .datepicker table tr td.active.disabled:hover {
+    background-image: none;
+    font-weight: 600;
+    text-shadow: none; }
+  div#example-widget-container > * .datepicker table tr td.today, div#example-widget-container > * .datepicker table tr td.today:hover, div#example-widget-container > * .datepicker table tr td.today.disabled, div#example-widget-container > * .datepicker table tr td.today.disabled:hover {
+    background-color: #e5e9ec;
+    background-image: none;
+    color: #ffffff; }
+  div#example-widget-container > * .datepicker table tr td.active:hover, div#example-widget-container > * .datepicker table tr td.active:hover:hover, div#example-widget-container > * .datepicker table tr td.active.disabled:hover, div#example-widget-container > * .datepicker table tr td.active.disabled:hover:hover, div#example-widget-container > * .datepicker table tr td.active:active, div#example-widget-container > * .datepicker table tr td.active:hover:active, div#example-widget-container > * .datepicker table tr td.active.disabled:active, div#example-widget-container > * .datepicker table tr td.active.disabled:hover:active, div#example-widget-container > * .datepicker table tr td.active.active, div#example-widget-container > * .datepicker table tr td.active.active:hover, div#example-widget-container > * .datepicker table tr td.active.disabled.active, div#example-widget-container > * .datepicker table tr td.active.disabled.active:hover, div#example-widget-container > * .datepicker table tr td.active.disabled, div#example-widget-container > * .datepicker table tr td.active.disabled:hover, div#example-widget-container > * .datepicker table tr td.active.disabled.disabled, div#example-widget-container > * .datepicker table tr td.active.disabled.disabled:hover, div#example-widget-container > * .datepicker table tr td.active[disabled], div#example-widget-container > * .datepicker table tr td.active[disabled]:hover, div#example-widget-container > * .datepicker table tr td.active.disabled[disabled], div#example-widget-container > * .datepicker table tr td.active.disabled[disabled]:hover {
+    background-color: #0090d9; }
+  div#example-widget-container > * .datepicker table tr td span.active, div#example-widget-container > * .datepicker table tr td span.active:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled, div#example-widget-container > * .datepicker table tr td span.active.disabled:hover {
+    background-image: none;
+    border: medium none;
+    text-shadow: none; }
+  div#example-widget-container > * .datepicker table tr td span.active:hover, div#example-widget-container > * .datepicker table tr td span.active:hover:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled:hover:hover, div#example-widget-container > * .datepicker table tr td span.active:active, div#example-widget-container > * .datepicker table tr td span.active:hover:active, div#example-widget-container > * .datepicker table tr td span.active.disabled:active, div#example-widget-container > * .datepicker table tr td span.active.disabled:hover:active, div#example-widget-container > * .datepicker table tr td span.active.active, div#example-widget-container > * .datepicker table tr td span.active.active:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled.active, div#example-widget-container > * .datepicker table tr td span.active.disabled.active:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled, div#example-widget-container > * .datepicker table tr td span.active.disabled:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled.disabled, div#example-widget-container > * .datepicker table tr td span.active.disabled.disabled:hover, div#example-widget-container > * .datepicker table tr td span.active[disabled], div#example-widget-container > * .datepicker table tr td span.active[disabled]:hover, div#example-widget-container > * .datepicker table tr td span.active.disabled[disabled], div#example-widget-container > * .datepicker table tr td span.active.disabled[disabled]:hover {
+    background-color: #0090d9; }
+  div#example-widget-container > * .bootstrap-timepicker-widget table td a i {
+    color: #0090d9; }
+  div#example-widget-container > * .daterangepicker .calendar th {
+    color: #0090d9; }
+  div#example-widget-container > * #calendar {
+    position: relative; }
+  div#example-widget-container > * .fc-event, div#example-widget-container > * #event-categories .event-category {
+    padding: 2px 5px;
+    background: #edeef0 !important;
+    border: 1px solid #e8e9ec !important;
+    color: #8B91A0 !important; }
+  div#example-widget-container > * #event-categories .event-category {
+    cursor: move; }
+  div#example-widget-container > * .fc-day-number {
+    margin: 2px 2px 0 0; }
+  div#example-widget-container > * .fc-header-title h2 {
+    color: #8B91A0;
+    font-weight: 200;
+    letter-spacing: -1px; }
+  div#example-widget-container > * .fc-today .fc-day-number {
+    font-weight: bold; }
+  div#example-widget-container > * .fc-state-highlight {
+    background: #F5F5F5 !important; }
+  div#example-widget-container > * .fc-button {
+    color: #858585 !important;
+    height: 40px !important;
+    line-height: 40px;
+    opacity: 0.6; }
+  div#example-widget-container > * .fc-button:hover {
+    opacity: 1; }
+  div#example-widget-container > * .fc-button-prev, div#example-widget-container > * .fc-button-next {
+    padding: 0;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+    text-indent: -9999px; }
+  div#example-widget-container > * .fc-button-prev .fc-text-arrow, div#example-widget-container > * .fc-button-next .fc-text-arrow {
+    font-weight: bold; }
+  div#example-widget-container > * .fc-button-prev:after, div#example-widget-container > * .fc-button-next:after {
+    font-family: FontAwesome;
+    text-indent: 0;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  div#example-widget-container > * .fc-button-prev:after {
+    content: "\f104"; }
+  div#example-widget-container > * .fc-button-next:after {
+    content: "\f105"; }
+  div#example-widget-container > * .fc-state-default {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    border-color: #DDDDDD !important;
+    box-shadow: none !important;
+    color: #666666;
+    text-shadow: none !important;
+    border-radius: 0 !important; }
+  div#example-widget-container > * .fc-state-down, div#example-widget-container > * .fc-state-active {
+    opacity: 1; }
+  div#example-widget-container > * .fc-header-left {
+    position: absolute !important;
+    top: 0;
+    left: 15px;
+    width: 50% !important; }
+  div#example-widget-container > * .fc-header-right {
+    position: absolute !important;
+    top: 0;
+    right: 15px;
+    width: 50% !important; }
+  div#example-widget-container > * .fc-header-center {
+    display: block !important;
+    padding-top: 60px !important; }
+  div#example-widget-container > * .event-category {
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 3px;
+    margin: 5px 0; }
+  div#example-widget-container > * .fc-border-separate tr.fc-last th {
+    border-top: none !important;
+    border-left: none !important; }
+  div#example-widget-container > * .fc-border-separate th.fc-last {
+    border-right: none !important; }
+  div#example-widget-container > * .fc-grid th {
+    text-align: right; }
+  div#example-widget-container > * .fc-event {
+    background-color: #F0F0F0;
+    border: none;
+    color: #333333;
+    font-size: 12px; }
+  div#example-widget-container > * .fc-event .fc-content > span:first-child:before, div#example-widget-container > * .event-category:before {
+    content: "\f111";
+    font-family: FontAwesome;
+    font-size: 6px;
+    line-height: 16px;
+    padding-right: 5px;
+    color: #00AEFF;
+    float: left; }
+  div#example-widget-container > * .event-category {
+    color: #858585; }
+  div#example-widget-container > * .event-category:before {
+    line-height: 20px; }
+  div#example-widget-container > * .event-cancelled .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-cancelled:before {
+    color: #E6C800; }
+  div#example-widget-container > * .event-home .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-home:before {
+    color: #FF2968; }
+  div#example-widget-container > * .event-overtime .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-overtime:before {
+    color: #711A76; }
+  div#example-widget-container > * .event-generic .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-generic:before {
+    color: #00AEFF; }
+  div#example-widget-container > * .event-job .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-job:before {
+    color: #882F00; }
+  div#example-widget-container > * .event-offsite .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-offsite:before {
+    color: #44A703; }
+  div#example-widget-container > * .event-todo .fc-content > span:first-child:before, div#example-widget-container > * .event-category.event-todo:before {
+    color: #FF3B30; }
+  div#example-widget-container > * .fc-view-month .fc-event-time {
+    display: none; }
+  div#example-widget-container > * .fc-icon-fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.33333333em; }
+  div#example-widget-container > * #inline-container [contenteditable="true"] {
+    padding: 10px; }
+  div#example-widget-container > * #inline-container {
+    border: 1px solid #CCCCCC;
+    margin: 30px auto 0;
+    padding: 10px; }
+  div#example-widget-container > * #inline-container hr {
+    background-color: #05B2D2;
+    height: 5px;
+    color: #05B2D2;
+    border: 0; }
+  div#example-widget-container > * #inline-header {
+    overflow: hidden;
+    padding: 0 0 30px;
+    position: relative; }
+  div#example-widget-container > * #inline-headerLeft {
+    padding-top: 10px; }
+  div#example-widget-container > * #inline-headerLeft h2, div#example-widget-container > * #inline-headerLeft h3 {
+    font-weight: normal;
+    margin: 0;
+    overflow: hidden;
+    text-align: center; }
+  div#example-widget-container > * #inline-headerLeft h2 {
+    font-family: "Arial Black", arial-black;
+    font-size: 52px;
+    line-height: 1.1em;
+    text-transform: uppercase; }
+  div#example-widget-container > * #inline-headerLeft h3 {
+    color: #666666;
+    font-size: 24px;
+    line-height: 1.1em;
+    margin: 0.2em 0 0; }
+  div#example-widget-container > * #inline-headerRight p {
+    margin: 0;
+    text-align: justify; }
+  div#example-widget-container > * #inline-headerRight p + p {
+    margin-top: 20px; }
+  div#example-widget-container > * #inline-headerRight div {
+    color: #666666;
+    font-size: 16px; }
+  div#example-widget-container > * #inline-columns {
+    color: #333333;
+    overflow: hidden;
+    padding-top: 20px; }
+  div#example-widget-container > * #inline-columns blockquote {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 2em;
+    font-style: italic;
+    margin: 30px 40px;
+    position: relative;
+    border: none; }
+  div#example-widget-container > * #inline-columns blockquote:before {
+    color: #666666;
+    content: "\f10d";
+    font-size: 45px;
+    left: -40px;
+    line-height: 60px;
+    position: absolute;
+    text-align: center;
+    width: 35px;
+    clear: both;
+    display: block;
+    font-family: FontAwesome;
+    font-weight: bold;
+    position: absolute;
+    text-align: center; }
+  div#example-widget-container > * #inline-tagLine {
+    border-top: 5px solid #05B2D2;
+    padding-top: 20px; }
+  div#example-widget-container > * #inline-taglist {
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 0 0 20px; }
+  div#example-widget-container > * .noteWrap {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative; }
+  div#example-widget-container > * .noteWrap .note-editor {
+    border: none; }
+  div#example-widget-container > * .noteWrap .note-editor .note-toolbar {
+    background: none;
+    border-bottom: none;
+    padding: 0; }
+  div#example-widget-container > * .noteWrap .note-editor .note-editable {
+    min-height: 240px;
+    background: url("../images/line_detail.png");
+    line-height: 20px;
+    padding: 0;
+    margin-top: 20px;
+    color: #858585; }
+  div#example-widget-container > * .noteWrap .note-editor .note-statusbar {
+    background: none; }
+  div#example-widget-container > * .noteWrap .note-editor .note-statusbar .note-resizebar {
+    border-top: none; }
+  div#example-widget-container > * .slider {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle; }
+  div#example-widget-container > * .slider.slider-horizontal {
+    margin: 10px 0;
+    width: 210px !important; }
+  div#example-widget-container > * .slider.slider-horizontal .slider-track {
+    height: 5px !important;
+    left: 0;
+    margin-top: -5px;
+    top: 50%;
+    width: 100%; }
+  div#example-widget-container > * .slider.slider-horizontal .slider-handle {
+    margin-top: -10px !important; }
+  div#example-widget-container > * .slider.slider-vertical {
+    margin: 0 10px; }
+  div#example-widget-container > * .slider.slider-vertical .slider-handle {
+    margin-left: -10px !important; }
+  div#example-widget-container > * .slider.slider-vertical .slider-track {
+    width: 5px !important; }
+  div#example-widget-container > * .slider.slider-vertical .slider-handle {
+    margin-left: -10px !important; }
+  div#example-widget-container > * .slider-handle.round {
+    background: linear-gradient(to bottom, #dddddd 13%, #ffffff 97%) repeat scroll 0 0 transparent;
+    box-shadow: 0 2px 1px -1px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.39);
+    height: 26px;
+    opacity: 1;
+    width: 26px; }
+  div#example-widget-container > * .slider-selection {
+    background-color: #dddddd !important;
+    background-image: none !important;
+    border-radius: none;
+    box-shadow: none; }
+  div#example-widget-container > * .slider.slider-blue .slider-track {
+    background: #5F8295; }
+  div#example-widget-container > * .slider.slider-green .slider-track {
+    background: #1FBBA6; }
+  div#example-widget-container > * .slider.slider-orange .slider-track {
+    background: #F58A5C; }
+  div#example-widget-container > * .slider.slider-red .slider-track {
+    background: #e66b6b; }
+  div#example-widget-container > * .slider.slider-yellow .slider-track {
+    background: #FFB848; }
+  div#example-widget-container > * .slider.slider-purple .slider-track {
+    background: #804C75; }
+  div#example-widget-container > * .slider.slider-azure .slider-track {
+    background: #00BDCC; }
+  div#example-widget-container > * .fileupload .uneditable-input {
+    white-space: nowrap; }
+  div#example-widget-container > * .fileupload-new .input-group .btn-file {
+    -webkit-border-radius: 0 3px 3px 0 !important;
+    -moz-border-radius: 0 3px 3px 0 !important;
+    border-radius: 0 3px 3px 0 !important; }
+  div#example-widget-container > * .fileinput-button {
+    overflow: hidden;
+    position: relative; }
+  div#example-widget-container > * .fileinput-button input {
+    cursor: pointer;
+    direction: ltr;
+    font-size: 23px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-300px, 0px) scale(4); }
+  div#example-widget-container > * .ps-container .ps-scrollbar-x-rail:hover,
+  div#example-widget-container > * .ps-container .ps-scrollbar-x-rail.hover {
+    background-color: #eee !important; }
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail {
+    width: 6px;
+    -moz-transition: width 0.2s linear;
+    -o-transition: width 0.2s linear;
+    -webkit-transition: width 0.2s linear;
+    transition: width 0.2s linear; }
+  div#example-widget-container > * .ps-container .ps-scrollbar-y {
+    width: 6px;
+    -moz-transition: width 0.2s linear;
+    -o-transition: width 0.2s linear;
+    -webkit-transition: width 0.2s linear;
+    transition: width 0.2s linear; }
+  div#example-widget-container > * .ps-container:hover .ps-scrollbar-y-rail,
+  div#example-widget-container > * .ps-container.hover .ps-scrollbar-y-rail {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+    opacity: 0.4; }
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail:hover,
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail.hover,
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail.in-scrolling {
+    background-color: #eee;
+    width: 10px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; }
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y,
+  div#example-widget-container > * .ps-container .ps-scrollbar-y-rail.in-scrolling .ps-scrollbar-y {
+    background-color: #999;
+    width: 10px; }
+  div#example-widget-container > * .fileupload-new.thumbnail {
+    width: 200px;
+    height: 150px; }
+  div#example-widget-container > * .fileupload-preview.thumbnail {
+    max-width: 200px;
+    max-height: 150px;
+    line-height: 20px; }
+
+/*# sourceMappingURL=scssplugins.css.map */

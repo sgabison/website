@@ -26,6 +26,11 @@ class Societe extends \Object\Concrete {
 	public function getGuests($q=null){
 		return (array) $this->getResource()->getGuests($q);
 	}
+/*
+	public function getGuestsbytel($q=null,$tel){
+		return (array) $this->getResource()->getGuests($q);
+	}
+*/
 	public function getPositionsByLoc($id=null){
 		$result=array();
 		$locs=$this->getLocations();
@@ -41,7 +46,7 @@ class Societe extends \Object\Concrete {
 		endif;
     }
 	public function toArray() {
-$fields=array('id','name','description','address','zip','city','tel','email','fax','maxSeats','maxTables','resaUnit','maxResaPerUnit','mealduration','closingDateStart', 'closingDateEnd');
+$fields=array('id','name','description','address','zip','city','tel','email','fax','maxSeats','maxTables','resaUnit','maxResaPerUnit','maxResaSeats','mealduration','latlngresult');
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();

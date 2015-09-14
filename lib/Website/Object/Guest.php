@@ -19,12 +19,22 @@ class Guest extends \Object\Concrete {
 		return  $this->getFirstname().' '.$this->getLastname();
 	}
 	public function toArray() {
-		$fields=array('id','lastname','email','tel');
+		$fields=array('id','lastname','email','tel','bookingnotes');
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();
 		}
 		$array['avatar']=(method_exists($this->getAvatar() ,getFullpath))? $this->getAvatar()->getFullpath() :'';
+		return $array;
+	}
+	public function toSpecialArray() {
+		$fields=array('id','lastname','email','tel','bookingnotes');
+		Foreach($fields as $field){
+			$getter= 'get'.ucfirst($field);
+			$array[$field]=$this->$getter();
+		}
+		$array['full']=$this->getTel().' - '.$this->getLastname();
+		$array['complete']=$this->getTel().'----'.$this->getLastname().'----'.$this->getEmail().'----'.$this->getBookingnotes();
 		return $array;
 	}
 

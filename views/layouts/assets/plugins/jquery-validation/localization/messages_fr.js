@@ -4,7 +4,18 @@
  */
 (function ($) {
 	$.extend($.validator.messages, {
+        name: "Entrez le nom de la société.",
+        address: "Entrez une adress pour la société.",
+        zip: "Entrez un code postal pour la société.",
+        city: "Entrez une ville pour la société.",
+        tel: "Entrez un numéro de téléphone.",
+        email: "Entrez une adresse courriel.",
+        maxSeats: "Entrez un nombre max de siéges.",
+        maxTables: "Entrez un nombre max de tables.",
+        meallength: "Entrez la duréé moyenne d' un repas EN MINUTES.",
+        maxResaPerUnit: "Entrez un nombre max de reservations autorisées par unité de temps.",
 		required: "Ce champ est obligatoire.",
+		checkTableSeats: "Il ne peut y avoir moins de siéges que de tables.",
 		remote: "Veuillez corriger ce champ.",
 		email: "Veuillez fournir une adresse électronique valide.",
 		url: "Veuillez fournir une adresse URL valide.",
