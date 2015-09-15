@@ -7,13 +7,9 @@
 	use Pimcore\Tool;	
 	use Website\Tool\Reponse;
 	use Website\Tool\Request;
-class EventController extends Useraware {
+	class CalendarController extends Useraware {
 
-	public function ajaxcontentAction() {
-		$this->layout ()->setLayout ( 'layouts_single_page' );
-		
-		$this->view->doc = $document;
-	}
+
 	public function preDispatch() {
 		parent::preDispatch();
 		$this->view->categories = $this->categories = array("job","home","cancelled","offsite","overtime","todo","generic");
