@@ -15,10 +15,24 @@ class Resource extends \Object\Concrete\Resource {
     	$defaultImage = Asset::getById(49);
     	return $defaultImage;
     }
-	public function init() {  
-        parent::init();
-     }
 
+	/*
+	 * retourne un tableau format mysql a convertir (timestamp)
+	 * $start et $end sont zend_date
+	 */
+	public function getRapportReservations (  $start= null, $end = null ){
+		if(!$start) $start= \Zend_Date::now();
+		if(!$end) $end=$start;
+		$locationId = $this->model->getId ();
+		$result=array("location_id"=>$locationId);
+		if($locationId >0 ):
+		$sql = sprintf(" SELECT count(o.oo_id) as nbre, sum(o.partysize) as couverts, o.datereservation, o.location__id as location_id, o.serving__id as serving_id, s.title as serving_name, lower(o.status), o.arrived FROM object_query_11 o join object_query_13 s on s.oo_id=o.serving__id WHERE  o.`datereservation`>= '%e' AND o.`datereservation`<= '%f' AND o.`location__id` = '%d' group by   o.datereservation, o.location__id, o.serving__id, lower(o.status), o.arrived order by o.location__id, o.datereservation,  o.serving__id,  s.title, o.arrived" 
+					,  $start->getTimestamp(), $end->getTimestamp(), $locationId);
+		$result =$this->db->FetchAll($sql);
+		endif;
+		return $result;
+	}
+        
     public function getReservations(){
 		$result=array();
 		if($this->model->getId() >0 ):
@@ -26,8 +40,8 @@ class Resource extends \Object\Concrete\Resource {
 		$data =$this->db->FetchAll($sql);
 		endif;
 		foreach ($data as $key=>$row){
-			$loc = \Object\Reservation::getById( $row["src_id"] );
-			if (  $loc instanceof \Object\Reservation )	$result[]= $loc ;
+			$resa = \Object\Reservation::getById( $row["src_id"] );
+			if (  $resa instanceof \Object\Reservation )	$result[]= $resa ;
 		}
     	return $result;
     }
@@ -42,7 +56,8 @@ class Resource extends \Object\Concrete\Resource {
 			if (  $loc instanceof \Object\Reservation )	$result[]= $loc ;
 		}
     	return $result;
-    }     
+    } 
+   
     public function getServings(){
 		$result=array();
 		if($this->model->getId() >0 ):

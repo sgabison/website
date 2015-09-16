@@ -101,6 +101,7 @@ class Reservation extends \Object\Concrete {
         $result['bookingnotes']=$data['bookingnotes'];
         return $result;
 	}
+
 }
 
 

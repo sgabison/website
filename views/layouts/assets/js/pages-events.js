@@ -1,4 +1,4 @@
-var Calendar = function() {
+var Events = function() {
     "use strict";
     var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
     var defaultRange = new Object;
@@ -54,8 +54,7 @@ var Calendar = function() {
         var m = date.getMonth();
         var y = date.getFullYear();
         var form = '';
-        var div = $('#rapport-calendar');
-        div.fullCalendar({
+        $('#full-calendar').fullCalendar({
             buttonIcons: {
                 prev: 'fa fa-chevron-left',
                 next: 'fa fa-chevron-right'
@@ -121,16 +120,17 @@ var Calendar = function() {
             },
             eventClick: function(calEvent, jsEvent, view) {
                 dateToShow = calEvent.start;
-                
-                var url= "/liste-reservations";
-                var data  = '?calendar='+ moment(calEvent.start).format('DD-MM-YYYY') +
-                '&servingid='+ calEvent.serving_id+
-                '&locationid='+ calEvent.location_id;
-                window.location=url+ data ;
+                $.subview({
+                    content: "#readFullEvent",
+                    startFrom: "right",
+                    onShow: function() {
+                        readFullEvents(calEvent._id);
+                    }
+                });
 
             }
         });
-        demoCalendar = div.fullCalendar("clientEvents");
+        demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
     };
     var editFullEvent = function(el) {
         $(".close-new-event").off().on("click", function() {
@@ -300,7 +300,7 @@ var Calendar = function() {
                     $.blockUI({
                         message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
                     });
-                    var reponse = new $.post("page.php", data);; 
+                    var reponse = new Object; 
     				   reponse.data = "";
 					   reponse.id =  el;
     				   reponse.METHOD = ( is_int(reponse.id) )? 'DELETE':'';
@@ -553,7 +553,7 @@ var Calendar = function() {
 					   reponse.end =  end;
     				   reponse.METHOD = 'GET';
                         $.ajax({
-                            url: '/data/calendar/get-events',
+                            url: '/data/event/get-events',
                             dataType: 'json',
                             type : 'POST', // obligatoire
                             data : JSON.stringify(reponse),
