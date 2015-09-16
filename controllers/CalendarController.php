@@ -181,50 +181,44 @@
 		
 		// Short-circuit if the client did not give us a date range.
 		if (! isset ( $data ['start'] ) || ! isset ( $data ['end'] )) {
-			die ( "Veuillez indiquer une plage de dates/Please provide a date range." );
+			
+			 $data ['start'] = "2015-01-01";
+			 $data ['end'] = \Zend_Date::now()->toString('YYYY-MM-dd');
+			 //die ( "Veuillez indiquer une plage de dates/Please provide a date range." );
 		}
 		
 		// Parse the start/end parameters.
 		// These are assumed to be ISO8601 strings with no time nor timezone, like "2013-12-29".
 		// Since no timezone will be present, they will parsed as UTC.
-		$range_start = Object\Shift::parseDateTime ( $data ['start'] );
-		$range_end = Object\Shift::parseDateTime ( $data ['end'] );
-		$data [] = $range_start->toString ( \Zend_Date::ISO_8601 );
-		$data [] = $range_end->toString ( \Zend_Date::ISO_8601 );
-		// Parse the timezone parameter if it is present.
-		$timezone = null;
-		if (isset ( $data ['timezone'] )) {
-			$timezone = new DateTimeZone ( $data ['timezone'] );
-		}
-		
-		// Read and parse our events JSON file into an array of event data arrays.
-		$json = file_get_contents ( PIMCORE_LAYOUTS_DIRECTORY . '/assets/json/events.json' );
-		$input_arrays = ($this->selectedLocation)? $this->selectedLocation->getShifts( $range_start, $range_end ): array(); //new Object\Shift\Listing (); // json_decode($json, true);
-		                                             
+		$range_start = new \Zend_Date($data ['start'],'YYYY-MM-dd'); 
+		$range_end = new \Zend_Date($data ['end'],'YYYY-MM-dd');
+		$input_arrays = ($this->selectedLocation)? (array) $this->selectedLocation->getRapportReservations( $range_start, $range_end ): array(); 
 		// Accumulate an output array of event data arrays.
 		$output_arrays = array ();
-		foreach ( $input_arrays as $event ) {
-			
-			// Convert the input array into a useful Event object
-			// $event2 = Object\Shift::create($event->toArray());
-			// $event2->setKey(Pimcore_File::getValidFilename('New Name 10'));
-			// $event2->setParentId(53);
-			// $event2->save();
-			// $output_arrays['new'] = $event2 ;
-			
-			// $data[]= $event->getEnd()->toString(\Zend_Date::ISO_8601);
-			// If the event is in-bounds, add it to the output
-			if ($event->isWithinDayRange ( $range_start, $range_end )) {
-				$output_arrays [] = $event->toCalendar ();
-			}
+		$format  = \Zend_Date::ISO_8601;
+		if($input_arrays):
+		$i=1;
+		foreach ( $input_arrays as  $input ) {
+			$array=array();
+			$array['id'] = $i++;
+			$array['title'] = $input['serving_name']." ".$input['nbre']." ".\Zend_Registry::get('Zend_Translate')->translate("reservations");
+			$array['serving_id'] = $input['serving_id'];
+			$array['allDay'] = false ;
+			$array['location_id'] = $this->selectedLocation->getId();
+			$array['className'] = "event-generic" ;
+			$array['category'] = "generic";
+			$array['content'] = $input['couverts']." ".\Zend_Registry::get('Zend_Translate')->translate("couverts");
+			$start = new \Zend_Date($input['datereservation'], \Zend_Date::TIMESTAMP);
+			$array['end'] = $array['start'] = $start->toString($format);
+			$output_arrays [] = $array;		
 		}
-		
+		endif;
 		// Send JSON to the client.
-		$reponse = new Reponse ();
-		
-		$reponse->data = $output_arrays; // $input_arrays;
-		$reponse->message = "TXT_SHIFTS_SENT";
+		$reponse = new Reponse () ;		
+		$reponse->data = $output_arrays;//$output_arrays; 
+		$reponse->message = "TXT_RAPPORT_SENT";
 		$reponse->success = true;
+		$reponse->debug=   $this->selectedLocation->getRapportReservations( $range_start, $range_end );//$input_arrays;
 		
 		$this->render ( $reponse );
 		// echo json_encode($output_arrays);

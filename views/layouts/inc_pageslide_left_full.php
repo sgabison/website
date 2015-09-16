@@ -32,14 +32,18 @@
 								<a href="/societe#<?php echo strtolower( $this->translate('TXT_SOCIETE_LOCATIONS_TAB') );?>"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
 							</li>
 							<li>
+								<a href="/evenements"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_TITLE_EVENT')?></span> </a>
+							</li>
+							<li>
 								<a href="/reserver"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_PRENDRE_RESERVATION')?></span> </a>
 							</li>
 							<li>
 								<a href="/liste-reservations-search"><i class="fa fa-bars"></i> <span class="title"><?php echo $this->t('TXT_LIST_RESERVATION')?></span> </a>
 							</li>
 							<li>
-								<a href="/evenements"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_TITLE_EVENT')?></span> </a>
-							</li>							
+								<a href="/booking-calendar"><i class="fa fa-bars"></i> <span class="title"><?php echo $this->t('TXT_CALENDRIER_RESERVATION')?></span> </a>
+							</li>
+							
 <!--
 							<li>
 								<a href="/communication-setup"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_COMMUNICATION')?></span> </a>

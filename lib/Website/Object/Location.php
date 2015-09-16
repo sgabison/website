@@ -31,6 +31,12 @@ class Location extends \Object\Concrete {
 		}
 		return $array;
 	}
+	public function getRapportReservations ( $start, $end ){
+		$result=array();
+		$result=$this->getResource()->getRapportReservations( $start, $end );
+		
+		return $result;
+	}
 	public function createServing($data=array()){
 		$object = new \Object\Serving(); 		
  		$object->setLocation($this);

@@ -10,7 +10,7 @@
 class EventController extends Useraware {
 
 	public function ajaxcontentAction() {
-		$this->layout ()->setLayout ( 'layouts_single_page' );
+		$this->layout ()->setLayout ( 'portal' );
 		
 		$this->view->doc = $document;
 	}
@@ -21,14 +21,14 @@ class EventController extends Useraware {
 	public function calendarAction() {
 	    $this->layout ()->setLayout ( 'portal' );
 	     
-        $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-calendar.js');
+        $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-events.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.pulsate/jquery.pulsate.min.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-user-profile.js');
         
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {
 					Main.init();
- 					Calendar.init();
+ 					Events.init();
 					PagesUserProfile.init();
         			SVExamples.init();
 				});',
@@ -200,24 +200,13 @@ class EventController extends Useraware {
 		if (isset ( $data ['timezone'] )) {
 			$timezone = new DateTimeZone ( $data ['timezone'] );
 		}
-		
-		// Read and parse our events JSON file into an array of event data arrays.
-		$json = file_get_contents ( PIMCORE_LAYOUTS_DIRECTORY . '/assets/json/events.json' );
+
 		$input_arrays = ($this->selectedLocation)? $this->selectedLocation->getShifts( $range_start, $range_end ): array(); //new Object\Shift\Listing (); // json_decode($json, true);
 		                                             
 		// Accumulate an output array of event data arrays.
 		$output_arrays = array ();
 		foreach ( $input_arrays as $event ) {
-			
-			// Convert the input array into a useful Event object
-			// $event2 = Object\Shift::create($event->toArray());
-			// $event2->setKey(Pimcore_File::getValidFilename('New Name 10'));
-			// $event2->setParentId(53);
-			// $event2->save();
-			// $output_arrays['new'] = $event2 ;
-			
-			// $data[]= $event->getEnd()->toString(\Zend_Date::ISO_8601);
-			// If the event is in-bounds, add it to the output
+
 			if ($event->isWithinDayRange ( $range_start, $range_end )) {
 				$output_arrays [] = $event->toCalendar ();
 			}
@@ -228,9 +217,8 @@ class EventController extends Useraware {
 		
 		$reponse->data = $output_arrays; // $input_arrays;
 		$reponse->message = "TXT_SHIFTS_SENT";
-		$reponse->success = true;
-		
+		$reponse->success = true;		
 		$this->render ( $reponse );
-		// echo json_encode($output_arrays);
+
 	}
 }

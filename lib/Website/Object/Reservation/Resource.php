@@ -14,8 +14,7 @@ class Resource extends \Object\Concrete\Resource {
 	public function init() {
 		parent::init ();
 	}
-	
-	
+
     public function getFolderRoot() {
 		$societe = ($this->model->getLocation ()) ? $this->model->getLocation ()->getSociete () : "";
     	$parent=($societe)? $societe->getParent():\Object\Folder::getById ( 1 );
