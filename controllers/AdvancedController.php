@@ -5,6 +5,7 @@ use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
+
 use Website\Tool\Reponse;
 class AdvancedController extends Action {
 	public function init() {
@@ -35,7 +36,12 @@ class AdvancedController extends Action {
 			$this->view->societe = $this->societe = \Object\Societe::getById ( $this->person->getSociete ()->getId () );			
 		}
 	}
-
+	public function postDispatch() {
+		parent::postDispatch ();
+		// $this->view->locations = $this->societe->getLocations() ;
+		
+		// do something after the action is called //-> see Zend Framework
+	}
 	public function testAction() {
 		
 		// Send JSON to the client.
