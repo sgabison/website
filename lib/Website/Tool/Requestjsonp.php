@@ -30,7 +30,7 @@ class Requestjsonp {
             } else {
 				$this->id =  $params['data']['id'];
 			}
-//		var_dump( $this->params ); echo "<br>"; echo "<br>";
+//		var_dump( $this->params ); echo "<br>"; echo "<br>"; exit;
 
     }
 }

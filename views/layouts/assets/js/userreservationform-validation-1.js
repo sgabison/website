@@ -35,14 +35,7 @@ var ReservationFormValidator1 = function () {
 	}  
 	var	today=new Date();
 	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
-	$('#calendarlinkdata').click( function(){
-		$('.registergroup1').addClass('no-display');
-		$('.registergroup2').addClass('no-display');
-		$('.registergroup').addClass('no-display');
-		$('.selectgroup').addClass('no-display');
-		$('.slotgroup').addClass('no-display');
-		$('#calendarbox').removeClass('no-display');
-	});
+	$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
 	$('.calendarhref').css( 'cursor', 'pointer' );
 	var reservationSubmit= function(){
 		var thisDay=today.getDay();

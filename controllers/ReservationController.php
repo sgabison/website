@@ -610,12 +610,15 @@ class ReservationController extends Useraware
 	public function listreservationsearchAction(){
 		$this->layout()->setLayout('portal');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/search-reservation-list.js');
+		if( $this->language =='fr'){
+			$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
+		}
 		$societe=$this->societe;
 		$locationarray=$societe->getLocations();
 		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
 					Main.init();
         			SVExamples.init();
-        			PagesUserProfile.init();
+        			SearchReservationList.init();
 				});', 'text/javascript', array (
 								'noescape' => true
 		) );

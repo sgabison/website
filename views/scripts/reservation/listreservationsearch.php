@@ -1,6 +1,6 @@
 <div class="panel panel-white">
 	<div class="panel-heading">
-		<h4 class="panel-title"><?= $this->translate("TXT_LIST_RESERVATION_SEARCH")?><span class="text-bold"><?= $this->translate("TXT_NEW_RESERVATION_LIST")?> </span></h4>
+		<h4 class="panel-title"><?= $this->translate("TXT_LIST_RESERVATION_SEARCH")?><span class="text-bold"> <?= $this->translate("TXT_NEW_RESERVATION_LIST")?> </span></h4>
 	</div>
 	<div class="panel-body">
 		<form role="form" id="searchform" novalidate="novalidate" action="/liste-reservations">
@@ -13,6 +13,7 @@
 						<i class="fa fa-ok"></i> <?php echo $this->translate('TXT_YOUR_FORM_VALIDATION_IS_SUCCESSFULL');?>
 					</div>
 					<input id="selectedLocationId" name="selectedLocationId" value="<?php if($this->selectedLocation) {echo $this->selectedLocation->getId();}?>" class="no-display">
+					<input id="language" class="no-display" value="<?php echo $this->language;?>">
 					<input id="servingid" name="servingid" value="<?php echo $servid ?>" class="no-display">
 					<input id="calendar" name="calendar" value="" class="no-display">
 				</div>

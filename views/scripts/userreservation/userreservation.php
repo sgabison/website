@@ -1,9 +1,9 @@
 <div class="ajax-white-backdrop" style="display: block;"></div>
-<div class="panel panel-white">
-	<div class="panel-body" id="reservationform">
+<div class="col-md-12 space-20">
+	<div id="reservationform">
 <!-- start: FORM VALIDATION 1 PANEL -->
 		<form role="form" id="bookingform" novalidate="novalidate">
-			<div class="row panel panel-white">
+			<div class="row">
 				<!-- start: ERRORS - CONFIRMATIONS -->
 				<div class="col-md-12">
 					<div class="errorHandler alert alert-danger no-display">
@@ -25,18 +25,36 @@
 				<!-- start: SELECTION GROUP -->
 				<div class="col-md-12 selectiongroup">
 					<!-- start: SUMMARY SELECTION GROUP -->
-					<div class="col-md-12">
-						<h4>
-							<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?> 
-							<span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span>
-							<span class="text-bold no-display" id="locationlink">
-
-								<a class="linkhref locationhref locationlinkfinal">
-									<span id="locationlinkdata"></span>
-								</a> 
-
-							</span>
-						</h4>
+					<div class="col-md-12 panel panel-white">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?> 
+								<span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span>
+								<span class="text-bold no-display" id="locationlink">
+									<a class="linkhref locationhref locationlinkfinal">
+										<span id="locationlinkdata"></span>
+									</a> 
+								</span>
+							</h4>
+							<div class="panel-tools">
+								<div class="dropdown">
+									<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
+										<i class="fa fa-cog"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-light pull-right" role="menu">
+										<li>
+											<a href="/reservation?lg=fr_FR">
+												<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('FRENCH');?></span> </a>
+										</li>
+										<li>
+											<a href="/reservation?lg=en">
+												<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('ENGLISH');?></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 						<table class="table table-bordered table-hover col-md-12" id="sample-table-4" style="table-layout: fixed;">
 							<tbody>
 								<tr>
@@ -130,13 +148,13 @@
 				</div>
 				<!-- end: SELECTION GROUP -->
 				<!-- start: REGISTER GROUP -->
-				<div class="col-md-12 no-display registergroup">
+				<div class="col-md-12 no-display registergroup space-20">
 					<div class="registergroup1">
 						<div class="form-group">
 							<label class="control-label">
 								<?php echo $this->translate('TXT_YOUR_NAME');?> <span class="symbol required"></span>
 							</label>
-							<input type="text" placeholder="Insert your Name" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>'>
+							<input type="text" placeholder="<?php echo $this->translate('INSERT_NAME');?>" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>'>
 						</div>
 						<div class="form-group">
 							<label class="control-label">
@@ -150,9 +168,11 @@
 							</label>
 							<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email" value='<?php echo $this->email;?>'>
 						</div>
-						<button class="btn btn-dark-orange btn-block" id='submit'>
-							<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
-						</button>
+						<div class="form-group">
+							<button class="btn btn-dark-orange btn-block" id='submit'>
+								<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
+							</button>
+						</div>
 					</div>
 					<div class="registergroup2 no-display">		
 						<div class="form-group">
@@ -192,7 +212,7 @@
 								</label>
 							</div>
 						</div>
-						<div class="form-group no-display registergroup">
+						<div class="form-group no-display registergroup2">
 							<label>
 								<?php echo $this->translate('TXT_AGREED_TERMS');?>
 							</label>

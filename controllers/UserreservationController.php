@@ -117,7 +117,7 @@ class UserreservationController extends Action
 		$location=Object_Location::getById($locationid, 1);
     	$datetounix=new Zend_Date( $dateres, 'dd-MM-YYYY HH:mm:ss');
     	$datestart=$datetounix->getTimestamp();
-		$d=$datetounix->get(Zend_Date::WEEKDAY);	
+		$d=$datetounix->get(Zend_Date::WEEKDAY_DIGIT);
 		//First get a list of Reservation objects for the day for this location
 		$dailyorders = new Object\Reservation\Listing();
 		$dailyorders->setCondition("location__id =".$locationid." AND start >= '".$datestart."'" );
@@ -134,8 +134,7 @@ class UserreservationController extends Action
 		       // if( $myserving instanceof Object_Serving ){   	
 					$mealduration=( $myserving->getMealduration() )*60;
 					$week=array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-					//foreach( $week as $d ){
-					if($d=='Monday'){
+					if($d=='1' ){
 						$closed=$myserving->getClosedmonday();
 						if( $myserving->getTimestartmonday() ){
 							$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartmonday());
@@ -143,7 +142,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendmonday() ){
 							$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendmonday());
 						}else{$timeend=$datestart;}
-					}elseif($d=='Tuesday'){
+					}elseif($d=='2'){
 						$closed=$myserving->getClosedtuesday();
 						if( $myserving->getTimestarttuesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestarttuesday());
@@ -151,7 +150,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendtuesday() ){
 						$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendtuesday());
 						}else{$timeend=$datestart;}
-					}elseif($d=='Wednesday'){
+					}elseif($d=='3'){
 						$closed=$myserving->getClosedwednesday();
 						if( $myserving->getTimestartwednesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartwednesday());
@@ -159,7 +158,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendwednesday() ){
 						$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendwednesday());
 						}else{$timeend=$datestart;}
-					}elseif($d=='Thursday'){
+					}elseif($d=='4'){
 						$closed=$myserving->getClosedthursday();
 						if( $myserving->getTimestartthursday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartthursday());
@@ -167,7 +166,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendthursday() ){
 						$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendthursday());
 						}else{$timeend=$datestart;}
-					}elseif($d=='Friday'){
+					}elseif($d=='5'){
 						$closed=$myserving->getClosedfriday();
 						if( $myserving->getTimestartfriday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartfriday());
@@ -175,7 +174,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendfriday() ){
 						$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendfriday());	
 						}else{$timeend=$datestart;}
-					}elseif($d=='Saturday'){
+					}elseif($d=='6'){
 						$closed=$myserving->getClosedsaturday();
 						if( $myserving->getTimestartsaturday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsaturday());
@@ -183,7 +182,7 @@ class UserreservationController extends Action
 						if( $myserving->getTimeendsaturday() ){
 						$timeend=$datestart+$this->timeslotToMinutes($myserving->getTimeendsaturday());
 						}else{$timeend=$datestart;}
-					}elseif($d=='Sunday'){
+					}elseif($d=='0'){
 						$closed=$myserving->getClosedsunday();
 						if( $myserving->getTimestartsunday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsunday());
@@ -198,7 +197,6 @@ class UserreservationController extends Action
 					$i=0;
 					while($timestart<=$endtime){
 						$i++;
-						echo $i;echo"<br>";
 						$timeslot=date("H", $timestart).":".date("i", $timestart);
 						$orderswarning="";
 						$seatswarning="";
@@ -236,7 +234,6 @@ class UserreservationController extends Action
 						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_'.$closed]=$resatime;
 					}
 			}
-			exit;
 			$reponse = new Reponse();
 			$reponse->data=$resafinal;
 			$reponse->message=$date;
@@ -259,15 +256,19 @@ class UserreservationController extends Action
 	}
 	public function checkClosedServings(){
 		$servings=$this->selectedLocation->getServings();
+    	$date=new Zend_Date();
 		$weekClose[0]=1; $weekClose[1]=1; $weekClose[2]=1; $weekClose[3]=1; $weekClose[4]=1; $weekClose[5]=1; $weekClose[6]=1;
+		//$date=new Zend_Date();
+		//echo $date->get(Zend_Date::WEEKDAY_DIGIT);
+		//exit;
 		foreach($servings as $myserving){
-			$weekClose[0]=$myserving->getClosedmonday()*$weekClose[0];
-			$weekClose[1]=$myserving->getClosedtuesday()*$weekClose[1];
-			$weekClose[2]=$myserving->getClosedwednesday()*$weekClose[2];
-			$weekClose[3]=$myserving->getClosedthursday()*$weekClose[3];
-			$weekClose[4]=$myserving->getClosedfriday()*$weekClose[4];
-			$weekClose[5]=$myserving->getClosedsaturday()*$weekClose[5];
-			$weekClose[6]=$myserving->getClosedsunday()*$weekClose[6];
+			$weekClose[1]=$myserving->getClosedmonday()*$weekClose[1];
+			$weekClose[2]=$myserving->getClosedtuesday()*$weekClose[2];
+			$weekClose[3]=$myserving->getClosedwednesday()*$weekClose[3];
+			$weekClose[4]=$myserving->getClosedthursday()*$weekClose[4];
+			$weekClose[5]=$myserving->getClosedfriday()*$weekClose[5];
+			$weekClose[6]=$myserving->getClosedsaturday()*$weekClose[6];
+			$weekClose[0]=$myserving->getClosedsunday()*$weekClose[0];
 		}
 		$week="";
 		$week=array();
@@ -284,6 +285,9 @@ class UserreservationController extends Action
     		\Zend_Registry::set("Zend_Locale", $locale);
     		$this->mySessionSite->Locale=$locale;
 		}
+		$societes= new Object\Societe\Listing();
+		$this->view->societes=$societes;
+		echo $this->getParam("selectedLocationid");
 		if( $this->getParam("selectedLocationid") ){
 			$selectedLocationid=$this->getParam("selectedLocationid");
 		} else {
@@ -306,11 +310,18 @@ class UserreservationController extends Action
 			$this->view->resachange=false;			
 
 			$this->view->selectedlocationid=$this->selectedLocation->getId();
-
-       		$this->view->lat=$this->selectedLocation->getGeolocalisation()->getLatitude();
-       		$this->view->long=$this->selectedLocation->getGeolocalisation()->getLongitude();
+			if( $this->selectedLocation->getGeolocalisation() ){
+	       		$this->view->lat=$this->selectedLocation->getGeolocalisation()->getLatitude();
+	       		$this->view->long=$this->selectedLocation->getGeolocalisation()->getLongitude();
+			}else{
+				$this->view->lat=0;
+				$this->view->long=0;
+			}	
 			if( $this->getParam('resadate') ){
 				$this->view->resadate=$this->getParam('resadate');
+			}
+			if( $this->language =='fr'){
+				$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
 			}
 		} else {
 			$this->view->warning="This is not a correct location";
@@ -336,7 +347,7 @@ class UserreservationController extends Action
 		$this->getAnswer();
 	}
  	public function getAnswer ($tree=false) {
-		$this->requete=new Requestjsonp()	;
+		$this->requete=new Request()	;
 		$method = $this->requete->method; //$this->getParam('METHOD',$_SERVER["REQUEST_METHOD"]) ;
 		$this->id = $this->requete->id;
 		$data=$this->requete->params;

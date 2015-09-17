@@ -104,11 +104,10 @@
 										</div>
 										<div class="row">
 											<div class="col-md-7 col-lg-4">
-												<div class="panel panel-white">											
-<!--
-<script src="http://demo.gabison.com/website/views/layouts/assets/js/create-reservation.js" type="text/javascript"></script>
-<div id="example-widget-container"></div>
--->
+												<div class="panel panel-white">
+													<iframe src="/reservation" width="100%" height="600px" frameborder="0" id="iframe">
+													  <p>Votre navigateur ne supporte pas l'élément iframe</p>
+													</iframe>
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-5">
