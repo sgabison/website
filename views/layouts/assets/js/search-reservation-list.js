@@ -13,7 +13,14 @@ var SearchReservationList = function () {
 	}
 	$('#arrived').iCheck({checkboxClass: 'icheckbox_square-orange'});
 	$('#cancelled').iCheck({checkboxClass: 'icheckbox_square-orange'});
-	$('.input-group.date').datepicker({ startDate: '0d', todayBtn: 'linked', todayHighlight: true, defaultDate: new Date(), autoclose: true, format: 'dd-mm-yyyy' });	
+	$('.input-group.date').datepicker({ 
+		startDate: '0d',
+		language: $("#language").val(), 
+		todayBtn: 'linked', 
+		todayHighlight: true, 
+		defaultDate: new Date(), 
+		autoclose: true, 
+		format: 'dd-mm-yyyy' });	
 	var fullDate = new Date();
 	var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
 	var currentDate =  fullDate.getDate() + "-" + twoDigitMonth + "-" + fullDate.getFullYear();
@@ -47,7 +54,6 @@ var SearchReservationList = function () {
 	return {
         //main function to initiate template pages
         init: function () {
-			SearchReservationList();
 			searchDataLoad();
         }
     };

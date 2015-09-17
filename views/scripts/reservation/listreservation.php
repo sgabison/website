@@ -28,7 +28,7 @@
 		
 			<div class="col-md-12">
 		
-			<div class="panel panel-grey">
+			<div class="panel panel-white">
 				<div class="panel-heading">
 					<h4 class="panel-title" style="color:#FFFFFF"><?= $this->translate("TXT_CONFIGURATION_PANEL")?></h4>
 					<div class="panel-tools">
