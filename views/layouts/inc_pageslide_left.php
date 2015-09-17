@@ -26,30 +26,20 @@
 							<li class="start">
 								<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_0.html"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span class="label label-default pull-right ">LABEL</span> </a>
 							</li>
+<?php foreach($this->societes as $societe){ ?>							
 							<li>
-								<a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> Ajax Submenu 1 </span><i class="icon-arrow"></i> </a>
+								<a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> <?= $societe->getName()?></span><i class="icon-arrow"></i> </a>
 								<ul class="sub-menu">
+								<?php foreach( $societe->getLocations() as $location){ ?>
 									<li>
-													<a href="#showCalendar" class="show-calendar"><span class="fa-stack"> <i class="fa fa-calendar-o fa-stack-1x fa-lg"></i> <i class="fa fa-share fa-stack-1x stack-right-bottom text-danger"></i> </span> Show calendar</a>
-									</li>
-									<li>
-										<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_1.html">
-											<span class="title"> Ajax Sample Page 1 </span>
+										<a href="/reservation?selectedLocationid=<?= $location->getId();?>">
+											<span class="title"> <?= $location->getName();?> </span>
 										</a>
 									</li>
-									<li>
-										<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_2.html">
-											<span class="title"> Ajax Sample Page 2 </span>
-										</a>
-									</li>								
-									<li>
-										<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_3.html">
-											<span class="title"> Ajax Sample Page 3 </span>
-										</a>
-									</li>
+								<?php } ?>
 								</ul>
 							</li>
-
+<?php } ?>
 
 <?php if($this->documents and $this->documents->getTotalCount() > 0) { ?>
         <?php foreach($this->documents as $doc) { ?>

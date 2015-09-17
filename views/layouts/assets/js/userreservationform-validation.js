@@ -117,7 +117,7 @@ var ReservationFormValidator = function () {
 			console.log( JSON.stringify(reponse) );
 			$.ajax({
 				url: 'http://demo.gabison.com/data/userreservation/get-data',
-				dataType: 'jsonp',
+				dataType: 'json',
 				type:'POST', //obligatoire
 				data: JSON.stringify(reponse),
 				contentType: "application/json; charset=utf-8",
@@ -407,15 +407,6 @@ var ReservationFormValidator = function () {
 		$('#tags_1').tagsInput({
 			width: 'auto'
 		});
-		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined'){
-			$('.panel-collapse').removeClass('expand');
-			$('.panel-collapse').addClass('collapses');
-			$('#tagpanel').show();
-			$('.panel-collapse').find("span").text("Collapses");
-		}
-		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' ){
-			$('.registergroup').removeClass('no-display');
-		}
 	};
 	var feedTags = function() {
 		$('.btn-tags').click( function(){
