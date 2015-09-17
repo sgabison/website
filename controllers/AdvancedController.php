@@ -5,7 +5,6 @@ use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
-
 use Website\Tool\Reponse;
 class AdvancedController extends Action {
 	public function init() {
