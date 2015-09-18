@@ -41,7 +41,7 @@
 								<a href="/liste-reservations-search"><i class="fa fa-bars"></i> <span class="title"><?php echo $this->t('TXT_LIST_RESERVATION')?></span> </a>
 							</li>
 							<li>
-								<a href="/booking-calendar"><i class="fa fa-bars"></i> <span class="title"><?php echo $this->t('TXT_CALENDRIER_RESERVATION')?></span> </a>
+								<a href="/booking-calendar"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_CALENDRIER_RESERVATION')?></span> </a>
 							</li>
 							
 <!--

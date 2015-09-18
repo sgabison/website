@@ -104,8 +104,8 @@ var Calendar = function() {
                     $(this).remove();
                 }
             },
-            selectable: true,
-            selectHelper: true,
+            selectable: false,
+            selectHelper: false,
             select: function(start, end, allDay) {
                 defaultRange.start = moment(start);
                 defaultRange.end = moment(start).add('hours', 1);
