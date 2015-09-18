@@ -26,8 +26,16 @@ class Resource extends \Object\Concrete\Resource {
 		$locationId = $this->model->getId ();
 		$result=array("location_id"=>$locationId);
 		if($locationId >0 ):
-		$sql = sprintf(" SELECT count(o.oo_id) as nbre, sum(o.partysize) as couverts, o.datereservation, o.location__id as location_id, o.serving__id as serving_id, s.title as serving_name, lower(o.status), o.arrived FROM object_query_11 o join object_query_13 s on s.oo_id=o.serving__id WHERE  o.`datereservation`>= '%e' AND o.`datereservation`<= '%f' AND o.`location__id` = '%d' group by   o.datereservation, o.location__id, o.serving__id, lower(o.status), o.arrived order by o.location__id, o.datereservation,  o.serving__id,  s.title, o.arrived" 
+		$sql = sprintf(" SELECT count(o.oo_id) as nbre, sum(o.partysize) as couverts,
+				min(o.start) as date_start, max(o.end) as date_end, 
+				o.location__id as location_id, o.serving__id as serving_id, concat(s.title,' ',lower(o.status)) as serving_name, 
+				lower(o.status)
+				FROM object_query_11 o join object_query_13 s on s.oo_id=o.serving__id 
+				WHERE  o.`start`>= '%e' AND o.`start`<= '%f' AND o.`location__id` = '%d' "
 					,  $start->getTimestamp(), $end->getTimestamp(), $locationId);
+		$sql .= "group by   DAY(FROM_UNIXTIME(o.start)),  o.location__id, o.serving__id, lower(o.status)
+				 order by o.location__id,   o.serving__id,  s.title, o.arrived" ;
+		
 		$result =$this->db->FetchAll($sql);
 		endif;
 		return $result;

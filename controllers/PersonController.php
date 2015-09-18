@@ -198,6 +198,7 @@ class PersonController extends Useraware
 			$data=$this->requete->params;
 			if ( !($data['avatar'] instanceof \Asset) and $data['avatar'] )
 			$data['avatar'] = $this->convertToAsset($data['avatar']);
+			if( $data['password'] =="" ){ $data['password']=$person->getPassword();}
 			$person->setValues( $data );
 			$person->save();
 			$res->data =  $person->toArray();

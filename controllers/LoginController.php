@@ -11,10 +11,19 @@ use Website\Tool\Reponse;
 
 class LoginController extends  Action {
 
-    public function preDispatch() {
+    public function postDispatch() {
         $this->enableLayout();
 		$this->layout()->setLayout('login');
-		//Initalize Zend_Session namespace for FlashMessenger through Pimcore's helepr
+ 
+ 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS."/assets/js/login.js");
+ 		$this->view->inlineScript ()->appendScript ( '
+					Main.init();
+					Login.init();
+					var php_message = "'.$this->view->error.'";
+					if (php_message.length) toastr.warning( php_message );
+					'
+		);
+		 
     }
 
 	public function defaultAction() {

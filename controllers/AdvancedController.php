@@ -36,7 +36,12 @@ class AdvancedController extends Action {
 			$this->view->societe = $this->societe = \Object\Societe::getById ( $this->person->getSociete ()->getId () );			
 		}
 	}
-
+	public function postDispatch() {
+		parent::postDispatch ();
+		// $this->view->locations = $this->societe->getLocations() ;
+		
+		// do something after the action is called //-> see Zend Framework
+	}
 	public function testAction() {
 		
 		// Send JSON to the client.

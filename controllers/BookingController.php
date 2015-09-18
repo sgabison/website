@@ -36,6 +36,8 @@ class BookingController extends Useraware {
 	}
 
 	public function portalAction() {
+		$locations=$this->societe->getLocations();
+		$this->view->location=$locations[0]->getName();
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js');
@@ -55,15 +57,13 @@ class BookingController extends Useraware {
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.appear/jquery.appear.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/setupform-validation.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/index.js');
-		
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/index.js');		
 		// ex css	$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.css');
-		
 		$this->view->inlineScript()->appendScript(
 				'jQuery(document).ready(function() { 
 					Main.init();
-					TimePickerFormElements.init();
-					SetupFormValidator.init(); 
+					//TimePickerFormElements.init();
+					//SetupFormValidator.init(); 
 					Index.init();
 				});',
 				'text/javascript',

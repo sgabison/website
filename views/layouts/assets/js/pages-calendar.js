@@ -55,7 +55,9 @@ var Calendar = function() {
         var y = date.getFullYear();
         var form = '';
         var div = $('#rapport-calendar');
+        console.log(div, language);
         div.fullCalendar({
+        	lang: language,
             buttonIcons: {
                 prev: 'fa fa-chevron-left',
                 next: 'fa fa-chevron-right'

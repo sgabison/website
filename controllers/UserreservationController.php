@@ -287,7 +287,6 @@ class UserreservationController extends Action
 		}
 		$societes= new Object\Societe\Listing();
 		$this->view->societes=$societes;
-		echo $this->getParam("selectedLocationid");
 		if( $this->getParam("selectedLocationid") ){
 			$selectedLocationid=$this->getParam("selectedLocationid");
 		} else {

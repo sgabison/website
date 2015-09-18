@@ -55,6 +55,7 @@ var Events = function() {
         var y = date.getFullYear();
         var form = '';
         $('#full-calendar').fullCalendar({
+        	lang:language,
             buttonIcons: {
                 prev: 'fa fa-chevron-left',
                 next: 'fa fa-chevron-right'
@@ -238,7 +239,7 @@ var Events = function() {
                         eventCategory = demoCalendar[i].category;
                     }
                     $('.form-full-event .event-categories option').filter(function() {
-                    	console.log(t(eventCategory), eventCategory, $(this).text());
+                    // 	console.log(t(eventCategory), eventCategory, $(this).text());
                         return ($(this).text().toLowerCase() == t(eventCategory) );
                     }).prop('selected', true);
                     $('.form-full-event .event-categories').selectpicker('render');
@@ -497,7 +498,7 @@ var Events = function() {
 
                 } else {
 
-					   console.log("hurra new event");
+					   // console.log("hurra new event");
     				   reponse.id =  "";
     				   reponse.METHOD = 'POST';
                         $.ajax({

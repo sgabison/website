@@ -32,7 +32,7 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/fullcalendar/fullcalendar/lang-all.js"></script>		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>		
@@ -78,14 +78,23 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/main.js"></script>
 		<!-- end: CORE JAVASCRIPTS  -->
 
-		<script>
-		 
-			jQuery(document).ready(function() {
-			 	TableExport.init();
-				console.log( 'Offsite 2 <?php echo $this->language;?> ',i18n.t("offsite") );	
-			});
-		 
+		<script>		
+			var runTranslate=function(){
+				$.holdReady( true );
+				$.getJSON('/data/default/trad', function(data){ 
+					var option={    resStore: data.store, lng: data.lng , 
+									useLocalStorage: true  ,
+									localStorageExpirationTime: 86400  // in ms, default 1 week
+								};
+					i18n.init(option);
+					// console.log( 'Offsite 1 ', data.lng, i18n.t("offsite"),  t("Offsite") );		
+					language = data.lng;
+					$.holdReady( false );			
+				});			
+			};
+			runTranslate();
 		</script>
+		<?php $this->inlineScript ()->appendScript ('TableExport.init();') ; ?>
 		<?php echo $this->inlineScript(); ?>
 		
 		  

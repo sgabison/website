@@ -208,8 +208,10 @@
 			$array['className'] = "event-generic" ;
 			$array['category'] = "generic";
 			$array['content'] = $input['couverts']." ".\Zend_Registry::get('Zend_Translate')->translate("couverts");
-			$start = new \Zend_Date($input['datereservation'], \Zend_Date::TIMESTAMP);
-			$array['end'] = $array['start'] = $start->toString($format);
+			$start = new \Zend_Date($input['date_start'], \Zend_Date::TIMESTAMP);
+			$end= new \Zend_Date($input['date_end'], \Zend_Date::TIMESTAMP);
+			$array['start'] = $start->toString($format);
+			$array['end'] = $end->toString($format);
 			$output_arrays [] = $array;		
 		}
 		endif;

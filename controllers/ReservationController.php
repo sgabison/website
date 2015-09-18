@@ -394,10 +394,11 @@ class ReservationController extends Useraware
 			Main.init();
 			ReservationFormValidator.init();
 			Maps.init();
-			$("body").on("click", ".locationlinkfinal", function(){
+			$("body").on("click", ".locationlinkfinal", function(){	
 				var newresa="newresa";
 				$.ajax({url: "/fr/booking/selectiongroup?locationid="+$("#select_location").val()+"&resadate="+moment( $(".mycalendar").datepicker("getDate") ).format("DD-MM-YYYY")+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
+					$("#registerbutton").addClass("no-display");
 					ReservationFormValidator1.init();
 				}});
 			}); 
@@ -611,7 +612,7 @@ class ReservationController extends Useraware
 		$this->layout()->setLayout('portal');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/search-reservation-list.js');
 		if( $this->language =='fr'){
-			$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
+			//$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
 		}
 		$societe=$this->societe;
 		$locationarray=$societe->getLocations();
