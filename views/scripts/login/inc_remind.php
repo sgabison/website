@@ -1,6 +1,6 @@
 ﻿				<!-- start: REMIND BOX -->
 				<div class="box-remind">
-					<h3>Sign in to your account</h3>
+					<h3><?php echo $this->t('Sign in to your account')?></h3>
 					<p>
 						<?= $this->translate("Entrez votre nouveau mot de passe")?>
 					</p>
@@ -18,7 +18,7 @@
 
 							<div class="form-group form-actions">
 								<span class="input-icon">
-									<input id="newpassword" type="password" class="form-control password" name="newpassword" placeholder="Password">
+									<input id="newpassword" type="password" class="form-control password" name="newpassword" placeholder="<?php echo $this->t('Password')?>'">
 									<i class="fa fa-lock"></i>
 								</span>
 							</div>
@@ -31,7 +31,7 @@
 
 							<div class="form-actions">
 								<button type="submit" class="btn btn-green pull-right">
-									Login <i class="fa fa-arrow-circle-right"></i>
+									<?php echo $this->t('Login')?>' <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</div>
 						</fieldset>

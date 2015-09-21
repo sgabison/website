@@ -1,8 +1,8 @@
 				<!-- start: LOGIN BOX -->
 				<div class="box-login">
-					<h3>Sign in to your account</h3>
+					<h3><?php echo $this->t('Sign in to your account')?></h3>
 					<p>
-						Please enter your name and password to log in.
+						<?php echo $this->t('Please enter your email and password to log in.')?>
 					</p>
 					<form class="form-login" action="index.html">
 						<div class="errorHandler alert alert-danger <? if(!$this->error) echo 'no-display'?> ">
@@ -19,22 +19,22 @@
 									<input type="password" class="form-control password" name="password" placeholder="Password">
 									<i class="fa fa-lock"></i>
 									<a class="forgot" href="#">
-										I forgot my password
+										<?php echo $this->t('I forgot my password')?>
 									</a> </span>
 							</div>
 							<div class="form-actions">
 								<label for="remember" class="checkbox-inline">
 									<input type="checkbox" class="grey remember" id="remember" name="remember">
-									Keep me signed in
+									<?php echo $this->t('Keep me signed in')?>
 								</label>
 								<button type="submit" class="btn btn-green pull-right">
 									Login <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</div>
 							<div class="new-account">
-								Don't have an account yet?
+								<?php echo $this->t("Do not have an account yet?")?>
 								<a href="#" class="register">
-									Create an account
+									<?php echo $this->t('Create an account')?>
 								</a>
 							</div>
 						</fieldset>

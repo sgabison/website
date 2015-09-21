@@ -1,8 +1,8 @@
 <!-- start: REGISTER BOX -->
 				<div class="box-register">
-					<h3>Sign Up</h3>
+					<h3><?php echo $this->t('Sign Up')?></h3>
 					<p>
-						Enter your personal details below:
+						<?php echo $this->t('Enter your personal details below:')?>
 					</p>
 					<form class="form-register">
 						<div class="errorHandler alert alert-danger no-display">
@@ -18,48 +18,48 @@
 									</a> </span>
 							</div>
 							<div class="form-group">
-									<input type="text" class="form-control" name="firstname" placeholder="First Name">
+									<input type="text" class="form-control" name="firstname" placeholder="<?php echo $this->t('First Name')?>">
 							</div>
 							<div class="form-group">
-									<input type="text" class="form-control" name="lastname" placeholder="Last Name">
+									<input type="text" class="form-control" name="lastname" placeholder="<?php echo $this->t('Last Name')?>">
 							</div>
 							<div class="form-group">
-								<span class="input-icon"><input type="text" class="form-control" name="address" placeholder="Address"><i class="fa fa-envelope"></i> </span>
+								<span class="input-icon"><input type="text" class="form-control" name="address" placeholder="<?php echo $this->t('Address')?>"><i class="fa fa-envelope"></i> </span>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="city" placeholder="City">
+								<input type="text" class="form-control" name="city" placeholder="<?php echo $this->t('City')?>">
 							</div>
 							<div class="form-group">
 								<div>
 									<label class="radio-inline">
 										<input type="radio" class="grey" value="female" name="gender">
-										Female
+										<?php echo $this->t('Female')?>
 									</label>
 									<label class="radio-inline">
 										<input type="radio" class="grey" value="male" name="gender">
-										Male
+										<?php echo $this->t('Male')?>
 									</label>
 								</div>
 							</div>
 							<div class="form-group">								
-									<input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number">
+									<input type="text" class="form-control" id="phone" name="phone" placeholder="<?php echo $this->t('Phone number')?>">
 							</div>
 							<p>
 								<?= $this->t("Enter your account details below:")?>
 							</p>
 							<div class="form-group">
 								<span class="input-icon">
-									<input type="email" class="form-control" name="email" placeholder="Email">
+									<input type="email" class="form-control" name="email" placeholder="<?php echo $this->t('Email')?>">
 									<i class="fa fa-envelope"></i> </span>
 							</div>
 							<div class="form-group">
 								<span class="input-icon">
-									<input type="password" class="form-control" id="password_register" name="password" placeholder="Password">
+									<input type="password" class="form-control" id="password_register" name="password" placeholder="<?php echo $this->t('Password')?>">
 									<i class="fa fa-lock"></i> </span>
 							</div>
 							<div class="form-group">
 								<span class="input-icon">
-									<input type="password" class="form-control" name="password_again" placeholder="Password Again">
+									<input type="password" class="form-control" name="password_again" placeholder="<?php echo $this->t('Password Again')?>">
 									<i class="fa fa-lock"></i> </span>
 							</div>
 							<div class="form-group">
@@ -73,7 +73,7 @@
 							<div class="form-actions">
 								<?= $this->t("Already have an account?")?>
 								<a href="#" class="go-back">
-									Log-in
+									<?php echo $this->t('Log-in')?>
 								</a>
 								<button type="submit" class="btn btn-green pull-right">
 									<?= $this->t("Submit")?> <i class="fa fa-arrow-circle-right"></i>

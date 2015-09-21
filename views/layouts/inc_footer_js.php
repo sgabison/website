@@ -7,6 +7,24 @@
 		<!--[if gte IE 9]><!-->
 			<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
 		<!--<![endif]-->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/i18next/1.6.3/i18next-1.6.3.min.js"></script>
+		<script>		
+			var runTranslate=function(){
+				$.holdReady( true );
+				$.getJSON('/data/default/trad', function(data){ 
+					var option={    resStore: data.store, lng: data.lng , 
+									useLocalStorage: true  ,
+									localStorageExpirationTime: 86400  // in ms, default 1 week
+								};
+					i18n.init(option);
+					// console.log( 'Offsite 1 ', data.lng, i18n.t("offsite"),  t("Offsite") );		
+					language = data.lng;
+					$.holdReady( false );			
+				});			
+			};
+			runTranslate();
+		</script>
+				
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
@@ -45,8 +63,6 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/subview-examples2.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		
-		<script src="//cdnjs.cloudflare.com/ajax/libs/i18next/1.6.3/i18next-1.6.3.min.js"></script>
-
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-typeahead/bootstrap-typeahead.js"></script>
 		
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/truncate/jquery.truncate.js"></script>
@@ -78,22 +94,7 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/main.js"></script>
 		<!-- end: CORE JAVASCRIPTS  -->
 
-		<script>		
-			var runTranslate=function(){
-				$.holdReady( true );
-				$.getJSON('/data/default/trad', function(data){ 
-					var option={    resStore: data.store, lng: data.lng , 
-									useLocalStorage: true  ,
-									localStorageExpirationTime: 86400  // in ms, default 1 week
-								};
-					i18n.init(option);
-					// console.log( 'Offsite 1 ', data.lng, i18n.t("offsite"),  t("Offsite") );		
-					language = data.lng;
-					$.holdReady( false );			
-				});			
-			};
-			runTranslate();
-		</script>
+
 		<?php $this->inlineScript ()->appendScript ('TableExport.init();') ; ?>
 		<?php echo $this->inlineScript(); ?>
 		

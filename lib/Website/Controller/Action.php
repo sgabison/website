@@ -25,16 +25,16 @@ class Action extends Frontend {
     	if ($this->_getParam ( "lg" )) {
     		$locale = new \Zend_Locale($this->_getParam ( "lg" ));
     		\Zend_Registry::set("Zend_Locale", $locale);
-    		$this->mySessionSite->Locale=$locale;
-    	}
+     	}
     	
-    	if(\Zend_Registry::isRegistered("Zend_Locale")) {
+    	if(\Zend_Registry::isRegistered("Zend_Locale") and $this->mySessionSite->Locale ) {  //init forcée à french à reprendre
     		$locale = \Zend_Registry::get("Zend_Locale");
     	} else {
     		$locale = new \Zend_Locale("fr_FR");
     		\Zend_Registry::set("Zend_Locale", $locale);
     	}
-    	
+
+    	$this->mySessionSite->Locale=$locale;   	 
     	$this->view->language = $this->language = $locale->getLanguage();
     	
         $languages = \Pimcore\Tool::getValidLanguages();

@@ -1,8 +1,8 @@
 				<!-- start: FORGOT BOX -->
 				<div class="box-forgot">
-					<h3>Forget Password?</h3>
+					<h3><?php echo $this->t('Forget Password?') ?></h3>
 					<p>
-						Enter your e-mail address below to reset your password.
+						<?php echo $this->t('Enter your e-mail address below to reset your password.') ?>
 					</p>
 					<form class="form-forgot">
 						<div class="errorHandler alert alert-danger no-display">
@@ -16,10 +16,10 @@
 							</div>
 							<div class="form-actions">
 								<a class="btn btn-light-grey go-back">
-									<i class="fa fa-chevron-circle-left"></i> Log-In
+									<i class="fa fa-chevron-circle-left"></i> <?php echo $this->t('Log-In')?>
 								</a>
 								<button type="submit" class="btn btn-green pull-right">
-									Submit <i class="fa fa-arrow-circle-right"></i>
+									<?php echo $this->t('Submit') ?> <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</div>
 						</fieldset>
