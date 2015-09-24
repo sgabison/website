@@ -16,8 +16,8 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<input type="checkbox" class="all-day" data-label-text="All-Day"
-							data-on-text="True" data-off-text="False">
+						<input type="checkbox" class="all-day" data-label-text="<?= $this->t("All-Day")?>"
+							data-on-text="<?= $this->t('True')?>" data-off-text="<?= $this->t('False')?>">
 					</div>
 				</div>
 				<div class="no-all-day-range">
@@ -56,7 +56,14 @@
 					<div class="form-group">
 						<select class="form-control selectpicker event-categories">
 							<?php Foreach ($this->categories as $category): ?>
-							<option data-content="<span class='event-category event-<?php echo $category?>'><?php echo $this->t($category)?></span>" value="event-<?php echo $category?>"><?php echo $this->t($category)?></option>
+							<option data-content="<span 
+								
+								
+								
+								class='event-category event-<?php echo $category?>'><?php echo $this->t($category)?></span>"
+								value="event-
+								<?php echo $category?>">
+								<?php echo $this->t($category)?></option>
 							<?php endforeach ; ?>
 						</select>
 					</div>
@@ -107,15 +114,22 @@
 			</div>
 			<div class="col-md-6">
 				<span class="event-category event-cancelled">Cancelled</span> <span
-					class="event-allday"><i class='fa fa-check'></i> All-Day</span>
+					class="event-allday"><i class='fa fa-check'></i> <?= $this->t("All-Day")?>
+				</span>
 			</div>
 			<div class="col-md-12">
-				<div class="event-start">
-					<div class="event-day"></div>
-					<div class="event-date"></div>
-					<div class="event-time"></div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="event-start">
+							<div class="event-day"></div>
+							<div class="event-date"></div>
+							<div class="event-time"></div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="event-end"></div>
+					</div>
 				</div>
-				<div class="event-end"></div>
 			</div>
 			<div class="col-md-12">
 				<div class="event-content"></div>

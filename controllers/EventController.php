@@ -180,13 +180,16 @@ class EventController extends Useraware {
 		$data=$this->requete->params;
 		$METHOD= $this->requete->method;
  
-		// PHP will fatal error if we attempt to use the DateTime class without this being set.
-		date_default_timezone_set ( 'UTC' );
 		
 		// Short-circuit if the client did not give us a date range.
 		if (! isset ( $data ['start'] ) || ! isset ( $data ['end'] )) {
 			die ( "Veuillez indiquer une plage de dates/Please provide a date range." );
 		}
+
+		if($data ['timezone']) : date_default_timezone_set ( $data ['timezone'] );
+		else: date_default_timezone_set ( 'Europe/Paris' );
+		endif;
+ 
 		
 		// Parse the start/end parameters.
 		// These are assumed to be ISO8601 strings with no time nor timezone, like "2013-12-29".
@@ -196,10 +199,7 @@ class EventController extends Useraware {
 		$data [] = $range_start->toString ( \Zend_Date::ISO_8601 );
 		$data [] = $range_end->toString ( \Zend_Date::ISO_8601 );
 		// Parse the timezone parameter if it is present.
-		$timezone = null;
-		if (isset ( $data ['timezone'] )) {
-			$timezone = new DateTimeZone ( $data ['timezone'] );
-		}
+
 
 		$input_arrays = ($this->selectedLocation)? $this->selectedLocation->getShifts( $range_start, $range_end ): array(); //new Object\Shift\Listing (); // json_decode($json, true);
 		                                             

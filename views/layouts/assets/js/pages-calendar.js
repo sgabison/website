@@ -14,7 +14,7 @@ var Calendar = function() {
 		var start = new Date(y, m-1, d);
         //var end = new Date(y, m+1, d );
         var end = new Date(y+1, m, d );
-		loadEvents (start, end );
+		
     };
     //function to initiate Full Calendar
     var runFullCalendar = function() {
@@ -55,8 +55,10 @@ var Calendar = function() {
         var y = date.getFullYear();
         var form = '';
         var div = $('#rapport-calendar');
-        div.fullCalendar({
+
+		div.fullCalendar({
         	lang: language,
+	//		ignoreTimezone :false,
             buttonIcons: {
                 prev: 'fa fa-chevron-left',
                 next: 'fa fa-chevron-right'
@@ -68,7 +70,7 @@ var Calendar = function() {
             },
             weekends: true,
             firstDay: 1,
-            events: demoCalendar,
+            events:  loadEvents,//demoCalendar,
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -125,13 +127,11 @@ var Calendar = function() {
                 
                 var url= "/liste-reservations";
                 var data  = '?calendar='+ moment(calEvent.start).format('DD-MM-YYYY') +
-                '&servingid='+ calEvent.serving_id+
-                '&locationid='+ calEvent.location_id;
+                '&servingid='+ calEvent.serving_id;
                 window.location=url+ data ;
 
             }
         });
-        demoCalendar = div.fullCalendar("clientEvents");
     };
     var editFullEvent = function(el) {
         $(".close-new-event").off().on("click", function() {
@@ -204,7 +204,7 @@ var Calendar = function() {
 
             for (var i = 0; i < demoCalendar.length; i++) {
 
-                if (demoCalendar[i]._id == el) {
+                if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
                     $(".form-full-event .event-start-date").val(moment(demoCalendar[i].start));
@@ -326,7 +326,7 @@ var Calendar = function() {
             });
         });
         for (var i = 0; i < demoCalendar.length; i++) {
-            if (demoCalendar[i]._id == el) {
+            if (demoCalendar[i].id == el) {
 
 
                 $("#readFullEvent .event-allday").hide();
@@ -466,13 +466,13 @@ var Calendar = function() {
                     var actual_event = $('#full-calendar').fullCalendar('clientEvents', el);
                     actual_event = actual_event[0];
                     for (var i = 0; i < demoCalendar.length; i++) {
-                        if (demoCalendar[i]._id == el) {
-                            newEvent._id = el;
+                        if (demoCalendar[i].id == el) {
+                            newEvent.id = el;
                             var eventIndex = i;
                         }
                     }
                    console.log("hurra", newEvent);
-   				   reponse.id =  newEvent._id;
+   				   reponse.id =  newEvent.id;
 				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
 
 
@@ -486,7 +486,7 @@ var Calendar = function() {
 							$.unblockUI();
 							if (json.success || json.success == 'true') {
 
-                                $('#full-calendar').fullCalendar('removeEvents', actual_event._id);
+                                $('#full-calendar').fullCalendar('removeEvents', actual_event.id);
                                 $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
 
                                 demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
@@ -498,7 +498,7 @@ var Calendar = function() {
 
                 } else {
 
-					   console.log("hurra new event");
+					 //   console.log("hurra new event");
     				   reponse.id =  "";
     				   reponse.METHOD = 'POST';
                         $.ajax({
@@ -529,7 +529,7 @@ var Calendar = function() {
 					   console.log("hurra save event", newEvent);
 					   var reponse = new Object; 
     				   reponse.data = newEvent;
-					   reponse.id =  newEvent._id;
+					   reponse.id =  newEvent.id;
     				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
                         $.ajax({
                             url: '/data/event/get-data',
@@ -547,12 +547,14 @@ var Calendar = function() {
                         	}
                         });
 	};
-	var loadEvents = function (start,end){
-					   console.log("hurra load events",start,end);
+	var loadEvents = function (start,end,timezone,callback){
+					//   console.log("hurra load events",start,end);
 					   var reponse = new Object; 
     				   reponse.start = start;
 					   reponse.end =  end;
+					   reponse.timezone = timezone;
     				   reponse.METHOD = 'GET';
+
                         $.ajax({
                             url: '/data/calendar/get-events',
                             dataType: 'json',
@@ -561,10 +563,9 @@ var Calendar = function() {
                             contentType : "application/json; charset=utf-8",
                             success : function(json) {
     							$.unblockUI();
-	    						if (json.success || json.success == 'true') {	                               
-	                                demoCalendar = json.data;
-									runFullCalendar();
-									runFullCalendarValidation();
+	    						if (json.success || json.success == 'true') {	
+									callback( json.data) ;								
+									demoCalendar = $.makeArray(json.data);
 	                            }
                         	}
                         });
@@ -579,6 +580,8 @@ var Calendar = function() {
     return {
         init: function() {
             setFullCalendarEvents();
+			runFullCalendar();
+			runFullCalendarValidation();
         }
     };
 }();

@@ -172,19 +172,19 @@
 
 	}
 	public function getEventsAction() {
-		$this->requete=new Request ( )	;
-		$data=$this->requete->params;
-		$METHOD= $this->requete->method;
- 
-		// PHP will fatal error if we attempt to use the DateTime class without this being set.
-		date_default_timezone_set ( 'UTC' );
-		
+ 		$this->requete=new Request ( )	;
+ 		$data=$this->requete->params;
+ 		$METHOD= $this->requete->method;
+
+ 		if($data ['timezone']) : date_default_timezone_set ( $data ['timezone'] );
+		else: date_default_timezone_set ( 'Europe/Paris' );
+		endif;
 		// Short-circuit if the client did not give us a date range.
 		if (! isset ( $data ['start'] ) || ! isset ( $data ['end'] )) {
-			
-			 $data ['start'] = "2015-01-01";
-			 $data ['end'] = \Zend_Date::now()->toString('YYYY-MM-dd');
-			 //die ( "Veuillez indiquer une plage de dates/Please provide a date range." );
+						
+			 $data ['start'] = (! isset ( $data ['start'] ))? \Zend_Date::now()->toString('YYYY-MM-dd') :  $data ['start'] ;
+			 $data ['end'] = (! isset ( $data ['end'] )) ? \Zend_Date::now()->toString('YYYY-MM-dd') : $data ['end'] ;
+		
 		}
 		
 		// Parse the start/end parameters.
@@ -208,11 +208,12 @@
 			$array['className'] = "event-generic" ;
 			$array['category'] = "generic";
 			$array['content'] = $input['couverts']." ".\Zend_Registry::get('Zend_Translate')->translate("couverts");
+			$array['statut'] = $input['statut'];
 			$start = new \Zend_Date($input['date_start'], \Zend_Date::TIMESTAMP);
 			$end= new \Zend_Date($input['date_end'], \Zend_Date::TIMESTAMP);
 			$array['start'] = $start->toString($format);
 			$array['end'] = $end->toString($format);
-			$output_arrays [] = $array;		
+			if ($array['statut'] != "cancelled") $output_arrays [] = $array;		
 		}
 		endif;
 		// Send JSON to the client.

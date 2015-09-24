@@ -2,8 +2,12 @@
 								<!-- start: FULL CALENDAR PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
+										
+<!--
 										<i class="fa fa-calendar"></i>
 										<?php echo $this->t('TXT_TITLE_EVENT')?> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
+-->
+										<h4 class="panel-title"><?php echo $this->t('TXT_TITLE_EVENT')?> <span class="text-bold"> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?> </span></h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
@@ -37,7 +41,7 @@
 									</div>
 									<div class="panel-body">
 										<div class="col-sm-12 space20">
-											<a href="#newFullEvent" class="btn btn-green add-event"><i class="fa fa-plus"></i> <?php echo $this->t('TXT_ADD_EVENT')?></a>
+											<a href="#newFullEvent" class="btn btn-primary add-event"><i class="fa fa-plus"></i> <?php echo $this->t('TXT_ADD_EVENT')?></a>
 										</div>
 										<div class="col-sm-9">
 											<div id='full-calendar'></div>

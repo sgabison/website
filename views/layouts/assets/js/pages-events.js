@@ -2,19 +2,20 @@ var Events = function() {
     "use strict";
     var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
     var defaultRange = new Object;
+	
     defaultRange.start = moment();
     defaultRange.end = moment().add('days', 1);
     //Calendar
     var setFullCalendarEvents = function() {
         var date = new Date();
+		moment.lang(language);
         dateToShow = date;
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
 		var start = new Date(y, m-1, d);
         //var end = new Date(y, m+1, d );
-        var end = new Date(y+1, m, d );
-		loadEvents (start, end );
+        var end = new Date(y, m+1, d );
     };
     //function to initiate Full Calendar
     var runFullCalendar = function() {
@@ -67,7 +68,7 @@ var Events = function() {
             },
             weekends: true,
             firstDay: 1,
-            events: demoCalendar,
+            events: loadEvents,
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -125,13 +126,13 @@ var Events = function() {
                     content: "#readFullEvent",
                     startFrom: "right",
                     onShow: function() {
-                        readFullEvents(calEvent._id);
+						console.log(calEvent);
+                        readFullEvents(calEvent.id);
                     }
                 });
 
             }
         });
-        demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
     };
     var editFullEvent = function(el) {
         $(".close-new-event").off().on("click", function() {
@@ -203,8 +204,8 @@ var Events = function() {
             $(".form-full-event .event-id").val(el);
 
             for (var i = 0; i < demoCalendar.length; i++) {
-
-                if (demoCalendar[i]._id == el) {
+				console.log("editevent", el, demoCalendar[i]);
+                if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
                     $(".form-full-event .event-start-date").val(moment(demoCalendar[i].start));
@@ -326,7 +327,7 @@ var Events = function() {
             });
         });
         for (var i = 0; i < demoCalendar.length; i++) {
-            if (demoCalendar[i]._id == el) {
+            if (demoCalendar[i].id == el) {
 
 
                 $("#readFullEvent .event-allday").hide();
@@ -466,13 +467,13 @@ var Events = function() {
                     var actual_event = $('#full-calendar').fullCalendar('clientEvents', el);
                     actual_event = actual_event[0];
                     for (var i = 0; i < demoCalendar.length; i++) {
-                        if (demoCalendar[i]._id == el) {
-                            newEvent._id = el;
+                        if (demoCalendar[i].id == el) {
+                            newEvent.id = el;
                             var eventIndex = i;
                         }
                     }
-                   console.log("hurra", newEvent);
-   				   reponse.id =  newEvent._id;
+ 
+				   reponse.id =  newEvent.id;
 				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
 
 
@@ -486,7 +487,7 @@ var Events = function() {
 							$.unblockUI();
 							if (json.success || json.success == 'true') {
 
-                                $('#full-calendar').fullCalendar('removeEvents', actual_event._id);
+                                $('#full-calendar').fullCalendar('removeEvents', actual_event.id);
                                 $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
 
                                 demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
@@ -526,10 +527,10 @@ var Events = function() {
         });
     };
 	var saveEvent = function (newEvent){
-					   console.log("hurra save event", newEvent);
+					    
 					   var reponse = new Object; 
     				   reponse.data = newEvent;
-					   reponse.id =  newEvent._id;
+					   reponse.id =  newEvent.id;
     				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
                         $.ajax({
                             url: '/data/event/get-data',
@@ -541,17 +542,18 @@ var Events = function() {
     							$.unblockUI();
 	    						if (json.success || json.success == 'true') {
 	                                $('#full-calendar').fullCalendar('renderEvent', json.data, true);
-	                                demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+	                                demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
 	                                toastr.success(json.message);
 	                            }
                         	}
                         });
 	};
-	var loadEvents = function (start,end){
-					   console.log("hurra load events",start,end);
+	var loadEvents = function (start,end,timezone,callback){
+					  
 					   var reponse = new Object; 
     				   reponse.start = start;
 					   reponse.end =  end;
+					   reponse.timezone =  timezone;
     				   reponse.METHOD = 'GET';
                         $.ajax({
                             url: '/data/event/get-events',
@@ -562,9 +564,9 @@ var Events = function() {
                             success : function(json) {
     							$.unblockUI();
 	    						if (json.success || json.success == 'true') {	                               
-	                                demoCalendar = json.data;
-									runFullCalendar();
-									runFullCalendarValidation();
+									callback(json.data);
+									demoCalendar = $.makeArray(json.data);
+									console.log("loadEvents",demoCalendar);
 	                            }
                         	}
                         });
@@ -579,6 +581,8 @@ var Events = function() {
     return {
         init: function() {
             setFullCalendarEvents();
+			runFullCalendar();
+			runFullCalendarValidation();
         }
     };
 }();

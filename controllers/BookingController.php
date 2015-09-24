@@ -36,20 +36,20 @@ class BookingController extends Useraware {
 	}
 
 	public function portalAction() {
-		$locations=$this->societe->getLocations();
-		$this->view->location=$locations[0]->getName();
+
+		$this->view->location=$this->selectedLocation;
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-mockjax/jquery.mockjax.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/lib/d3.v3.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedAreaChart.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedArea.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/nv.d3.min.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBarChart.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBar.js');
+// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/lib/d3.v3.js');
+// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedAreaChart.js');
+// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedArea.js');
+//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/nv.d3.min.js');
+//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBarChart.js');
+//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBar.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootbox/bootbox.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/easy-pie-chart/dist/jquery.easypiechart.min.js');
@@ -96,6 +96,63 @@ class BookingController extends Useraware {
 				\Logger::err($e);
 				echo $e->getMessage();exit;
 			}
+	}
+	public function introductionAction() {
+		$this->layout ()->setLayout ( 'portal' );
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+				var date = new Date();
+		        var d = date.getDate();
+		        var m = date.getMonth();
+		        var y = date.getFullYear();
+				var closeddays = $("#closeddays").val().split(",");
+				console.log( closeddays );
+				var offday = $("#offday").val();
+				$("#fullcalendar").fullCalendar({
+					lang: language,
+					height: 400,
+					weekends: true,
+					selectable: true,
+		            selectHelper: false,
+		            dayRender: function (date, cell) {
+		            	if($.inArray(date.format("DD-MM-YYYY"), closeddays)>=0){
+					        cell.css("background-color", "red");
+					        cell.css("cursor", "not-allowed");
+		            	}
+		            	if(date.format("DD-MM-YYYY")==offday){
+					        cell.css("background-color", "red");
+					        cell.css("cursor", "not-allowed");
+		            	}
+				    },
+		            select: function(start, end, allDay) {
+		            	console.log( start.format("DD-MM-YYYY") );
+		            	if($.inArray(start.format("DD-MM-YYYY"), closeddays)==-1){
+							/// collect date
+		            	}
+		            }
+				});
+
+				$("#mydate").glDatePicker({
+				    showAlways: true,
+				    allowMonthSelect: false,
+				    allowYearSelect: false,
+				    prevArrow: "",
+				    nextArrow: "",
+				    selectedDate: new Date(2013, 8, 5),
+				    selectableDateRange: [
+				        { from: new Date(2013, 8, 1),
+				            to: new Date(2013, 8, 10) },
+				        { from: new Date(2013, 8, 19),
+				            to: new Date(2013, 8, 22) },
+				    ],
+				    selectableDates: [
+				        { date: new Date(2013, 8, 24) },
+				        { date: new Date(2013, 8, 30) }
+				    ]
+				});
+
+			});', 'text/javascript', array (
+			'noescape' => true 
+		) );
 	}
 	public function searchAction () {
 
