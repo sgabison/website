@@ -5892,6 +5892,11 @@ div.timeline .column_center .timeline_element:before, div.timeline .column_cente
 }
 
 /* line 23, ../sass/partials/_calendar.scss */
+div#fullcalendar .fc-state-highlight {
+  background: transparent !important;
+}
+
+/* line 23, ../sass/partials/_calendar.scss */
 .fc-state-highlight {
   background: #F5F5F5 !important;
 }

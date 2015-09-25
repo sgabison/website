@@ -11,6 +11,11 @@ var ReservationFormValidator = function () {
 	       return results[1] || 0;
 	    }
 	}
+    if ($(".tooltips").length) {
+        $('.tooltips').tooltip();
+    }
+	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
+	$('[data-toggle="tooltip"]').tooltip();
 	$.reformatDate=function(dateStr){
 	  var dArr = dateStr.split("-");  // ex input "2010-01-18"
 	  return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0]; //ex out: "18/01/10"
@@ -26,33 +31,85 @@ var ReservationFormValidator = function () {
 	var	today=new Date();
 	var thisDay=today.getDay();
 	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-	//var offdays = $('#offdays').val().split(',');
-	var closeddays = $('#closeddays').val();
+	var offdays = $('#offdays').val().split(',');
+	var closeddays = $('#closeddays').val().split(',');
+	console.log( moment( $('#mycalendar').val(), 'DD-MM-YYYY' ) );
 	var inRange=false;
-	$("#fullcalendar").fullCalendar({
-		lang: language,
-		height: 400,
-		weekends: true,
-		selectable: true,
-        selectHelper: false,
-        dayRender: function (date, cell) {
-        	if($.inArray(date.format("DD-MM-YYYY"), closeddays)>=0){
-		       cell.css("background-color", "red");
-		       cell.css("cursor", "not-allowed");
-        	}
-        	//if(date.format("DD-MM-YYYY")==offday){
-		    //   cell.css("background-color", "red");
-		    //   cell.css("cursor", "not-allowed");
-        	//}
-	    },
-        select: function(start, end, allDay) {
-        	console.log( start.format("DD-MM-YYYY") );
-        	if($.inArray(start.format("DD-MM-YYYY"), closeddays)==-1){
-				//$('#mycalendar').val( start.format("DD-MM-YYYY") );
-        	}
-        }
-	});
-
+	var managePartySize = function(){
+		$('#lessthansevenbutton').click( function(){
+			$('.morethanseven').addClass('no-display');
+			$('.lessthanseven').removeClass('no-display');
+		});
+		$('#morethansevenbutton').click( function(){
+			$('.morethanseven').removeClass('no-display');
+			$('.lessthanseven').addClass('no-display');
+		});
+		$('.partybutton').click( function(){
+			$('#party').val( $(this).val() );
+			$('#personlinkdata').text( $(this).val() );
+			$('.partybutton').removeClass('btn-default');
+			$('.partybutton').removeClass('btn-dark-orange');
+			$(this).addClass('btn-dark-orange');
+		});
+		$('#partyselect').on('change', function(){
+			$('#party').val( $('#partyselect').val() );
+			$('#personlinkdata').text( $('#partyselect').val() );
+		});
+	}
+	var loadFullCalendar = function(){
+		$("#fullcalendar").fullCalendar({
+			lang: language,
+			height: 400,
+			weekends: true,
+			selectable: true,
+	        selectHelper: false,
+	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
+	        dayClick: function(date, jsEvent, view) {
+	        	if( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ){
+		        	console.log('works');
+		        	$('tbody td').removeClass('currentDayClass');
+		        	$(this).addClass('currentDayClass');
+	        	}else{
+	        		console.log('don t works');
+	        		//console.log(view);
+	        		//console.log(this);
+		        	$(this).removeClass('fc-highlight');
+		        	//$(this).attr('class', '');
+	        	}
+	        },
+	        dayRender: function (date, cell) {
+	        	console.log( date.day() );
+				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
+				   cell.removeClass("fc-state-highlight");
+				   cell.removeClass("fc-today");
+				}
+	        	if( $.inArray( date.format( "DD-MM-YYYY" ), offdays ) >=0 ){
+			       cell.css("background-color", "#DDDDDD");
+			       cell.css("cursor", "not-allowed");
+			       cell.prop('data-toggle', 'tooltip');
+			       cell.prop('title', t('js_no_serving'));
+	        	}
+	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
+			       cell.css("background-color", "#BBBBBB");
+			       cell.css("cursor", "not-allowed");
+			       cell.prop('title', t('js_restaurant_closed'));	        		
+	        	}
+	        	if( date < moment().subtract(1, 'days' ) ){
+			       cell.css("background-color", "#EEEEEE");
+			       cell.css("cursor", "not-allowed");
+			       cell.prop('title', t('js_passed_date'));	        		
+	        	}
+		    },
+	        select: function(start, end, allDay) {
+	        	console.log( start.format("DD-MM-YYYY") );
+	        	if( start >= moment().subtract(1, 'days' ) && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
+					$('#mycalendar').val( start.format("DD-MM-YYYY") );
+					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+	        	}
+	        }
+		});
+	}
+/*
 	var loadCalendar = function(){
 		$('#mycalendar').datepicker({ 
 			startDate: "0d",
@@ -98,7 +155,7 @@ var ReservationFormValidator = function () {
 		});
 		$('#mycalendar').datepicker('show');
 	}
-
+*/
 	var reservationDataLoad = function () {
 		var form1 = $('#bookingform');
 		console.log( 'select_location'+$('#select_location').val() );
@@ -162,11 +219,13 @@ var ReservationFormValidator = function () {
 	var reservationSubmit= function(){
 		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid') !== 'undefined' && $.urlParam('reservationid')!='' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
 			lauchRequest(reservationid);
+			$('#partybox').addClass('no-display');
 		}else{
 			var backdrop = $('.ajax-white-backdrop');
 			backdrop.remove();
 			$('.book').click( function(){
-				lauchRequest();	
+				lauchRequest();
+				$('#partybox').addClass('no-display');	
 			});	
 		}
 	};
@@ -231,6 +290,7 @@ var ReservationFormValidator = function () {
 	}
 	var slotButton = function(locationid, elementid, backdrop){
 			$('#slotinput').val( $('#'+elementid).attr("value") );
+			$('#slotlinkdata').text( $('#'+elementid).attr("value") );
 			$('#locationinput').val( locationid );
 			$('#reservationinput').val( reservationid );
 			$('#reservationdateinput').val($('#mycalendar').val());
@@ -251,7 +311,7 @@ var ReservationFormValidator = function () {
 		$('#locationlink').removeClass('no-display');
 		var locationid=$('#select_location').val();
 		var locationname=$('#select_location option:selected' ).text();
-		var resadate=$('.mycalendar').val();
+		var resadate=$('#mycalendar').val();
 		//updatelink();
 		$('#calendarlinkdata').text(resadate);
 		$('#locationlinkdata').text(locationname); 
@@ -397,7 +457,7 @@ var ReservationFormValidator = function () {
 	var runTagsInput = function() {
 		$('#tags_1').tagsInput({
 			width: 'auto',
-			onRemoveTag: function(value){ $(':button[value="'+value+'"]').removeClass('no-display'); },
+			onRemoveTag: function(value){ $('a[value="'+value+'"]').removeClass('no-display'); },
 			onAddTag: function(value){ console.log(value);}
 		});
 		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined'){
@@ -413,7 +473,7 @@ var ReservationFormValidator = function () {
 	var feedTags = function() {
 		$('.btn-tags').click( function(){
 			$(this).addClass('no-display');
-			$('#tags_1').addTag( $(this).val() );		
+			$('#tags_1').addTag( $(this).attr("value") );		
 		});
 	};
 	$('input.typeahead').typeahead({
@@ -483,9 +543,9 @@ var ReservationFormValidator = function () {
     return {
         //main function to initiate template pages
         init: function () {
-            //validateCheckRadio();
+            managePartySize();
             runValidator1();
-			loadCalendar();
+			loadFullCalendar();
 			reservationSubmit();
 			runTagsInput();
 			feedTags();

@@ -45,10 +45,19 @@ body .fc { /* extra precedence to overcome jqui */
 	color: #666;
 }
 
+div#fullcalendar .fc-unthemed .fc-today {
+	background: #ffffff;
+}
+
 .fc-unthemed .fc-today {
 	background: #fcf8e3;
 }
 
+div#fullcalendar .fc-highlight{
+	background: #dddddd;
+	opacity: 0;
+	filter: alpha(opacity=0); /* for IE */
+}
 .fc-highlight { /* when user is selecting cells */
 	background: #bce8f1;
 	opacity: .3;

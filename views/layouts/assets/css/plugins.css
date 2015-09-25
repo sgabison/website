@@ -1548,6 +1548,11 @@ div.tagsinput input {
   font-weight: bold;
 }
 
+div#fullcalendar .fc-state-highlight {
+  background: transparent !important;
+}
+
+
 /* line 28, ../sass/vendor/_calendar.scss */
 .fc-state-highlight {
   background: #F5F5F5 !important;

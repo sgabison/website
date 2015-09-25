@@ -54,25 +54,22 @@
 						<label class="col-sm-3 control-label">
 							<?= $this->translate("TXT_EMAIL")?> <span class="symbol required"></span>
 						</label>
-						<div class="col-sm-8">
+						<div class="col-sm-9">
 							<input type="text" class="form-control" id="email" disabled value="<?php echo $this->getParam('guestemail');?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="form-field-20">
-							With Character Limit
+							<?= $this->translate("TXT_TEXTE")?>
 						</label>
-						<div class="col-sm-8">
-							<input type="text" id="message" placeholder="Text Field" id="form-field-20" class="form-control limited" maxlength="40">
+						<div class="col-sm-9">
+							<textarea type="text" id="message" rows="4" class="form-control" placeholder="<?= $this->translate('TXT_TEXTE_PLACEHOLDER')?>"></textarea>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<p>
-						<?= $this->translate("TXT_SEND_MAIL_MESSAGE_READY")?>
-					</p>
 				</div>
 				<div class="col-md-4">
 					<input class="no-display" id="resaid" name="resaid" value="<?php echo $this->getParam('resaid');?>">
@@ -96,7 +93,7 @@ $('#sendmail').click( function(e){
 		data: {sendmail: 'send', resaid: $("#resaid").val(), message: $("#message").val() },
 		success: function() {
 			$.unblockUI();
-			toastr.success('Mail is sent');
+			toastr.success(t('js_mail_sent');
 			$('#ajax-modal').modal('toggle');
 		},
 		error: function (request, status, error) {

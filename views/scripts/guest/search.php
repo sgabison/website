@@ -38,18 +38,19 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-12 space20">
-				<button href="#newSearch" class="btn btn-green new-search">
+<!--
+				<button href="#newSearch" class="btn btn-blue new-search">
 					<?= $this->translate("Action 1")?>
 					<i class="fa fa-plus"></i>
 				</button>
-				<button data-table="#guestList"
-					class="btn btn-orange print-table">
-					<?= $this->translate("Print")?>
-					<i class="fa fa-print"></i>
-				</button>
-				<div class="btn-group pull-right">
+-->
+				<div class="pull-right">
+					<button data-table="#guestList" class="btn btn-orange print-table">
+						<?= $this->translate("Print")?>
+						<i class="fa fa-print"></i>
+					</button>
 					<button data-toggle="dropdown"
-						class="btn btn-green dropdown-toggle">
+						class="btn btn-blue dropdown-toggle">
 						Export <i class="fa fa-angle-down"></i>
 					</button>
 					<ul class="dropdown-menu dropdown-light pull-right">
@@ -126,12 +127,12 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>ID</th>
-							<th>Last Name</th>
-							<th>Tel</th>
-							<th>Email</th>
-							<th>Edit</th>
-							<th>Reservation</th>
+							<th><?php echo $this->translate('TXT_ID');?></th>
+							<th><?php echo $this->translate('TXT_LASTNAME');?></th>
+							<th><?php echo $this->translate('TXT_TEL');?></th>
+							<th><?php echo $this->translate('TXT_EMAIL');?></th>
+							<th><?php echo $this->translate('TXT_EDIT');?></th>
+							<th><?php echo $this->translate('TXT_RESERVATION');?></th>
 						</tr>
 					</thead>
 				</table>

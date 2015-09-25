@@ -1,25 +1,26 @@
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_head.php") ; ?>
 	<!-- start: BODY -->
-	<body class="single-page">
+	<body>
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar.php") ; ?>
 
 		<div class="main-wrapper">
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar_resa.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar_resa.php") ; ?>
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_left.php") ; ?>
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_right.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_right.php") ; ?>
 
 			<!-- start: MAIN CONTAINER -->
 			<div class="main-container inner">
 				<!-- start: PAGE -->
 				<div class="main-content" style="background-color:#FFFFFF">
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_panel_configuration_modal_form.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_panel_configuration_modal_form.php") ; ?>
 
 			<?= $this->layout()->content; ?>
-
+<!--
 					<div class="subviews">
 						<div class="subviews-container">		
 						</div>
 					</div>
+-->
 				</div>
 				<!-- end: PAGE -->
 			</div>
@@ -69,6 +70,11 @@ jQuery(document).ready(function() {
 		$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&resadate="+$.formattednewDate(newdate, today)+"&method=CHANGE", success: function(result){
 			$(".selectiongroup").html(result);
 			ReservationFormValidator1.init();
+			$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
+			$('.locationlinkfinal').css( 'cursor', 'pointer' );
+			$('#mycalendar').datepicker().on('changeDate', function (ev) {
+			    $('#calendarlinkdata').text( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
+			});
 		}});
 	});
 });

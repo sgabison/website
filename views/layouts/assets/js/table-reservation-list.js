@@ -14,9 +14,17 @@ var TableReservationList = function () {
 			limitText: 'You\'re allowed to input %n character%s into this field.'
 		});
 	};
-//	if( $('#warning').val() == 'search' ){
-//		window.location.href = '/liste-reservations-search';
-//	}
+    if ($(".tooltips").length) {
+        $('.tooltips').tooltip();
+    }
+	//START---CONFIG PANEL----//
+	$('.config').click( function(){
+		$('.configpanel').removeClass('no-display');
+	});
+	$('.close-configpanel').click( function(){
+		$('.configpanel').addClass('no-display');
+	});
+	//END---CONFIG PANEL----//
 	$(".search-select").select2({
 		placeholder: "Select a State",
 		allowClear: false
@@ -65,7 +73,7 @@ var TableReservationList = function () {
 			$modal.modal('loading');
 			setTimeout(function() {
 				$modal.modal('loading').find('.modal-body').prepend('<div class="alert alert-info fade in">' + 'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' + '</div>');
-			}, 1000);
+			}, 200);
 		});
 	};
 	var format= function ( d ) {
@@ -73,18 +81,18 @@ var TableReservationList = function () {
 	    var array=d.bookingnotes.split(',');
 	    var html='';
 	    $.each(array, function( index, value ) {
-	    	html=html+'<a class="btn btn-xs btn-green tooltips" data-original-title="Edit" style="margin-right:10px">'+value+'</a>'
+	    	html=html+'<a class="btn btn-blue tooltips" data-original-title="Edit" style="margin-right:10px">'+value+'</a>'
 	    });
 	    return '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 	        '<tr>'+
 	            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
 	            '<td><b>'+d.guestemail.toUpperCase()+'</b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-xs btn-blue"><i class="fa fa-lg fa-envelope-o"></i> Send MAIL</a></td>'+
+				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
 	        '</tr>'+
 	        '<tr>'+
 	            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
 	            '<td><b>'+d.guesttel+'<b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-xs btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> Send SMS</a></td>'+
+				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
 	        '</tr>'+
 	        '<tr>'+
 	            '<td>Notes:</td>'+  '<td colspan="2">' + html + '</td>'+
@@ -129,7 +137,7 @@ var TableReservationList = function () {
 					label: "Status:",
 					name: "status",
 					type:  "select",
-					options: ['Telephone', 'Internet', 'Fullfilled', 'Cancelled']
+					options: ['Telephone', 'Internet', 'Arrivé', 'Annulé']
 				}, {
 	                label:     "Arrived:",
 	                name:      "arrived",
@@ -164,7 +172,7 @@ var TableReservationList = function () {
 				e.preventDefault();
 				editor.remove( $(this).closest('tr'), {
 					title: 'Delete record',
-					message: 'Are you sure you wish to remove this record?',
+					message: t('Are you sure you wish to remove this record?'),
 					buttons: 'Delete'
 				} );
 			} );
@@ -217,7 +225,7 @@ var TableReservationList = function () {
 					// create the backdrop and wait for next modal to be triggered
 					$('body').modalmanager('loading');
 					setTimeout(function() {
-						$modal.load('/send-text-message?guesttel='+$(e.target).attr('data'), '', function() {
+						$modal.load('/send-text-message?guesttel='+$(e.target).attr('data')+'&resaid='+$(e.target).attr('resa'), '', function() {
 							$modal.modal();
 						});
 					}, 1000);
@@ -227,13 +235,15 @@ var TableReservationList = function () {
 		        var column = table.column( e.val );
 		        column.visible( ! column.visible() );
 		    })
+		    $.fn.bootstrapSwitch.defaults.onColor = 'success';
+		    $.fn.bootstrapSwitch.defaults.offColor = 'warning';
 			$(".search-select").on("select2-selecting", function(e) {
 		        var column = table.column( e.val );
 		        column.visible( ! column.visible() );
 		    })
 			table = oTable.DataTable( {
 				fnCreatedRow: function( row, data, dataIndex ) {
-					if ( data['status'] === 'Cancelled' ){
+					if ( data['status'] === 'Cancelled' || data['status'] === 'Annulé' ){
 						console.log( row.id );
 						console.log( data['status'] );
 						var $row=$(row);
@@ -253,26 +263,37 @@ var TableReservationList = function () {
 		                "className":      'details-control',
 		                "orderable":      false,
 		                "data":           null,
-		                "defaultContent": ''
+		                "defaultContent": '',
+		                "render": function ( data, type, row ) {
+		                	return "<a class='btn btn-default'><i class='fa fa-plus-square'> </i></a>"
+		                }
 		            },
 					{ 
 						"data": "datereservation", 
 						"visible": false
 					},
-					{ data: "start" },
-					{ data: "id" },
+					{ 
+						"data": "start",
+						"render": function ( data, type, row ) {
+							return '<a class="btn btn-blue"><i class="fa fa-clock-o"></i> '+row.start+'</a>';
+						}
+					},
+					{ 	
+						"data": "id",
+						"render": function (data, type, row){
+							return '<h4><strong>'+data+'</strong></h4>';
+						} 
+					},
 					{ 
 						"data": "guestname",
 						"render": function (data, type, row){
-							return data +' ('+ row.partysize +')';
-							}
+							return '<h4><strong>'+data+'</strong></h4>';
+						}
 					},
 					{ 
 						"data": "partysize",
-		                "createdCell": function ( td, cellData, rowData, row, col ) {
-							if ( cellData > 3 ) {
-					        	$(td).css('color', 'red');
-					      	}
+						"render": function (data, type, row){
+							return '<a class="btn btn-blue"><i class="fa fa-group"></i> '+data+'</a>';
 						}
 					},
 					{ 
@@ -283,17 +304,29 @@ var TableReservationList = function () {
 						"data": "bookingnotes",
 		                "render": function ( data, type, row ) {
 		                	var array=data.split(',');
-		                	var wheelchair ='';var baby ='';var allergy ='';
+		                	var wheelchair ='';var baby ='';var allergy ='';var party ='';var bug ='';var group ='';var warning ='';
 		                    if ( $.inArray('Chaise roulante', array) >=0 || $.inArray('Wheelchair', array) >=0  ) {
-		                        var wheelchair='<a class="btn btn-xs btn-dark-orange tooltips"><i class="fa fa-wheelchair"></i></a> ';
+		                        var wheelchair='<a class="btn btn-dark-orange tooltips"><i class="fa fa-wheelchair"></i></a> ';
 		                    } 
-		                    if ( $.inArray('Baby on board', array) >=0 ){
-		                    	var baby='<a class="btn btn-xs btn-dark-orange tooltips"><i class="fa fa-female"></i></a> ';
+		                    if ( $.inArray('Baby on board', array) >=0 || $.inArray('Bébé à bord', array) >=0  ){
+		                    	var baby='<a class="btn btn-dark-orange tooltips"><i class="fa fa-female"></i></a> ';
 		                    } 
-		                    if ( $.inArray('Nut allergy', array) >=0 || $.inArray('allergie', array) >=0 ){
-		                    	var allergy='<a class="btn btn-xs btn-dark-orange tooltips"><i class="fa fa-medkit"></i></a> ';
+		                    if ( $.inArray('Nut Allergy', array) >=0 || $.inArray('Allergie aux noix', array) >=0 ){
+		                    	var allergy='<a class="btn btn-dark-orange tooltips"><i class="fa fa-medkit"></i></a> ';
 		                    } 
-		                    return wheelchair + baby + allergy;
+		                    if ( $.inArray('client pénible', array) >=0 || $.inArray('picky customer', array) >=0 ){
+		                    	var bug='<a class="btn btn-dark-orange tooltips"><i class="fa fa-bug"></i></a> ';
+		                    } 
+		                    if ( $.inArray('Célébration', array) >=0 || $.inArray('Party', array) >=0 ){
+		                    	var party='<a class="btn btn-dark-orange tooltips"><i class="fa fa-gift"></i></a> ';
+		                    } 
+		                    if ( $.inArray('Groupe entreprise', array) >=0 || $.inArray('Company party', array) >=0 ){
+		                    	var group='<a class="btn btn-dark-orange tooltips"><i class="fa fa-group"></i></a> ';
+		                    } 
+		                    if ( $.inArray('Special Table', array) >=0 || $.inArray('Spéciale table', array) >=0 ){
+		                    	var warning='<a class="btn btn-dark-orange tooltips"><i class="fa fa-warning"></i></a> ';
+		                    } 
+		                    return wheelchair + baby + allergy + party + bug + group + warning;
 		                	},
 		                "className": "dt-body-center"	
 					},
@@ -304,7 +337,7 @@ var TableReservationList = function () {
 					{
 		                "data":   "arrived",
 		                "render": function ( data, type, row ) {
-		                	if( row.status !="Cancelled" ){
+		                	if( row.status !="Cancelled" && row.status !="Annulé" ){
 								$("input[type='checkbox'].make-switch").bootstrapSwitch();
 								if( data == 1 ){
 			                    	return '<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>';
@@ -326,7 +359,7 @@ var TableReservationList = function () {
 						"data": null,
 						"orderable": false,
 						"render": function ( row  ) {
-							return '<a href="/reserver?reservationid='+row.id+'" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+							return '<a href="/reserver?reservationid='+row.id+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
 						}
 					},
 					{ 
@@ -334,7 +367,7 @@ var TableReservationList = function () {
 						"data": null,
 						"orderable": false,
 						"render": function ( ) {
-							return '<a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>';
+							return '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>';
 						}
 					},
 					{ 
@@ -394,7 +427,7 @@ var TableReservationList = function () {
 					return true;
 				}
 			} else {
-				if( aData[9]=='Cancelled' ){
+				if( aData[9]=='Cancelled'  || aData[9]=='Annulé' ){
 					if( $('#checkcancelled').is(":checked") ){
 						return false;
 					}else{

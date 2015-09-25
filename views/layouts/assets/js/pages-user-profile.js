@@ -70,7 +70,7 @@ var PagesUserProfile = function() {
 		var url = '/data/person/get-data';
 		$
 				.blockUI({
-					message : '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+					message : '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
 				});
 		reponse.data = {
 			id : id
@@ -379,10 +379,8 @@ var PagesUserProfile = function() {
 			$(".contributor-avatar").removeClass("fileupload-exists").addClass(
 					"fileupload-new");
 
-			$(".contributor-avatar .fileupload-preview")
-					.empty()
-					.append(
-							"<img src='/website/views/layouts/assets/images/anonymous.jpg'>");
+			$(".contributor-avatar .fileupload-preview").empty().append(
+					"<img src='/website/views/layouts/assets/images/anonymous.jpg'>");
 		}
 		$(".contributor-message").val("");
 		$(".contributor-form-method").val("PUT");
@@ -396,31 +394,11 @@ var PagesUserProfile = function() {
 					errorElement : "span", // contain the error msg in a span
 											// tag
 					errorClass : 'help-block',
-					errorPlacement : function(error, element) { // render error
-																// placement for
-																// each input
-																// type
-						if (element.attr("type") == "radio"
-								|| element.attr("type") == "checkbox") { // for
-																			// chosen
-																			// elements,
-																			// need
-																			// to
-																			// insert
-																			// the
-																			// error
-																			// after
-																			// the
-																			// chosen
-																			// container
-							error.insertBefore($(element)
-									.closest('.form-group').children('div')
-									.children().last());
-						} else if (element.attr("name") == "dd"
-								|| element.attr("name") == "mm"
-								|| element.attr("name") == "yyyy") {
-							error.insertBefore($(element)
-									.closest('.form-group').children('div'));
+					errorPlacement : function(error, element) { 
+						if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { 
+							error.insertBefore($(element).closest('.form-group').children('div').children().last());
+						} else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+							error.insertBefore($(element).closest('.form-group').children('div'));
 						} else {
 							error.insertBefore(element);
 							// for other inputs, just perform default behavior
@@ -466,13 +444,12 @@ var PagesUserProfile = function() {
 						}
 					},
 					messages : {
-						firstname : "Please specify your first name",
-						lastname : "Please specify your last name",
+						firstname : t("js_first_name_please"),
+						lastname : t("js_last_name_please"),
 						email : {
-							required : "We need your email address to contact you",
-							email : "Your email address must be in the format of name@domain.com"
-						},
-						gender : "Please check a gender!"
+							required : t("js_email_please"),
+							email : t("js_emailformat_please"),
+						}
 					},
 					invalidHandler : function(event, validator) { // display
 																	// error
@@ -500,116 +477,92 @@ var PagesUserProfile = function() {
 					success : function(label, element) {
 						label.addClass('help-block valid');
 						// mark the current input as valid and display OK icon
-						$(element).closest('.form-group').removeClass(
-								'has-error').addClass('has-success').find(
-								'.symbol').removeClass('required').addClass(
-								'ok');
+						$(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
 					},
 					submitHandler : function(form) {
-
 						errorHandler3.hide();
 						var userAvatar;
 						if ($(".fileupload-preview img").attr("src") == null) {
 							userAvatar = "";
 						} else {
-							userAvatar = $(".fileupload-preview img").attr(
-									"src");
+							userAvatar = $(".fileupload-preview img").attr("src");
 						}
-
 						var newContributor = new Object;
 						newContributor.id = $(".contributor-id").val(),
-								newContributor.firstname = $(
-										".contributor-firstname").val(),
-								newContributor.lastname = $(
-										".contributor-lastname").val(),
-								newContributor.email = $(".contributor-email")
-										.val(), newContributor.password = $(
-										".contributor-password").val(),
-								newContributor.gender = $(
-										"input.contributor-gender:checked")
-										.val(), newContributor.permits = $(
-										".contributor-permits option:selected")
-										.val(),
-								newContributor.avatar = userAvatar,
-								newContributor.message = $(
-										".contributor-message").val(),
-								newContributor.method = $(
-										".contributor-form-method").val();
-
-						$
-								.blockUI({
-									message : '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
-								});
+						newContributor.firstname = $(".contributor-firstname").val(),
+						newContributor.lastname = $(".contributor-lastname").val(),
+						newContributor.email = $(".contributor-email").val(), newContributor.password = $(".contributor-password").val(),
+						newContributor.gender = $("input.contributor-gender:checked").val(), newContributor.permits = $(".contributor-permits option:selected").val(),
+						newContributor.avatar = userAvatar,
+						newContributor.message = $(".contributor-message").val(),
+						newContributor.method = $(".contributor-form-method").val();
+						$.blockUI({
+							message : '<i class="fa fa-spinner fa-spin"></i>'+t('js_please_wait')
+						});
 						var reponse = new Object; // object(id,METHOD
 													// =(PUT,GET,POST,DELETE),data)
 						reponse.data = newContributor;
 						reponse.id = newContributor.id;
 						reponse.METHOD = newContributor.method;
 						if ($(".contributor-id").val() !== "") {
-							$
-									.ajax({
-										url : '/data/person/get-data',
-										dataType : 'json',
-										type : 'POST', // obligatoire
-										data : JSON.stringify(reponse),
-										contentType : "application/json; charset=utf-8",
-										success : function(json) {
-											$.unblockUI();
-											if (json.success
-													|| json.success == 'true') {
-												var i = $(".contributor-index")
-														.val();
-												contributors[i] = json.data;
-												oTable.ajax.reload();
-												$.hideSubview();
-												// TODO mettre à jour la liste
-												toastr
-														.success(newContributor.firstname
-																+ ' '
-																+ newContributor.lastname
-																+ ' '
-																+ json.message);
-											} else {
-												toastr
-														.error(newContributor.firstname
-																+ ' '
-																+ newContributor.lastname
-																+ ' '
-																+ json.message);
-											}
-										}
-									});
+							$.ajax({
+								url : '/data/person/get-data',
+								dataType : 'json',
+								type : 'POST', // obligatoire
+								data : JSON.stringify(reponse),
+								contentType : "application/json; charset=utf-8",
+								success : function(json) {
+									$.unblockUI();
+									if (json.success
+											|| json.success == 'true') {
+										var i = $(".contributor-index")
+												.val();
+										contributors[i] = json.data;
+										oTable.ajax.reload();
+										$.hideSubview();
+										// TODO mettre à jour la liste
+										toastr.success(newContributor.firstname
+										+ ' '
+										+ newContributor.lastname
+										+ ' '
+										+ json.message);
+									} else {
+										toastr.error(newContributor.firstname
+										+ ' '
+										+ newContributor.lastname
+										+ ' '
+										+ json.message);
+									}
+								}
+							});
 						} else {
-							$
-									.ajax({
-										url : '/data/person/get-data',
-										dataType : 'json',
-										type : 'POST',
-										contentType : "application/json; charset=utf-8",
-										data : JSON.stringify(reponse),
-										success : function(json) {
-											$.unblockUI();
-											if (json.success
-													|| json.success == 'true') {
-												contributors.push(json.data);
-												oTable.ajax.reload();
-												$.hideSubview();
-												toastr
-														.success(newContributor.firstname
-																+ ' '
-																+ newContributor.lastname
-																+ ' '
-																+ json.message);
-											} else {
-												toastr
-														.error(newContributor.firstname
-																+ ' '
-																+ newContributor.lastname
-																+ ' '
-																+ json.message);
-											}
-										}
-									});
+							$.ajax({
+							url : '/data/person/get-data',
+							dataType : 'json',
+							type : 'POST',
+							contentType : "application/json; charset=utf-8",
+							data : JSON.stringify(reponse),
+							success : function(json) {
+								$.unblockUI();
+								if (json.success
+										|| json.success == 'true') {
+									contributors.push(json.data);
+									oTable.ajax.reload();
+									$.hideSubview();
+									toastr.success(newContributor.firstname
+									+ ' '
+									+ newContributor.lastname
+									+ ' '
+									+ json.message);
+								} else {
+									toastr.error(newContributor.firstname
+									+ ' '
+									+ newContributor.lastname
+									+ ' '
+									+ json.message);
+								}
+							}
+						});
 						}
 					}
 				});

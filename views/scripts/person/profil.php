@@ -48,12 +48,12 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label class="control-label">
-							Permits <span class="symbol required"></span>
+							<?= $this->translate("PERMITS")?> <span class="symbol required"></span>
 						</label>
 						<select name="permits" class="form-control contributor-permits">
-							<option value="1">Admin</option>
-							<option value="2">View and Edit</option>
-							<option value="3">View Only</option>
+							<option value="1"><?= $this->translate("ADMIN")?></option>
+							<option value="2"><?= $this->translate("VIEW_EDIT")?></option>
+							<option value="3"><?= $this->translate("VIEW_ONLY")?></option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -62,11 +62,11 @@
 							</div>
 							<div class="fileupload-preview fileupload-exists thumbnail"><img src="<?php if($this->person->getAvatar() instanceof \Asset) : echo $this->person->getAvatar()->getThumbnail('resaexpress') ; else : echo '#'; endif; ?>"></div>
 							<div class="contributor-avatar-options">
-								<span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="fa fa-picture-o"></i> <?= $this->translate("SELECT_IMAGE")?></span><span class="fileupload-exists"><i class="fa fa-picture-o"></i> Change</span>
+								<span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="fa fa-picture-o"></i> <?= $this->translate("SELECT_IMAGE")?></span><span class="fileupload-exists"><i class="fa fa-picture-o"></i> <?= $this->translate("CHANGE")?></span>
 									<input type="file">
 								</span>
 								<a href="#" class="btn fileupload-exists btn-light-grey" data-dismiss="fileupload">
-									<i class="fa fa-times"></i> Remove
+									<i class="fa fa-times"></i> <?= $this->translate("DELETE")?>
 								</a>
 							</div>
 						</div>

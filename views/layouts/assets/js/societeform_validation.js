@@ -184,20 +184,44 @@ var SocieteSetupFormValidator = function () {
 	    var editor = new $.fn.dataTable.Editor( {
 	        ajax: "/data/societe/persons-list",
 	        table: "#personlist",
+            i18n: {
+		        create: {
+		            button: t("js_new"),
+		            title:  t("js_create_new_record"),
+		            submit: t("js_create")
+		        },
+		        edit: {
+		            button: t("js_modify"),
+		            title:  t("js_modify_entry"),
+		            submit: t("js_renew"),
+		        },
+		        remove: {
+		            button: t("js_delete"),
+		            title:  t("js_delete"),
+		            submit: t("js_delete"),
+		            confirm: {
+		                _: "Etes-vous sûr de vouloir supprimer %d lignes?",
+		                1: "Etes-vous sûr de vouloir supprimer 1 ligne?"
+		            }
+		        },
+		        error: {
+		            system: "Une erreur s’est produite, contacter l’administrateur système"
+		        }
+            },
 	        fields: [ {
-	                label: "First Name:",
+	                label: t('js_firstname'),
 	                name: "firstname"
 	            }, {
-	                label: "Last Name:",
+	                label: t('js_lastname'),
 	                name: "lastname"
 	            }, {
-	                label: "Email:",
+	                label: t('js_email'),
 	                name: "email"
 	            }, {
-	                label: "Phone:",
+	                label: t('js_phone'),
 	                name: "phone"
 	            }, {
-	                label: "Password",
+	                label: t('js_password'),
 	                name: "password",
 	                type: "password"
 	            }
@@ -208,8 +232,8 @@ var SocieteSetupFormValidator = function () {
 	        e.preventDefault();
 	 
 	        editor.edit( $(this).closest('tr'), {
-	            title: 'Edit record',
-	            buttons: 'Update'
+	            title: t("js_modify"),
+	            buttons: t("js_update"),
 	        } );
 	    } );
 	 
@@ -218,9 +242,9 @@ var SocieteSetupFormValidator = function () {
 	        e.preventDefault();
 	 
 	        editor.remove( $(this).closest('tr'), {
-	            title: 'Delete record',
-	            message: 'Are you sure you wish to remove this record?',
-	            buttons: 'Delete'
+	            title: t("js_delete"),
+	            message: t("js_delete_record_confirm"),
+	            buttons: t("js_delete")
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
@@ -228,8 +252,8 @@ var SocieteSetupFormValidator = function () {
 	        e.preventDefault();
 	 
 	        editor.create( {
-	            title: 'Create new record',
-	            buttons: 'Add'
+	            title: t("js_create_new_record"),
+	            buttons: t("js_add")
 	        } );
 	    } );
 		editor.on( 'onInitCreate', function () {
@@ -248,7 +272,8 @@ var SocieteSetupFormValidator = function () {
 			  { data: "lastname" },
 			  { data: "email" },
 			  { data: "phone" },
-	          { data: null, defaultContent: '<a href="" class="btn btn-xs btn-green tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> Edit</a> / <a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> Del</a>'}
+	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-blue tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> </a>'},
+	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
 			],
 			order: [ 1, 'asc' ],
 			tableTools: {
@@ -275,7 +300,7 @@ var SocieteSetupFormValidator = function () {
 		    		'<td width="150px">'+ info +'</td>'+
 		    		'<td width="5%"><i class="fa fa-lg fa-cutlery"></i></td>'+
 		    		'<td width="100px">'+serv[0].toUpperCase()+'</td>'+
-		    		'<td><a class="btn btn-xs btn-green" style="color:#FFFFFF" href="/serving-setup?selectedLocationId='+d.id+'&servingid='+serv[1]+'"><i class="fa fa-edit"></i> Modif</button></td>'+
+		    		'<td><a class="btn btn-blue" style="color:#FFFFFF" href="/serving-setup?selectedLocationId='+d.id+'&servingid='+serv[1]+'"><i class="fa fa-edit"></i> </button></td>'+
 		    		'</tr>'
 		    });
 		    return add;
@@ -290,22 +315,22 @@ var SocieteSetupFormValidator = function () {
 	        table: "#locationlist",
             i18n: {
 		        create: {
-		            button: "Nouveau",
-		            title:  "Créer nouvelle entrée",
-		            submit: "Créer"
+		            button: t("js_new"),
+		            title:  t("js_create_new_record"),
+		            submit: t("js_create")
 		        },
 		        edit: {
-		            button: "Modifier",
-		            title:  "Modifier entrée",
-		            submit: "Actualiser"
+		            button: t("js_modify"),
+		            title:  t("js_modify_entry"),
+		            submit: t("js_renew"),
 		        },
 		        remove: {
-		            button: "Supprimer",
-		            title:  "Supprimer",
-		            submit: "Supprimer",
+		            button: t("js_delete"),
+		            title:  t("js_delete"),
+		            submit: t("js_delete"),
 		            confirm: {
-		                _: "Etes-vous sûr de vouloir supprimer %d lignes?",
-		                1: "Etes-vous sûr de vouloir supprimer 1 ligne?"
+		                _: t("js_delete_n_lines"),
+		                1: t("js_delete_1_lines")
 		            }
 		        },
 		        error: {
@@ -313,19 +338,19 @@ var SocieteSetupFormValidator = function () {
 		        }
             },		        
 	        fields: [ {
-	                label: "Location Name:",
+	                label: t("js_location_name"),
 	                name: "name"
 	            }, {
-	                label: "Resa Unit:",
+	                label: t("js_resaunit"),
 	                name: "resaUnit"
 	            }, {
-	                label: "Max Seats:",
+	                label: t("js_maxseats"),
 	                name: "maxSeats"
 	            }, {
-	                label: "Max Tables:",
+	                label: t("js_maxtables"),
 	                name: "maxTables"
 	            }, {
-	                label: "Max Resas Per Unit:",
+	                label: t("js_maxresaperunit"),
 	                name: "maxResaPerUnit"
 	            }
 	        ]
@@ -348,10 +373,8 @@ var SocieteSetupFormValidator = function () {
 	    $('#locationlist').on('click', 'a.editor_edit', function (e) {
 	        e.preventDefault();
 	        editor2.edit( $(this).closest('tr'), {
-	            //title: 'Edit record',
-	            title: 'Modifier la location',
-	            //buttons: 'Update'
-	            buttons: 'Modif'
+	            title: t('js_change_location'),
+	            buttons: t("js_modify")
 	        } );
 	    } );
 	 
@@ -359,20 +382,17 @@ var SocieteSetupFormValidator = function () {
 	    $('#locationlist').on('click', 'a.editor_remove', function (e) {
 	        e.preventDefault();
 	        editor2.remove( $(this).closest('tr'), {
-	            //title: 'Delete record',
-	            title: 'Supprimer location',
-	            //message: 'Are you sure you wish to remove this record?',
-	            message: 'Etes-vous sûr que vous souhaitez supprimer cette location?',
-	            //buttons: 'Delete'
-	            buttons: 'Supprimer'
+	            title: t('js_delete_location'),
+	            message: t('js_delete_location_confirm'),
+	            buttons: t("js_delete")
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
 	    $('a.editor_create').on('click', function (e) {
 	        e.preventDefault();
 	        editor2.create( {
-	            title: 'Create new record',
-	            buttons: 'Add'
+	            title: t("js_create_new_record"),
+	            buttons: t("js_add")
 	        } );
 	    } );
 //	    $('#locationlist').on( 'click', 'tbody td:not(:first-child)', function (e) {
@@ -395,7 +415,11 @@ var SocieteSetupFormValidator = function () {
               { "className":      'details-control',
                 "orderable":      false,
                 "data":           null,
-                "defaultContent": '' },
+                "defaultContent": '',
+                "render": function ( data, type, row ) {
+                	return "<a class='btn btn-default'><i class='fa fa-plus-square'> </i></a>"
+                }
+              },
 			  { data: "name" },
 			  { data: "resaUnit" },
 			  { data: "maxSeats" },
@@ -403,13 +427,13 @@ var SocieteSetupFormValidator = function () {
 			  { data: "maxResaPerUnit" },
 	          {
 				"class": "center",
-				"data": "id",
+				"data": "icon",
 				"orderable": false,
 			    "render": function ( data, type, full, meta ) {
-			      	return '<a href="/location-setup?selectedLocationId='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> Modif</a>';
+			      	return '<a href="/location-setup?selectedLocationId='+data+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> </a>';
 			    }
 	          },
-	          { data: null, defaultContent: '<!--<a href="" class="btn btn-xs btn-green tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> Modif</a> / --><a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> Sup</a>'}
+	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
 			],
 			order: [ 1, 'asc' ],
 			tableTools: {
@@ -418,8 +442,149 @@ var SocieteSetupFormValidator = function () {
 			  aButtons: [{ sExtends: "editor_create", editor: editor2 }]
 			}
 		} );
-	};
-		
+	}
+	var loadTags = function () {
+	    var editor3 = new $.fn.dataTable.Editor( {
+	        ajax: "/data/tags/tags-list",
+	        table: "#tagslist",
+            i18n: {
+		        create: {
+		            button: t("js_new"),
+		            title:  t("js_create_new_record"),
+		            submit: t("js_create")
+		        },
+		        edit: {
+		            button: t("js_modify"),
+		            title:  t("js_modify_entry"),
+		            submit: t("js_renew"),
+		        },
+		        remove: {
+		            button: t("js_delete"),
+		            title:  t("js_delete"),
+		            submit: t("js_delete"),
+		            confirm: {
+		                _: "Etes-vous sûr de vouloir supprimer %d lignes?",
+		                1: "Etes-vous sûr de vouloir supprimer 1 ligne?"
+		            }
+		        },
+		        error: {
+		            system: "Une erreur s’est produite, contacter l’administrateur système"
+		        }
+            },		        
+	        fields: [ {
+					name: "id",
+					type: "hidden"
+				}, {
+	                label: t("js_tag_code"),
+	                name: "code"
+	            }, {
+	                label: t("js_name_fr"),
+	                name: "name_fr"
+	            }, {
+	                label: t("js_name_en"),
+	                name: "name_en"
+	            }, {
+	                label: "icon",
+	                name: "icon",           
+	                type:  "select",
+	                options: [
+	                    { label: "camera", 		value: "fa-camera-retro" },
+	                    { label: "wheelchair",  value: "fa-wheelchair" },
+	                    { label: "money",      	value: "fa-money" },
+	                    { label: "medic",      	value: "fa-medkit" },
+	                    { label: "ambulance",  	value: "fa-ambulance" },
+	                    { label: "coffee",  	value: "fa-coffee" },
+	                    { label: "cutlery",  	value: "fa-cutlery" },
+	                    { label: "calendar",  	value: "fa-calendar" },
+	                    { label: "gift",  		value: "fa-gift" },
+	                    { label: "group",  		value: "fa-group" },
+	                    { label: "male",  		value: "fa-male" },
+	                    { label: "warning",  	value: "fa-warning" },
+	                    { label: "group",  		value: "fa-group" },
+	                    { label: "briefcase",  	value: "fa-briefcase" },
+	                    { label: "asterisk",  	value: "fa-asterisk" },
+	                    { label: "beer",  		value: "fa-beer" },
+	                    { label: "bug",  		value: "fa-bug" }
+	                ]
+	            }
+	            
+	        ]
+	    } );
+	    $('#tagslist').on( 'click', 'tbody td.details-control', function () {
+	        var tr = $(this).closest('tr');
+	        var row = table.row( tr );
+	        if ( row.child.isShown() ) {
+	            // This row is already open - close it
+	            row.child.hide();
+	            tr.removeClass('shown');
+	        }
+	        else {
+	            // Open this row
+	            row.child( format(row.data()) ).show();
+	            tr.addClass('shown');
+	        }
+	    } );
+	    // Edit record
+	    $('#tagslist').on('click', 'a.editor_edit', function (e) {
+	        e.preventDefault();
+	        editor3.edit( $(this).closest('tr'), {
+	            title: t('js_change_tag'),
+	            buttons: t("js_modify")
+	        } );
+	    } );
+	 
+	    // Delete a record
+	    $('#tagslist').on('click', 'a.editor_remove', function (e) {
+	        e.preventDefault();
+	        editor3.remove( $(this).closest('tr'), {
+	            title: t('js_delete_tag'),
+	            message: t('js_delete_tag_confirm'),
+	            buttons: t("js_delete")
+	        } );
+	    } ); 
+	    // Activate an inline edit on click of a table cell
+	    $('a.editor_create').on('click', function (e) {
+	        e.preventDefault();
+	        editor.create( {
+	            title: t("js_create_new_record"),
+	            buttons: t("js_add")
+	        } );
+	    } );
+//	    $('#tagslist').on( 'click', 'tbody td:not(:first-child)', function (e) {
+//	        editor3.inline( this );
+//	    } );
+		var table = $('#tagslist').DataTable( {
+			dom: "Tfrtip",
+			ajax: "/data/tags/tags-list",
+			columns: [
+			  { data: null, defaultContent: '', orderable: false },
+			  { 
+			  	"data": "id",
+			  	"visible": false 
+			  },
+			  { data: "code" },
+			  { data: "name_fr" },
+			  { data: "name_en" },
+	          {
+				"class": "center",
+				"data": "icon",
+				"orderable": false,
+			    "render": function ( data, type, row ) {
+			      	return '<i class="fa '+row.icon+' fa-2x"></i> ';
+			    }
+	          },
+	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-blue tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> </a>'},
+	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
+			],
+			order: [ 1, 'asc' ],
+			tableTools: {
+			  sRowSelect: "os",
+			  sRowSelector: 'td:first-child',
+			  aButtons: [{ sExtends: "editor_create", editor: editor3 }]
+			}
+		} );
+	}
+
     return {
         //main function to initiate template pages
         init: function () {
@@ -427,6 +592,7 @@ var SocieteSetupFormValidator = function () {
             //societeSetupSubmit(); 
             loadLocations();
             loadPersons();
+            loadTags();
         }
     };
 }();

@@ -5,59 +5,64 @@
 		<div class="col-md-12 space20">
 			<h4 class="panel-title">
 				<span class="actionitems">
-					<span class="text-bold"><?= $this->translate("TXT_DATE")?>: <?php echo $this->calendar;?>/ <?php echo $this->translate("TXT_SERVING")?>: <?= strtoupper($this->servingname);?></span>
+					<?= $this->translate("TXT_DATE")?>: <span class="text-bold"><?php echo $this->calendar;?></span> / <?php echo $this->translate("TXT_SERVING")?>: <span class="text-bold"><?= strtoupper($this->servingname);?></span>
 				</span>
 				<span class="guestactionitems" class="no-display">
 					<span class="text-bold"><?= $this->translate("TXT_GUEST")?>: <?php echo $this->guestname;?>/ <?php echo $this->translate("TXT_TEL")?>: <?= strtoupper($this->guesttel);?>  </span>
 				</span>
 			</h4>
 		</div>
-		<input id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
-		<input id='servingid' class='no-display' value='<?php echo $this->getParam("servingid");?>'>
-		<input id='guestid' class='no-display' value='<?php echo $this->getParam("guestid");?>'>
-		<input id='warning' class='no-display' value='<?php echo $this->warning;?>'>
-		<input id='cancelled' class='no-display' value='<?php echo $this->cancelled;?>'>
-		<input id='arrived' class='no-display' value='<?php echo $this->arrived;?>'>
 		<div class="panel-tools">
-			<a class="panel-expand" href="#"> <i class="fa fa-expand"></i><span> <?= $this->translate("TXT_FULLSCREEN")?></span></a>
+			<a class="config" href="#"> <i class="fa fa-cog"></i><span> </span></a>
+			<a class="panel-expand" href="#"> <i class="fa fa-expand"></i><span> </span></a>
 		</div>
 	</div>
 	<input id='selectedLocationId' class="no-display" value='<?php echo $this->selectedLocation->getId();?>'>
+	<input id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
+	<input id='dayafter' class='no-display' value='<?php echo $this->dayafter;?>'>
+	<input id='daybefore' class='no-display' value='<?php echo $this->daybefore;?>'>
+	<input id='servingid' class='no-display' value='<?php echo $this->getParam("servingid");?>'>
+	<input id='guestid' class='no-display' value='<?php echo $this->getParam("guestid");?>'>
+	<input id='warning' class='no-display' value='<?php echo $this->warning;?>'>
+	<input id='cancelled' class='no-display' value='<?php echo $this->cancelled;?>'>
+	<input id='arrived' class='no-display' value='<?php echo $this->arrived;?>'>
 	<div class="panel-body">
-		<div class="row">
-		
+		<div class="row configpanel no-display">
 			<div class="col-md-12">
-		
 			<div class="panel panel-white">
 				<div class="panel-heading">
-					<h4 class="panel-title" style="color:#FFFFFF"><?= $this->translate("TXT_CONFIGURATION_PANEL")?></h4>
+					<h4 class="panel-title"><?= $this->translate("TXT_CONFIGURATION_PANEL")?></h4>
 					<div class="panel-tools">
-						<a class="panel-collapse expand" href="#"><i class="fa fa-angle-up fa-rotate-180"></i> <span>Expand</span> </a>
+						<a class="close-configpanel" href="#"><i class="fa fa-close"></i> </a>
 					</div>
 				</div>
-				<div class="panel-body" style="display:none">
+				<div class="panel-body">
 					<div class="col-md-12 space20">
 						<span class="actionitems">
-							<a href="/liste-reservations-search?selectedLocationId=<?php echo $this->selectedLocation->getId();?>&" class="btn btn-green"><?= $this->translate("TXT_NEW_SEARCH")?> <i class="fa fa-search"></i></a>
+							<a href="/liste-reservations-search?selectedLocationId=<?php echo $this->selectedLocation->getId();?>&" class="btn btn-blue"><?= $this->translate("TXT_NEW_SEARCH")?> <i class="fa fa-search"></i></a>
 							<div class="btn-group">
-								<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-									Date <span class="caret"></span>
+								<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->daybefore;?>" class="btn btn-blue hidden-xs">
+									<i class="fa fa-fast-backward"></i>
 								</a>
-								<ul class="dropdown-menu" role="menu">
-									<li role="presentation" class="dropdown-header"><?= $this->translate("TXT_DATE_SELECTION")?></li>
-									<li><a href="#"><?= $this->translate("TXT_TODAY")?></a></li>
-									<li><a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php $today=new Zend_date();$tomorrow=$today->add('1', Zend_Date::DAY);echo $today->get('dd-MM-yyyy');?>"><?= $this->translate("TXT_TOMORROW")?></a></li>
-									<li><a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php $today=new Zend_date();$tomorrow=$today->add('2', Zend_Date::DAY);echo $today->get('dd-MM-yyyy');?>"><?= $this->translate("TXT_DAY_AFTER_TOMORROW")?></a></li>
-								</ul>
+								<a href="#" class="btn btn-blue">
+									<i class="fa fa-refresh"></i> <?php echo $this->calendar;?>
+								</a> 
+								<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>" class="btn btn-blue hidden-xs">
+									<i class="fa fa-fast-forward"></i>
+								</a>
 							</div>
-							<input id="checkarrived" type="checkbox" class="checkbox-inline checkbox make-switch" data-on-text="Arrived" data-off-text="Arrived">
-							<input id="checkcancelled" type="checkbox" class="checkbox-inline checkbox make-switch" data-on-text="Cancelled" data-off-text="Cancelled">
+							<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>">
+								<input id="checkarrived" type="checkbox" class="checkbox-inline checkbox make-switch tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_ARRIVED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
+							</span>
+							<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>">
+								<input id="checkcancelled" type="checkbox" class="checkbox-inline checkbox make-switch bootstrap-switch-success tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_CANCELLED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
+							</span>
 							<div class="pull-right">
 								<button data-table="#reservationList" class="btn btn-orange print-table">
 									<?= $this->translate("Print")?>
 									<i class="fa fa-print"></i>
 								</button> 
-								<button data-toggle="dropdown" class="btn btn-green dropdown-toggle">Export <i class="fa fa-angle-down"></i></button>
+								<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle">Export <i class="fa fa-angle-down"></i></button>
 								<ul class="dropdown-menu dropdown-light pull-right">
 									<li><a href="#" class="export-pdf" data-table="#reservationList"
 										data-ignoreColumn="0,2,5"> <img
@@ -123,9 +128,10 @@
 							</div>
 						</span>
 					</div>
+<!--
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="form-field-select-4" style="color:#FFFFFF">
+							<label for="form-field-select-4"> 
 								<?= $this->translate("DROPDOWN_MULTIPLE_SELECT")?>
 							</label>
 							<select multiple="multiple" id="form-field-select-4" class="form-control search-select">
@@ -143,6 +149,7 @@
 							</select>
 						</div>
 					</div>
+-->
 				</div>
 			</div>
 			</div>

@@ -2,8 +2,11 @@
 								<!-- start: FULL CALENDAR PANEL -->
 								<div class="panel panel-white">
 									<div class="panel-heading">
+<!--
 										<i class="fa fa-calendar"></i>
 										<?php echo $this->t('TXT_TITLE_RAPPORT')?> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
+-->
+										<h4 class="panel-title"><?php echo $this->t('TXT_TITLE_RAPPORT')?> <span class="text-bold"> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?> </span></h4>
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">

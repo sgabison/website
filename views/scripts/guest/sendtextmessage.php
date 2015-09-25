@@ -39,7 +39,7 @@
 			<?= $this->translate("TXT_INFO_COMMUNICATION")?>
 		</p>
 		<hr>
-		<form action="#" role="form" id="form">
+		<div role="form" class="form-horizontal">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="errorHandler alert alert-danger no-display">
@@ -49,27 +49,24 @@
 						<i class="fa fa-ok"></i> Your form validation is successful!
 					</div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">
 							<?= $this->translate("TXT_CELL_NUMBER")?>
 						</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="tel" name="tel" disabled value="<?php echo $this->getParam('guesttel');?>">
+							<input type="text" class="form-control" id="tel" disabled value="<?php echo $this->getParam('guesttel');?>">
+							<input id="resaid" value="<?php echo $this->getParam('resaid');?>" class="no-display">
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="form-field-20">
-							140 Character Limit
+							<?= $this->translate("TXT_WRITE_SMS")?>
 						</label>
 						<div class="col-sm-8">
-							<input type="text" placeholder="Text Field" id="form-field-20" class="form-control limited" maxlength="140">
+							<input type="text" id="smstext" placeholder="Text Field" id="form-field-20" class="form-control limited" maxlength="80">
 						</div>
 					</div>
 				</div>
@@ -85,11 +82,41 @@
 				<div class="col-md-8">
 				</div>
 				<div class="col-md-4">
-					<button class="btn btn-yellow btn-block" type="submit">
+					<button class="btn btn-yellow btn-block" id="sendsms" value="send">
 						<?= $this->translate("TXT_SEND")?> <i class="fa fa-arrow-circle-right"></i>
 					</button>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
+<script>
+jQuery(document).ready(function() {
+	$resaid=$('#resaid').val();
+	$('.limited').inputlimiter({
+		remText: t('Il ne vous reste plus que %n caractère%s à écrire...'),
+		remFullText: t('Stop! Vous ne pouvez plus écrire plus de caractères.'),
+		limitText: t("Vous pouvez écrire jusque'à %n caractères dans ce champs.")
+	});
+	$('#sendsms').click( function(){
+		  tel = $("#tel").val() 
+		, smstext = $("#smstext").val()
+		$.blockUI({
+			message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
+		});
+		$.ajax({
+			url: '/data/guest/sendsmstext',
+			type:'POST', //obligatoire
+			data: {tel: tel, resaid: $("#resaid").val(), smstext: smstext },
+			success: function() {
+				$.unblockUI();
+				$('#ajax-modal').modal('hide');
+				toastr.success(t('js_sms_sent'));
+			},
+			error: function (request, status, error) {
+				alert(error);
+			}        
+		});
+	});
+});
+</script>

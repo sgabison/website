@@ -1,6 +1,6 @@
 var ReservationFormValidator = function () {
 	"use strict";
-	var URL = "http://demo.gabison.com";
+	var URL = window.location.protocol + "//" + window.location.host ;
 	var backdrop = $('.ajax-white-backdrop2');
 	backdrop.remove();
 	$.urlParam = function(name){
@@ -53,29 +53,40 @@ var ReservationFormValidator = function () {
 		startDate: "0d",
 		language: $("#language").val(),
 		todayBtn: "linked", 
-		todayHighlight: false, 
+		todayHighlight: true, 
 		defaultDate: new Date(), 
 		autoclose: true,
 		datesDisabled: offdays, 
 		format: "dd-mm-yyyy",
 		container: '#example-widget-container',
 		beforeShowDay: function (date){
-			if( $.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0){
+			if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
 				console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
 				return {
-					tooltip: 'Restaurant is closed',
-                    classes: 'today',
+					tooltip: 'Le Restaurant est fermé',
+                    classes: 'closedDayClass',
                     enabled: false
 				}
 			}
 			var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
 			var dayFormat = date.getDay();
 			console.log( dayFormat );
-			if( date == today ){
-			  return {classes: 'activeDayClass', tooltip: 'today'};
+			if( date < today ){
+			  return {
+			  	classes: 'disabled passedDayClass', 
+			  	tooltip: 'Date passée'
+			  };
 			}
-			if( closeddays.search(dayFormat) >= 0){ 
-			  return {classes: 'disabled today', tooltip: 'No serving this day'};
+			if( date == today ){
+			  return {
+			  	classes: 'activeDayClass', 
+			  	tooltip: 'Aujourd hui'
+			  };
+			}
+			if( date>today && closeddays.search(dayFormat) >= 0){ 
+			  return {
+			  	classes: 'disabled closedDayClass', 
+			  	tooltip: 'Aucun service ce jour'};
 			}
 		}
 	});
@@ -116,7 +127,7 @@ var ReservationFormValidator = function () {
 			reponse.METHOD = newReservation.METHOD; 
 			console.log( JSON.stringify(reponse) );
 			$.ajax({
-				url: 'http://demo.gabison.com/data/userreservation/get-data',
+				url: URL+'/data/userreservation/get-data',
 				dataType: 'json',
 				type:'POST', //obligatoire
 				data: JSON.stringify(reponse),
@@ -204,7 +215,7 @@ var ReservationFormValidator = function () {
 					}else if( res[3] != 'ok' ){
 						classresult = 'disabled';
 					}else if( res[4] != 'selected' ){
-						classresult = 'btn-light-orange';
+						classresult = 'btn-dark-orange';
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
@@ -291,7 +302,7 @@ var ReservationFormValidator = function () {
 					i++;
 					var serv=key.split("_-_");
 					console.log( 'closed:'+serv[2] );
-					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-light-orange';}
+					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-dark-orange';}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
@@ -405,13 +416,14 @@ var ReservationFormValidator = function () {
     };
 	var runTagsInput = function() {
 		$('#tags_1').tagsInput({
-			width: 'auto'
+			width: 'auto',
+			onRemoveTag: function(value){ $(':button[value="'+value+'"]').removeClass('no-display'); },
+			onAddTag: function(value){ console.log(value);}
 		});
 	};
 	var feedTags = function() {
 		$('.btn-tags').click( function(){
-			$(this).addClass('btn-red');
-			//$('#tags_1').val( $('#tags_1').val() + $(this).val() + ',' );
+			$(this).addClass('no-display');
 			$('#tags_1').addTag( $(this).val() );
 		});
 	};

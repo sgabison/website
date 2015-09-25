@@ -84,102 +84,127 @@ var LocationFormValidator = function () {
 			});
 		//});
 	};
-
-    // Edit record
-    var editor;
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "/data/serving/serving-list?locationid="+locationid,
-        table: "#servinglist",
-        fields: [ {
-                label: "Name:",
-                name: "title"
-            }, {
-                label: "Max Seats:",
-                name: "maxseats"
-            }, {
-                label: "Max Tables:",
-                name: "maxtables"
-            }, {
-                label: "Meal Duration:",
-                name: "mealduration"
-            }, {
-                label: "Id:",
-                name: "id",
-	            type: "readonly"
-            }
-        ]
-    } );
-    $('#servinglist').on('click', 'a.editor_edit', function (e) {
-        e.preventDefault();
-        editor.edit( $(this).closest('tr'), {
-            title: 'Edit record',
-            buttons: 'Update'
-        } );
-    } );
-	editor.on( 'onInitCreate', function () {
-	 	editor.hide('maxseats');
-	 	editor.hide('maxtables');
-	 	editor.hide('mealduration');
-	 	editor.hide('id');
-	});
-    // Delete a record
-    $('#servinglist').on('click', 'a.editor_remove', function (e) {
-        e.preventDefault();
-        editor.remove( $(this).closest('tr'), {
-            title: 'Delete record',
-            message: 'Are you sure you wish to remove this record?',
-            buttons: 'Delete'
-        } );
-    } ); 
-    // Activate an inline edit on click of a table cell
-    $('a.editor_create').on('click', function (e) {
-        e.preventDefault();
-        editor.create( {
-            title: 'Create new record',
-            buttons: 'Add'
-        } );
-    } );
-	editor.on( 'postCreate', function ( e, json, data ) {
-		var id = json.row.DT_RowId;
-	    window.location.href="/serving-setup?servingid="+id;
-	} );
-    $('#servinglist').on( 'click', 'tbody td:not(:first-child)', function (e) {
-    	if ( $(this).index() < 5 ) {
-	        editor.inline( this );
-    	}
-    } );
-	$('#servinglist').DataTable( {
-		dom: "Tfrtip",
-		ajax: "/data/serving/serving-list?locationid="+locationid,
-		columns: [
-		  { data: null, defaultContent: '', orderable: false },
-		  { data: "title" },
-		  { data: "maxseats" },
-		  { 
-		  	"data": "maxtables",
-		  	"type": "number" 
-		  },
-		  { 
-		  	"data": "mealduration",
-		  	"type": "number"
-		  },
-		  { 
-			"class": "center",
-			"data": "id",
-			"orderable": false,
-		    "render": function ( data, type, full, meta ) {
-		      	return '<a href="/serving-setup?servingid='+data+'" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> Modif</a>';
+	var loadServings = function () {
+	    // Edit record
+	    var editor;
+	    editor = new $.fn.dataTable.Editor( {
+	        ajax: "/data/serving/serving-list?locationid="+locationid,
+	        table: "#servinglist",
+	        i18n: {
+				create: {
+					button: t("js_new"),
+					title:  t("js_create_new_record"),
+					submit: t("js_create")
+				},
+				edit: {
+					button: t("js_modify"),
+					title:  t("js_modify_entry"),
+					submit: t("js_renew"),
+				},
+				remove: {
+					button: t("js_delete"),
+					title:  t("js_delete"),
+					submit: t("js_delete"),
+					confirm: {
+						_: t("js_delete_n_lines"),
+						1: t("js_delete_1_lines")
+					}
+				},
+				error: {
+					system: t("js_error_admin")
+				}
+	        },
+	        fields: [ {
+	                label: t("js_name"),
+	                name: "title"
+	            }, {
+	                label: t("js_maxseats"),
+	                name: "maxseats"
+	            }, {
+	                label: t("js_maxtables"),
+	                name: "maxtables"
+	            }, {
+	                label: t("js_mealduration"),
+	                name: "mealduration"
+	            }, {
+	                label: t("js_id"),
+	                name: "id",
+		            type: "readonly"
+	            }
+	        ]
+	    } );
+	    $('#servinglist').on('click', 'a.editor_edit', function (e) {
+	        e.preventDefault();
+	        editor.edit( $(this).closest('tr'), {
+	            title: t('js_modify_entry'),
+	            buttons: t('js_update'),
+	        } );
+	    } );
+		editor.on( 'onInitCreate', function () {
+		 	editor.hide('maxseats');
+		 	editor.hide('maxtables');
+		 	editor.hide('mealduration');
+		 	editor.hide('id');
+		});
+	    // Delete a record
+	    $('#servinglist').on('click', 'a.editor_remove', function (e) {
+	        e.preventDefault();
+	        editor.remove( $(this).closest('tr'), {
+	            title: t('js_delete'),
+	            message: t('js_delete_record_confirm'),
+	            buttons: t('js_delete')
+	        } );
+	    } ); 
+	    // Activate an inline edit on click of a table cell
+	    $('a.editor_create').on('click', function (e) {
+	        e.preventDefault();
+	        editor.create( {
+	            title: t('js_create_new_record'),
+	            buttons: t('js_create')
+	        } );
+	    } );
+		editor.on( 'postCreate', function ( e, json, data ) {
+			var id = json.row.DT_RowId;
+		    window.location.href="/serving-setup?servingid="+id;
+		} );
+	    $('#servinglist').on( 'click', 'tbody td:not(:first-child)', function (e) {
+	    	if ( $(this).index() < 5 ) {
+		        editor.inline( this );
+	    	}
+	    } );
+		$('#servinglist').DataTable( {
+			dom: "Tfrtip",
+			ajax: "/data/serving/serving-list?locationid="+locationid,
+			columns: [
+			  { data: null, defaultContent: '', orderable: false },
+			  { data: "title" },
+			  { data: "maxseats" },
+			  { 
+			  	"data": "maxtables",
+			  	"type": "number" 
+			  },
+			  { 
+			  	"data": "mealduration",
+			  	"type": "number"
+			  },
+			  { 
+				"class": "center",
+				"data": "id",
+				"orderable": false,
+			    "render": function ( data, type, full, meta ) {
+			      	return '<a href="/serving-setup?servingid='+data+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> </a>';
+				}
+			  },
+	          { data: null, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
+			],
+			order: [ 1, 'asc' ],
+			tableTools: {
+			  sRowSelect: "os",
+			  sRowSelector: 'td:first-child',
+			  aButtons: [{ sExtends: "editor_create", editor: editor }]
 			}
-		  },
-          { data: null, defaultContent: '<!--<a href="serving-setup?servingid=" class="btn btn-xs btn-green tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a> / --><a href="" class="btn btn-xs btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> Sup</a>'}
-		],
-		order: [ 1, 'asc' ],
-		tableTools: {
-		  sRowSelect: "os",
-		  sRowSelector: 'td:first-child',
-		  aButtons: [{ sExtends: "editor_create", editor: editor }]
-		}
-	} );
+		} );
+	}
 	var validateCheckRadio = function (val) {
         $("input[type='radio'], input[type='checkbox']").on('ifChecked', function(event) {
 			$(this).parent().closest(".has-error").removeClass("has-error").addClass("has-success").find(".help-block").hide().end().find('.symbol').addClass('ok');
@@ -253,17 +278,17 @@ var LocationFormValidator = function () {
                     number: true
                 }            },
             messages: {
-                name: "Please enter a name",
-                address: "Please enter an address",
-                zip: "Please enter a postal code",
-                city: "Please enter a city",
-                email: "Please enter a correct email address",
-                tel: "Please enter a telephone number on 10 digits, a numeric value",
-                resaUnit: "Please enter a Reservation Unit, a numeric value",
-                maxSeats: "Please enter a maximum seats value, a numeric value",
-                maxTables: "Please enter a maximum tables value, a numeric value",
-                maxResaPerUnit: "Please enter a maximum number of reservations per unit of time, a numeric value",
-                mealduration: "Please enter an average duration for the meal, a numeric value"
+                name: t('js_name_please'),
+                address: t('js_address_please'),
+                zip: t('js_zip_please'),
+                city: t('js_city_please'),
+                email: t('js_email_please'),
+                tel: t('js_tel_please'),
+                resaUnit: t('js_resaunit_please'),
+                maxSeats: t('js_maxseats_please'),
+                maxTables: t('js_maxtables_please'),
+                maxResaPerUnit: t('js_maxresperunits_please'),
+                mealduration: t('js_mealduration_please')
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler2.hide();
@@ -299,7 +324,7 @@ var LocationFormValidator = function () {
         	initModals();
             validateCheckRadio();
             runValidator2();
-            //locationsetupDataLoad();
+            loadServings();
             changeLocation();
         }
     };

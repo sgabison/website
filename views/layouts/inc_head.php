@@ -78,6 +78,7 @@
 		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/iCheck/skins/all.css">
 		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-social-buttons/bootstrap-social.css">
 		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css">
+		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/css/glDatePicker.default.css">
 		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE CSS -->
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,200,100,800' rel='stylesheet' type='text/css'>

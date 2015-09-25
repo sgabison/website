@@ -1,11 +1,24 @@
 td.details-control {
-    background: url('../../images/details_open.png') no-repeat center center;
+    //background: url('../../images/details_open.png') no-repeat center center;
     cursor: pointer;
 }
 tr.shown td.details-control {
-    background: url('../../images/details_close.png') no-repeat center center;
+    //background: url('../../images/details_close.png') no-repeat center center;
 }
 .activeDayClass{
     background: #5F8295;
     color: #FFFFFF
+}
+.closedDayClass{
+    background: #FFFFFF;
+    color: #D0D3D8;
+    cursor: not-allowed;
+}
+.passedDayClass{
+    background: #FFFFFF;
+    color: #D0D3D8;
+    cursor: not-allowed;
+}
+.currentDayClass{
+    background: #f2682c;
 }

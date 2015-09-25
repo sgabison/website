@@ -4,6 +4,7 @@ var UserProfileValidation = function () {
         var formContributor = $('.form-contributor');
         var errorHandler3 = $('.errorHandler', formContributor);
         var successHandler3 = $('.successHandler', formContributor);
+        console.log('formprofile', t('offsite'));
         formContributor.validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
@@ -31,25 +32,27 @@ var UserProfileValidation = function () {
                     required: true,
                     email: true
                 }
-/*                ,
+                ,
                 password: {
-                    minlength: 6,
-                    required: true
+                    minlength: 6
                 },
                 password_again: {
-                    required: true,
                     minlength: 5,
                     equalTo: ".contributor-password"
                 }
-*/
             },
             messages: {
-                firstname: "Please specify your first name",
-                lastname: "Please specify your last name",
+                firstname: t("js_first_name_please"),
+                lastname: t("js_last_name_please"),
                 email: {
-                    required: "We need your email address to contact you",
-                    email: "Your email address must be in the format of name@domain.com"
+                    required: t("js_email_please"),
+                    email: t("js_emailformat_please")
+                },
+                password_again: {
+                    minlength: t("js_password_format"),
+                    equalTo: t("js_password_check")
                 }
+
             },
             invalidHandler: function(event, validator) { //display error alert on form submit
                 successHandler3.hide();

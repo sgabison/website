@@ -3,7 +3,7 @@
 		<h4 class="panel-title"><?= $this->translate("TXT_LIST_RESERVATION_SEARCH")?><span class="text-bold"> <?= $this->translate("TXT_NEW_RESERVATION_LIST")?> </span></h4>
 	</div>
 	<div class="panel-body">
-		<form role="form" id="searchform" novalidate="novalidate" action="/liste-reservations">
+		<form role="form" method="post" id="searchform" novalidate="novalidate" action="/liste-reservations">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="errorHandler alert alert-danger no-display">
@@ -16,45 +16,65 @@
 					<input id="language" class="no-display" value="<?php echo $this->language;?>">
 					<input id="servingid" name="servingid" value="<?php echo $servid ?>" class="no-display">
 					<input id="calendar" name="calendar" value="" class="no-display">
+					<input id="calendar1" name="calendar1" value="" class="no-display">
+					<input id="calendar2" name="calendar2" value="" class="no-display">
 				</div>
 				<div class="col-md-12">
 					<div class="col-md-6">
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo $this->translate('TXT_SELECT_DATE');?><span class="symbol required"></span>
-							</label>
-							<div class="input-group date" id="calendarbox">
-								<input id="mycalendar" disabled type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar" value="<?php echo $this->getParam('calendar');?>">
-								<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+						<div class="panel panel-white">
+							<div class="panel-heading">
+								<h4 class="panel-title"><?= $this->translate("TXT_SELECTION_PANEL")?></h4>
+							</div>
+							<div class="panel-body">					
+								<div class="form-group">
+									<label class="control-label">
+										<?php echo $this->translate('TXT_SELECT_DATE');?><span class="symbol required"></span>
+									</label>
+									<div class="input-group date" id="calendarbox">
+										<input id="mycalendar" disabled type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar" value="<?php echo $this->getParam('calendar');?>">
+										<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										<?php echo $this->translate('TXT_SELECT_SERVING');?><span class="symbol required"></span>
+									</label>
+									<div>
+									<?php $i=0;foreach( $this->selectedLocation->getServings() as $serving){ ?>
+										<button type="button" class="btn btn-sm buttons-widget servingbutton btn-light-orange" value="<?php echo $serving->getId(); ?>" style="margin:5px"><?php echo $serving->getTitle(); ?></button>		
+									<?php if($i==0){$servid=$serving->getId();}$i++;} ?>
+									</div>
+								</div>
+		<!--
+								<div class="form-group">
+									<label class="checkbox-inline">
+										<input type="checkbox" id="cancelled" name="cancelled" class="checkbox square-orange" value="1">
+										<?php echo $this->translate('TXT_INCLUDE_CANCELLED');?>
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="checkbox-inline">
+										<input type="checkbox" id="arrived" name="arrived" class="checkbox square-orange" value="1">
+										<?php echo $this->translate('TXT_INCLUDE_ARRIVED');?>
+									</label>
+								</div>
+		-->
+								<a href="http://ib.guestonline.fr/instabook/bookings/dCSNApQ" class="iframe" id="tol_module" style="background: #8BBD1E;color: #fff; font-family:'trebuchet ms',helvetica,sans-serif;font-size:14px;width: 180px;text-align:center;display: inline-block;padding: 5px 10px 6px;text-decoration: none;font-weight: bold;line-height: 1;-moz-border-radius: 5px;-webkit-border-radius: 5px;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);text-shadow: 0 -1px 1px rgba(0,0,0,0.25);border-radius: 5px;box-shadow: 0 1px 3px rgba(0,0,0,0.5);border-bottom: 1px solid rgba(0,0,0,0.25);cursor: pointer;">Book on line</a>
+								
+								<script type="text/javascript">
+								  (function() {
+								    var tomod = document.createElement('script'); tomod.type = 'text/javascript'; tomod.async = true;
+								    tomod.src = 'http://ib.guestonline.fr/instabook/js/instabook_mod.js';
+								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tomod, s);
+								  })();
+								</script>
+								<div class="form-group">
+									<button class="btn btn-dark-orange btn-block" value='submit' id='submit'>
+										<?php echo $this->translate('TXT_GENERATE_LIST');?> <i class="fa fa-arrow-circle-right"></i>
+									</button>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo $this->translate('TXT_SELECT_SERVING');?><span class="symbol required"></span>
-							</label>
-							<div>
-							<?php $i=0;foreach( $this->selectedLocation->getServings() as $serving){ ?>
-								<button type="button" class="btn btn-sm buttons-widget servingbutton btn-light-orange" value="<?php echo $serving->getId(); ?>" style="margin:5px"><?php echo $serving->getTitle(); ?></button>		
-							<?php if($i==0){$servid=$serving->getId();}$i++;} ?>
-							</div>
-						</div>
-<!--
-						<div class="form-group">
-							<label class="checkbox-inline">
-								<input type="checkbox" id="cancelled" name="cancelled" class="checkbox square-orange" value="1">
-								<?php echo $this->translate('TXT_INCLUDE_CANCELLED');?>
-							</label>
-						</div>
-						<div class="form-group">
-							<label class="checkbox-inline">
-								<input type="checkbox" id="arrived" name="arrived" class="checkbox square-orange" value="1">
-								<?php echo $this->translate('TXT_INCLUDE_ARRIVED');?>
-							</label>
-						</div>
--->
-						<button class="btn btn-dark-orange btn-block" value='submit' id='submit'>
-							<?php echo $this->translate('TXT_GENERATE_LIST');?> <i class="fa fa-arrow-circle-right"></i>
-						</button>
 					</div>
 				</div>
 			</div>

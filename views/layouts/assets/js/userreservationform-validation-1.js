@@ -47,29 +47,40 @@ var ReservationFormValidator1 = function () {
 			startDate: "0d",
 			language: $("#language").val(),
 			todayBtn: "linked", 
-			todayHighlight: false, 
+			todayHighlight: true, 
 			defaultDate: new Date(), 
 			autoclose: true,
 			datesDisabled: offdays, 
 			format: "dd-mm-yyyy",
 			container: '#example-widget-container',
 			beforeShowDay: function (date){
-				if( $.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0){
+				if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
 					console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
 					return {
-						tooltip: 'Restaurant is closed',
-	                    classes: 'today',
+						tooltip: 'Le Restaurant est fermé',
+	                    classes: 'closedDayClass',
 	                    enabled: false
 					}
 				}
 				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
 				var dayFormat = date.getDay();
 				console.log( dayFormat );
-				if( date == today ){
-				  return {classes: 'activeDayClass', tooltip: 'today'};
+				if( date < today ){
+				  return {
+				  	classes: 'disabled passedDayClass', 
+				  	tooltip: 'Date passée'
+				  };
 				}
-				if( closeddays.search(dayFormat) >= 0){ 
-				  return {classes: 'disabled today', tooltip: 'No serving this day'};
+				if( date == today ){
+				  return {
+				  	classes: 'activeDayClass', 
+				  	tooltip: 'Aujourd hui'
+				  };
+				}
+				if( date>today && closeddays.search(dayFormat) >= 0){ 
+				  return {
+				  	classes: 'disabled closedDayClass', 
+				  	tooltip: 'Aucun service ce jour'};
 				}
 			}
 		});
@@ -217,7 +228,7 @@ var ReservationFormValidator1 = function () {
 					i++;
 					var serv=key.split("_-_");
 					console.log( 'closed:'+serv[2] );
-					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-light-orange';}
+					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-dark-orange';}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							

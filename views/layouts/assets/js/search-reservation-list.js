@@ -13,8 +13,20 @@ var SearchReservationList = function () {
 	}
 	$('#arrived').iCheck({checkboxClass: 'icheckbox_square-orange'});
 	$('#cancelled').iCheck({checkboxClass: 'icheckbox_square-orange'});
+	if( $("#language").val() == 'fr' ){
+		$.fn.datepicker.dates['fr'] = {
+			days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+			daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+			daysMin: ["D", "L", "Ma", "Me", "J", "V", "S", "D"],
+			months: ["Janvier", "FÃ©vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "AoÃ»t", "Septembre", "Octobre", "Novembre", "DÃ©cembre"],
+			monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"],
+			today: "Aujourd'hui",
+			clear: "Effacer",
+			weekStart: 1,
+			format: "dd-mm-yyyy"
+		};
+	}
 	$('.input-group.date').datepicker({ 
-		startDate: '0d',
 		language: $("#language").val(), 
 		todayBtn: 'linked', 
 		todayHighlight: true, 
@@ -43,13 +55,13 @@ var SearchReservationList = function () {
 	});
 	var searchDataLoad = function () {
 		var form1 = $('#searchform');
-		form1.attr('action','/liste-reservations'); 
-		form1.attr('method','POST');
-		$('#submit').click( function(event){
-			var str = $( "form" ).serialize();
-			event.preventDefault();
-	   		form1.submit();
-		});
+		//form1.attr('action','/liste-reservations'); 
+		//form1.attr('method','POST');
+		//$('#submit').click( function(event){
+		//	var str = $( "form" ).serialize();
+		//	event.preventDefault();
+	   	//	form1.submit();
+		//});
 	};
 	return {
         //main function to initiate template pages

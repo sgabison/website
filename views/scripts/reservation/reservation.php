@@ -29,135 +29,161 @@
 						<i class="fa fa-ok"></i> <?php echo $this->translate('TXT_VALIDATION');?>
 					</div>
 				</div>
-					<div class="col-md-6 selectiongroup">
-						<div class="form-group">
-							<span class="text-bold no-display" id="locationlink">
-								<h4>
-									<a class="linkhref locationhref locationlinkfinal"><span id="locationlinkdata"></span></a> <?php echo $this->translate('TXT_ON_THE');?> <a class="linkhref calendarhref locationlinkfinal"><span class="text-bold" id="calendarlinkdata"></span></a>
-								</h4>
-								<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'PUT';}else{echo 'POST';}?>" class="no-display">
+				<div class="col-md-6 selectiongroup">
+					<div class="panel panel-white">
+						<div class="panel-heading">
+							<h4 class="panel-title"><?php echo $this->translate('TXT_SELECTION_PANEL');?></h4>
+						</div>
+						<div class="panel-body">
+							<table class="table table-bordered table-hover" id="sample-table-4" style="table-layout: fixed;">
+								<tbody>
+									<tr>
+										<td class="col-md-4" style="text-align: center">
+											<i class="fa fa-users fa-lg"></i><br>
+											<a class="linkhref calendarhref locationlinkfinal">
+												<span class="text-bold" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> 
+												<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
+											</a>
+					 					</td>
+										<td class="col-md-4" style="text-align: center">
+											<i class="fa fa-calendar fa-lg"></i><br>
+											<a class="linkhref calendarhref locationlinkfinal">
+												<span class="text-bold" id="calendarlinkdata"><?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?></span>
+											</a>
+										</td>
+										<td class="col-md-4" style="text-align: center">
+											<i class="fa fa-clock-o fa-lg"></i><br>
+											<a class="linkhref calendarhref locationlinkfinal">
+												<span class="text-bold" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+											</a>													
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div><?php echo $this->translate('TXT_SELECT_DATE_PARTY');?></div>
+							<div class="form-group">
+								<span class="text-bold no-display" id="locationlink">
+<!--
+									<h4>
+										<a class="linkhref locationhref locationlinkfinal"><span id="locationlinkdata"></span></a> <?php echo $this->translate('TXT_ON_THE');?> <a class="linkhref calendarhref locationlinkfinal"><span class="text-bold" id="calendarlinkdata"></span></a>
+									</h4>
+-->
+									<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'PUT';}else{echo 'POST';}?>" class="no-display">
+								</span>
+							</div>
+							<div id="calendarbox">
+								<div class="col-md-12">
+									<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?>" style="width:205px">
+									<div id="fullcalendar"></div>
+								</div>
+							</div>
+							<div id="partybox">
+								<input id="party" class="no-display">
+								<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
+									<?php $i=0; while($i<7){ 
+										$i++;?>
+									<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+									<?php } ?>
+									<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
+								</div>
+								<div class="col-md-2 no-display morethanseven" id="lessthansevenbutton" style="margin-top:15px">
+									<button type="button" class="btn btn-default"> - </button>
+								</div>
+								<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
+									<select id="partyselect" class="form-control">
+										<?php $i=6; while($i<16){ 
+											$i++;
+											echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
+									     } ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12 form-group bookbutton" >
+								<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_NEXT_STEP');?> <i class="fa fa-arrow-circle-right"></i></span>
+							</div>
+							<span class='no-display' id='selectgroup'>
+								<div class="form-group">
+									<label class="control-label">
+										<?php echo $this->translate('TXT_SELECT_SERVING');?> <span class="symbol required"></span>
+									</label>
+									<div id="servings" class="space20 panel-body buttons-widget"></div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										<?php echo $this->translate('TXT_SELECT_TIMESLOT');?> <span class="symbol required"></span>
+									</label>
+									<div id="slots" class="space20 panel-body buttons-widget"></div>
+								</div>
 							</span>
 						</div>
-						<div class="form-group">
-							<div class="input-group date" id="calendarbox">
-								<input id="mycalendar" disabled name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?>">
-								<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-							</div>
-						</div>	
-						<div class="form-group">
-							<select id="party" name="party" class="form-control">
-								<?php $i=0; while($i<16){ 
-									$i++;
-									if($i==2){$select='selected';}else{$select='';};
-									echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
-							     } ?>
-							</select>
-						</div>
-						<div class="form-group bookbutton" >
-							<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i></span>
-						</div>
-						<span class='no-display' id='selectgroup'>
-							<div class="form-group">
-								<label class="control-label">
-									<?php echo $this->translate('TXT_SELECT_SERVING');?> <span class="symbol required"></span>
-								</label>
-								<div id="servings" class="space20 panel-body buttons-widget"></div>
-							</div>
-							<div class="form-group">
-								<label class="control-label">
-									<?php echo $this->translate('TXT_SELECT_TIMESLOT');?> <span class="symbol required"></span>
-								</label>
-								<div id="slots" class="space20 panel-body buttons-widget"></div>
-							</div>
-						</span>
 					</div>
-					<div class="col-md-6 no-display registergroup">
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo $this->translate('TXT_GUEST_TEL');?><span class="symbol required"></span>
-							</label>
-							<span class="input-icon">
-							<input  placeholder="06XXXXXXXX" class="form-control typeahead" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>' size='10'>
-							<i class="telephone fa fa-phone"></i>
-							</span>
+				</div>
+				<div class="col-md-6 no-display registergroup">
+					<div class="panel panel-white">
+						<div class="panel-heading">
+							<h4 class="panel-title"><?php echo $this->translate('TXT_REGISTRATION_PANEL');?></h4>
 						</div>
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo $this->translate('TXT_GUEST_NAME');?> <span class="symbol required"></span>
-							</label>
-							<span class="input-icon">
-							<input type="text" placeholder="Insert your Name" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>'>
-							<i class="fa fa-user"></i>
-							</span>
-						</div>
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo $this->translate('TXT_GUEST_EMAIL_ADDRESS');?> <span class="symbol required"></span>
-							</label>
-							<span class="input-icon">
-							<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email" value='<?php echo $this->email;?>'>
-							<i class="fa fa-envelope"></i>
-							</span>
-						</div>									
-						<div class="form-group">
-							<div class="panel panel-white">
-								<div class="panel-heading">
-									<label class="control-label"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></label>
-									<div class="panel-tools">
-										<div class="dropdown">
-											<a class="panel-collapse expand" href="#"><i class="fa fa-angle-up"></i> <span>Expand</span> </a>
+						<div class="panel-body">					
+					
+							<div class="form-group">
+								<label class="control-label">
+									<?php echo $this->translate('TXT_GUEST_TEL');?><span class="symbol required"></span>
+								</label>
+								<span class="input-icon">
+								<input  placeholder="06XXXXXXXX" class="form-control typeahead" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>' size='10'>
+								<i class="telephone fa fa-phone"></i>
+								</span>
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									<?php echo $this->translate('TXT_GUEST_NAME');?> <span class="symbol required"></span>
+								</label>
+								<span class="input-icon">
+								<input type="text" placeholder="Insert your Name" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>'>
+								<i class="fa fa-user"></i>
+								</span>
+							</div>
+							<div class="form-group">
+								<label class="control-label">
+									<?php echo $this->translate('TXT_GUEST_EMAIL_ADDRESS');?> <span class="symbol required"></span>
+								</label>
+								<span class="input-icon">
+								<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email" value='<?php echo $this->email;?>'>
+								<i class="fa fa-envelope"></i>
+								</span>
+							</div>									
+							<div class="form-group">
+								<div class="panel panel-white">
+									<div class="panel-heading">
+										<label class="control-label"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></label>
+										<div class="panel-tools">
+											<div class="dropdown">
+												<a class="panel-collapse expand" href="#"><i class="fa fa-angle-up"></i> <span>Expand</span> </a>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="panel-body" style="display:none" id='tagpanel'>
-									<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_BABY');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_BABY');?></button>
-									<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?></button>
-									<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_SPECIATABLE');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_SPECIATABLE');?></button>
-									<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_NUTALLERGY');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_NUTALLERGY');?></button>
-									<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
+									<div class="panel-body" style="display:none" id='tagpanel'>
+<!--
+										<?php //foreach( $this->societe->getTags() as $tag){ ?>
+										<button type="button" class="btn btn-sm btn-tags btn-dark-orange" data="<?php //echo $tag->getId();?>" value="<?php //echo $tag->getTag();?>" style="margin:5px"><?php //echo $tag->getTag() ?></button>
+										<?php //} ?>
+-->										
+										<?php foreach( $this->societe->getTags() as $tag){ ?>
+										<a href="#" class="btn btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
+										<?php } ?>
+										<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
+										<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<hr>
-							<label class="control-label">
-								<strong><?php echo $this->translate('TXT_SIGNUP_NEWSLETTER');?></strong> <span class="symbol required"></span>
-							</label>
-							<p>
-								<?php echo $this->translate('TXT_WANT_TO_SIGNUP_NEWSLETTER');?>
-							</p>
-							<div>
-								<label class="radio-inline">
-									<input type="radio" class="grey" value="" name="newsletter">
-									<?php echo $this->translate('TXT_NO');?>
-								</label>
-								<label class="radio-inline">
-									<input type="radio" class="grey" value="" name="newsletter">
-									<?php echo $this->translate('TXT_YES');?>
-								</label>
+							<div id="inputs" class="no-display"></div>
+							<div id="registerbutton">
+								<button class="btn btn-dark-orange btn-block" type="submit" value='submit' id='submit'>
+									<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
+								</button>
 							</div>
 						</div>
 					</div>
-				</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div>
-						<span class="symbol required"></span><?php echo $this->translate('TXT_REQUIRED_FIELDS');?>
-						<hr>
-					</div>
-				</div>
-			</div>
-			<div class="row no-display registergroup">
-				<div class="col-md-8">
-					<p>
-						<?php echo $this->translate('TXT_AGREED_TERMS_1');?> <a href="#"><?php echo $this->translate('TXT_AGREED_TERMS_2');?></a>
-					</p>
-				</div>
-				<div id="inputs"></div>
-				<div class="col-md-4">
-					<button class="btn btn-dark-orange btn-block" type="submit" value='submit' id='submit'>
-						<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
-					</button>
 				</div>
 			</div>
 		</form>

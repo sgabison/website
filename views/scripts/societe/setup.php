@@ -1,7 +1,8 @@
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 <script type="text/javascript">
 var geocoder;
 var map;
+/*
 function initialize() {
 	geocoder = new google.maps.Geocoder();
 	var latlng = new google.maps.LatLng(<?php echo $this->lat;?>, <?php echo $this->long;?>);
@@ -37,6 +38,14 @@ function codeAddress() {
 	});
 }
 google.maps.event.addDomListener(window, 'load', initialize);
+function resetMap(m) {
+   var x = m.getZoom(); 
+   var c = m.getCenter();
+   google.maps.event.trigger(m, 'resize');
+   m.setZoom(x);
+   m.setCenter(c);
+};
+*/
 </script>
 
 			<div class="panel panel-white">
@@ -70,7 +79,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 											<div class="panel panel-white">
 												<div class="panel-heading">
 													<h5 class="panel-title">
-													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  onclick="resetMap(map)">
 														<i class="icon-arrow"></i> <?php echo $this->translate('SETUP_LOCATION_COMMUNICATION');?>
 													</a></h5>
 												</div>
@@ -142,16 +151,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 																</div>
 															</div>
 														</div>
+														<!--
 														<div class="panel-body">
 																<label class="control-label" for="zip"><?php echo $this->translate('MYPROFILE_GEOLOCATION'); ?></label>
 										                       <div class="controls">
-										                         <button type="button" value="Geocode" onclick="codeAddress()" class="btn btn-primary">Geocode</button>
+										                         <button type="button" value="Geocode" onclick="codeAddress()" class="btn btn-blue">Geocode</button>
 										                         <p class="help-block"><?php echo $this->translate('MYPROFILE_GEOLOCATION_HELP'); ?></p>
 										                       </div>
 															<div class="map" id="map-canvas" style='width:100%; height:400px'></div>
 															<input id="latresult" name="latresult" class="no-display">
 															<input id="lngresult" name="lngresult" class="no-display">
 														</div>
+														-->
 													</div>
 												</div>
 											</div>
@@ -266,6 +277,38 @@ google.maps.event.addDomListener(window, 'load', initialize);
 													</div>
 												</div>
 											</div>
+											<div class="panel panel-white">
+												<div class="panel-heading">
+													<h5 class="panel-title">
+													<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+														<i class="icon-arrow"></i> <?php echo $this->translate('SETUP_TAGS');?>
+													</a></h5>
+												</div>
+												<div id="collapseThree" class="panel-collapse collapse">
+													<div class="panel-body">
+														<div class="row">
+														<div class="panel panel-white">
+															<div class="panel-body">
+																<table id="tagslist" class="table">
+															        <thead>
+															            <tr>
+															                <th></th>
+															                <th></th>
+															                <th><?php echo $this->translate('TAG_CODE');?></th>
+															                <th><?php echo $this->translate('TAG_FR');?></th>
+															                <th><?php echo $this->translate('TAG_EN');?></th>
+															                <th><?php echo $this->translate('TXT_ICON');?></th>
+															                <th></th>
+															                <th></th>
+															            </tr>
+															        </thead>
+																</table>
+															</div>
+														</div>
+														</div>
+													</div>
+												</div>
+											</div>			
 										</div>
 									</div>
 									<div class="row">
@@ -292,10 +335,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 							        <thead>
 							            <tr>
 							                <th></th>
-							                <th>First Name</th>
-							                <th>Last Name</th>
-							                <th>Email</th>
-							                <th>Phone</th>
+							                <th><?php echo $this->translate('TXT_FIRSTNAME');?></th>
+							                <th><?php echo $this->translate('TXT_LASTNAME');?></th>
+							                <th><?php echo $this->translate('TXT_EMAIL');?></th>
+							                <th><?php echo $this->translate('TXT_PHONE');?></th>
+							                <th></th>
 							                <th></th>
 							            </tr>
 							        </thead>
@@ -307,15 +351,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 									<div class="col-md-12 <?php if( $this->copyinfo != '1' ){ echo 'no-display';}?>" id="copybox" >
 										<div class="col-md-6">
 											<p>
-												It seems you have not started to configurate the location as yet. Do you wish to use the information you have updated at the company level as default ? (recommended)
+												<?php echo $this->translate('TXT_COPY_DATA_FROM_SOCIETE');?>
 											</p>
-											<button class="btn btn-primary" id="copydata" name="copydata">Copy Societe data</button>
+											<button class="btn btn-blue" id="copydata" name="copydata"><?php echo $this->translate('TXT_COPY_SOCIETE_DATA');?></button>
 										</div>
 										<div class="col-md-6">
 											<p>
-											Alternatively you can start editing the location data from scratch (advanced users only)
+											<?php echo $this->translate('TXT_NOT_COPY_SOCIETE_DATA');?>
 											</p>
-											<button class="btn btn-primary" id="nocopydata" name="nocopydata">Edit from scratch</button>
+											<button class="btn btn-blue" id="nocopydata" name="nocopydata"><?php echo $this->translate('TXT_EDIT_FROM_SCRATCH');?></button>
 										</div>
 									</div>
 									<div class="col-md-12 <?php if( $this->copyinfo == '1' ){ echo 'no-display';}?>" id="nocopybox" >
@@ -333,7 +377,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 									            </tr>
 									        </thead>
 										</table>
-										<?php echo $this->copyinfo; ?>
+										<?php //echo $this->copyinfo; ?>
 										<br>
 									</div>
 								</div>
