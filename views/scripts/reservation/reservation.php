@@ -123,16 +123,26 @@
 						<div class="panel-heading">
 							<h4 class="panel-title"><?php echo $this->translate('TXT_REGISTRATION_PANEL');?></h4>
 						</div>
-						<div class="panel-body">					
-					
-							<div class="form-group">
+						<div class="panel-body">
+							<div class="form-group connected-group">
 								<label class="control-label">
 									<?php echo $this->translate('TXT_GUEST_TEL');?><span class="symbol required"></span>
 								</label>
-								<span class="input-icon">
-								<input  placeholder="06XXXXXXXX" class="form-control typeahead" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>' size='10'>
-								<i class="telephone fa fa-phone"></i>
-								</span>
+								<div class="row">
+									<div class='col-md-5'>
+										<select class="js-example js-states">
+											<option value="fr" <?php if($this->countrycode=='fr'){echo "selected";}?>>+33 France</option>
+											<option value="gb" <?php if($this->countrycode=='gb'){echo "selected";}?>>+44 Great Britain</option>
+											<option value="us" <?php if($this->countrycode=='us'){echo "selected";}?>>+1 Unites States</option>
+										</select>
+									</div>
+									<div class='col-md-7'>									
+										<span class="input-icon">
+										<input  placeholder="06XXXXXXXX" class="form-control typeahead" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>' size='10'>
+										<i class="telephone fa fa-phone"></i>
+										</span>
+									</div>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label">

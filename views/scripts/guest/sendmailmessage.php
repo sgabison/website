@@ -93,7 +93,7 @@ $('#sendmail').click( function(e){
 		data: {sendmail: 'send', resaid: $("#resaid").val(), message: $("#message").val() },
 		success: function() {
 			$.unblockUI();
-			toastr.success(t('js_mail_sent');
+			toastr.success(t('js_mail_sent'));
 			$('#ajax-modal').modal('toggle');
 		},
 		error: function (request, status, error) {

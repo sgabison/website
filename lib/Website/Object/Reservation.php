@@ -72,8 +72,8 @@ class Reservation extends \Object\Concrete {
 				$mealduration=$serving->getMealduration();
 			}
 			$end=new \Zend_date( $start->getTimeStamp()+($mealduration*60) );
-			if( $data['email'] ){
-		        $guest=\Object\Guest::getByEmail($data['email'], 1);
+			if( $data['tel'] ){
+		        $guest=\Object\Guest::getByTel($data['tel'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
 		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'] ) );

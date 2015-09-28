@@ -17,6 +17,49 @@ var TableReservationList = function () {
     if ($(".tooltips").length) {
         $('.tooltips').tooltip();
     }
+    var pickerTime = function(){
+		$('#arrivaltime').timepicker({showMeridian: false});
+    }
+	var loadFullCalendar = function(){
+		$("#myfullcalendar").fullCalendar({
+			lang: language,
+			height: 400,
+			weekends: true,
+			selectable: true,
+	        selectHelper: false,
+	        defaultDate: moment( $('#calendar').val(), 'DD-MM-YYYY' ),
+	        dayClick: function(date, jsEvent, view) {
+		        console.log('works');
+	        },
+	        dayRender: function (date, cell) {
+	        	console.log( date.day() );
+			   //cell.removeClass("fc-state-highlight");
+			   //cell.removeClass("fc-today");
+		       //cell.css("background-color", "#DDDDDD");
+		       //cell.css("cursor", "not-allowed");
+		       //cell.prop('data-toggle', 'tooltip');
+		    },
+	        select: function(start, end, allDay) {
+	        	console.log( start.format("DD-MM-YYYY") );
+	        	$('.bs-example-modal-basic').modal('toggle');
+	        	window.location.href = "/liste-reservations?servingid="+$('#servingid').val()+"&calendar="+start.format("DD-MM-YYYY");
+	        }
+		});
+	}
+	var runTouchSpin = function() {
+		$("#nrofpeople").TouchSpin({
+			min: 0,
+			max: 100,
+			step: 1,
+			decimals: 0,
+			boostat: 5,
+			maxboostedstep: 10,
+			postfix: 'people'
+		});
+	}
+	$('.bs-example-modal-basic').on('shown.bs.modal', function () {
+	   $("#myfullcalendar").fullCalendar('render');
+	});    
 	//START---CONFIG PANEL----//
 	$('.config').click( function(){
 		$('.configpanel').removeClass('no-display');
@@ -83,21 +126,47 @@ var TableReservationList = function () {
 	    $.each(array, function( index, value ) {
 	    	html=html+'<a class="btn btn-blue tooltips" data-original-title="Edit" style="margin-right:10px">'+value+'</a>'
 	    });
-	    return '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
-	        '<tr>'+
-	            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
-	            '<td><b>'+d.guestemail.toUpperCase()+'</b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
-	        '</tr>'+
-	        '<tr>'+
-	            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
-	            '<td><b>'+d.guesttel+'<b></td>'+
-				'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
-	        '</tr>'+
-	        '<tr>'+
-	            '<td>Notes:</td>'+  '<td colspan="2">' + html + '</td>'+
-	        '</tr>'+
-	    '</table>';
+	    return '<div class="row">'+
+	    	'<div class="col-md-6">'+
+			    '<div class="panel panel-white">'+
+					'<div class="panel-heading">'+
+						'<h4 class="panel-title">'+t('js_comm_panel')+'</h4>'+
+					'</div>'+
+					'<div class="panel-body">'+
+					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
+					        '<tr>'+
+					            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
+					            '<td><b>'+d.guestemail.toUpperCase()+'</b></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
+					        '</tr>'+
+					        '<tr>'+
+					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
+					            '<td><b>'+d.guesttel+'<b></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
+					        '</tr>'+
+					        '<tr>'+
+					            '<td>Notes:</td>'+  '<td colspan="2">'+d.guestemail+'</td>'+
+					        '</tr>'+
+					    '</table>'+
+					'</div>'+
+				'</div>'+
+			'</div>'+
+	    	'<div class="col-md-6">'+
+			    '<div class="panel panel-white">'+
+					'<div class="panel-heading">'+
+						'<h4 class="panel-title">'+t('js_extra_panel')+'</h4>'+
+					'</div>'+
+					'<div class="panel-body">'+
+					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
+					        '<tr>'+
+					            '<td>Serving:</td>'+  '<td colspan="2">'+d.servingtitle+'</td>'+
+					        '</tr>'+
+					    '</table>'+
+					'</div>'+
+				'</div>'+
+			'</div>'+
+		'</div>'
+	    ;
 	}
 	var doTable = function () {
 		var backdrop = $('.ajax-white-backdrop');
@@ -156,6 +225,9 @@ var TableReservationList = function () {
 				}, {
 					name: "guesttel",
 					type: "hidden"
+				}, {
+					name: "servingtitle",
+					type: "hidden"
 				} ]
 			} );
 			// Edit record 
@@ -178,9 +250,9 @@ var TableReservationList = function () {
 			} );
 		    oTable.on( 'switchChange.bootstrapSwitch', 'input.editor-active', function () {
 		        editor.edit( $(this).closest('tr'), false ).set( 'arrived', $(this).bootstrapSwitch('state') ? 1 : 0 ).submit();
-		        //if( $(this).bootstrapSwitch('state') ){ $('input.editor-active').prop('checked', true);}
+		        // if( $(this).bootstrapSwitch('state') ){ $('input.editor-active').prop('checked', true);}
 		        console.log( 'input.editor-active'+$('input.editor-active').val() );
-		        //toastr.success("reussi" + ' ' +"merci");
+		        // toastr.success("reussi" + ' ' +"merci");
 		    } );
 			// Activate an inline edit on click of a oTable cell
 			$('a.editor_create').on('click', function (e) {
@@ -196,6 +268,26 @@ var TableReservationList = function () {
 				console.log( $(e.target).html() );
 				console.log( $("table thead tr th").eq($(e.target).index()) );
 				//editor.inline( this );
+			} );
+			oTable.on( 'click', 'tbody td.partysize', function(){
+				var that=this;
+				console.log( $(this).children('a').children('span').text() );
+				$('#nrofpeople').val( $(this).children('a').children('span').text() );
+				$('#changenrpeople').click( function(){
+					editor.edit( $(that).closest('tr'), false ).set( 'partysize', $('#nrofpeople').val() ).submit();
+					$('.nr-of-people').modal('toggle');
+					toastr.success(t('js_partysize'));	
+				});
+			} );
+			oTable.on( 'click', 'tbody td.starttime', function(){
+				var that=this;
+				console.log( $(this).children('a').children('span').text() );
+				$('#arrivaltime').val( $(this).children('a').children('span').text() );
+				$('#changearrivaltime').click( function(){
+					editor.edit( $(that).closest('tr'), false ).set( 'start', $('#arrivaltime').val() ).submit();
+					$('.arrivaltime').modal('toggle');
+					toastr.success(t('js_arrivaltime'));	
+				});
 			} );
 		    oTable.on( 'click', 'tbody td.details-control', function () {
 		        var tr = $(this).closest('tr');
@@ -231,6 +323,12 @@ var TableReservationList = function () {
 					}, 1000);
 				});	 
 		    } );
+		    $("#datedisplay").click( function(e) {
+		        var column = table.column( '2' );
+		        column.visible( ! column.visible() );
+		        var col = table.column( '5' );
+		        col.visible( ! col.visible() );
+		    });
 		 	$(".search-select").on("select2-removed", function(e) {
 		        var column = table.column( e.val );
 		        column.visible( ! column.visible() );
@@ -270,12 +368,16 @@ var TableReservationList = function () {
 		            },
 					{ 
 						"data": "datereservation", 
-						"visible": false
+						"visible": false,
+						"render": function (data, type, row){
+							return '<h4><strong>'+data+'</strong></h4>';
+						} 
 					},
 					{ 
 						"data": "start",
+						"className": 'starttime',
 						"render": function ( data, type, row ) {
-							return '<a class="btn btn-blue"><i class="fa fa-clock-o"></i> '+row.start+'</a>';
+							return '<a class="btn btn-blue" data-target=".arrivaltime" data-toggle="modal"><i class="fa fa-clock-o"></i> <span class="starttime">'+data+'<span></a>';
 						}
 					},
 					{ 	
@@ -292,8 +394,9 @@ var TableReservationList = function () {
 					},
 					{ 
 						"data": "partysize",
+						"className": 'partysize',
 						"render": function (data, type, row){
-							return '<a class="btn btn-blue"><i class="fa fa-group"></i> '+data+'</a>';
+							return '<a class="btn btn-blue nrpeople" data-target=".nr-of-people" data-toggle="modal"><i class="fa fa-group"></i> <span class="people">'+data+'<span></a>';
 						}
 					},
 					{ 
@@ -377,6 +480,10 @@ var TableReservationList = function () {
 					{ 
 						"data": "guesttel", 
 						"visible": false
+					},
+					{ 
+						"data": "servingtitle", 
+						"visible": false
 					}
 					],
 				order: [ 1, 'asc' ],
@@ -413,11 +520,11 @@ var TableReservationList = function () {
     	$("#reservationList").dataTable().fnDraw();
     	return false;
     });
-	$.fn.dataTableExt.afnFiltering.push(
-   		function( oSettings, aData, iDataIndex ) {
+	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
 			var nTr = oSettings.aoData[ iDataIndex ].nTr;
 			console.log( 'checkarrived', $('#checkarrived').is(":checked") );
 			console.log( 'arrived', aData[10] );
+			console.log( 'serving', aData[16] );
 			console.log( 'checkcancelled', $('#checkcancelled').is(":checked") );
 			console.log( 'cancelled', aData[9] );
 			if( aData[10]=='<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>' ){
@@ -437,14 +544,28 @@ var TableReservationList = function () {
 					return true;
 				}
 			}
-   		}
-	);
+   	} );
+//	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
+//		var servinglist=$('#servinglist').val();
+//		var list=servinglist.split(',');
+//		$.each( list, function( i, val ){
+			//if( aData[16]==val ){
+			//	return false;
+			//} else {
+			//	return true;
+			//}
+//		});
+//		return true;
+//   	});
     return {
         //main function to initiate template pages
         init: function () {
 			doTable();
 			initModals();
 			runInputLimiter();
+			loadFullCalendar();
+			runTouchSpin();
+			pickerTime();
         }
     };
 }();

@@ -14,6 +14,9 @@ var ReservationFormValidator = function () {
     if ($(".tooltips").length) {
         $('.tooltips').tooltip();
     }
+    var runSelect2 = function() {
+	    $(".js-example").select2();    
+	}
 	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	$('[data-toggle="tooltip"]').tooltip();
 	$.reformatDate=function(dateStr){
@@ -549,6 +552,7 @@ var ReservationFormValidator = function () {
 			reservationSubmit();
 			runTagsInput();
 			feedTags();
+			runSelect2();
         }
     };
 }();

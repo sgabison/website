@@ -3,20 +3,205 @@
 <div class="panel panel-white">
 	<div class="panel-heading">
 		<div class="col-md-12 space20">
-			<h4 class="panel-title">
-				<span class="actionitems">
+			<span class="actionitems">
+<!--
+				<a href="/liste-reservations-search?selectedLocationId=<?php echo $this->selectedLocation->getId();?>&" class="btn btn-blue"><?= $this->translate("TXT_NEW_SEARCH")?> <i class="fa fa-search"></i></a>
+-->
+				<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle">
+					<?= strtoupper($this->servingname);?> <i class="fa fa-angle-down"></i>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/liste-reservations?servingid=&calendar=<?php echo $this->calendar;?>"><?= $this->translate("TXT_ALL_SERVICES")?> 
+						</a>
+					</li>
+					<?php $servingstring="";$i=0;foreach( $this->servings as $serving ){ ?>
+					<li>
+						<a href="/liste-reservations?servingid=<?php echo $serving->getId();?>&calendar=<?php echo $this->calendar;?>"><span class="servinglink" value="<?php echo $serving->getId();?>"><?php echo $serving->getTitle();?></span>
+						</a>
+					</li>
+					<?php 
+						$servingstring=$servingstring.$serving->getTitle().',';
+					} ?>
+				</ul>
+				<div class="btn-group">
+					<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->daybefore;?>" class="btn btn-blue hidden-xs">
+						<i class="fa fa-fast-backward"></i>
+					</a>
+					<a class="btn btn-blue"  data-target=".bs-example-modal-basic" data-toggle="modal">
+						<i class="fa fa-refresh"></i> <?php echo $this->calendar;?>
+					</a> 
+					<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>" class="btn btn-blue hidden-xs">
+						<i class="fa fa-fast-forward"></i>
+					</a>
+				</div>
+				<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>">
+					<input id="checkarrived" type="checkbox" class="checkbox-inline checkbox make-switch tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_ARRIVED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
+				</span>
+				<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>">
+					<input id="checkcancelled" type="checkbox" class="checkbox-inline checkbox make-switch bootstrap-switch-success tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_CANCELLED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
+				</span>
+				<div class="pull-right">
+					<button data-table="#reservationList" class="btn btn-orange print-table">
+						<!--<?= $this->translate("Print")?>-->
+						<i class="fa fa-print"></i>
+					</button> 
+					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:50px">
+					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
+					<ul class="dropdown-menu dropdown-light pull-right">
+						<li><a href="#" class="export-pdf" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png'
+								width='24px'> Save as PDF
+						</a>
+						</li>
+						<li><a href="#" class="export-png" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/png.png'
+								width='24px'> Save as PNG
+						</a>
+						</li>
+						<li><a href="#" class="export-csv" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/csv.png'
+								width='24px'> Save as CSV
+						</a>
+						</li>
+						<li><a href="#" class="export-txt" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/txt.png'
+								width='24px'> Save as TXT
+						</a>
+						</li>
+						<li><a href="#" class="export-xml" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xml.png'
+								width='24px'> Save as XML
+						</a>
+						</li>
+						<li><a href="#" class="export-sql" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/sql.png'
+								width='24px'> Save as SQL
+						</a>
+						</li>
+						<li><a href="#" class="export-json" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/json.png'
+								width='24px'> Save as JSON
+						</a>
+						</li>
+						<li><a href="#" class="export-excel" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
+								width='24px'> Export to Excel
+						</a>
+						</li>
+						<li><a href="#" class="export-doc" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/word.png'
+								width='24px'> Export to Word
+						</a>
+						</li>
+						<li><a href="#" class="export-powerpoint"
+							data-table="#reservationList" data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/ppt.png'
+								width='24px'> Export to PowerPoint
+						</a>
+						</li>
+					</ul>
+				</div>
+			</span>
+<!--
+			<span class="actionitems">
+				<h4 class="panel-title">
 					<?= $this->translate("TXT_DATE")?>: <span class="text-bold"><?php echo $this->calendar;?></span> / <?php echo $this->translate("TXT_SERVING")?>: <span class="text-bold"><?= strtoupper($this->servingname);?></span>
-				</span>
-				<span class="guestactionitems" class="no-display">
-					<span class="text-bold"><?= $this->translate("TXT_GUEST")?>: <?php echo $this->guestname;?>/ <?php echo $this->translate("TXT_TEL")?>: <?= strtoupper($this->guesttel);?>  </span>
-				</span>
-			</h4>
+				<h4>
+			</span>
+-->
+			
+			<span class="guestactionitems" class="no-display">
+				<button class="btn btn-blue">
+					<i class="fa fa-user"></i> <?php echo $this->guestname;?>
+				</button>
+				<button class="btn btn-blue">
+					<i class="fa fa-phone"></i> <?php echo $this->guesttel;?>
+				</button>
+				<button class="btn btn-blue" id="datedisplay">
+					<i class="fa fa-phone"></i> <?= $this->translate('TXT_DISPLAY_DATE')?>
+				</button>
+				<div class="pull-right">
+					<button data-table="#reservationList" class="btn btn-orange print-table">
+						<!--<?= $this->translate("Print")?>-->
+						<i class="fa fa-print"></i>
+					</button> 
+					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:50px">
+					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
+					<ul class="dropdown-menu dropdown-light pull-right">
+						<li><a href="#" class="export-pdf" data-table="#reservationList" data-ignoreColumn="0,2,5"> <img src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png' width='24px'> Save as PDF
+						</a>
+						</li>
+						<li><a href="#" class="export-png" data-table="#reservationList" data-ignoreColumn="0,2,5"> <img src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/png.png' width='24px'> Save as PNG
+						</a>
+						</li>
+						<li><a href="#" class="export-csv" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/csv.png'
+								width='24px'> Save as CSV
+						</a>
+						</li>
+						<li><a href="#" class="export-txt" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/txt.png'
+								width='24px'> Save as TXT
+						</a>
+						</li>
+						<li><a href="#" class="export-xml" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xml.png'
+								width='24px'> Save as XML
+						</a>
+						</li>
+						<li><a href="#" class="export-sql" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/sql.png'
+								width='24px'> Save as SQL
+						</a>
+						</li>
+						<li><a href="#" class="export-json" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/json.png'
+								width='24px'> Save as JSON
+						</a>
+						</li>
+						<li><a href="#" class="export-excel" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
+								width='24px'> Export to Excel
+						</a>
+						</li>
+						<li><a href="#" class="export-doc" data-table="#reservationList"
+							data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/word.png'
+								width='24px'> Export to Word
+						</a>
+						</li>
+						<li><a href="#" class="export-powerpoint"
+							data-table="#reservationList" data-ignoreColumn="0,2,5"> <img
+								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/ppt.png'
+								width='24px'> Export to PowerPoint
+						</a>
+						</li>
+					</ul>
+				</div>
+			</span>
 		</div>
 		<div class="panel-tools">
 			<a class="config" href="#"> <i class="fa fa-cog"></i><span> </span></a>
 			<a class="panel-expand" href="#"> <i class="fa fa-expand"></i><span> </span></a>
 		</div>
 	</div>
+	<input id="servinglist" class="no-display value="<?php echo addslashes($servingstring);?>">
 	<input id='selectedLocationId' class="no-display" value='<?php echo $this->selectedLocation->getId();?>'>
 	<input id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
 	<input id='dayafter' class='no-display' value='<?php echo $this->dayafter;?>'>
@@ -38,95 +223,6 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-md-12 space20">
-						<span class="actionitems">
-							<a href="/liste-reservations-search?selectedLocationId=<?php echo $this->selectedLocation->getId();?>&" class="btn btn-blue"><?= $this->translate("TXT_NEW_SEARCH")?> <i class="fa fa-search"></i></a>
-							<div class="btn-group">
-								<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->daybefore;?>" class="btn btn-blue hidden-xs">
-									<i class="fa fa-fast-backward"></i>
-								</a>
-								<a href="#" class="btn btn-blue">
-									<i class="fa fa-refresh"></i> <?php echo $this->calendar;?>
-								</a> 
-								<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>" class="btn btn-blue hidden-xs">
-									<i class="fa fa-fast-forward"></i>
-								</a>
-							</div>
-							<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>">
-								<input id="checkarrived" type="checkbox" class="checkbox-inline checkbox make-switch tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_ARRIVED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
-							</span>
-							<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>">
-								<input id="checkcancelled" type="checkbox" class="checkbox-inline checkbox make-switch bootstrap-switch-success tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_CANCELLED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
-							</span>
-							<div class="pull-right">
-								<button data-table="#reservationList" class="btn btn-orange print-table">
-									<?= $this->translate("Print")?>
-									<i class="fa fa-print"></i>
-								</button> 
-								<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle">Export <i class="fa fa-angle-down"></i></button>
-								<ul class="dropdown-menu dropdown-light pull-right">
-									<li><a href="#" class="export-pdf" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png'
-											width='24px'> Save as PDF
-									</a>
-									</li>
-									<li><a href="#" class="export-png" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/png.png'
-											width='24px'> Save as PNG
-									</a>
-									</li>
-									<li><a href="#" class="export-csv" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/csv.png'
-											width='24px'> Save as CSV
-									</a>
-									</li>
-									<li><a href="#" class="export-txt" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/txt.png'
-											width='24px'> Save as TXT
-									</a>
-									</li>
-									<li><a href="#" class="export-xml" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xml.png'
-											width='24px'> Save as XML
-									</a>
-									</li>
-									<li><a href="#" class="export-sql" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/sql.png'
-											width='24px'> Save as SQL
-									</a>
-									</li>
-									<li><a href="#" class="export-json" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/json.png'
-											width='24px'> Save as JSON
-									</a>
-									</li>
-									<li><a href="#" class="export-excel" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
-											width='24px'> Export to Excel
-									</a>
-									</li>
-									<li><a href="#" class="export-doc" data-table="#reservationList"
-										data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/word.png'
-											width='24px'> Export to Word
-									</a>
-									</li>
-									<li><a href="#" class="export-powerpoint"
-										data-table="#reservationList" data-ignoreColumn="0,2,5"> <img
-											src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/ppt.png'
-											width='24px'> Export to PowerPoint
-									</a>
-									</li>
-								</ul>
-							</div>
-						</span>
 					</div>
 <!--
 					<div class="col-md-12">
@@ -160,7 +256,7 @@
 		<div class="row">
 			<!-- le contenu ici -->
 			<div class="table-responsive col-md-12 space20">
-				<table id="reservationList" class="display table table-striped">
+				<table id="reservationList" class="display table">
 					<thead>
 						<tr>
 							<th></th>
@@ -179,6 +275,7 @@
 							<th><?= $this->translate("TXT_HEADER_DEL")?></th>
 							<th><?= $this->translate("TXT_HEADER_GUEST_EMAIL")?></th>
 							<th><?= $this->translate("TXT_HEADER_GUEST_TEL")?></th>
+							<th><?= $this->translate("TXT_SERVING")?></th>
 						</tr>
 					</thead>
 				</table>
@@ -187,4 +284,89 @@
 	</div>
 	<!-- Small modal -->
 	<div id="ajax-modal" class="modal extended-modal fade no-display" tabindex="-1"></div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal bs-example-modal-basic fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+					×
+				</button>
+				<h4 id="myModalLabel" class="modal-title">Select a date</h4>
+			</div>
+			<div class="modal-body">
+				<div id="myfullcalendar" style="height:400px">
+				</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default" type="button">
+					Close
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal nr-of-people fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+					×
+				</button>
+				<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_UPDATE_PARTYSIZE")?></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<input id="nrofpeople" name="nrofpeople">
+					</div>
+					<div class="col-md-4">
+						<button id="changenrpeople" class="btn btn-blue"><?= $this->translate("CHANGE")?></button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default" type="button">
+					<?= $this->translate("TXT_CLOSE")?>
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal arrivaltime fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+					×
+				</button>
+				<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_UPDATE_ARRIVALTIME")?></h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div class="input-group input-append bootstrap-timepicker">
+							<input type="text" id="arrivaltime" name="arrivaltime" class="form-control time-picker initiate">
+							<span class="input-group-addon add-on"><i class="fa fa-clock-o"></i></span>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<button id="changearrivaltime" class="btn btn-blue"><?= $this->translate("CHANGE")?></button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button data-dismiss="modal" class="btn btn-default" type="button">
+					<?= $this->translate("TXT_CLOSE")?>
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
 </div>

@@ -386,19 +386,18 @@ class ReservationController extends Useraware
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/reservationform-validation.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/reservationform-validation-1.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.js');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/form-elements.js');
-		if( $this->language =='fr'){
-			$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
-		}
 		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
 			Main.init();
 			ReservationFormValidator.init();
 			Maps.init();
 			$("body").on("click", ".locationlinkfinal", function(){	
 				var newresa="newresa";
-				$.ajax({url: "/fr/booking/selectiongroup?locationid="+$("#select_location").val()+"&resadate="+moment( $(".mycalendar").datepicker("getDate") ).format("DD-MM-YYYY")+"&method=CHANGE", success: function(result){
+				$.ajax({url: "/fr/booking/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
 					$("#registerbutton").addClass("no-display");
+					$("a.locationlinkfinal").css( "cursor", "pointer" );
 					ReservationFormValidator1.init();
 				}});
 			}); 
@@ -410,14 +409,14 @@ class ReservationController extends Useraware
 	}
 	public function selectiongroupAction(){
 		//FIND A WAY TO FETCH THE SOCIETE VALUE
-
 		$societe=$this->societe;
-
 		if ($societe instanceof Object_Societe ) {
 			$this->view->locations = $societe->getLocations();
 		}
 		$this->view->selectedlocationid=$this->getParam('locationid');
 		$this->view->resadate=$this->getParam('resadate');
+		$this->view->partysize=$this->getParam('partysize');
+		$this->view->slot=$this->getParam('slot');
 		$this->disableLayout();
 
 	}
@@ -542,11 +541,12 @@ class ReservationController extends Useraware
 	public function create() {
 		$res = new Reponse();
 		$data=$this->requete->params;
-		if( $this->person ){ $data['person']=$this->person; }
+		if( $this->person ){ $data['person']=$this->person; }else{$person=\Object\Person::getById(248);}
 		$rec = new \Object\Reservation();
 		$formattedData=\Object\Reservation::formatData($data); 
 		$result=$rec->updateData( $formattedData );
 		if ($result instanceof \Object\Reservation) {
+			//$this->updateHistory('Reservation created', $result, $this->person, 'reservation confirmation', $data['partysize'], $data['start']);
 			$res->success = true;
 			$res->message = "TXT_CREATE_OK" ;
 			$res->data = $result->toArray();
@@ -629,6 +629,7 @@ class ReservationController extends Useraware
 		$this->view->cancelled=$this->getParam('cancelled');
 		$this->view->arrived=$this->getParam('arrived');
 		$guestid=$this->getParam('guestid');
+		$this->view->servings=$this->selectedLocation->getServings();
 		if( $guestid != '' ){
 			$guest=Object\Guest::getById($guestid, 1);
 			if( $guest instanceof Object\Guest ){
@@ -643,6 +644,13 @@ class ReservationController extends Useraware
 		}
 		$calendar=$this->getParam('calendar');
 		if( $calendar=='' ){ $date=new Zend_date(); $calendar=$date->get('dd-MM-YYYY'); }
+
+		$dayafter=new Zend_date($calendar, "dd-MM-YYYY");
+		$dayafter->add('24:00:00', Zend_Date::TIMES);
+		$daybefore=new Zend_date($calendar, "dd-MM-YYYY");
+		$daybefore->sub('24:00:00', Zend_Date::TIMES);
+		$this->view->dayafter=$dayafter->get('dd-MM-YYYY');
+		$this->view->daybefore=$daybefore->get('dd-MM-YYYY');
 		$this->view->calendar=$calendar;
 		$myservingid=$this->getParam('servingid');
 		if( $myservingid != ''){
@@ -652,7 +660,11 @@ class ReservationController extends Useraware
 				$this->view->servingname=$servingname;
 			}
 		}else{
-			$servingname="Tous les services";
+			if( $this->language == "fr"){
+				$servingname="Tous les services";
+			}else{
+				$servingname="All services";
+			}
 			$this->view->servingname=$servingname;
 		}
 		if ( $myservingid=='' || $calendar=="" ){
@@ -661,8 +673,11 @@ class ReservationController extends Useraware
 			$this->view->warning="nosearch";
 		}
 		$this->reservationsArray();
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
+		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/table-reservation-list.js');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js');
 		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
 					Main.init();
@@ -735,13 +750,16 @@ class ReservationController extends Useraware
 						}
 					}
 					//date update needs to be reworked
-					//$myreservation->setStart( $this->reformatDate($_POST['data']) );
+					$daystart = $myreservation->getStart()->get('dd-MM-YYYY');
+					$newdatestart=new Zend_Date( $daystart.' '.$_POST['data']['start'].':00', 'dd-MM-YYYY HH:mm:ss');
+					$myreservation->setStart( $newdatestart );
 					$myreservation->setPartysize($_POST['data']['partysize']);
 					$myreservation->setBookingref($_POST['data']['bookingref']);
 					$myreservation->setBookingnotes($_POST['data']['bookingnotes']);
+					if( $_POST['data']['status'] == 'Annulé'  ){$_POST['data']['status'] = "Cancelled"; }
 					$myreservation->setStatus($_POST['data']['status']);
 					if( $_POST['data']['arrived'] == '1'  ){ $arrived = 1; }else{ $arrived = 0; }
-					$myreservation->setArrived($_POST['data']['arrived']);
+					$myreservation->setArrived($arrived);
 					$myreservation->save();
 					$data=$_POST['data'];
 					$data['DT_RowId']="row_".$_POST['data']['id'];
@@ -796,6 +814,11 @@ class ReservationController extends Useraware
 		}else{
 			$resa['locationid']=''; $resa['locationname']='';
 		}
+		if( $this->language == "fr" ){
+			if( $reservation->getStatus() == "Cancelled" ){ $resa['status']="Annulé"; } else { $resa['status']=$reservation->getStatus(); }
+		}else{
+			$resa['status']=$reservation->getStatus();
+		}
 		if( $reservation->getGuest() instanceof Object_Guest ){
 			$resa['guestid']=$reservation->getGuest()->getId();
 			$resa['guestname']=$reservation->getGuest()->getLastname();
@@ -822,11 +845,22 @@ class ReservationController extends Useraware
 		//DT_RowId identifies the id for the datatable
 		$resa['DT_RowId']=$reservation->getId();
 		$resa['id']=$reservation->getId();
-		$resa['status']=$reservation->getStatus();
+		
 		$resa['arrived']=$reservation->getArrived();
 		$resa['partysize']=$reservation->getPartysize();
 		$resa['bookingref']=$reservation->getBookingref();
 		$resa['bookingnotes']=$reservation->getBookingnotes();
 		return $resa;
+	}
+	public function updateHistory($action, $reservation, $person, $communication, $partysize, $start){
+		$rec = new \Object\Resahistory();
+		$formattedData=\Object\Resahistory::formatData($action, $reservation, $person, $communication, $partysize, $start);
+		$result=$rec->updateData( $formattedData );
+		if ($result instanceof \Object\Resahistory) {
+			$res="reservation history updated";
+		} else {
+			die('reservation history NOT updated');
+		}
+		return $res;
 	}
 }
