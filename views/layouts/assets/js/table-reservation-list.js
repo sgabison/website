@@ -273,20 +273,22 @@ var TableReservationList = function () {
 				var that=this;
 				console.log( $(this).children('a').children('span').text() );
 				$('#nrofpeople').val( $(this).children('a').children('span').text() );
-				$('#changenrpeople').click( function(){
+				$('#changenrpeople').on('click', function(){
 					editor.edit( $(that).closest('tr'), false ).set( 'partysize', $('#nrofpeople').val() ).submit();
 					$('.nr-of-people').modal('toggle');
-					toastr.success(t('js_partysize'));	
+					toastr.success(t('js_partysize'));
+					$('#changenrpeople').off('click');
 				});
 			} );
 			oTable.on( 'click', 'tbody td.starttime', function(){
 				var that=this;
 				console.log( $(this).children('a').children('span').text() );
 				$('#arrivaltime').val( $(this).children('a').children('span').text() );
-				$('#changearrivaltime').click( function(){
+				$('#changearrivaltime').on('click', function(){
 					editor.edit( $(that).closest('tr'), false ).set( 'start', $('#arrivaltime').val() ).submit();
 					$('.arrivaltime').modal('toggle');
-					toastr.success(t('js_arrivaltime'));	
+					toastr.success(t('js_arrivaltime'));
+					$('#changearrivaltime').off('click');	
 				});
 			} );
 		    oTable.on( 'click', 'tbody td.details-control', function () {
@@ -377,7 +379,7 @@ var TableReservationList = function () {
 						"data": "start",
 						"className": 'starttime',
 						"render": function ( data, type, row ) {
-							return '<a class="btn btn-blue" data-target=".arrivaltime" data-toggle="modal"><i class="fa fa-clock-o"></i> <span class="starttime">'+data+'<span></a>';
+							return '<a class="btn btn-blue" data-target=".arrivaltime" data-toggle="modal" rowid="'+row.id+'"><i class="fa fa-clock-o"></i> <span class="starttime">'+data+'<span></a>';
 						}
 					},
 					{ 	

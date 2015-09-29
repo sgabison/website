@@ -173,6 +173,7 @@ var ReservationFormValidator = function () {
 			, newReservation.reservationdate = $("#reservationdateinput").val()
 			, newReservation.email = $("#email").val()
 			, newReservation.tel = $("#tel").val()
+			, newReservation.countrycode = $("#countrycode").val()
 			, newReservation.partysize = $("#party").val()
 			, newReservation.start = $("#slotinput").val()
 			, newReservation.servinginput = $("#servinginput").val()

@@ -22,3 +22,33 @@ tr.shown td.details-control {
 .currentDayClass{
     background: #f2682c;
 }
+#googlemaps { 
+  height: 100%; 
+  width: 100%; 
+  position:absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+}     
+#contactform { 
+  position: relative; 
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  width: 400px;
+  margin: 0 20px 0;
+  padding: 0px;
+  background: transparent;
+  height: auto;
+  opacity: 1; /* Set the opacity for a slightly transparent Google Form */ 
+  color: white;
+}
+#description { 
+  position: relative; 
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  width: 100%;
+  margin: 0 20px 0;
+  padding: 0px;
+  background: transparent;
+  height: auto;
+  opacity: 1; /* Set the opacity for a slightly transparent Google Form */ 
+  color: white;
+}

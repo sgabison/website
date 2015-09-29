@@ -56,6 +56,7 @@ class Reservation extends \Object\Concrete {
 	  return $date;
 	 }
 	public function formatData( $data ){
+		$data['tel']=filter_var( $data['tel'], FILTER_SANITIZE_NUMBER_INT );
 		if( $data['datereservation'] ){
 			$datereservation=self::parseDateTime( $data['datereservation'], 'dd-MM-YYYY' );
 			$start=self::parseDateTime( $data['reservationdate'].' '.$data['start'], 'dd-MM-YYYY HH:mm' );
@@ -76,7 +77,7 @@ class Reservation extends \Object\Concrete {
 		        $guest=\Object\Guest::getByTel($data['tel'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
-		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'] ) );
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'] ) );
 		        }
 			}
         }
@@ -84,6 +85,7 @@ class Reservation extends \Object\Concrete {
         $result['id']=$data['id'];
         $result['method']=$data['method'];
         $result['tel']=$data['tel'];
+        $result['countrycode']=$data['countrycode'];
         $result['email']=$data['email'];
         $result['lastname']=$data['lastname'];
         $result['partysize']=$data['partysize'];

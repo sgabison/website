@@ -33,8 +33,8 @@
 	</div>
 </div>
 -->
-<div class="col-md-4 space-20">
-	<div class="panel panel-white">
+<div class="col-md-12 space-20">
+	<div>
 		<div class="panel-heading">
 			<h4 class="panel-title"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
 			<div class="panel-tools">
@@ -43,10 +43,10 @@
 				</a>
 			</div>
 		</div>
-		<div class="panel-body">
+		<div class="panel-body" style='margin-left:10px;margin-right:10px;'>
 			<div id="reservationform">
 		<!-- start: FORM VALIDATION 1 PANEL -->
-				<form role="form" id="bookingform" novalidate="novalidate">
+				<form role="form" method="POST" id="bookingform" novalidate="novalidate">
 					<div class="row">
 						<!-- start: ERRORS - CONFIRMATIONS -->
 						<div>
@@ -97,7 +97,7 @@
 											<td class="col-md-4">
 												Name:
 						 					</td>
-						 					<td class="col-md-4" colspan="2">
+						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-lastname"></span>
 						 					</td>
 										</tr>
@@ -105,7 +105,7 @@
 											<td class="col-md-4">
 												Tel:
 						 					</td>
-						 					<td class="col-md-4" colspan="2">
+						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-tel"></span>
 						 					</td>
 										</tr>
@@ -113,7 +113,7 @@
 											<td class="col-md-4">
 												Email:
 						 					</td>
-						 					<td class="col-md-4" colspan="2">
+						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-email"></span>
 						 					</td>
 										</tr>
@@ -173,8 +173,10 @@
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_YOUR_TEL');?><span class="symbol required"></span>
-									</label>
-									<input type="tel" placeholder="06XXXXXXXX" class="form-control" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>'>
+									</label>								
+									<span class="input-icon">
+										<input type="tel" class="form-control" id="tel" name="tel" value='<?php echo $this->tel;?>'>
+									</span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
@@ -303,21 +305,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-<div class="col-md-8 space-20">
-	<div class="panel panel-white">
-		<div class="panel-heading">
-			<h4 class="panel-title">Discover <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
-			<div class="panel-tools">
-				<a class="panel-expand" href="#">
-					<i class="fa fa-expand"></i> <span><?php echo $this->translate('TXT_FULLSCREEN');?></span>
-				</a>
-			</div>
-		</div>
-		<div class="panel-body" id="reservationform">
-		This is some text about the restaurant
 		</div>
 	</div>
 </div>

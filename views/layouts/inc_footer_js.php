@@ -50,7 +50,8 @@
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/fullcalendar/fullcalendar/lang-all.js"></script>		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/fullcalendar/fullcalendar/lang-all.js"></script>		
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>		

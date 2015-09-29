@@ -22,7 +22,6 @@ class BookingController extends Useraware {
 		// do something after the action is called //-> see Zend Framework
 	}
 	public function defaultAction() {
-		
 		// Send JSON to the client.
 		$reponse = new Reponse ();
 		
@@ -98,61 +97,8 @@ class BookingController extends Useraware {
 			}
 	}
 	public function introductionAction() {
-		$this->layout ()->setLayout ( 'portal' );
-		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
-				var date = new Date();
-		        var d = date.getDate();
-		        var m = date.getMonth();
-		        var y = date.getFullYear();
-				var closeddays = $("#closeddays").val().split(",");
-				console.log( closeddays );
-				var offday = $("#offday").val();
-				$("#fullcalendar").fullCalendar({
-					lang: language,
-					height: 400,
-					weekends: true,
-					selectable: true,
-		            selectHelper: false,
-		            dayRender: function (date, cell) {
-		            	if($.inArray(date.format("DD-MM-YYYY"), closeddays)>=0){
-					        cell.css("background-color", "red");
-					        cell.css("cursor", "not-allowed");
-		            	}
-		            	if(date.format("DD-MM-YYYY")==offday){
-					        cell.css("background-color", "red");
-					        cell.css("cursor", "not-allowed");
-		            	}
-				    },
-		            select: function(start, end, allDay) {
-		            	console.log( start.format("DD-MM-YYYY") );
-		            	if($.inArray(start.format("DD-MM-YYYY"), closeddays)==-1){
-							/// collect date
-		            	}
-		            }
-				});
-
-				$("#mydate").glDatePicker({
-				    showAlways: true,
-				    allowMonthSelect: false,
-				    allowYearSelect: false,
-				    prevArrow: "",
-				    nextArrow: "",
-				    selectedDate: new Date(2013, 8, 5),
-				    selectableDateRange: [
-				        { from: new Date(2013, 8, 1),
-				            to: new Date(2013, 8, 10) },
-				        { from: new Date(2013, 8, 19),
-				            to: new Date(2013, 8, 22) },
-				    ],
-				    selectableDates: [
-				        { date: new Date(2013, 8, 24) },
-				        { date: new Date(2013, 8, 30) }
-				    ]
-				});
-
-			});', 'text/javascript', array (
-			'noescape' => true 
-		) );
+		$this->layout ()->setLayout ( 'introduction_layout' );
+		$this->view->societes= new Object\Societe\Listing();
 	}
 	public function searchAction () {
 

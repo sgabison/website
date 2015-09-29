@@ -67,7 +67,7 @@ jQuery(document).ready(function() {
 				return getDate2(exampledate)+'-'+getMonth2(exampledate)+'-'+exampledate.getFullYear();	
 			}
 		}
-		$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&resadate="+$.formattednewDate(newdate, today)+"&method=CHANGE", success: function(result){
+		$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&slot="+ $("#slotlinkdata").text()+"&resadate="+$.formattednewDate(newdate, today)+"&method=CHANGE", success: function(result){
 			$(".selectiongroup").html(result);
 			ReservationFormValidator1.init();
 			$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );

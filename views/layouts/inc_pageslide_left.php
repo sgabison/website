@@ -26,7 +26,7 @@
 				<li class="start">
 					<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_0.html"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span class="label label-default pull-right ">LABEL</span> </a>
 				</li>
-<?php foreach($this->societes as $societe){ ?>							
+<?php if($this->societes){foreach($this->societes as $societe){ ?>							
 				<li>
 					<a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> <?= $societe->getName()?></span><i class="icon-arrow"></i> </a>
 					<ul class="sub-menu">
@@ -39,7 +39,7 @@
 					<?php } ?>
 					</ul>
 				</li>
-<?php } ?>
+<?php } } ?>
 			</ul>
 			<!-- end: MAIN NAVIGATION MENU -->
 		</div>

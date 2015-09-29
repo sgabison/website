@@ -318,11 +318,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-4"></div>
-					<div class="col-md-4">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
 						<input id="nrofpeople" name="nrofpeople">
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<button id="changenrpeople" class="btn btn-blue"><?= $this->translate("CHANGE")?></button>
 					</div>
 				</div>

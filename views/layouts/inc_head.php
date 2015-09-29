@@ -90,6 +90,8 @@
 		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/css/themes/theme-style8.css" type="text/css" id="skin_color">
 
 		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/css/print.css" type="text/css" media="print"/>
+		
+		<link rel="stylesheet" href="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/intl-tel-input-master/build/css/intlTelInput.css">
 		<!-- end: CORE CSS -->
 		<link rel="shortcut icon" href="/favicon.ico" />
 	</head>

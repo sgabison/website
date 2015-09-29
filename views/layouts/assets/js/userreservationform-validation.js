@@ -16,6 +16,11 @@ var ReservationFormValidator = function () {
 	  var dArr = dateStr.split("-");  // ex input "2010-01-18"
 	  return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0]; //ex out: "18/01/10"
 	}
+    if ($(".tooltips").length) {
+        $('.tooltips').tooltip();
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+   	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	$.formattedDate=function(exampledate, today){
 		if(exampledate==null || exampledate===false){
 			return getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
@@ -49,6 +54,19 @@ var ReservationFormValidator = function () {
 	var offdays = $('#offdays').val().split(',');
 	var closeddays = $('#closeddays').val();
 	var inRange=false;
+	$('body').on('click','.reg-data', function(){ $('.registergroup1').removeClass('no-display');$('.registergroup2').addClass('no-display');});
+    var runSelect2 = function() {
+	    $(".js-example").select2();    
+	}
+	var checkData = function(){
+		console.log( 'reg-email', $('#reg-email').text() );
+		console.log( 'reg-tel', $('#reg-tel').text() );
+		console.log( 'reg-lastname', $('#reg-lastname').text() );
+		if( $('#reg-email').html() =='' ){ $('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); }else{ $('#reg-email').html( "<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-email').html() ); $('#reg-email').css("color", "#777777" ); }
+		if( $('#reg-tel').html() =='' ){ $('#reg-tel').html("<i class='fa fa-square-o fa-lg'></i> Tel mandatory"); $('#reg-tel').css( "color", "#a94442" );  } else { $('#reg-tel').html("<i class='fa fa-check-square-o fa-lg'></i> "+ $("#tel").intlTelInput("getNumber") ); $('#reg-tel').css( "color", "#777777" ); }
+		if( $('#reg-lastname').html() =='' ){ $('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); }else{ $('#reg-lastname').html("<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-lastname').html() ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );}
+		
+	}
 	$('#mycalendar').datepicker({ 
 		startDate: "0d",
 		language: $("#language").val(),
@@ -95,6 +113,26 @@ var ReservationFormValidator = function () {
 	$('#mycalendar').datepicker().on('changeDate', function (ev) {
 	    $('#calendarlinkdata').text( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
 	});
+	var intTelData = function(){
+		$("#tel").intlTelInput({ 
+	        //allowExtensions: true,
+	        //autoFormat: false,
+	        //autoHideDialCode: false,
+	        //autoPlaceholder: false,
+	        defaultCountry: "fr",
+	        // geoIpLookup: function(callback) {
+	        //   $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+	        //     var countryCode = (resp && resp.country) ? resp.country : "";
+	        //     callback(countryCode);
+	        //   });
+	        // },
+	        //nationalMode: false,
+	        //numberType: "MOBILE",
+	        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+	        preferredCountries: ['fr', 'gb', 'de', 'be'],
+	        utilsScript: "/website/views/layouts/assets/plugins/intl-tel-input-master/lib/libphonenumber/build/utils.js"
+		})
+	}
 	var reservationDataLoad = function () {
 		var form1 = $('#bookingform');
 		console.log( 'select_location'+$('#select_location').val() );
@@ -110,6 +148,7 @@ var ReservationFormValidator = function () {
 			, newReservation.datereservation = formattedtoday
 			, newReservation.reservationdate = $("#reservationdateinput").val()
 			, newReservation.email = $("#email").val()
+			, newReservation.countrycode = $("#tel").intlTelInput("getSelectedCountryData").dialCode
 			, newReservation.tel = $("#tel").val()
 			, newReservation.partysize = $("#party").val()
 			, newReservation.start = $("#slotinput").val()
@@ -264,7 +303,7 @@ var ReservationFormValidator = function () {
 		var persondata=$('#party').val();
 		//updatelink();
 		$('#calendarlinkdata').text(resadate);
-		$('#personlinkdata').text(persondata);
+		$('#personlinkdata').text( $('#party').val() );
 		$('#locationlinkdata').text(locationname); 
 		var i=0;
 		//clear up the divs
@@ -338,80 +377,93 @@ var ReservationFormValidator = function () {
                 return false;
             }
         }, 'Please select a day, month, and year');
-        form1.validate({
-            errorElement: "span", // contain the error msg in a span tag
-            errorClass: 'help-block',
-            errorPlacement: function (error, element) { // render error placement for each input type
-                if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
-                    error.insertAfter($(element).closest('.form-group').children('div').children().last());
-                } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
-                    error.insertAfter($(element).closest('.form-group').children('div'));
-                } else {
-                    // error.insertAfter(element);
-                    // for other inputs, just perform default behavior
-                }
-            },
-            ignore: "",
-            rules: {
-                firstlastname: {
-                    required: true,
-                    minlength: 2
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                tel: {
-                    required: true,
-                    number: true,
-                    minlength: 10
-                }
-            },
-            messages: {
-                firstlastname: "Please enter your name",
-                email: {
-                    required: "We need your email address to contact you",
-                    email: "Your email address must be in the format of name@domain.com"
-                },
-                tel: {
-                    required: "We need your telephone # to contact you",
-                    number: "enter your telephone number on 10 digits only"
-                }
-            },
-            invalidHandler: function (event, validator) { //display error alert on form submit
-                //successHandler1.hide();
-                //errorHandler1.show();
-            },
-            highlight: function (element) {
-                $(element).closest('.help-block').removeClass('valid');
-                // display OK icon
-                $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
-                // add the Bootstrap error class to the control group
-            },
-            unhighlight: function (element) { // revert the change done by hightlight
-                $(element).closest('.form-group').removeClass('has-error');
-                // set error class to the control group
-            },
-            success: function (label, element) {
-                //label.addClass('help-block valid');
-                // mark the current input as valid and display OK icon
-                $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
-                $('#submit').click( function(){
-					$('.registergroup1').addClass('no-display');
-					$('.registergroup2').removeClass('no-display');
-					$('#reg-lastname').html( $('#firstlastname').val() );
-					$('#reg-tel').html( $('#tel').val() );
-					$('#reg-email').html( $('#email').val() );		
-				});
-            },
-            submitHandler: function (form) {
-               // successHandler1.show();
-                errorHandler1.hide();
-                //submit form
-                //form.submit();
-                //alert('submitform');
-                reservationDataLoad();
-            }
+        $('#submit').click( function(){
+	        form1.validate({
+	            errorElement: "span", // contain the error msg in a span tag
+	            errorClass: 'help-block',
+	            errorPlacement: function (error, element) { // render error placement for each input type
+	                if (element.attr("type") == "radio" || element.attr("type") == "checkbox") { // for chosen elements, need to insert the error after the chosen container
+	                    error.insertAfter($(element).closest('.form-group').children('div').children().last());
+	                } else if (element.attr("name") == "dd" || element.attr("name") == "mm" || element.attr("name") == "yyyy") {
+	                    error.insertAfter($(element).closest('.form-group').children('div'));
+	                } else {
+	                    // error.insertAfter(element);
+	                    // for other inputs, just perform default behavior
+	                }
+	            },
+	            ignore: "",
+	            rules: {
+	                firstlastname: {
+	                    required: true,
+	                    minlength: 2
+	                },
+	                email: {
+	                    required: true,
+	                    email: true
+	                },
+	                tel: {
+	                    required: true,
+	                    //number: true,
+	                    //minlength: 10
+	                }
+	            },
+	            messages: {
+	                firstlastname: "Please enter your name",
+	                email: {
+	                    required: "We need your email address to contact you",
+	                    email: "Your email address must be in the format of name@domain.com"
+	                },
+	                tel: {
+	                    required: "We need your telephone # to contact you",
+	                    number: "enter your telephone number on 10 digits only"
+	                }
+	            },
+	            invalidHandler: function (event, validator) { //display error alert on form submit               
+	                console.log( 'validator', validator );
+	                console.log( 'event', event );
+	                console.log( 'event', event );
+	                //errorHandler1.show();
+	            },
+	            highlight: function (element) {
+	                $(element).closest('.help-block').removeClass('valid');
+	                // display OK icon
+	                $(element).closest('.form-group').removeClass('has-success').addClass('has-error').find('.symbol').removeClass('ok').addClass('required');
+	                // add the Bootstrap error class to the control group
+	            },
+	            unhighlight: function (element) { // revert the change done by hightlight
+	                $(element).closest('.form-group').removeClass('has-error');
+	                // set error class to the control group
+	            },
+	            showErrors: function(errorMap, errorList) {
+				    this.defaultShowErrors();
+				    if( this.numberOfInvalids() == 0 ){
+						$('.registergroup1').addClass('no-display');
+						$('.registergroup2').removeClass('no-display');
+						if( $('#firstlastname').val() != '' ){$('#reg-lastname').html( $('#firstlastname').val() ); }
+						if( $('#tel').val() != '' ){$('#reg-tel').html( $('#tel').val() ); }
+						if( $('#email').val() != '' ){ $('#reg-email').html( $('#email').val() ); }
+						checkData();
+						reservationDataLoad();	
+				    }					
+				  },
+	            success: function (label, element) {
+	                //label.addClass('help-block valid');
+	                // mark the current input as valid and display OK icon
+	                $(element).closest('.form-group').removeClass('has-error').addClass('has-success').find('.symbol').removeClass('required').addClass('ok');
+	               /*
+	                $('#submit').click( function(){   	
+	
+					});
+					*/
+	            },
+	            submitHandler: function (form) {
+	               // successHandler1.show();
+	                errorHandler1.hide();
+	                //submit form
+	                //form.submit();
+	                //alert('submitform');
+	            }
+	        });
         });
     };
 	var runTagsInput = function() {
@@ -435,6 +487,8 @@ var ReservationFormValidator = function () {
 			reservationSubmit();
 			runTagsInput();
 			feedTags();
+			runSelect2();
+			intTelData();
         }
     };
 }();

@@ -130,10 +130,10 @@
 								</label>
 								<div class="row">
 									<div class='col-md-5'>
-										<select class="js-example js-states">
-											<option value="fr" <?php if($this->countrycode=='fr'){echo "selected";}?>>+33 France</option>
-											<option value="gb" <?php if($this->countrycode=='gb'){echo "selected";}?>>+44 Great Britain</option>
-											<option value="us" <?php if($this->countrycode=='us'){echo "selected";}?>>+1 Unites States</option>
+										<select class="js-example js-states" id="countrycode">
+											<option value="33" <?php if($this->countrycode=='33'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_FRANCE');?></option>
+											<option value="44" <?php if($this->countrycode=='44'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_GB');?></option>
+											<option value="1" <?php if($this->countrycode=='1'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_USA');?></option>
 										</select>
 									</div>
 									<div class='col-md-7'>									

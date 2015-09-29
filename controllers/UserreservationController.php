@@ -13,6 +13,10 @@ use Website\Tool\Requestjsonp;
 class UserreservationController extends Action
 {
 	
+	public function introAction(){
+		$this->layout ()->setLayout ( 'introduction_layout' );
+		$this->disableViewAutoRender();	
+	}
 	public function termsAction(){
 		$this->layout ()->setLayout ( 'portal' );	
 	}
@@ -117,10 +121,12 @@ class UserreservationController extends Action
 		$location=Object_Location::getById($locationid, 1);
     	$datetounix=new Zend_Date( $dateres, 'dd-MM-YYYY HH:mm:ss');
     	$datestart=$datetounix->getTimestamp();
+    	$dateend=$datestart+86400;
 		$d=$datetounix->get(Zend_Date::WEEKDAY_DIGIT);
 		//First get a list of Reservation objects for the day for this location
 		$dailyorders = new Object\Reservation\Listing();
-		$dailyorders->setCondition("location__id =".$locationid." AND start >= '".$datestart."'" );
+		$dailyorders->setCondition("location__id =".$locationid." AND start >= ".$datestart." AND end <= ".$dateend );
+//		var_dump( $dailyorders ); exit;
 		if( $location instanceof Object_Location ){
 			//get unit of time for that location
 			$unit=( $location->getResaunit() )*60;
@@ -213,26 +219,28 @@ class UserreservationController extends Action
 						$startslot=$timestart;//First let s identify timestamp for startlost and endlot
 						$timestart=$timestart+$unit;//Add unit of time to timestart
 						$endslot=$timestart;
+
 						
 						//let's identify all orders that start after the start of the slot or that finish before the end of the slot
 						foreach($dailyorders as $order){
-							if( ( $order->getStart()->getTimestamp() <= $startslot AND $order->getEnd()->getTimestamp()>$endslot ) OR ( ($order->getStart()->getTimestamp()) > ( $startslot + ( (int)$meal*60 ) ) ) ){ 
+							if( ( (  $startslot <= $order->getStart()->getTimestamp() ) && ( $endslot >= $order->getEnd()->getTimestamp() ) ) ||  ( ( $startslot >= $order->getStart()->getTimestamp() ) && ( $endslot <= ( $order->getStart()->getTimestamp() + $mealduration ) ) ) ){
 								$size=$order->getPartysize();
 								$p=$p+$size;
 							}
+							//echo $order->getId(); echo "<br>";
 						}
 						if( $p >= $maxseats){ $seatswarning='-'.$p; }else{ $seatswarning='-ok'; }
-						
 						//Feed the data
 						if( $timeslot == $myreservationstartslot ){$slotselected='-selected';}else{$slotselected='';}
 						$resatime['shift-'.$i.$orderswarning.$seatswarning.$slotselected]=$timeslot;
-
+						//echo "<br>";echo "<br>";
 					}
 					if ( $myserving->getId() == $myreservationservingid ){
 						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed]=$resatime;
 					}else{
 						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_'.$closed]=$resatime;
 					}
+					//exit;
 			}
 			$reponse = new Reponse();
 			$reponse->data=$resafinal;
@@ -280,6 +288,9 @@ class UserreservationController extends Action
     public function userreservationAction() {
 		//SET RESACHANGE TO FALSE
 		$this->layout()->setLayout('reservation_layout_registration');
+		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/intl-tel-input-master/build/css/intlTelInput.css');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/intl-tel-input-master/build/js/intlTelInput.js');
 		if ( $this->getParam("lg") ){
     		$locale = new \Zend_Locale($this->_getParam ( "lg" ));
     		\Zend_Registry::set("Zend_Locale", $locale);
@@ -298,6 +309,7 @@ class UserreservationController extends Action
 			$today=new zend_date();
 			$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 			$fulltext="";
+			$this->view->societe=$this->selectedLocation->getSociete();
 			foreach( $selectedLocation->getShifts($today, $sixmonthsfromnow) as $dayoff ){
 				if( $dayoff->getAllDay()==1 ){
 					$fulltext=$this->arrayToString( $this->getAllDays( $dayoff->getStart(), $dayoff->getEnd() ) ).",".$fulltext;
@@ -336,6 +348,8 @@ class UserreservationController extends Action
 		if ( $location ){
 			$this->view->selectedLocation=$location;
 		}
+		$this->view->partysize=$this->getParam('partysize');
+		$this->view->slot=$this->getParam('slot');
 		$this->view->resadate=$this->getParam('resadate');
 		$this->disableLayout();
 

@@ -119,7 +119,7 @@ class ReservationController extends Useraware
 		$d=$datetounix->get(Zend_Date::WEEKDAY_DIGIT);
 		//First get a list of Reservation objects for the day for this location
 		$dailyorders = new Object\Reservation\Listing();
-		$dailyorders->setCondition("location__id =".$locationid." AND start >= '".$datestart."' AND end <= '".$dateend."'" );
+		$dailyorders->setCondition("location__id =".$locationid." AND start >= ".$datestart." AND end <= ".$dateend );
 //		var_dump( $dailyorders ); exit;
 		if( $location instanceof Object_Location ){
 			//get unit of time for that location
@@ -134,7 +134,6 @@ class ReservationController extends Useraware
 		       // if( $myserving instanceof Object_Serving ){   	
 					$mealduration=( $myserving->getMealduration() )*60;
 					$week=array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-					//foreach( $week as $d ){
 					if($d=='1' ){
 						$closed=$myserving->getClosedmonday();
 						if( $myserving->getTimestartmonday() ){
@@ -222,6 +221,7 @@ class ReservationController extends Useraware
 								$size=$order->getPartysize();
 								$p=$p+$size;
 							}
+							//echo $order->getId(); echo "<br>";
 						}
 						if( $p >= $maxseats){ $seatswarning='-'.$p; }else{ $seatswarning='-'.$p; }
 						

@@ -5,10 +5,9 @@
 				<td class="col-md-4" style="text-align: center">
 					<i class="fa fa-users fa-lg"></i><br>
 					<a class="linkhref calendarhref locationlinkfinal">
-						<span class="text-bold" id="personlinkdata"></span> 
+						<span class="text-bold" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> 
 						<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
-					</a>
-					</td>
+					</a>					</td>
 				<td class="col-md-4" style="text-align: center">
 					<i class="fa fa-calendar fa-lg"></i><br>
 					<a class="linkhref calendarhref locationlinkfinal">
@@ -18,7 +17,7 @@
 				<td class="col-md-4" style="text-align: center">
 					<i class="fa fa-clock-o fa-lg"></i><br>
 					<a class="linkhref calendarhref locationlinkfinal">
-						<span class="text-bold" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+						<span class="text-bold" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
 					</a>													
 				</td>
 			</tr>
