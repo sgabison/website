@@ -187,6 +187,9 @@ var ReservationFormValidator = function () {
 		                $('#finalguesttel').text( newReservation.tel );		                
 		                $('#finaldate').text( newReservation.reservationdate );
 		                $('#finaltimeslot').text( newReservation.start );
+		                $.cookie("email", newReservation.email, { expires: 90, path: '/' });
+		                $.cookie("tel", newReservation.tel, { expires: 90, path: '/' });
+		                $.cookie("guestname", newReservation.lastname, { expires: 90, path: '/' });
 					}
 				},
 				error: function (request, status, error) {
@@ -469,16 +472,23 @@ var ReservationFormValidator = function () {
 	var runTagsInput = function() {
 		$('#tags_1').tagsInput({
 			width: 'auto',
-			onRemoveTag: function(value){ $(':button[value="'+value+'"]').removeClass('no-display'); },
+			onRemoveTag: function(value){ $('a[value="'+value+'"]').removeClass('no-display'); },
 			onAddTag: function(value){ console.log(value);}
 		});
 	};
 	var feedTags = function() {
 		$('.btn-tags').click( function(){
 			$(this).addClass('no-display');
-			$('#tags_1').addTag( $(this).val() );
+			$('#tags_1').addTag( $(this).attr("value") );		
 		});
 	};
+	var cookieSet = function () {
+		$.cookie('name', 'value');
+		console.log( 'cookie email', $.cookie('email') );
+		$('#email').val( $.cookie('email') );
+		$('#tel').val( $.cookie('tel') );
+		$('#firstlastname').val( $.cookie('guestname') );
+	}
     return {
         //main function to initiate template pages
         init: function () {
@@ -489,6 +499,7 @@ var ReservationFormValidator = function () {
 			feedTags();
 			runSelect2();
 			intTelData();
+			cookieSet();
         }
     };
 }();

@@ -12,7 +12,7 @@ class Reservation extends \Object\Concrete {
 	public $name;
 	public $properties = array(); // an array of other misc properties
 	public function toArray() {
-		$fields=array('id', 'bookingref', 'bookingnotes', 'status', 'partysize', 'datereservation', 'start', 'end', 'arrived' );
+		$fields=array('id', 'bookingref', 'bookingnotes', 'status', 'partysize', 'actualpartysize', 'datereservation', 'actualstart', 'start', 'end', 'arrived' );
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();
@@ -60,10 +60,20 @@ class Reservation extends \Object\Concrete {
 		if( $data['datereservation'] ){
 			$datereservation=self::parseDateTime( $data['datereservation'], 'dd-MM-YYYY' );
 			$start=self::parseDateTime( $data['reservationdate'].' '.$data['start'], 'dd-MM-YYYY HH:mm' );
+			if( $data['arrived'] == 1 ){
+				$actualstart=self::parseDateTime( $data['reservationdate'].' '.$data['start'], 'dd-MM-YYYY HH:mm' );
+			}
 		}else{
 			$chosenresa=Object\Reservation::getById( $data['id'], 1 );
 			$chosenday=$chosenresa->getStart()->get('dd-MM-YYYY');
 			$start=self::parseDateTime( $chosenday.' '.$data['start'], 'dd-MM-YYYY HH:mm' );
+			if( $data['arrived'] == 1 ){
+				$actualstart=self::parseDateTime( $data['reservationdate'].' '.$data['start'], 'dd-MM-YYYY HH:mm' );
+			}
+		}
+		if( $data['arrived']== 1 ){
+			$data['actualpartysize']=$data['partysize'];
+			$data['actualstart']=$data['start'];
 		}
         $location=\Object\Location::getById($data['locationid'], 1);
         if ( $location instanceof \Object\Location ){
@@ -88,6 +98,7 @@ class Reservation extends \Object\Concrete {
         $result['countrycode']=$data['countrycode'];
         $result['email']=$data['email'];
         $result['lastname']=$data['lastname'];
+        $result['actualpartysize']=$data['actualpartysize'];
         $result['partysize']=$data['partysize'];
         $result['status']=$data['status'];
         $result['arrived']=$data['arrived'];
@@ -96,6 +107,7 @@ class Reservation extends \Object\Concrete {
         $result['location']=$location;
         $result['guest']=$guest;
         $result['serving']=$serving;
+        $result['actualstart']=$actualstart;
         $result['start']=$start;
         $result['datereservation']=$datereservation;
         $result['end']=$end;

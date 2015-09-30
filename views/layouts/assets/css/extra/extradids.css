@@ -33,7 +33,7 @@ tr.shown td.details-control {
 #contactform { 
   position: relative; 
   z-index: 1; /* The z-index should be higher than Google Maps */
-  width: 400px;
+  width: 350px;
   margin: 0 20px 0;
   padding: 0px;
   background: transparent;

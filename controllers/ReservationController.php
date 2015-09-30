@@ -546,7 +546,6 @@ class ReservationController extends Useraware
 		$formattedData=\Object\Reservation::formatData($data); 
 		$result=$rec->updateData( $formattedData );
 		if ($result instanceof \Object\Reservation) {
-			//$this->updateHistory('Reservation created', $result, $this->person, 'reservation confirmation', $data['partysize'], $data['start']);
 			$res->success = true;
 			$res->message = "TXT_CREATE_OK" ;
 			$res->data = $result->toArray();
@@ -661,7 +660,7 @@ class ReservationController extends Useraware
 			}
 		}else{
 			if( $this->language == "fr"){
-				$servingname="Tous les services";
+				$servingname="Tous services";
 			}else{
 				$servingname="All services";
 			}
@@ -752,13 +751,20 @@ class ReservationController extends Useraware
 					//date update needs to be reworked
 					$daystart = $myreservation->getStart()->get('dd-MM-YYYY');
 					$newdatestart=new Zend_Date( $daystart.' '.$_POST['data']['start'].':00', 'dd-MM-YYYY HH:mm:ss');
-					$myreservation->setStart( $newdatestart );
-					$myreservation->setPartysize($_POST['data']['partysize']);
 					$myreservation->setBookingref($_POST['data']['bookingref']);
 					$myreservation->setBookingnotes($_POST['data']['bookingnotes']);
 					if( $_POST['data']['status'] == 'Annulé'  ){$_POST['data']['status'] = "Cancelled"; }
 					$myreservation->setStatus($_POST['data']['status']);
 					if( $_POST['data']['arrived'] == '1'  ){ $arrived = 1; }else{ $arrived = 0; }
+					if( $arrived == 1 ){
+						$myreservation->setActualpartysize( $_POST['data']['partysize'] );
+						$myreservation->setPartysize( $myreservation->getPartysize() );
+						$myreservation->setActualstart( $newdatestart );
+						$myreservation->setStart( $myreservation->getStart() );
+					}else{
+						$myreservation->setPartysize($_POST['data']['partysize']);
+						$myreservation->setStart( $newdatestart );
+					}
 					$myreservation->setArrived($arrived);
 					$myreservation->save();
 					$data=$_POST['data'];
@@ -851,16 +857,5 @@ class ReservationController extends Useraware
 		$resa['bookingref']=$reservation->getBookingref();
 		$resa['bookingnotes']=$reservation->getBookingnotes();
 		return $resa;
-	}
-	public function updateHistory($action, $reservation, $person, $communication, $partysize, $start){
-		$rec = new \Object\Resahistory();
-		$formattedData=\Object\Resahistory::formatData($action, $reservation, $person, $communication, $partysize, $start);
-		$result=$rec->updateData( $formattedData );
-		if ($result instanceof \Object\Resahistory) {
-			$res="reservation history updated";
-		} else {
-			die('reservation history NOT updated');
-		}
-		return $res;
 	}
 }

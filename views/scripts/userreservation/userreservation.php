@@ -46,7 +46,7 @@
 		<div class="panel-body" style='margin-left:10px;margin-right:10px;'>
 			<div id="reservationform">
 		<!-- start: FORM VALIDATION 1 PANEL -->
-				<form role="form" method="POST" id="bookingform" novalidate="novalidate">
+				<form role="form" id="bookingform" novalidate="novalidate">
 					<div class="row">
 						<!-- start: ERRORS - CONFIRMATIONS -->
 						<div>
@@ -168,21 +168,21 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_YOUR_NAME');?> <span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="<?php echo $this->translate('INSERT_NAME');?>" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>'>
+									<input type="text" placeholder="<?php echo $this->translate('INSERT_NAME');?>" class="form-control" id="firstlastname" name="firstlastname">
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_YOUR_TEL');?><span class="symbol required"></span>
 									</label>								
 									<span class="input-icon">
-										<input type="tel" class="form-control" id="tel" name="tel" value='<?php echo $this->tel;?>'>
+										<input type="tel" class="form-control" id="tel" name="tel">
 									</span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_YOUR_EMAIL_ADDRESS');?> <span class="symbol required"></span>
 									</label>
-									<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email" value='<?php echo $this->email;?>'>
+									<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email">
 								</div>
 								<div class="form-group">
 									<button class="btn btn-dark-orange btn-block" id='submit'>
@@ -207,13 +207,21 @@
 											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?></button>
 											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_SPECIATABLE');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_SPECIATABLE');?></button>
 											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_NUTALLERGY');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_NUTALLERGY');?></button>
--->
 										<?php foreach( $this->societe->getTags() as $tag){ ?>
 										<button type="button" class="btn btn-sm btn-tags btn-dark-orange" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px"><?php echo $tag->getTag() ?></button>
 										<?php } ?>
 											<input id="tags_1" type="text" value='<?php echo $this->bookingnotes;?>'>
 											<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
 										</div>
+-->										
+										<?php foreach( $this->societe->getTags() as $tag){ ?>
+										<a href="#" class="btn btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
+										<?php } ?>
+											<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
+											<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
+										</div>
+										
+										
 									</div>
 								</div>
 								<div class="form-group">

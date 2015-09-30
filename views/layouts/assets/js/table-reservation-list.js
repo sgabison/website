@@ -136,13 +136,11 @@ var TableReservationList = function () {
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
 					            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
-					            '<td><b>'+d.guestemail.toUpperCase()+'</b></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title="'+d.guestemail.toUpperCase()+'"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
 					        '</tr>'+
 					        '<tr>'+
 					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
-					            '<td><b>'+d.guesttel+'<b></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue"><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title="'+d.guesttel+'><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
 					        '</tr>'+
 					        '<tr>'+
 					            '<td>Notes:</td>'+  '<td colspan="2">'+d.guestemail+'</td>'+
@@ -292,6 +290,7 @@ var TableReservationList = function () {
 				});
 			} );
 		    oTable.on( 'click', 'tbody td.details-control', function () {
+		        $('.tooltips').tooltip();
 		        var tr = $(this).closest('tr');
 		        var row = table.row( tr );
 		        if ( row.child.isShown() ) {

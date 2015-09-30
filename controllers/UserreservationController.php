@@ -15,7 +15,20 @@ class UserreservationController extends Action
 	
 	public function introAction(){
 		$this->layout ()->setLayout ( 'introduction_layout' );
-		$this->disableViewAutoRender();	
+		$this->view->societes= new Object\Societe\Listing();
+		if( $this->getParam('selectedLocationid') ){
+			$location=Object\Location::getById( $this->getParam('selectedLocationid'), 1);
+			if( $location instanceof Object\Location ){
+				$this->view->selectedLocation = $location;
+			}else{
+				die('Wrong location');
+			}
+		} else {
+			foreach( $this->view->societes as $societe ){
+				$locations=$societe->getLocations();
+			}
+			$this->view->selectedLocation=$locations[0];
+		}
 	}
 	public function termsAction(){
 		$this->layout ()->setLayout ( 'portal' );	
