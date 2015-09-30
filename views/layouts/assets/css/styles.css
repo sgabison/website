@@ -1287,7 +1287,7 @@ ul.main-navigation-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
   color: #8C8989;
   display: none;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
   padding: 35px 10px 10px 10px;
   position: relative;
   z-index: 3;
@@ -7982,7 +7982,7 @@ body.error-full-page {
 /* ---------------------------------------------------------------------- */
 /* line 4, ../sass/partials/_sliding-bar.scss */
 #slidingbar-area {
-  overflow: auto !important;
+  overflow: visible !important;
 }
 
 /* line 7, ../sass/partials/_sliding-bar.scss */
@@ -8032,7 +8032,7 @@ body.error-full-page {
 
 /* line 14, ../sass/partials/_mobile.scss */
 .isMobile #slidingbar-area, .isMobile .subviews {
-  overflow: auto !important;
+  overflow: visible !important;
   -ms-overflow-style: auto !important;
   -webkit-overflow-scrolling: touch !important;
 }
