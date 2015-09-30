@@ -122,7 +122,7 @@
 /* ---------------------------------------------------------------------- */
 /*  Up To Medium Devices
  /* ---------------------------------------------------------------------- */
-@media (max-width: 991px) {
+@media (max-width: 1025px) {
   /* 991px */
   /* line 100, ../sass/partials/_responsive.scss */
   .horizontal-menu-fixed .main-container {

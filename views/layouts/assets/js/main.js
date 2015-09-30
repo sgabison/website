@@ -238,7 +238,7 @@ var Main = function() {
                 'max-height': $windowHeight
             });
         }
-        if ($windowWidth > 991) {
+        if ($windowWidth > 1025) {
             mainNavigation.css({
                 height: $windowHeight - topBar.outerHeight(true) - $(".slide-tools").outerHeight(true)
             });
@@ -743,7 +743,7 @@ var Main = function() {
         });
         $(".sb-toggle-left, .closedbar").on("click", function(e) {
             if (activeAnimation == false) {
-                if ($windowWidth > 991) {
+                if ($windowWidth > 1025) {
                     $body.removeClass("sidebar-mobile-open");
                     if ($body.hasClass("sidebar-close")) {
                         if ($body.hasClass("layout-boxed") || $body.hasClass("isMobile")) {
@@ -852,7 +852,7 @@ var Main = function() {
         });
         $(".sb-toggle-right").on("click", function(e) {
             if (activeAnimation == false) {
-                if ($windowWidth > 991) {
+                if ($windowWidth > 1025) {
                     $body.removeClass("sidebar-mobile-open");
                 }
                 if ($body.hasClass("right-sidebar-open")) {

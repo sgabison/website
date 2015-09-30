@@ -245,12 +245,16 @@ h1, h2, h3, h4 {
 }
 /* line 44, ../sass/partials/layout-elements/_header.scss */
 .topbar .container .navbar-header .navbar-brand {
-  padding: 0;
-  min-width: 100px;
-  line-height: 36px;
-  top: 7px;
-  position: absolute;
-  margin: 0;
+position: absolute;
+top: 0;
+height: 36px;
+width: 36px;
+text-align: center;
+background: none;
+color: #FFFFFF;
+font-size: 1.3em;
+line-height: 36px;
+padding: 0;
 }
 /* line 51, ../sass/partials/layout-elements/_header.scss */
 .topbar .container .navbar-header .navbar-brand i {
@@ -1104,7 +1108,6 @@ ul.main-navigation-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 31px;
   margin-right: 3px;
   margin-top: 2px;
   filter: alpha(opacity=90);

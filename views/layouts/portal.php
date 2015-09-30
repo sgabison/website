@@ -15,10 +15,7 @@
 					<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_panel_configuration_modal_form.php") ; ?>
 
 					<div class="container">
-						<!-- start: PAGE HEADER -->
-					<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_toolbar.php") ; ?>
-						<!-- end: PAGE HEADER -->
-					<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_breadcrumb.php") ; ?>
+						
 						<!-- start: PAGE CONTENT -->
 						<div class="row">
 							<div id="ajax-content" class="col-md-12">

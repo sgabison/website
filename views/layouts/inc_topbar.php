@@ -3,13 +3,15 @@
 				<!-- start: TOPBAR CONTAINER -->
 				<div class="container">
 					<div class="navbar-header">
-						<a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+						<a class="sb-toggle-left hidden-lg" href="#main-navbar">
 							<i class="fa fa-bars"></i>
 						</a>
 						<!-- start: LOGO -->
 						<a class="navbar-brand" href="index.html">
-							<img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/logo.png" alt="ResaExpress"/>
-						</a>
+							<!--  <img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/logo.png" alt="ResaExpress"/>-->
+							<i class="fa fa-globe">ResaExpress</i>
+						
+							</a>
 						<!-- end: LOGO -->
 					</div>
 					<div class="topbar-tools">
@@ -51,16 +53,23 @@
 								</ul>
 							</li>
 							<!-- end: USER DROPDOWN -->
-<!--							
+							
 							<li class="right-menu-toggle">
-								<a href="#" class="sb-toggle-right">
+<!--								<a href="#" class="sb-toggle-right">
 									<i class="fa fa-globe toggle-icon"></i> <i class="fa fa-caret-right"></i> <span class="notifications-count badge badge-default hide"> 3</span>
 								</a>
+-->	
+							<a class="btn user-options sb_toggle">
+								<i class="fa fa-globe toggle-icon"></i>
+							</a>
 							</li>
--->
+
 						</ul>
 						<!-- end: TOP NAVIGATION MENU -->
 					</div>
+					
+					
+					
 				</div>
 				<!-- end: TOPBAR CONTAINER -->
 			</header>

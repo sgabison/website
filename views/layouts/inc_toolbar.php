@@ -37,7 +37,7 @@
 										<!-- start: TO-DO DROPDOWN Locations-->
 										<li class="dropdown">
 											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
-												<i class="fa fa-glass"></i> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
+												<i class="fa fa-cutlery"></i> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
 											</a>
 											<ul class="dropdown-menu dropdown-light dropdown-location">
 												
@@ -49,7 +49,7 @@
 												 
 												<li <?php if($location->getId() == $this->selectedLocation->getId()) {?> class="active" <?php } ?>>
 													<a href="?selectedLocationId=<?php echo $location->getId() ?>" data-location="<?php echo $location->getId() ?>" class="new-location">
-														<span class="fa-stack"> <i class="fa fa-glass fa-lg"></i> </span> <?php echo $location->getName()?></a>
+														<span class="fa-stack"> <i class="fa fa-cutlery fa-lg"></i> </span> <span class="glyphicon-class"><?php echo $location->getName()?></span></a>
 												</li>
 												<?php   endforeach; endif; ?>				
 											</ul>
