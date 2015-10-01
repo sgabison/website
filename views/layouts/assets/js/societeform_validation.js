@@ -16,7 +16,10 @@ var SocieteSetupFormValidator = function () {
 	    var myurl=window.location.href;
 	    var finalurl=myurl.split('#');
 	    window.location.href=window.location.href.replace( /[\?#].*|$/, "?copydata=yes#locations" );
-	});	
+	});
+	var runAutosize = function() {
+		$("textarea.autosize").autosize();
+	};
 	$('#closingDateStart').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
 	$('#closingDateEnd').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
 	var societeSetupSubmit= function(){
@@ -40,6 +43,7 @@ var SocieteSetupFormValidator = function () {
 			, newSociete.closingDateEnd = $("#closingDateEnd").val()
 			, newSociete.lngresult = $("#lngresult").val()
 			, newSociete.latresult = $("#latresult").val()
+			,newSociete.description = $("#presentation").val()
 			, newSociete.METHOD = 'PUT';
 			$.blockUI({
 				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
@@ -59,7 +63,7 @@ var SocieteSetupFormValidator = function () {
 					if (json.success || json.success == 'true') {
 						//var i = $("#reservation-id").val();
 						//reservation[i] = json.data;
-						toastr.success(newSociete.maxseats +' '+ newSociete.maxtables + ' '+ json.message);
+						toastr.success(newSociete.name + ' '+ json.message);
 					}
 				},
 				error: function (request, status, error) {
@@ -427,9 +431,9 @@ var SocieteSetupFormValidator = function () {
 			  { data: "maxResaPerUnit" },
 	          {
 				"class": "center",
-				"data": "icon",
+				"data": "id",
 				"orderable": false,
-			    "render": function ( data, type, full, meta ) {
+			    "render": function ( data, type, row ) {
 			      	return '<a href="/location-setup?selectedLocationId='+data+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i> </a>';
 			    }
 	          },
@@ -593,6 +597,7 @@ var SocieteSetupFormValidator = function () {
             loadLocations();
             loadPersons();
             loadTags();
+            runAutosize();
         }
     };
 }();

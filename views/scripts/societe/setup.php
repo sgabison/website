@@ -51,6 +51,8 @@ function resetMap(m) {
 			<div class="panel panel-white">
 				<div class="panel-heading">
 					<h4 class="panel-title"><span class="text-bold"><?php echo $this->translate('TXT_SETUP_SOCIETE_SET_UP');?> : <?php echo $this->name;?></span></h4>
+					<div class="panel-tools">
+					</div>
 				</div>
 				<div class="panel-body">
 					<div class="tabbable">
@@ -176,17 +178,16 @@ function resetMap(m) {
 												<div id="collapseTwo" class="panel-collapse collapse">
 													<div class="panel-body">
 														<div class="row">
-														<div class="col-md-12 form-group form-horizontal">
-															<label class="control-label">
-																<?php echo $this->translate('TXT_SETUP_SOCIETE_COMPANY PRESENTATION');?>
-															</label>
-															<input type="text" placeholder="Text Field" name="presentation" id="presentation" class="form-control limited" maxlength="100" value="<?php echo $this->description;?>">
-														</div>	
 														<div class="col-md-12">
 														<div class="col-md-6">
 														<div class="panel panel-white">
 														<div class="panel-body">	
-														
+																<div class="form-group">
+																	<label class="control-label">
+																		<?php echo $this->translate('TXT_SETUP_SOCIETE_COMPANY PRESENTATION');?>
+																	</label>
+																	<textarea placeholder="Text Field" name="presentation" id="presentation" class="form-control limited autosize"><?php echo $this->description;?></textarea>
+																</div>
 																<div class="form-group">
 																	<label class="control-label">
 																		<?php echo $this->translate('TXT_SETUP_SOCIETE_UNIT_OF_TIME_FOR_RESA');?> <span class="symbol required"></span>

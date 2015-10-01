@@ -7,7 +7,7 @@
 <!--
 				<a href="/liste-reservations-search?selectedLocationId=<?php echo $this->selectedLocation->getId();?>&" class="btn btn-blue"><?= $this->translate("TXT_NEW_SEARCH")?> <i class="fa fa-search"></i></a>
 -->
-				<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle">
+				<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle tooltips" data-rel="tooltip" data-original-title="<?= $this->selectedLocation->getName();?>">
 					<?= strtoupper($this->servingname);?> <i class="fa fa-angle-down"></i>
 				</button>
 				<ul class="dropdown-menu">
@@ -292,14 +292,14 @@
 				<button aria-hidden="true" data-dismiss="modal" class="close" type="button">
 					×
 				</button>
-				<h4 id="myModalLabel" class="modal-title">Select a date</h4>
+				<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_SELECT_DATE")?></h4>
 			</div>
 			<div class="modal-body">
 				<div id="myfullcalendar" style="height:400px">
 				</div>
 			<div class="modal-footer">
 				<button data-dismiss="modal" class="btn btn-default" type="button">
-					Close
+					<?= $this->translate("TXT_CLOSE")?>
 				</button>
 			</div>
 		</div>

@@ -59,7 +59,6 @@
 									</label>
 								</div>
 		-->
-								<a href="http://ib.guestonline.fr/instabook/bookings/dCSNApQ" class="iframe" id="tol_module" style="background: #8BBD1E;color: #fff; font-family:'trebuchet ms',helvetica,sans-serif;font-size:14px;width: 180px;text-align:center;display: inline-block;padding: 5px 10px 6px;text-decoration: none;font-weight: bold;line-height: 1;-moz-border-radius: 5px;-webkit-border-radius: 5px;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);text-shadow: 0 -1px 1px rgba(0,0,0,0.25);border-radius: 5px;box-shadow: 0 1px 3px rgba(0,0,0,0.5);border-bottom: 1px solid rgba(0,0,0,0.25);cursor: pointer;">Book on line</a>
 								
 								<script type="text/javascript">
 								  (function() {

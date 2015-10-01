@@ -1,6 +1,11 @@
 <div class="panel panel-white">
 	<div class="panel-heading">
-		<h4 class="panel-title"><span class="text-bold"><?php echo $this->translate('TXT_SETUP_SERVING_SET_UP');?> : <?php echo $this->title;?></span></h4>
+		<h4 class="panel-title">
+			<span class="text-bold"><?php echo $this->translate('TXT_SETUP_SERVING_SET_UP');?> : <?php echo $this->title;?></span>
+		</h4>
+		<div class="panel-tools">
+			<a class="btn btn-primary btn-sm" href="/location-setup?selectedLocationId=<?php echo $this->serving->getLocation()->getId();?>"><i class="fa fa-angle-double-left"></i> <?php echo $this->translate('TXT_BACK');?></a>
+		</div>
 	</div>
 	<div class="panel-body">
 		<form action="#" role="form" id="servingform" novalidate="novalidate">

@@ -2,6 +2,7 @@ var SearchReservationList = function () {
 	"use strict";
 	var guesttext='test'; 
 	var locationid;
+	var	today=new Date();
 	$.urlParam = function(name){
 	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
 	    if (results==null){
@@ -10,6 +11,14 @@ var SearchReservationList = function () {
 	    else{
 	       return results[1] || 0;
 	    }
+	}
+	var getMonth2=function(date) {
+	    var month = date.getMonth() + 1;
+	    return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
+	}
+	var getDate2=function(date) {
+	    var day = date.getDate();
+	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
 	}
 	$('#arrived').iCheck({checkboxClass: 'icheckbox_square-orange'});
 	$('#cancelled').iCheck({checkboxClass: 'icheckbox_square-orange'});
@@ -32,10 +41,9 @@ var SearchReservationList = function () {
 		todayHighlight: true, 
 		defaultDate: new Date(), 
 		autoclose: true, 
-		format: 'dd-mm-yyyy' });	
-	var fullDate = new Date();
-	var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-	var currentDate =  fullDate.getDate() + "-" + twoDigitMonth + "-" + fullDate.getFullYear();
+		format: 'dd-mm-yyyy' 
+	});	
+	var currentDate =  getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
 	if( $('.mycalendar').val() == '' ){
 		$('.mycalendar').val( currentDate );
 	}

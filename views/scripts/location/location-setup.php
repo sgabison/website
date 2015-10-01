@@ -2,6 +2,9 @@
 	<div class="panel-heading">
 		<h4 class="panel-title"><span class="text-bold"><?php echo $this->translate('TXT_SETUP_LOCATION_SET_UP');?> : <?php echo $this->name;?></span></h4>
 	</div>
+		<div class="panel-tools">
+			<a class="btn btn-primary btn-sm" href="/societe#locations"><i class="fa fa-angle-double-left"></i> <?php echo $this->translate('TXT_BACK');?></a>
+		</div>
 	<div class="panel-body">
 		<form action="#" method="post" role="form" id="locationsetupform" novalidate="novalidate">
 			<div class="row">
@@ -57,7 +60,7 @@
 							<label class="control-label">
 								<?php echo $this->translate('TXT_SETUP_SOCIETE_FAX');?>
 							</label>
-							<input type="text" placeholder="Text Field" name="fax" id="fax" class="form-control limited" maxlength="100" value="<?php echo $this->fax;?>">
+							<input type="text" placeholder="Text Field" name="fax" id="fax" class="form-control limited " maxlength="100" value="<?php echo $this->fax;?>">
 						</div>
 					</div>
 				</div>
@@ -65,13 +68,11 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label class="control-label">
-								<?php echo strtoupper( $this->translate('TXT_SETUP_LOCATION_PRESENTATION') );?>
-							</label>
-							<input type="text" placeholder="Text Field" name="description" id="description" class="form-control limited" maxlength="100" value="<?php echo $this->description;?>">
-						</div>
+					<div class="form-group">
+						<label class="control-label">
+							<?php echo $this->translate('TXT_SETUP_LOCATION_PRESENTATION');?>
+						</label>
+						<textarea placeholder="Description" name="presentation" id="presentation" class="form-control limited autosize"><?php echo $this->description;?></textarea>
 					</div>
 				</div>
 			</div>
@@ -86,11 +87,11 @@
 				        <thead>
 				            <tr>
 				                <th></th>
-				                <th>Nom</th>
-				                <th>Max Sièges</th>
-				                <th>Max Tables</th>
-				                <th>Durée Repas</th>
-				                <th>ID</th>
+				                <th><?php echo strtoupper( $this->translate('TXT_NAME') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_MAX_SEATS') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_MAX_TABLES') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_DURATION_OF_MEAL') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_ID') );?></th>
 				                <th></th>
 				            </tr>
 				        </thead>

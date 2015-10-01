@@ -5,6 +5,9 @@ var LocationFormValidator = function () {
 			$( "#changelocationform" ).submit();
 		});
 	};
+	var runAutosize = function() {
+		$("textarea.autosize").autosize();
+	};
 	var initModals = function() {
 		$.fn.modalmanager.defaults.resize = true;
 		$.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' + '<div class="progress progress-striped active">' + '<div class="progress-bar" style="width: 100%;"></div>' + '</div>' + '</div>';
@@ -47,7 +50,7 @@ var LocationFormValidator = function () {
 			, newLocation.email = $("#email").val()
 			, newLocation.tel = $("#tel").val()
 			, newLocation.fax = $("#fax").val()
-			, newLocation.description = $("#description").val()
+			, newLocation.description = $("#presentation").val()
 			, newLocation.resaUnit = $("#resaUnit").val()
 			, newLocation.maxSeats = $("#maxSeats").val()
 			, newLocation.maxTables = $("#maxTables").val()

@@ -29,6 +29,7 @@ class LocationController extends Useraware
         $this->layout ()->setLayout ( 'portal' );
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/locationform-validation.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
+        $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/autosize/jquery.autosize.min.js');
         
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {

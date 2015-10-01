@@ -136,14 +136,14 @@ var TableReservationList = function () {
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
 					            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title="'+d.guestemail.toUpperCase()+'"><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guestemail.toUpperCase()+' "><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
 					        '</tr>'+
 					        '<tr>'+
 					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title="'+d.guesttel+'><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
+								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
 					        '</tr>'+
 					        '<tr>'+
-					            '<td>Notes:</td>'+  '<td colspan="2">'+d.guestemail+'</td>'+
+					            '<td>Notes:</td>'+  '<td colspan="2">'+d.bookingnotes+'</td>'+
 					        '</tr>'+
 					    '</table>'+
 					'</div>'+
@@ -157,7 +157,7 @@ var TableReservationList = function () {
 					'<div class="panel-body">'+
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
-					            '<td>Serving:</td>'+  '<td colspan="2">'+d.servingtitle+'</td>'+
+					            '<td>'+t('js_serving')+'</td>'+  '<td colspan="2"><b>'+d.servingtitle+'</b></td>'+
 					        '</tr>'+
 					    '</table>'+
 					'</div>'+
@@ -290,7 +290,6 @@ var TableReservationList = function () {
 				});
 			} );
 		    oTable.on( 'click', 'tbody td.details-control', function () {
-		        $('.tooltips').tooltip();
 		        var tr = $(this).closest('tr');
 		        var row = table.row( tr );
 		        if ( row.child.isShown() ) {
@@ -302,6 +301,7 @@ var TableReservationList = function () {
 		            // Open this row
 		            row.child( format(row.data()) ).show();
 		            tr.addClass('shown');
+		            $('.tooltips').tooltip();
 		        }
 				var $modal = $('#ajax-modal');
 				$('#ajax-modal').data('book_id', 5);
@@ -410,25 +410,25 @@ var TableReservationList = function () {
 		                	var array=data.split(',');
 		                	var wheelchair ='';var baby ='';var allergy ='';var party ='';var bug ='';var group ='';var warning ='';
 		                    if ( $.inArray('Chaise roulante', array) >=0 || $.inArray('Wheelchair', array) >=0  ) {
-		                        var wheelchair='<a class="btn btn-dark-orange tooltips"><i class="fa fa-wheelchair"></i></a> ';
+		                        var wheelchair='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_wheelchair')+'"><i class="fa fa-wheelchair"></i></a> ';
 		                    } 
 		                    if ( $.inArray('Baby on board', array) >=0 || $.inArray('Bébé à bord', array) >=0  ){
-		                    	var baby='<a class="btn btn-dark-orange tooltips"><i class="fa fa-female"></i></a> ';
+		                    	var baby='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_baby')+'"><i class="fa fa-female"></i></a> ';
 		                    } 
 		                    if ( $.inArray('Nut Allergy', array) >=0 || $.inArray('Allergie aux noix', array) >=0 ){
-		                    	var allergy='<a class="btn btn-dark-orange tooltips"><i class="fa fa-medkit"></i></a> ';
+		                    	var allergy='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_allergy')+'"><i class="fa fa-medkit"></i></a> ';
 		                    } 
 		                    if ( $.inArray('client pénible', array) >=0 || $.inArray('picky customer', array) >=0 ){
-		                    	var bug='<a class="btn btn-dark-orange tooltips"><i class="fa fa-bug"></i></a> ';
+		                    	var bug='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_picky')+'"><i class="fa fa-bug"></i></a> ';
 		                    } 
 		                    if ( $.inArray('Célébration', array) >=0 || $.inArray('Party', array) >=0 ){
-		                    	var party='<a class="btn btn-dark-orange tooltips"><i class="fa fa-gift"></i></a> ';
+		                    	var party='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_party')+'"><i class="fa fa-gift"></i></a> ';
 		                    } 
 		                    if ( $.inArray('Groupe entreprise', array) >=0 || $.inArray('Company party', array) >=0 ){
-		                    	var group='<a class="btn btn-dark-orange tooltips"><i class="fa fa-group"></i></a> ';
+		                    	var group='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_group')+'"><i class="fa fa-group"></i></a> ';
 		                    } 
-		                    if ( $.inArray('Special Table', array) >=0 || $.inArray('Spéciale table', array) >=0 ){
-		                    	var warning='<a class="btn btn-dark-orange tooltips"><i class="fa fa-warning"></i></a> ';
+		                    if ( $.inArray('Special Table', array) >=0 || $.inArray('Spéciale table', array) >=0  || $.inArray('Table particulière', array) >=0 ){
+		                    	var warning='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_specialtable')+'"><i class="fa fa-warning"></i></a> ';
 		                    } 
 		                    return wheelchair + baby + allergy + party + bug + group + warning;
 		                	},

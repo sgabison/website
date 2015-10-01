@@ -74,7 +74,7 @@ class SocieteController extends Useraware
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/societeform_validation.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/form-wizard.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-validation/localization/messages_fr.js');      
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/autosize/jquery.autosize.min.js');
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {
 					Main.init();
@@ -333,13 +333,17 @@ class SocieteController extends Useraware
 				$row['maxResaPerUnit']=$societe->getMaxResaPerUnit();
 				$row['mealduration']=$societe->getMealduration();
 				$row['resaUnit']=$societe->getResaUnit();
+				$row['description']=$societe->getDescription();
 				//COLECT DATA FROM DATATABLE EDITOR
 				$row['name']=$_POST['data']['name'];
 				//CREATE THE LOCATION
 				$result=$societe->createLocation($row);
 				if ($result instanceof \Object\Location) {
 					//CREATE NEW SERVING
-					$newserving['title']='New Serving';
+					$newserving['title']='Nouveau Service';
+					$newserving['maxseats']=$societe->getMaxSeats();
+					$newserving['maxtables']=$societe->getMaxTables();
+					$newserving['mealduration']=$societe->getMealduration();
 					$serving=$result->createServing($newserving);
 					$row['DT_RowId']=$result->getId();
 					$row['id']=$result->getId();
