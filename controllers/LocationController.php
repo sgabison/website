@@ -14,17 +14,36 @@ class LocationController extends Useraware
 
     public function locationSetupAction() {
         $societe=$this->societe;
+        //GET SELECTEDLOCATION
         if( $this->getParam('selectedLocationId') ){
 			$locationid=$this->getParam('selectedLocationId');
-   		}elseif( $this->getParam('selectedLocationId')){
-   			$locationid=$this->getParam('selectedLocationId');
+   		}else{
+   			die("you need to specify a location");
    		}
         $mylocation=\Object\Location::getById( $locationid, 1);
-        if( $mylocation instanceof \Object\Location ){		
+        if( $mylocation instanceof \Object\Location ){	
+        	//CHEK IF AUTHORISATION
+        	if( ! in_array( $mylocation, $societe->getLocations() ) ){ die('You do not have access to this location'); }
         	$mylocationarray = $mylocation->toArray();
-        	foreach ($mylocationarray as $key=>$val){
-        		$this->view->$key=$val;
-        	}
+	       	foreach ($mylocationarray as $key=>$val){
+	       		if( $key=="geolocalisation" ){
+	       			if($val instanceof \Pimcore\Model\Object\Data\Geopoint){
+		       			$this->view->lat=$val->getLatitude();
+	       			}else{
+	       				$this->view->lat=2;
+	       			}
+	       		}
+	       		if( $key=="geolocalisation" ){
+	       			if($val instanceof \Pimcore\Model\Object\Data\Geopoint){
+	       				$this->view->long=$val->getLongitude();
+	       			}else{
+	       				$this->view->long=48;
+	       			}
+	       		}
+	       		$this->view->$key=$val;
+	        }
+        }else{
+        	die("Incorrect location");
         }
         $this->layout ()->setLayout ( 'portal' );
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/locationform-validation.js');
@@ -103,6 +122,9 @@ class LocationController extends Useraware
 		$res = new Reponse();
 		$location=Object\Location::getById($this->id, 1);
 		if ($location instanceof Object\Location) {
+			if( $this->requete->params['latresult'] && $this->requete->params['lngresult'] ){
+				$this->requete->params['geolocalisation'] = new \Pimcore\Model\Object\Data\Geopoint( $this->requete->params['lngresult'],  $this->requete->params['latresult'] );
+			}
 			$location->setValues( $this->requete->params );
 			$location->save();
 			$res->data = $location->toArray();

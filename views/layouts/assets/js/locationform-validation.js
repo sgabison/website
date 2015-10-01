@@ -58,6 +58,8 @@ var LocationFormValidator = function () {
 			, newLocation.mealduration = $("#mealduration").val()
 			, newLocation.closingDateStart = $("#closingDateStart").val()
 			, newLocation.closingDateEnd = $("#closingDateEnd").val()
+			, newLocation.lngresult = $("#lngresult").val()
+			, newLocation.latresult = $("#latresult").val()
 			, newLocation.METHOD = 'PUT';
 			$.blockUI({
 				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
@@ -329,6 +331,7 @@ var LocationFormValidator = function () {
             runValidator2();
             loadServings();
             changeLocation();
+            runAutosize();
         }
     };
 }();
