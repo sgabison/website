@@ -35,6 +35,7 @@
 											</ul>
 										</li>
 										<!-- start: TO-DO DROPDOWN Locations-->
+								<?php if( $this->person->getPermits()==1 ){ ?>
 										<li class="dropdown">
 											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
 												<i class="fa fa-cutlery"></i> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
@@ -54,6 +55,13 @@
 												<?php   endforeach; endif; ?>				
 											</ul>
 										</li>
+								<?php } else { ?>
+									<li class="dropdown">
+										<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+											<i class="fa fa-cutlery"></i> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
+										</a>
+									</li>								
+								<?php } ?>
 										<li class="dropdown hidden">
 											<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
 												<i class="fa fa-plus"></i> SUBVIEW

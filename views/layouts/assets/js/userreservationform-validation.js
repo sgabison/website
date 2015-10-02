@@ -52,6 +52,7 @@ var ReservationFormValidator = function () {
 	var thisDay=today.getDay();
 	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 	var offdays = $('#offdays').val().split(',');
+	//alert( offdays );
 	var closeddays = $('#closeddays').val();
 	var inRange=false;
 	$('body').on('click','.reg-data', function(){ $('.registergroup1').removeClass('no-display');$('.registergroup2').addClass('no-display');});
@@ -62,9 +63,9 @@ var ReservationFormValidator = function () {
 		console.log( 'reg-email', $('#reg-email').text() );
 		console.log( 'reg-tel', $('#reg-tel').text() );
 		console.log( 'reg-lastname', $('#reg-lastname').text() );
-		if( $('#reg-email').html() =='' ){ $('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); }else{ $('#reg-email').html( "<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-email').html() ); $('#reg-email').css("color", "#777777" ); }
+		if( $('#reg-email').html() =='' ){ $('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); }else{ $('#reg-email').html( "<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-email').html().substr(0,15)+"..." ); $('#reg-email').css("color", "#777777" ); }
 		if( $('#reg-tel').html() =='' ){ $('#reg-tel').html("<i class='fa fa-square-o fa-lg'></i> Tel mandatory"); $('#reg-tel').css( "color", "#a94442" );  } else { $('#reg-tel').html("<i class='fa fa-check-square-o fa-lg'></i> "+ $("#tel").intlTelInput("getNumber") ); $('#reg-tel').css( "color", "#777777" ); }
-		if( $('#reg-lastname').html() =='' ){ $('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); }else{ $('#reg-lastname').html("<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-lastname').html() ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );}
+		if( $('#reg-lastname').html() =='' ){ $('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); }else{ $('#reg-lastname').html("<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-lastname').html().substr(0,15)+"..." ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );}
 		
 	}
 	$('#mycalendar').datepicker({ 

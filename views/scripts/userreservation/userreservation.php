@@ -36,14 +36,45 @@
 <div class="col-md-12 space-20">
 	<div>
 		<div class="panel-heading">
-			<h4 class="panel-title"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
+			<div style='width:100%; padding-right:20px; padding-top:5px'>
+				<h4 class="panel-title"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
+			</div>
+			<!--
 			<div class="panel-tools">
 				<a class="panel-expand" href="#">
 					<i class="fa fa-expand"></i> <span><?php echo $this->translate('TXT_FULLSCREEN');?></span>
 				</a>
 			</div>
+			-->
+			<div class="panel-tools" style="opacity:1">
+				<div class="dropdown">
+					<a data-toggle="dropdown" class="btn btn-sm dropdown-toggle btn-transparent-grey">
+						<i class="fa fa-cog"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-light pull-right" role="menu">
+						<li>
+							<a href="/reservation?lg=fr_FR&selectedLocationid=<?php echo $this->selectedLocation->getId();?>">
+								<!--<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('FRENCH');?></span> -->
+								<img src="/flags/fr-icon.png"> <span><?php echo $this->translate('FRENCH');?></span>
+							</a>
+						</li>
+						<li>
+							<a href="/reservation?lg=en&selectedLocationid=<?php echo $this->selectedLocation->getId();?>">
+								<!--<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('ENGLISH');?></span>-->
+								<img src="/flags/gb-icon.png"> <span><?php echo $this->translate('ENGLISH');?></span>
+							</a>
+						</li>
+						<li>
+							<a href="/reservation?lg=sv&selectedLocationid=<?php echo $this->selectedLocation->getId();?>">
+								<!--<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('ENGLISH');?></span>-->
+								<img src="/flags/se-icon.png"> <span><?php echo $this->translate('SWEDISH');?></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<div class="panel-body" style='margin-left:10px;margin-right:10px;'>
+		<div class="panel-body" style='margin-left:-5px;margin-right:-5px;'>
 			<div id="reservationform">
 		<!-- start: FORM VALIDATION 1 PANEL -->
 				<form role="form" id="bookingform" novalidate="novalidate">
@@ -299,11 +330,15 @@
 							<h4 class="panel-title"><?php echo $this->translate('TXT_WHAT');?> <span class="text-bold"><?php echo $this->translate('TXT_NEXT');?></span></h4>
 						</div>
 						<div class="panel-body">
+							<!--
 							<a class="btn btn-social btn-primary btn-block"><i class="fa fa-facebook"></i> <?php echo $this->translate('TXT_UPDATE_FACEBOOK');?></a>
+							-->
 							<a class="btn btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(RESTAURANT+LUNELLE)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
 		<!--					<a class="btn btn-social btn-primary btn-block" data-target=".bs-example-modal-basic" data-toggle="modal" id="mapmodal" ><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>-->
+							<!--
 							<a class="btn btn-social btn-success btn-block"><i class="fa fa-calendar"></i> <?php echo $this->translate('TXT_UPDATE_CALENDAR');?></a>
-							<a class="btn btn-social btn-purple btn-block" href="/reserver"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
+							-->
+							<a class="btn btn-social btn-purple btn-block" href="/reservation"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
 						</div>
 					</div>
 					<div class="form-group">

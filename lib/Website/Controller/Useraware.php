@@ -56,8 +56,16 @@ class Useraware extends Action {
     		$location = $this->societe->getDefaultLocation();
     		\Zend_Registry::set("selectedLocation", $location);
     	}
-
-    	$this->view->selectedLocation = $this->selectedLocation =$location;
+		if( $this->person->getPermits() == 2 ){
+			$this->view->selectedLocation = $this->selectedLocation = $this->person->getLocation();
+		}else{
+			if( $location->getSociete()->getName() == $this->person->getSociete()->getName() ){
+    			$this->view->selectedLocation = $this->selectedLocation =$location;
+			}else{
+				$locations=$this->person->getSociete()->getLocations();
+				$this->view->selectedLocation = $this->selectedLocation =$locations[0];
+			}
+		}
     }
     
 }

@@ -33,6 +33,37 @@ class BookingController extends Useraware {
 		
 		$this->render ( $reponse );
 	}
+	public function errorAction() {
+		$this->layout ()->setLayout ( 'portal' );
+	}
+	public function mysql_protect($value) {
+		if (get_magic_quotes_gpc()) {
+			$value = stripslashes($value);
+		}
+		if (!is_numeric($value)) {
+			$value = "'" . mysql_real_escape_string($value) . "'";
+		}
+		return $value;
+	}
+	public function dailystatsAction() {
+		$this->disableLayout();
+		$this->disableViewAutoRender();
+		$today=new Zend_date();
+		$day=$today->get('dd-MM-YYYY');
+		$start=new Zend_Date($day.' 00:00:00', 'dd-MM-YYYY HH:mm:ss');
+		$end=new Zend_Date($day.' 23:59:59', 'dd-MM-YYYY HH:mm:ss');
+		$todayts=$today->getTimeStamp();
+		$societes = new Object\Societe\Listing();
+		foreach( $societes as $societe){
+			$locations=$societe->getLocations();
+			foreach( $locations as $location ){
+				$results = $location->getRapportReservations( $start, $end );
+				foreach( $results as $result){
+					$this->db->query(sprintf("INSERT INTO `aa_dailystats` ( `creationDate`, `locationId`, `date`, `reservations`, `honoredReservations`, `seats`, `honoredSeats` ) VALUES ( '%s', '%ss', '%d', '%dd', '%ds', '%ddss', '%dsss')", $todayts, $result['location_id'], $day, $result['nbre'], '', $result['couverts'], ''));
+				}
+			}
+		}
+	}
 
 	public function portalAction() {
 

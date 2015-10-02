@@ -153,10 +153,12 @@ class ServingController extends Useraware
 	        	}
 	        } else {
 	         	$this->view->warning='Incorrect location';
+	         	die('incorrect serving id');
 	         	//var_dump($mylocation); exit;
 	        }
         } else {
         	$this->view->warning='Incorrect serving';
+        	die('incorrect serving id');
         	//var_dump($myserving); exit;
         }
         $this->view->serving=$myserving;

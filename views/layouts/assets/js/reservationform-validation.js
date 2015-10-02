@@ -81,7 +81,6 @@ var ReservationFormValidator = function () {
 	        	}
 	        },
 	        dayRender: function (date, cell) {
-	        	console.log( date.day() );
 				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
@@ -93,6 +92,10 @@ var ReservationFormValidator = function () {
 			       cell.prop('title', t('js_no_serving'));
 	        	}
 	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
+				   console.log( 'date.day()',date.day() );
+				   console.log( 'closeddays[5]',closeddays[5] );
+				   console.log( 'closeddays[6]',closeddays[6] );
+				   console.log( 'closeddays',closeddays );
 			       cell.css("background-color", "#BBBBBB");
 			       cell.css("cursor", "not-allowed");
 			       cell.prop('title', t('js_restaurant_closed'));	        		

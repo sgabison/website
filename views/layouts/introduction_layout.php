@@ -1,10 +1,10 @@
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_head.php") ; ?>
 	<!-- start: BODY -->
 	<body>
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar_resa.php") ; ?>
 
 		<div class="main-wrapper">
-			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar_resa.php") ; ?>
+			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar_resa.php") ; ?>
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_intro_left.php") ; ?>
 			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_right.php") ; ?>
 

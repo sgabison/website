@@ -374,6 +374,8 @@ class ReservationController extends Useraware
 			}
 			$this->view->closeddays=json_encode( $this->checkClosedServings() );
 			$this->view->offdaysrange=$fulltext;
+			//echo $this->view->offdaysrange; echo "<br>";
+			//echo $this->view->closeddays; exit;
 			if( $this->getParam('resadate') ){
 				$this->view->resadate=$this->getParam('resadate');
 			}

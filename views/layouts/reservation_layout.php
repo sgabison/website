@@ -1,7 +1,7 @@
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_head.php") ; ?>
 	<!-- start: BODY -->
 	<body class="single-page">
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar.php") ; ?>
+			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar_resa.php") ; ?>
 
 		<div class="main-wrapper">
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar.php") ; ?>
