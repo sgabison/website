@@ -39,7 +39,7 @@ class Person extends \Object\Concrete {
 			//	"positions",
 				"password",
 				"rating",
-			//	"societe",
+				"location",
 				"phone",
 				"address",
 				"city",
@@ -56,6 +56,8 @@ class Person extends \Object\Concrete {
 		}
 		$array['avatar']=(method_exists($this->getAvatar() ,getFullpath))? $this->getAvatar()->getFullpath() :'';
 		$array['societe']=(method_exists($this->getSociete() ,getName))? $this->getSociete()->getName() :'';
+		$array['locationid']=( $array['location'] )? $array['location']->getId() :'';
+		$array['locationname']=( $array['location'] )? $array['location']->getName() :'';
 		$array['dateRegister']=(method_exists($this->getDateRegister(),toString))?$this->getDateRegister()->toString("YYYY-MM-DD"):"";
 		return $array;
 	}

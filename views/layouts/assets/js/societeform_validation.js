@@ -20,6 +20,10 @@ var SocieteSetupFormValidator = function () {
 	var runAutosize = function() {
 		$("textarea.autosize").autosize();
 	};
+	var permitsToName=function(value){
+		if( value==1 ){ return t('Administrator'); }
+		if( value==2 ){ return t('Manager'); }
+	}
 	$('#closingDateStart').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
 	$('#closingDateEnd').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
 	var societeSetupSubmit= function(){
@@ -225,6 +229,21 @@ var SocieteSetupFormValidator = function () {
 	                label: t('js_phone'),
 	                name: "phone"
 	            }, {
+	                name: "locationname",
+	                type: "hidden"
+	            }, {
+	                label: t('js_permits'),
+	                name: "permits",
+	                type:  "select",
+	                options: [
+	                    { label: "Administrator", value: "1" },
+	                    { label: "Manager",       value: "2" }]
+	            }, {
+	                label: t('js_location'),
+	                name: "locationid",
+	                type:  "select",
+	                options: pos
+	            }, {
 	                label: t('js_password'),
 	                name: "password",
 	                type: "password"
@@ -264,9 +283,9 @@ var SocieteSetupFormValidator = function () {
 		 	//editor.hide('email');
 		 	//editor.hide('phone');
 		});
-	    $('#personlist').on( 'click', 'tbody td:not(:first-child)', function (e) {
-	        editor.inline( this );
-	    } );
+	    //$('#personlist').on( 'click', 'tbody td:not(:first-child)', function (e) {
+	    //    editor.inline( this );
+	    //} );
 		$('#personlist').DataTable( {
 			dom: "Tfrtip",
 			ajax: "/data/societe/persons-list",
@@ -276,6 +295,24 @@ var SocieteSetupFormValidator = function () {
 			  { data: "lastname" },
 			  { data: "email" },
 			  { data: "phone" },
+			  { 
+			  	"data": "locationname",
+			  	"visible": false 
+			  }, 
+			  { 
+				"data": "permits",
+				"orderable": false,
+			    "render": function ( data, type, row ) {
+			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-edit"></i> '+permitsToName(data)+'</a>';
+			    }
+			  },
+			  { 
+				"data": "locationid",
+				"orderable": false,
+			    "render": function ( data, type, row ) {
+			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-edit"></i> '+posit[data]+'</a>';
+			    }
+			  },
 	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-blue tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> </a>'},
 	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
 			],

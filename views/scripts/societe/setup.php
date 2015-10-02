@@ -46,6 +46,19 @@ function resetMap(m) {
    m.setCenter(c);
 };
 */
+var posit=[];
+var pos=[];
+var k;
+<?php
+	foreach( $this->societe->getLocations() as $location ){
+?>
+		pos.push({id: <?php echo $location->getId();?>, label: '<?php echo $location->getName();?>', value: '<?php echo $location->getId();?>'});
+		posit[<?php echo $location->getId();?>]='<?php echo $location->getName();?>';
+		k++;
+<?php
+	}
+?>
+console.log( pos );
 </script>
 
 			<div class="panel panel-white">
@@ -330,7 +343,6 @@ function resetMap(m) {
 									</div></form>
 								
 							</div>
-
 							<div class="tab-pane fade" id="staff">
 								<table id="personlist" class="table">
 							        <thead>
@@ -340,6 +352,9 @@ function resetMap(m) {
 							                <th><?php echo $this->translate('TXT_LASTNAME');?></th>
 							                <th><?php echo $this->translate('TXT_EMAIL');?></th>
 							                <th><?php echo $this->translate('TXT_PHONE');?></th>
+							                <th></th>
+							                <th><?php echo $this->translate('TXT_PERMISSION');?></th>
+							                <th><?php echo $this->translate('TXT_LOCATION');?></th>
 							                <th></th>
 							                <th></th>
 							            </tr>

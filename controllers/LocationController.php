@@ -14,6 +14,7 @@ class LocationController extends Useraware
 
     public function locationSetupAction() {
         $societe=$this->societe;
+        if( $this->person->getPermits() != 1 ){ die('You do not have access to this screen'); }
         //GET SELECTEDLOCATION
         if( $this->getParam('selectedLocationId') ){
 			$locationid=$this->getParam('selectedLocationId');

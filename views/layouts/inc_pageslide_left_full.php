@@ -28,9 +28,11 @@
 				<li>
 					<a href="/booking"><i class="fa fa-bar-chart-o"></i> <span class="title"> <?php echo $this->t('TXT_DASHBOARD')?> </span><span class="label label-default pull-right "><?php echo $this->t('TXT_LABEL_DASHBOARD')?></span> </a>
 				</li>
+<?php if( $this->person->getPermits() == 1 ){ ?>
 				<li>
 					<a href="/societe#<?php echo strtolower( $this->translate('TXT_SOCIETE_LOCATIONS_TAB') );?>"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
 				</li>
+<?php } ?>
 				<li>
 					<a href="/evenements"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_TITLE_EVENT')?></span> </a>
 				</li>

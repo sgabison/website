@@ -27,6 +27,7 @@ class SocieteController extends Useraware
     	$this->layout ()->setLayout ( 'portal' );
         $societe=$this->societe;
         $this->view->societe=$this->societe;
+        if( $this->person->getPermits() != 1 ){ die('You do not have access to this screen'); }
         //Check number of locations
         $locations=$this->societe->getLocations();
         $this->view->copyinfo=0;
@@ -227,6 +228,9 @@ class SocieteController extends Useraware
 					$person->setLastname($_POST['data']['lastname']);
 					$person->setEmail($_POST['data']['email']);
 					$person->setPhone($_POST['data']['phone']);
+					$person->setPermits($_POST['data']['permits']);
+					$location=Object\Location::getById( $_POST['data']['locationid'], 1 );
+					$person->setLocation( $location );
 					$person->setPassword(md5($_POST['data']['password']));
 					$person->save();
 				}
@@ -242,6 +246,9 @@ class SocieteController extends Useraware
 				$row['lastname']=$_POST['data']['lastname'];
 				$row['email']=$_POST['data']['email'];
 				$row['phone']=$_POST['data']['phone'];
+				$row['permits']=$_POST['data']['permits'];
+				$location=Object\Location::getById( $row['locationid'], 1 );
+				$row['location']=$location;
 				$row['password']=md5($_POST['data']['password']);
 				$current=Object\Person::getByEmail($row['email'],1);
 				if( $current instanceof Object\Person ){

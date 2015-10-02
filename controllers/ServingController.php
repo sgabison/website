@@ -131,6 +131,7 @@ class ServingController extends Useraware
 	
     public function servingSetupAction() {
         $societe=$this->societe;
+        if( $this->person->getPermits() != 1 ){ die('You do not have access to this screen'); }
 		$this->view->locations= $locations= $societe->getLocations();
 		$myserving=\Object\Serving::getById( $this->getParam('servingid',false));
 		if( $myserving instanceof Pimcore\Model\Object\Serving ){
