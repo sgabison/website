@@ -4,6 +4,7 @@
 	<div class="panel-heading">
 		<h4 class="panel-title"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?> 
 			<span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span>
+			<span id="clock"></span>
 		</h4>
 		<div class="panel-tools">
 			<a class="panel-expand" href="#">
@@ -168,7 +169,7 @@
 										<label class="control-label"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></label>
 										<div class="panel-tools">
 											<div class="dropdown">
-												<a class="panel-collapse expand" href="#"><i class="fa fa-angle-up"></i> <span>Expand</span> </a>
+												<a class="panel-collapse expand"><i class="fa fa-angle-up"></i> <span>Expand</span> </a>
 											</div>
 										</div>
 									</div>
@@ -179,7 +180,7 @@
 										<?php //} ?>
 -->										
 										<?php foreach( $this->societe->getTags() as $tag){ ?>
-										<a href="#" class="btn btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
+										<a class="btn btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
 										<?php } ?>
 										<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
 										<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>

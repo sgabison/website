@@ -23,25 +23,25 @@
 			</tr>
 			<tr class="registergroup2 no-display">
 				<td class="col-md-4">
-					Name:
+					<?php echo $this->translate('TXT_NAME');?>:
 				</td>
-				<td class="col-md-4" colspan="2">
+				<td class="col-md-4 reg-data" colspan="2">
 					<span id="reg-lastname"></span>
 				</td>
 			</tr>
 			<tr class="registergroup2 no-display">
 				<td class="col-md-4">
-					Tel:
+					<?php echo $this->translate('TXT_TEL');?>:
 				</td>
-				<td class="col-md-4" colspan="2">
+				<td class="col-md-4 reg-data" colspan="2">
 					<span id="reg-tel"></span>
 				</td>
 			</tr>
 			<tr class="registergroup2 no-display">
 				<td class="col-md-4">
-					Email:
+					<?php echo $this->translate('TXT_EMAIL');?>:
 				</td>
-				<td class="col-md-4" colspan="2">
+				<td class="col-md-4 reg-data" colspan="2">
 					<span id="reg-email"></span>
 				</td>
 			</tr>

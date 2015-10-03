@@ -17,6 +17,11 @@ var ReservationFormValidator = function () {
     var runSelect2 = function() {
 	    $(".js-example").select2();    
 	}
+	var myVar = setInterval(myTimer ,1000);
+	function myTimer() {
+	    var d = new Date();
+	    document.getElementById("clock").innerHTML = d.toLocaleTimeString('fr-FR');
+	}
 	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	$('[data-toggle="tooltip"]').tooltip();
 	$.reformatDate=function(dateStr){
@@ -30,8 +35,11 @@ var ReservationFormValidator = function () {
 	var getDate2=function(date) {
 	    var day = date.getDate();
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
-	}  
+	} 
 	var	today=new Date();
+	var timenow=today.getHours()+':'+today.getMinutes();
+	console.log( 'timenow'+timenow );
+	var todaydate=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear(); 
 	var thisDay=today.getDay();
 	var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 	var offdays = $('#offdays').val().split(',');
@@ -63,12 +71,17 @@ var ReservationFormValidator = function () {
 		$("#fullcalendar").fullCalendar({
 			lang: language,
 			height: 400,
+			header: {
+			    left:   'title',
+			    center: '',
+			    right:  'prev,next'
+			},
 			weekends: true,
 			selectable: true,
 	        selectHelper: false,
 	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
 	        dayClick: function(date, jsEvent, view) {
-	        	if( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ){
+	        	if( (date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
 		        	console.log('works');
 		        	$('tbody td').removeClass('currentDayClass');
 		        	$(this).addClass('currentDayClass');
@@ -84,6 +97,7 @@ var ReservationFormValidator = function () {
 				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
+				   cell.addClass('currentDayClass');
 				}
 	        	if( $.inArray( date.format( "DD-MM-YYYY" ), offdays ) >=0 ){
 			       cell.css("background-color", "#DDDDDD");
@@ -92,13 +106,15 @@ var ReservationFormValidator = function () {
 			       cell.prop('title', t('js_no_serving'));
 	        	}
 	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
-				   console.log( 'date.day()',date.day() );
-				   console.log( 'closeddays[5]',closeddays[5] );
-				   console.log( 'closeddays[6]',closeddays[6] );
-				   console.log( 'closeddays',closeddays );
-			       cell.css("background-color", "#BBBBBB");
-			       cell.css("cursor", "not-allowed");
-			       cell.prop('title', t('js_restaurant_closed'));	        		
+				   if( closeddays != "" ){
+					   console.log( 'date.day()',date.day() );
+					   console.log( 'closeddays[5]',closeddays[5] );
+					   console.log( 'closeddays[6]',closeddays[6] );
+					   console.log( 'closeddays',closeddays );
+				       cell.css("background-color", "#BBBBBB");
+				       cell.css("cursor", "not-allowed");
+				       cell.prop('title', t('js_restaurant_closed'));	        		
+				   }
 	        	}
 	        	if( date < moment().subtract(1, 'days' ) ){
 			       cell.css("background-color", "#EEEEEE");
@@ -357,8 +373,16 @@ var ReservationFormValidator = function () {
 				$.each(data.data, function (key, value) {
 					i++;
 					var serv=key.split("_-_");
-					console.log( 'closed:'+serv[2] );
+						console.log( 'closed:'+serv[2] );
+						console.log( 'todaydate:'+todaydate );
+						console.log( 'selecteddate:'+moment( $('#mycalendar').val(), 'DD-MM-YYYY' ) )
+						console.log( 'serv[4]:'+ serv[4] );
+						console.log( 'moment(serv[4]): '+moment(serv[4],'HH:mm') );
+						console.log( 'moment(timenow): '+moment(timenow,'HH:mm') );
 					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-light-orange';}
+					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
+						classclosed = 'disabled';
+					}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
@@ -422,14 +446,14 @@ var ReservationFormValidator = function () {
                 }
             },
             messages: {
-                firstlastname: "Please enter your name",
+                firstlastname: t("js_last_name_please"),
                 email: {
-                    required: "We need your email address to contact you",
-                    email: "Your email address must be in the format of name@domain.com"
+                    required: t("js_email_please"),
+                    email: t("js_emailformat_please")
                 },
                 tel: {
-                    required: "We need your telephone # to contact you",
-                    number: "enter your telephone number on 10 digits only"
+                    required: t("js_tel_please"),
+                    number: t("js_tel_please")
                 }
             },
             invalidHandler: function (event, validator) { //display error alert on form submit

@@ -50,12 +50,17 @@ var ReservationFormValidator1 = function () {
 		$("#fullcalendar").fullCalendar({
 			lang: language,
 			height: 400,
+			header: {
+			    left:   'title',
+			    center: '',
+			    right:  'prev,next'
+			},
 			weekends: true,
 			selectable: true,
 	        selectHelper: false,
 	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
 	        dayClick: function(date, jsEvent, view) {
-	        	if( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ){
+	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1) && ( closeddays == "" ) ){
 		        	console.log('works');
 		        	$('tbody td').removeClass('currentDayClass');
 		        	$(this).addClass('currentDayClass');
@@ -81,9 +86,11 @@ var ReservationFormValidator1 = function () {
 			       cell.prop('title', t('js_no_serving'));
 	        	}
 	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
-			       cell.css("background-color", "#BBBBBB");
-			       cell.css("cursor", "not-allowed");
-			       cell.prop('title', t('js_restaurant_closed'));	        		
+	        		if( closeddays != "" ){
+				       cell.css("background-color", "#BBBBBB");
+				       cell.css("cursor", "not-allowed");
+				       cell.prop('title', t('js_restaurant_closed'));
+	        		}        		
 	        	}
 	        	if( date.format("DD-MM-YYYY") == $('#calendarlinkdata').text() ){
 	        		console.log(date);

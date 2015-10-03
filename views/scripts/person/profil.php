@@ -46,6 +46,7 @@
 					</div>
 				</div>
 				<div class="col-md-6">
+<!--
 					<div class="form-group">
 						<label class="control-label">
 							<?= $this->translate("PERMITS")?> <span class="symbol required"></span>
@@ -53,14 +54,14 @@
 						<select name="permits" class="form-control contributor-permits">
 							<option value="1"><?= $this->translate("ADMIN")?></option>
 							<option value="2"><?= $this->translate("VIEW_EDIT")?></option>
-							<option value="3"><?= $this->translate("VIEW_ONLY")?></option>
 						</select>
 					</div>
+-->
 					<div class="form-group">
 						<div class="fileupload contributor-avatar fileupload-exists" data-provides="fileupload">
-							<div class="fileupload-new thumbnail"><img src="http://resaexpress.com/website/views/layouts/assets/images/anonymous.jpg" alt="" width="50" height="50">
+							<div class="fileupload-new thumbnail"><img src="http://resaexpress.com/website/views/layouts/assets/images/anonymous.jpg" alt="" width="200" height="200">
 							</div>
-							<div class="fileupload-preview fileupload-exists thumbnail"><img src="<?php if($this->person->getAvatar() instanceof \Asset) : echo $this->person->getAvatar()->getThumbnail('resaexpress') ; else : echo '#'; endif; ?>"></div>
+							<div class="fileupload-preview fileupload-exists thumbnail" style="height:200px"><img src="<?php if($this->person->getAvatar() instanceof \Asset) : echo $this->person->getAvatar()->getThumbnail('resaexpress') ; else : echo '#'; endif; ?>"></div>
 							<div class="contributor-avatar-options">
 								<span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="fa fa-picture-o"></i> <?= $this->translate("SELECT_IMAGE")?></span><span class="fileupload-exists"><i class="fa fa-picture-o"></i> <?= $this->translate("CHANGE")?></span>
 									<input type="file">

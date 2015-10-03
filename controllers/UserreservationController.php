@@ -155,6 +155,8 @@ class UserreservationController extends Action
 					$week=array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 					if($d=='1' ){
 						$closed=$myserving->getClosedmonday();
+						$servingstart=$myserving->getTimestartmonday();
+						$servingend=$myserving->getTimeendmonday();
 						if( $myserving->getTimestartmonday() ){
 							$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartmonday());
 						}else{$timestart=$datestart;}
@@ -163,6 +165,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='2'){
 						$closed=$myserving->getClosedtuesday();
+						$servingstart=$myserving->getTimestarttuesday();
+						$servingend=$myserving->getTimeendtuesday();
 						if( $myserving->getTimestarttuesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestarttuesday());
 						}else{$timestart=$datestart;}
@@ -171,6 +175,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='3'){
 						$closed=$myserving->getClosedwednesday();
+						$servingstart=$myserving->getTimestartwednesday();
+						$servingend=$myserving->getTimeendwednesday();
 						if( $myserving->getTimestartwednesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartwednesday());
 						}else{$timestart=$datestart;}
@@ -179,6 +185,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='4'){
 						$closed=$myserving->getClosedthursday();
+						$servingstart=$myserving->getTimestartthursday();
+						$servingend=$myserving->getTimeendthursday();
 						if( $myserving->getTimestartthursday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartthursday());
 						}else{$timestart=$datestart;}
@@ -187,6 +195,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='5'){
 						$closed=$myserving->getClosedfriday();
+						$servingstart=$myserving->getTimestartfriday();
+						$servingend=$myserving->getTimeendfriday();
 						if( $myserving->getTimestartfriday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartfriday());
 						}else{$timestart=$datestart;}
@@ -195,6 +205,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='6'){
 						$closed=$myserving->getClosedsaturday();
+						$servingstart=$myserving->getTimestartsaturday();
+						$servingend=$myserving->getTimeendsaturday();
 						if( $myserving->getTimestartsaturday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsaturday());
 						}else{$timestart=$datestart;}
@@ -203,6 +215,8 @@ class UserreservationController extends Action
 						}else{$timeend=$datestart;}
 					}elseif($d=='0'){
 						$closed=$myserving->getClosedsunday();
+						$servingstart=$myserving->getTimestartsunday();
+						$servingend=$myserving->getTimeendsunday();
 						if( $myserving->getTimestartsunday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsunday());
 						}else{$timestart=$datestart;}
@@ -249,11 +263,10 @@ class UserreservationController extends Action
 						//echo "<br>";echo "<br>";
 					}
 					if ( $myserving->getId() == $myreservationservingid ){
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
 					}else{
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_'.$closed]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_notselected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
 					}
-					//exit;
 			}
 			$reponse = new Reponse();
 			$reponse->data=$resafinal;

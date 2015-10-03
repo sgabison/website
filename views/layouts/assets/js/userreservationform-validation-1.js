@@ -34,9 +34,12 @@ var ReservationFormValidator1 = function () {
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
 	}  
 	var	today=new Date();
+	var timenow=today.getHours()+':'+today.getMinutes();
 	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
 	$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
 	$('.calendarhref').css( 'cursor', 'pointer' );
+	$('.backbutton').css( 'cursor', 'pointer' );
+	$('body').on('click','.reg-data', function(){ $('.registergroup1').removeClass('no-display');$('.registergroup2').addClass('no-display');});
 	var reservationSubmit= function(){
 		var thisDay=today.getDay();
 		var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -65,7 +68,7 @@ var ReservationFormValidator1 = function () {
 				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
 				var dayFormat = date.getDay();
 				console.log( dayFormat );
-				if( date < today ){
+				if( date.setHours(0,0,0,0) < today.setHours(0,0,0,0) ){
 				  return {
 				  	classes: 'disabled passedDayClass', 
 				  	tooltip: 'Date passée'
@@ -118,7 +121,7 @@ var ReservationFormValidator1 = function () {
 		console.log( 'locationid: '+locationid);
 		console.log( 'reservationid: '+reservationid);
 		$('#slotgroup').removeClass('no-display');
-		$('#servinggroup').addClass('no-display');
+		//$('#servinggroup').addClass('no-display');
 		$('#servinglinkdata').text( ", for "+$('#'+elementid).text() );
 		$('#servinglinkdata').css( 'cursor', 'pointer' );
 		$('#slots').html(function(){ return '';});
@@ -160,6 +163,7 @@ var ReservationFormValidator1 = function () {
 	}
 	var slotButton = function(locationid, elementid, backdrop){
 			$('#slotgroup').addClass('no-display');
+			$('#servinggroup').addClass('no-display');
 			$('#slotlinkdata').text( $('#'+elementid).text() );
 			$('#slotlinkdata').css( 'cursor', 'pointer' );
 			$('#slotinput').val( $('#'+elementid).attr("value") );
@@ -229,6 +233,9 @@ var ReservationFormValidator1 = function () {
 					var serv=key.split("_-_");
 					console.log( 'closed:'+serv[2] );
 					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-dark-orange';}
+					if( ( formattedtoday == $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
+						classclosed = 'disabled';
+					}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							

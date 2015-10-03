@@ -136,6 +136,8 @@ class ReservationController extends Useraware
 					$week=array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 					if($d=='1' ){
 						$closed=$myserving->getClosedmonday();
+						$servingstart=$myserving->getTimestartmonday();
+						$servingend=$myserving->getTimeendmonday();
 						if( $myserving->getTimestartmonday() ){
 							$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartmonday());
 						}else{$timestart=$datestart;}
@@ -144,6 +146,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='2'){
 						$closed=$myserving->getClosedtuesday();
+						$servingstart=$myserving->getTimestarttuesday();
+						$servingend=$myserving->getTimeendtuesday();
 						if( $myserving->getTimestarttuesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestarttuesday());
 						}else{$timestart=$datestart;}
@@ -152,6 +156,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='3'){
 						$closed=$myserving->getClosedwednesday();
+						$servingstart=$myserving->getTimestartwednesday();
+						$servingend=$myserving->getTimeendwednesday();
 						if( $myserving->getTimestartwednesday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartwednesday());
 						}else{$timestart=$datestart;}
@@ -160,6 +166,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='4'){
 						$closed=$myserving->getClosedthursday();
+						$servingstart=$myserving->getTimestartthursday();
+						$servingend=$myserving->getTimeendthursday();
 						if( $myserving->getTimestartthursday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartthursday());
 						}else{$timestart=$datestart;}
@@ -168,6 +176,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='5'){
 						$closed=$myserving->getClosedfriday();
+						$servingstart=$myserving->getTimestartfriday();
+						$servingend=$myserving->getTimeendfriday();
 						if( $myserving->getTimestartfriday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartfriday());
 						}else{$timestart=$datestart;}
@@ -176,6 +186,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='6'){
 						$closed=$myserving->getClosedsaturday();
+						$servingstart=$myserving->getTimestartsaturday();
+						$servingend=$myserving->getTimeendsaturday();
 						if( $myserving->getTimestartsaturday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsaturday());
 						}else{$timestart=$datestart;}
@@ -184,6 +196,8 @@ class ReservationController extends Useraware
 						}else{$timeend=$datestart;}
 					}elseif($d=='0'){
 						$closed=$myserving->getClosedsunday();
+						$servingstart=$myserving->getTimestartsunday();
+						$servingend=$myserving->getTimeendsunday();
 						if( $myserving->getTimestartsunday() ){
 						$timestart=$datestart+$this->timeslotToMinutes($myserving->getTimestartsunday());
 						}else{$timestart=$datestart;}
@@ -226,14 +240,15 @@ class ReservationController extends Useraware
 						if( $p >= $maxseats){ $seatswarning='-'.$p; }else{ $seatswarning='-'.$p; }
 						
 						//Feed the data
-						if( $timeslot == $myreservationstartslot ){$slotselected='-selected';}else{$slotselected='';}
+						//add startserving and endserving
+						if( $timeslot == $myreservationstartslot ){$slotselected='-selected';}else{$slotselected='-notselected';}
 						$resatime['shift-'.$i.$orderswarning.$seatswarning.$slotselected]=$timeslot;
 
 					}
 					if ( $myserving->getId() == $myreservationservingid ){
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
 					}else{
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_'.$closed]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_notselected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
 					}
 			}
 			$reponse = new Reponse();
@@ -333,6 +348,11 @@ class ReservationController extends Useraware
 			//Controls
 			if( $reservation instanceof Object\Reservation ){
 				//COLLECT OPEN/CLOSE DATA FOR THE LOCATION AND OPEN CLOSE DATA FOR SERVING
+				if( $this->person->getSociete()->getId() != $reservation->getLocation()->getSociete()->getId() ){ die('You do not have authorisation'); }
+				if( $this->person->getPermits == 2 ){
+					if( $this->person->getLocation()->getId() != $reservation->getLocation()->getId() ){ die('You do not have authorisation'); }
+				}
+				if( $reservation->getLocation()->getId() != $this->selectedLocation->getId() ){ die('You are NOT in the correct location:point of sales'); }
 				$today=new zend_date();
 				$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 				$fulltext="";
@@ -354,11 +374,11 @@ class ReservationController extends Useraware
 			        }
 			        //var_dump($reservationarray);exit;
 				} else {
-					//DO SOMETHING IF NO AUTHORISATION
+					die('You do not have authorisation');
 					$authorisation=false;
 				}
 			} else {
-				//DO SOMETHING IF NO AUTHORISATION
+				die('You do not have authorisation');
 				$authorisation=false;
 			}
 		}else{

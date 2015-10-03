@@ -36,8 +36,8 @@
 <div class="col-md-12 space-20">
 	<div>
 		<div class="panel-heading">
-			<div style='width:100%; padding-right:20px; padding-top:5px'>
-				<h4 class="panel-title"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
+			<div style='width:100%; margin-left:-20px;'>
+				<h4 class="panel-title"><span class="btn btn-sm dropdown-toggle btn-transparent-grey locationlinkfinal backbutton" id="backbutton"><i class="fa fa-angle-double-left"></i></span> <?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
 			</div>
 			<!--
 			<div class="panel-tools">
@@ -46,10 +46,10 @@
 				</a>
 			</div>
 			-->
-			<div class="panel-tools" style="opacity:1">
+			<div class="panel-tools" style="opacity:1; margin-right:-15px;">
 				<div class="dropdown">
 					<a data-toggle="dropdown" class="btn btn-sm dropdown-toggle btn-transparent-grey">
-						<i class="fa fa-cog"></i>
+						<img src="/flags/<?php echo $this->language;?>-icon.png">
 					</a>
 					<ul class="dropdown-menu dropdown-light pull-right" role="menu">
 						<li>
@@ -126,7 +126,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												Name:
+												<?php echo $this->translate('TXT_NAME');?>:
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-lastname"></span>
@@ -134,7 +134,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												Tel:
+												<?php echo $this->translate('TXT_TEL');?>:
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-tel"></span>
@@ -142,7 +142,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												Email:
+												<?php echo $this->translate('TXT_EMAIL');?>:
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-email"></span>

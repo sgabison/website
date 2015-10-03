@@ -47,6 +47,7 @@ var ReservationFormValidator = function () {
 		});
 	}
 	var	today=new Date();
+	var timenow=today.getHours()+':'+today.getMinutes();
 	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
 	$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
 	var thisDay=today.getDay();
@@ -56,17 +57,31 @@ var ReservationFormValidator = function () {
 	var closeddays = $('#closeddays').val();
 	var inRange=false;
 	$('body').on('click','.reg-data', function(){ $('.registergroup1').removeClass('no-display');$('.registergroup2').addClass('no-display');});
+	$('.backbutton').css( 'cursor', 'pointer' );
     var runSelect2 = function() {
 	    $(".js-example").select2();    
 	}
 	var checkData = function(){
+		var regemail, reglastname;
 		console.log( 'reg-email', $('#reg-email').text() );
 		console.log( 'reg-tel', $('#reg-tel').text() );
 		console.log( 'reg-lastname', $('#reg-lastname').text() );
-		if( $('#reg-email').html() =='' ){ $('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); }else{ $('#reg-email').html( "<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-email').html().substr(0,15)+"..." ); $('#reg-email').css("color", "#777777" ); }
-		if( $('#reg-tel').html() =='' ){ $('#reg-tel').html("<i class='fa fa-square-o fa-lg'></i> Tel mandatory"); $('#reg-tel').css( "color", "#a94442" );  } else { $('#reg-tel').html("<i class='fa fa-check-square-o fa-lg'></i> "+ $("#tel").intlTelInput("getNumber") ); $('#reg-tel').css( "color", "#777777" ); }
-		if( $('#reg-lastname').html() =='' ){ $('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); }else{ $('#reg-lastname').html("<i class='fa fa-check-square-o fa-lg'></i> "+$('#reg-lastname').html().substr(0,15)+"..." ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );}
-		
+		if( $('#reg-email').html().length >20 ){ regemail=$('#reg-email').html().substr(0,20)+'...' ;}else{regemail=$('#reg-email').html();}
+		if( $('#reg-lastname').html().length >20 ){ reglastname=$('#reg-lastname').html().substr(0,20)+'...' ;}else{reglastname=$('#reg-lastname').html();}
+		if( $('#reg-email').html() =='' ){ 
+			$('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); 
+		}else{ 
+			$('#reg-email').html( "<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+regemail+"</span></a>" ); $('#reg-email').css("color", "#777777" ); }
+		if( $('#reg-tel').html() =='' ){ 
+			$('#reg-tel').html("<i class='fa fa-square-o fa-lg'></i> Tel mandatory"); $('#reg-tel').css( "color", "#a94442" );  
+		}else{ 
+			$('#reg-tel').html("<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+ $("#tel").intlTelInput("getNumber")+'</span></a>' ); $('#reg-tel').css( "color", "#777777" ); 
+		}
+		if( $('#reg-lastname').html() =='' ){ 
+			$('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); 
+		}else{ 
+			$('#reg-lastname').html("<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+reglastname+"</span></a>" ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );
+		}	
 	}
 	$('#mycalendar').datepicker({ 
 		startDate: "0d",
@@ -80,7 +95,6 @@ var ReservationFormValidator = function () {
 		container: '#example-widget-container',
 		beforeShowDay: function (date){
 			if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
-				console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
 				return {
 					tooltip: 'Le Restaurant est fermé',
                     classes: 'closedDayClass',
@@ -89,8 +103,7 @@ var ReservationFormValidator = function () {
 			}
 			var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
 			var dayFormat = date.getDay();
-			console.log( dayFormat );
-			if( date < today ){
+			if( date.setHours(0,0,0,0) < today.setHours(0,0,0,0) ){
 			  return {
 			  	classes: 'disabled passedDayClass', 
 			  	tooltip: 'Date passée'
@@ -237,7 +250,7 @@ var ReservationFormValidator = function () {
 		console.log( 'locationid: '+locationid);
 		console.log( 'reservationid: '+reservationid);
 		$('#slotgroup').removeClass('no-display');
-		$('#servinggroup').addClass('no-display');
+		//$('#servinggroup').addClass('no-display');
 		$('#servinglinkdata').text( ", for "+$('#'+elementid).text() );
 		$('#servinglinkdata').css( 'cursor', 'pointer' );
 		$('#slots').html(function(){ return '';});
@@ -278,6 +291,7 @@ var ReservationFormValidator = function () {
 	}
 	var slotButton = function(locationid, elementid, backdrop){
 			$('#slotgroup').addClass('no-display');
+			$('#servinggroup').addClass('no-display');
 			$('#slotlinkdata').text( $('#'+elementid).text() );
 			$('#slotlinkdata').css( 'cursor', 'pointer' );
 			$('#slotinput').val( $('#'+elementid).attr("value") );
@@ -344,8 +358,13 @@ var ReservationFormValidator = function () {
 				$.each(data.data, function (key, value) {
 					i++;
 					var serv=key.split("_-_");
-					console.log( 'closed:'+serv[2] );
+					console.log( 'serv[4]:'+serv[4] );
+					console.log( formattedtoday );
+					console.log( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
 					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-dark-orange';}
+					if( ( formattedtoday == $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
+						classclosed = 'disabled';
+					}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							

@@ -1,4 +1,4 @@
-var PIMCORE_WEBSITE_LAYOUTS = "http://demo.gabison.com/website/views/layouts";
+var PIMCORE_WEBSITE_LAYOUTS = "http://resaexpress.com/website/views/layouts";
 var PagesUserProfile = function() {
 	"use strict";
 	var oTable, contributors = [];
@@ -68,10 +68,9 @@ var PagesUserProfile = function() {
 		var reponse = new Object; // object(id,METHOD
 									// =(PUT,GET,POST,DELETE),data)
 		var url = '/data/person/get-data';
-		$
-				.blockUI({
-					message : '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
-				});
+		$.blockUI({
+			message : '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+		});
 		reponse.data = {
 			id : id
 		};

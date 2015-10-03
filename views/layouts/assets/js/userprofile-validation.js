@@ -31,8 +31,7 @@ var UserProfileValidation = function () {
                 email: {
                     required: true,
                     email: true
-                }
-                ,
+                },
                 password: {
                     minlength: 6
                 },
@@ -88,7 +87,7 @@ var UserProfileValidation = function () {
 				, newContributor.lastname = $(".contributor-lastname").val()
 				, newContributor.email = $(".contributor-email").val()
 				, newContributor.password = $(".contributor-password").val()
-				, newContributor.permits = $(".contributor-permits option:selected").val()
+				//, newContributor.permits = $(".contributor-permits option:selected").val()
 				, newContributor.avatar = userAvatar
 				, newContributor.method = $(".contributor-form-method").val();
 
