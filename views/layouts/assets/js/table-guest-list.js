@@ -73,7 +73,8 @@ var GuestList = function () {
 						"data": "o_id",
 						"orderable": false,
 						"render": function ( data, type, full, meta ) {
-							return '<a href="/guest.html?id='+data+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+							//return '<a href="/guest.html?id='+data+'" class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
+							return '<a class="btn btn-blue tooltips" data-original-title="Edit"><i class="fa fa-edit"></i></a>';
 							}
 						},
 						{

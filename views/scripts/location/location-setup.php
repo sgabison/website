@@ -62,25 +62,25 @@ google.maps.event.addDomListener(window, 'load', initialize);
 								<label class="control-label">
 									<?php echo $this->translate('TXT_SETUP_SOCIETE_NAME');?>
 								</label>
-								<input type="text" placeholder="Text Field" name="name" id="name" class="form-control limited" maxlength="100" value="<?php echo $this->name;?>">
+								<input type="text" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_NAME');?>" name="name" id="name" class="form-control limited" maxlength="100" value="<?php echo $this->name;?>">
 							</div>
 							<div class="form-group">
 								<label class="control-label">
 									<?php echo $this->translate('TXT_SETUP_SOCIETE_ADDRESS');?>
 								</label>
-								<input type="text" placeholder="Text Field" name="address" id="address" class="form-control limited" maxlength="100" value="<?php echo $this->address;?>">
+								<input type="text" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_ADDRESS');?>" name="address" id="address" class="form-control limited" maxlength="100" value="<?php echo $this->address;?>">
 							</div>
 							<div class="form-group">
 								<label class="control-label">
 									<?php echo $this->translate('TXT_SETUP_SOCIETE_ZIP');?>
 								</label>
-								<input type="text" placeholder="Text Field" name="zip" id="zip" class="form-control limited" maxlength="100" value="<?php echo $this->zip;?>">
+								<input type="text" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_ZIP');?>" name="zip" id="zip" class="form-control limited" maxlength="100" value="<?php echo $this->zip;?>">
 							</div>
 							<div class="form-group">
 								<label class="control-label">
 									<?php echo $this->translate('TXT_SETUP_SOCIETE_CITY');?>
 								</label>
-								<input type="text" placeholder="Text Field" name="city" id="city" class="form-control limited" maxlength="100" value="<?php echo $this->city;?>">
+								<input type="text" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_CITY');?>" name="city" id="city" class="form-control limited" maxlength="100" value="<?php echo $this->city;?>">
 							</div>
 					</div>
 					<div class="col-md-6">
@@ -88,19 +88,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
 							<label class="control-label">
 								<?php echo $this->translate('TXT_SETUP_SOCIETE_EMAIL');?>
 							</label>
-							<input type="text" placeholder="Text Field" name="email" id="email" class="form-control limited" maxlength="100" value="<?php echo $this->email;?>">
+							<input type="text" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_EMAIL');?>" name="email" id="email" class="form-control limited" maxlength="100" value="<?php echo $this->email;?>">
 						</div>
 						<div class="form-group">
 							<label class="control-label">
 								<?php echo $this->translate('TXT_SETUP_SOCIETE_TEL');?>
 							</label>
-							<input type="text" placeholder="Text Field" name="tel" id="tel" class="form-control limited" maxlength="100" value="<?php echo $this->tel;?>">
+							<input type="number" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_TEL');?>" name="tel" id="tel" class="form-control limited" maxlength="100" value="<?php echo $this->tel;?>">
 						</div>
 						<div class="form-group">
 							<label class="control-label">
 								<?php echo $this->translate('TXT_SETUP_SOCIETE_FAX');?>
 							</label>
-							<input type="text" placeholder="Text Field" name="fax" id="fax" class="form-control limited " maxlength="100" value="<?php echo $this->fax;?>">
+							<input type="number" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_FAX');?>" name="fax" id="fax" class="form-control limited " maxlength="100" value="<?php echo $this->fax;?>">
 						</div>
 					</div>
 				</div>

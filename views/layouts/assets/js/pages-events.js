@@ -297,10 +297,10 @@ var Events = function() {
 
         $("#readFullEvent").find(".delete-event").off().on("click", function() {
             el = $(this).data("event-id");
-            bootbox.confirm("Are you sure to cancel?", function(result) {
+            bootbox.confirm(t('js_sure_cancel'), function(result) {
                 if (result) {
                     $.blockUI({
-                        message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+                        message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
                     });
                     var reponse = new Object; 
     				   reponse.data = "";
@@ -459,7 +459,7 @@ var Events = function() {
 				reponse.data = newEvent;
 				
                 $.blockUI({
-                    message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
+                    message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
                 });
 
                 if ($(".form-full-event .event-id").val() !== "") {

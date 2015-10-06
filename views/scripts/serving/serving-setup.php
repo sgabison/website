@@ -64,6 +64,22 @@
 							<div class="col-md-2"></div>
 							<div class="col-md-3">
 								<label class="control-label">
+									<?php echo $this->translate('TXT_MAX_TABLES');?>
+								</label>
+								<input type="number" id="maxtables" name="maxtables" value="<?php echo $this->selectedLocation->getMaxTables();?>">
+							</div>
+							<div class="col-md-3">
+								<label class="control-label">
+									<?php echo $this->translate('TXT_MAX_SEATS');?>
+								</label>
+								<input type="number" id="maxseats" name="maxseats" value="<?php echo $this->selectedLocation->getMaxSeats();?>">
+							</div>
+							<div class="col-md-4"></div>
+						<div class="col-md-12">
+						</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-3">
+								<label class="control-label">
 									<?php echo $this->translate('TXT_TIME_START');?>
 								</label>
 								<div class="input-group input-append bootstrap-timepicker">
@@ -124,13 +140,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatsmonday" name="maxseatsmonday" value="<?php echo $this->maxseatsmonday;?>" <?php if( $this->closedmonday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatsmonday" name="maxseatsmonday" value="<?php echo $this->maxseatsmonday;?>" <?php if( $this->closedmonday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablesmonday" name="maxtablesmonday" value="<?php echo $this->maxtablesmonday;?>" <?php if( $this->closedmonday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablesmonday" name="maxtablesmonday" value="<?php echo $this->maxtablesmonday;?>" <?php if( $this->closedmonday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -166,13 +182,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatstuesday" name="maxseatstuesday" value="<?php echo $this->maxseatstuesday;?>" <?php if( $this->closedtuesday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatstuesday" name="maxseatstuesday" value="<?php echo $this->maxseatstuesday;?>" <?php if( $this->closedtuesday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablestuesday" name="maxtablestuesday" value="<?php echo $this->maxtablestuesday;?>" <?php if( $this->closedtuesday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablestuesday" name="maxtablestuesday" value="<?php echo $this->maxtablestuesday;?>" <?php if( $this->closedtuesday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -208,13 +224,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatswednesday" name="maxseatswednesday" value="<?php echo $this->maxseatswednesday;?>" <?php if( $this->closedwednesday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatswednesday" name="maxseatswednesday" value="<?php echo $this->maxseatswednesday;?>" <?php if( $this->closedwednesday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtableswednesday" name="maxtableswednesday" value="<?php echo $this->maxtableswednesday;?>" <?php if( $this->closedwednesday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtableswednesday" name="maxtableswednesday" value="<?php echo $this->maxtableswednesday;?>" <?php if( $this->closedwednesday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -252,13 +268,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatsthursday" name="maxseatsthursday" value="<?php echo $this->maxseatsthursday;?>" <?php if( $this->closedthursday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatsthursday" name="maxseatsthursday" value="<?php echo $this->maxseatsthursday;?>" <?php if( $this->closedthursday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablesthursday" name="maxtablesthursday" value="<?php echo $this->maxtablesthursday;?>" <?php if( $this->closedthursday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablesthursday" name="maxtablesthursday" value="<?php echo $this->maxtablesthursday;?>" <?php if( $this->closedthursday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -294,13 +310,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatsfriday" name="maxseatsfriday" value="<?php echo $this->maxseatsfriday;?>" <?php if( $this->closedfriday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatsfriday" name="maxseatsfriday" value="<?php echo $this->maxseatsfriday;?>" <?php if( $this->closedfriday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablesfriday" name="maxtablesfriday" value="<?php echo $this->maxtablesfriday;?>" <?php if( $this->closedfriday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablesfriday" name="maxtablesfriday" value="<?php echo $this->maxtablesfriday;?>" <?php if( $this->closedfriday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -336,13 +352,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatssaturday" name="maxseatssaturday"  value="<?php echo $this->maxseatssaturday;?>" <?php if( $this->closedsaturday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatssaturday" name="maxseatssaturday"  value="<?php echo $this->maxseatssaturday;?>" <?php if( $this->closedsaturday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablessaturday" name="maxtablessaturday" value="<?php echo $this->maxtablessaturday;?>" <?php if( $this->closedsaturday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablessaturday" name="maxtablessaturday" value="<?php echo $this->maxtablessaturday;?>" <?php if( $this->closedsaturday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>
@@ -378,13 +394,13 @@
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_SEATS');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max seats" class="form-control" id="maxseatssunday" name="maxseatssunday"  value="<?php echo $this->maxseatssunday;?>" <?php if( $this->closedsunday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max seats" class="form-control maxseats" id="maxseatssunday" name="maxseatssunday"  value="<?php echo $this->maxseatssunday;?>" <?php if( $this->closedsunday!=0 ){echo 'disabled';}?>>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
 										<?php echo $this->translate('TXT_MAX_TABLES');?> <span class="symbol required"></span>
 									</label>
-									<input type="number" placeholder="Max tables" class="form-control" id="maxtablessunday" name="maxtablessunday" value="<?php echo $this->maxtablessunday;?>" <?php if( $this->closedsunday!=0 ){echo 'disabled';}?>>
+									<input type="number" placeholder="Max tables" class="form-control maxtables" id="maxtablessunday" name="maxtablessunday" value="<?php echo $this->maxtablessunday;?>" <?php if( $this->closedsunday!=0 ){echo 'disabled';}?>>
 								</div>
 							</div>
 						</div>

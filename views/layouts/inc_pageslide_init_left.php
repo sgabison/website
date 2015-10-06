@@ -11,7 +11,7 @@
 			</div>
 			<div class="user-profile border-top padding-horizontal-10 block">
 				<div class="inline-block">
-					<img src="/logos/resaexpress_small.png" alt="">
+					<img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/logos/resaexpress.png" alt="">
 				</div>
 				<div class="inline-block">
 					<h5 class="no-margin"> <?= $this->translate('WELCOME')?> </h5>

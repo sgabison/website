@@ -35,6 +35,7 @@ class BookingController extends Useraware {
 	}
 	public function errorAction() {
 		$this->layout ()->setLayout ( 'portal' );
+		$this->view->error=$this->getParam('error');
 	}
 	public function mysql_protect($value) {
 		if (get_magic_quotes_gpc()) {

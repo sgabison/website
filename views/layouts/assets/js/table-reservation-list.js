@@ -142,9 +142,6 @@ var TableReservationList = function () {
 					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
 								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
 					        '</tr>'+
-					        '<tr>'+
-					            '<td>Notes:</td>'+  '<td colspan="2">'+d.bookingnotes+'</td>'+
-					        '</tr>'+
 					    '</table>'+
 					'</div>'+
 				'</div>'+
@@ -158,6 +155,9 @@ var TableReservationList = function () {
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
 					            '<td>'+t('js_serving')+'</td>'+  '<td colspan="2"><b>'+d.servingtitle+'</b></td>'+
+					        '</tr>'+
+					        '<tr>'+
+					            '<td>Notes:</td>'+  '<td colspan="2">'+d.bookingnotes+'</td>'+
 					        '</tr>'+
 					    '</table>'+
 					'</div>'+

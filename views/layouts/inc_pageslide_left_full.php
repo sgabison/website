@@ -26,7 +26,7 @@
 			<!-- start: MAIN NAVIGATION MENU -->
 			<ul class="main-navigation-menu">
 				<li>
-					<a href="/booking"><i class="fa fa-bar-chart-o"></i> <span class="title"> <?php echo $this->t('TXT_DASHBOARD')?> </span><span class="label label-default pull-right "><?php echo $this->t('TXT_LABEL_DASHBOARD')?></span> </a>
+					<a href="/booking"><i class="fa fa-bar-chart-o"></i> <span class="title"> <?php echo $this->t('TXT_DASHBOARD')?> </span><!--<span class="label label-default pull-right "><?php echo $this->t('TXT_LABEL_DASHBOARD')?></span>--> </a>
 				</li>
 <?php if( $this->person->getPermits() == 1 ){ ?>
 				<li>

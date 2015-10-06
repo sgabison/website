@@ -15,7 +15,61 @@ class UserreservationController extends Action
 	
 	public function introAction(){
 		$this->layout ()->setLayout ( 'introduction_layout' );
-		$this->view->societes= new Object\Societe\Listing();
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/introduction.js');
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+			console.log("initiating IntroductionPanel");
+			IntroductionPanel.init();
+			});', 'text/javascript', array (
+			'noescape' => true 
+		) );
+		$societes= new Object\Societe\Listing();
+		//LIMIT TO LA CRIEE
+		$societes->setCondition("oo_id = 554");
+		$this->view->societes=$societes;
+		if( $this->getParam('selectedLocationid') ){
+			$location=Object\Location::getById( $this->getParam('selectedLocationid'), 1);
+			if( $location instanceof Object\Location ){
+				$this->view->selectedLocation = $location;
+			}else{
+				die('Wrong location');
+			}
+		} else {
+			foreach( $this->view->societes as $societe ){
+				$locations=$societe->getLocations();
+			}
+			$this->view->selectedLocation=$locations[0];
+		}
+	}
+	public function landingpageAction(){
+		$this->layout ()->setLayout ( 'introduction_layout' );
+		//$this->view->headScript()->appendFile('http://maps.google.com/maps/api/js?sensor=true');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/gmaps/gmaps.js');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/landingpage.js');
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+			console.log("initiating IntroductionPanel");
+			Maps.init();
+			});', 'text/javascript', array (
+			'noescape' => true 
+		) );
+		$societes= new Object\Societe\Listing();
+		//LIMIT TO LA CRIEE
+		$societes->setCondition("oo_id = 554");
+		$this->view->societes=$societes;
+		$locarray=array();
+		foreach( $societes as $societe){
+			foreach( $societe->getLocations() as $location ){
+				$loc['lat']=$location->getGeolocalisation()->getLatitude();
+				$loc['lng']=$location->getGeolocalisation()->getLongitude();
+				$loc['name']=$location->getName();
+				$loc['address']=$location->getAddress();
+				$loc['zip']=$location->getZip();
+				$loc['City']=$location->getCity();
+				$loc['Id']=$location->getId();
+				array_push( $locarray, $loc ); 
+			}
+			$restaurants['data']=$locarray;
+		}
+		$this->view->restaurants = json_encode($restaurants);
 		if( $this->getParam('selectedLocationid') ){
 			$location=Object\Location::getById( $this->getParam('selectedLocationid'), 1);
 			if( $location instanceof Object\Location ){

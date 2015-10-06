@@ -83,7 +83,7 @@
 								<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 									<?php $i=0; while($i<7){ 
 										$i++;?>
-									<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+									<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
 									<?php } ?>
 									<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
 								</div>
@@ -91,17 +91,20 @@
 									<button type="button" class="btn btn-default"> - </button>
 								</div>
 								<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
-									<select id="partyselect" class="form-control">
-										<?php $i=6; while($i<16){ 
+									<select id="partyselect" class="form-control selectpartyselection">
+										<option value='8'><?= $this->translate('TXT_FOR');?> 8 <?= $this->translate('TXT_PEOPLE');?></option>
+										<?php $i=7; while($i<16){ 
 											$i++;
 											echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
 									     } ?>
 									</select>
 								</div>
 							</div>
+<!--
 							<div class="col-md-12 form-group bookbutton" >
 								<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_NEXT_STEP');?> <i class="fa fa-arrow-circle-right"></i></span>
 							</div>
+-->
 							<span class='no-display' id='selectgroup'>
 								<div class="form-group">
 									<label class="control-label">
@@ -129,21 +132,9 @@
 								<label class="control-label">
 									<?php echo $this->translate('TXT_GUEST_TEL');?><span class="symbol required"></span>
 								</label>
-								<div class="row">
-									<div class='col-md-5'>
-										<select class="js-example js-states" id="countrycode">
-											<option value="33" <?php if($this->countrycode=='33'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_FRANCE');?></option>
-											<option value="44" <?php if($this->countrycode=='44'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_GB');?></option>
-											<option value="1" <?php if($this->countrycode=='1'){echo "selected";}?>><?php echo $this->translate('TXT_COUNTRYCODE_USA');?></option>
-										</select>
-									</div>
-									<div class='col-md-7'>									
-										<span class="input-icon">
-										<input  placeholder="06XXXXXXXX" class="form-control typeahead" id="tel" name="tel" maxlength="10" value='<?php echo $this->tel;?>' size='10'>
-										<i class="telephone fa fa-phone"></i>
-										</span>
-									</div>
-								</div>
+								<span class="input-icon">
+									<input class="form-control typeahead" id="tel" name="tel"  value='<?php echo $this->tel;?>'>
+								</span>
 							</div>
 							<div class="form-group">
 								<label class="control-label">

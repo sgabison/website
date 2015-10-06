@@ -23,20 +23,17 @@
 			</div>
 			<!-- start: MAIN NAVIGATION MENU -->
 			<ul class="main-navigation-menu">
-				<li class="start">
-					<a href="<?= PIMCORE_WEBSITE_LAYOUTS?>/layouts_single_content_0.html"><i class="fa fa-home"></i> <span class="title"> Dashboard </span><span class="label label-default pull-right ">LABEL</span> </a>
-				</li>
 <?php if($this->societes){foreach($this->societes as $societe){ ?>							
 				<li>
 					<a href="javascript:void(0)"><i class="fa fa-desktop"></i> <span class="title"> <?= $societe->getName()?></span><i class="icon-arrow"></i> </a>
 					<ul class="sub-menu">
-					<?php foreach( $societe->getLocations() as $location){ ?>
+<?php foreach( $societe->getLocations() as $location){ ?>
 						<li>
 							<a href="/reservation?selectedLocationid=<?php echo $location->getId();?>">
 								<span class="title"> <?= $location->getName();?> </span>
 							</a>
 						</li>
-					<?php } ?>
+<?php } ?>
 					</ul>
 				</li>
 <?php } } ?>

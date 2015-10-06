@@ -128,7 +128,7 @@
 					<i class="fa fa-phone"></i> <?php echo $this->guesttel;?>
 				</button>
 				<button class="btn btn-blue" id="datedisplay">
-					<i class="fa fa-phone"></i> <?= $this->translate('TXT_DISPLAY_DATE')?>
+					<i class="fa fa-calendar"></i> <?= $this->translate('TXT_DISPLAY_DATE')?>
 				</button>
 				<div class="pull-right">
 					<button data-table="#reservationList" class="btn btn-orange print-table">

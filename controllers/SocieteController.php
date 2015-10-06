@@ -27,7 +27,7 @@ class SocieteController extends Useraware
     	$this->layout ()->setLayout ( 'portal' );
         $societe=$this->societe;
         $this->view->societe=$this->societe;
-        if( $this->person->getPermits() != 1 ){ die('You do not have access to this screen'); }
+        if( $this->person->getPermits() != 1 ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_SCREEN') ); }
         //Check number of locations
         $locations=$this->societe->getLocations();
         $this->view->copyinfo=0;

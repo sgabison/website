@@ -46,7 +46,7 @@
 			<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 				<?php $i=0; while($i<7){ 
 					$i++;?>
-				<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+				<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
 				<?php } ?>
 				<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
 			</div>
@@ -54,17 +54,20 @@
 				<button type="button" class="btn btn-default"> - </button>
 			</div>
 			<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
-				<select id="partyselect" class="form-control">
-					<?php $i=6; while($i<16){ 
+				<select id="partyselect" class="form-control selectpartyselection">
+					<option value='8'><?= $this->translate('TXT_FOR');?> 8 <?= $this->translate('TXT_PEOPLE');?></option>
+					<?php $i=7; while($i<16){ 
 						$i++;
 						echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
 				     } ?>
 				</select>
 			</div>
 		</div>
+<!--
 		<div class="col-md-12 form-group bookbutton" >
 			<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_NEXT_STEP');?> <i class="fa fa-arrow-circle-right"></i></span>
 		</div>
+-->
 		<div class='no-display' id='selectgroup'>
 			<div class="form-group">
 				<label class="control-label">

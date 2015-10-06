@@ -348,11 +348,11 @@ class ReservationController extends Useraware
 			//Controls
 			if( $reservation instanceof Object\Reservation ){
 				//COLLECT OPEN/CLOSE DATA FOR THE LOCATION AND OPEN CLOSE DATA FOR SERVING
-				if( $this->person->getSociete()->getId() != $reservation->getLocation()->getSociete()->getId() ){ die('You do not have authorisation'); }
+				if( $this->person->getSociete()->getId() != $reservation->getLocation()->getSociete()->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_SOCIETE') ); }
 				if( $this->person->getPermits == 2 ){
-					if( $this->person->getLocation()->getId() != $reservation->getLocation()->getId() ){ die('You do not have authorisation'); }
+					if( $this->person->getLocation()->getId() != $reservation->getLocation()->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_LOCATION') ); }
 				}
-				if( $reservation->getLocation()->getId() != $this->selectedLocation->getId() ){ die('You are NOT in the correct location:point of sales'); }
+				if( $reservation->getLocation()->getId() != $this->selectedLocation->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_RESERVATION') ); }
 				$today=new zend_date();
 				$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 				$fulltext="";
@@ -374,12 +374,10 @@ class ReservationController extends Useraware
 			        }
 			        //var_dump($reservationarray);exit;
 				} else {
-					die('You do not have authorisation');
-					$authorisation=false;
+					$this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_SOCIETE') );
 				}
 			} else {
-				die('You do not have authorisation');
-				$authorisation=false;
+				$this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_RESERVATION') );
 			}
 		}else{
 			//SET RESACHANGE TO FALSE
@@ -402,13 +400,16 @@ class ReservationController extends Useraware
 		}
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
 		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css');
-		$this->view->headScript()->appendFile('http://maps.google.com/maps/api/js?sensor=true');
+		//$this->view->headScript()->appendFile('http://maps.google.com/maps/api/js?sensor=true');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/gmaps/gmaps.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/maps.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/reservationform-validation.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/reservationform-validation-1.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');
+		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/intl-tel-input-master/build/css/intlTelInput.css');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/intl-tel-input-master/build/js/intlTelInput.js');
+
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/form-elements.js');
 		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
 			Main.init();

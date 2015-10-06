@@ -17,6 +17,13 @@ var ReservationFormValidator = function () {
     var runSelect2 = function() {
 	    $(".js-example").select2();    
 	}
+	var intTelData = function(){
+		$("#tel").intlTelInput({ 
+	        defaultCountry: "fr",
+	        preferredCountries: ['fr', 'gb', 'de', 'be'],
+	        utilsScript: "/website/views/layouts/assets/plugins/intl-tel-input-master/lib/libphonenumber/build/utils.js"
+		})
+	}
 	var myVar = setInterval(myTimer ,1000);
 	function myTimer() {
 	    var d = new Date();
@@ -81,16 +88,13 @@ var ReservationFormValidator = function () {
 	        selectHelper: false,
 	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
 	        dayClick: function(date, jsEvent, view) {
-	        	if( (date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
+	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
 		        	console.log('works');
 		        	$('tbody td').removeClass('currentDayClass');
 		        	$(this).addClass('currentDayClass');
 	        	}else{
 	        		console.log('don t works');
-	        		//console.log(view);
-	        		//console.log(this);
 		        	$(this).removeClass('fc-highlight');
-		        	//$(this).attr('class', '');
 	        	}
 	        },
 	        dayRender: function (date, cell) {
@@ -107,10 +111,6 @@ var ReservationFormValidator = function () {
 	        	}
 	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
 				   if( closeddays != "" ){
-					   console.log( 'date.day()',date.day() );
-					   console.log( 'closeddays[5]',closeddays[5] );
-					   console.log( 'closeddays[6]',closeddays[6] );
-					   console.log( 'closeddays',closeddays );
 				       cell.css("background-color", "#BBBBBB");
 				       cell.css("cursor", "not-allowed");
 				       cell.prop('title', t('js_restaurant_closed'));	        		
@@ -128,56 +128,13 @@ var ReservationFormValidator = function () {
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
 	        	}
+	        	if( start.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
+					$('#mycalendar').val( start.format("DD-MM-YYYY") );
+					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
+	        	}
 	        }
 		});
 	}
-/*
-	var loadCalendar = function(){
-		$('#mycalendar').datepicker({ 
-			startDate: "0d",
-			language: $("#language").val(),
-			todayBtn: "linked", 
-			todayHighlight: false, 
-			defaultDate: new Date(), 
-			autoclose: false,
-			datesDisabled: offdays, 
-			format: "dd-mm-yyyy",
-			orientation: "bottom-left",
-			container: '#calendarcontainer',
-			beforeShowDay: function (date){
-				if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
-					console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
-					return {
-						tooltip: 'Le Restaurant est fermé',
-	                    classes: 'closedDayClass',
-	                    enabled: false
-					}
-				}
-				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
-				var dayFormat = date.getDay();
-				console.log( dayFormat );
-				if( date < today ){
-				  return {
-				  	classes: 'disabled passedDayClass', 
-				  	tooltip: 'Date passée'
-				  };
-				}
-				if( date == today ){
-				  return {
-				  	classes: 'activeDayClass', 
-				  	tooltip: 'Aujourd hui'
-				  };
-				}
-				if( date>today && closeddays.search(dayFormat) >= 0){ 
-				  return {
-				  	classes: 'disabled closedDayClass', 
-				  	tooltip: 'Aucun service ce jour'};
-				}
-			}
-		});
-		$('#mycalendar').datepicker('show');
-	}
-*/
 	var reservationDataLoad = function () {
 		var form1 = $('#bookingform');
 		console.log( 'select_location'+$('#select_location').val() );
@@ -192,7 +149,7 @@ var ReservationFormValidator = function () {
 			, newReservation.reservationdate = $("#reservationdateinput").val()
 			, newReservation.email = $("#email").val()
 			, newReservation.tel = $("#tel").val()
-			, newReservation.countrycode = $("#countrycode").val()
+			, newReservation.countrycode = $("#tel").intlTelInput("getSelectedCountryData").dialCode
 			, newReservation.partysize = $("#party").val()
 			, newReservation.start = $("#slotinput").val()
 			, newReservation.servinginput = $("#servinginput").val()
@@ -246,10 +203,18 @@ var ReservationFormValidator = function () {
 		}else{
 			var backdrop = $('.ajax-white-backdrop');
 			backdrop.remove();
-			$('.book').click( function(){
+			$('.partyselection').click( function(){
 				lauchRequest();
-				$('#partybox').addClass('no-display');	
-			});	
+				$('#partybox').addClass('no-display');					
+			});
+			$('.selectpartyselection').change( function(){
+				lauchRequest();
+				$('#partybox').addClass('no-display');					
+			});
+			//$('.book').click( function(){
+			//	lauchRequest();
+			//	$('#partybox').addClass('no-display');	
+			//});	
 		}
 	};
 	var myfunc=function(e){
@@ -375,12 +340,13 @@ var ReservationFormValidator = function () {
 					var serv=key.split("_-_");
 						console.log( 'closed:'+serv[2] );
 						console.log( 'todaydate:'+todaydate );
-						console.log( 'selecteddate:'+moment( $('#mycalendar').val(), 'DD-MM-YYYY' ) )
-						console.log( 'serv[4]:'+ serv[4] );
+						console.log( 'selecteddate:'+$('#mycalendar').val() );
+						console.log( 'selecteddate:'+moment( $('#mycalendar').val(), 'DD-MM-YYYY' ) );
+						console.log( 'serv[5]:'+ serv[5] );
 						console.log( 'moment(serv[4]): '+moment(serv[4],'HH:mm') );
 						console.log( 'moment(timenow): '+moment(timenow,'HH:mm') );
 					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-light-orange';}
-					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
+					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[5],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
 					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
@@ -441,8 +407,8 @@ var ReservationFormValidator = function () {
                 },
                 tel: {
                     required: true,
-                    number: true,
-                    minlength: 10
+                    //number: true,
+                    //minlength: 10
                 }
             },
             messages: {
@@ -581,6 +547,7 @@ var ReservationFormValidator = function () {
 			runTagsInput();
 			feedTags();
 			runSelect2();
+			intTelData();
         }
     };
 }();

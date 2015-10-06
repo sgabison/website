@@ -56,7 +56,7 @@ class Reservation extends \Object\Concrete {
 	  return $date;
 	 }
 	public function formatData( $data ){
-		$data['tel']=filter_var( $data['tel'], FILTER_SANITIZE_NUMBER_INT );
+		$data['tel']=preg_replace("/[^0-9]/","",$data['tel']);
 		if( $data['datereservation'] ){
 			$datereservation=self::parseDateTime( $data['datereservation'], 'dd-MM-YYYY' );
 			$start=self::parseDateTime( $data['reservationdate'].' '.$data['start'], 'dd-MM-YYYY HH:mm' );

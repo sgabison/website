@@ -22,6 +22,10 @@ var ReservationFormValidator1 = function () {
 	    var day = date.getDate();
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
 	}
+	var	today=new Date();
+	var timenow=today.getHours()+':'+today.getMinutes();
+	console.log( 'timenow'+timenow );
+	var todaydate=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
 	var offdays = $('#offdays').val().split(',');
 	var closeddays = $('#closeddays').val().split(',');
 	var resadate=$('#mycalendar').val();
@@ -60,24 +64,20 @@ var ReservationFormValidator1 = function () {
 	        selectHelper: false,
 	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
 	        dayClick: function(date, jsEvent, view) {
-	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1) && ( closeddays == "" ) ){
+	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
 		        	console.log('works');
 		        	$('tbody td').removeClass('currentDayClass');
 		        	$(this).addClass('currentDayClass');
 	        	}else{
 	        		console.log('don t works');
-	        		//console.log(view);
-	        		//console.log(this);
 		        	$(this).removeClass('fc-highlight');
-		        	//$(this).attr('class', '');
 	        	}
 	        },
 	        dayRender: function (date, cell) {
-	        	console.log( date.format("DD-MM-YYYY") );
-	        	console.log( resadate );
 				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
+				   cell.addClass('currentDayClass');
 				}
 	        	if( $.inArray( date.format( "DD-MM-YYYY" ), offdays ) >=0 ){
 			       cell.css("background-color", "#DDDDDD");
@@ -86,13 +86,14 @@ var ReservationFormValidator1 = function () {
 			       cell.prop('title', t('js_no_serving'));
 	        	}
 	        	if( date.day() == closeddays[0] || date.day() == closeddays[1] || date.day() == closeddays[2] || date.day() == closeddays[3] || date.day() == closeddays[4] || date.day() == closeddays[5] || date.day() == closeddays[6] ){
-	        		if( closeddays != "" ){
+	        	   if( closeddays != "" ){
 				       cell.css("background-color", "#BBBBBB");
 				       cell.css("cursor", "not-allowed");
 				       cell.prop('title', t('js_restaurant_closed'));
 	        		}        		
 	        	}
 	        	if( date.format("DD-MM-YYYY") == $('#calendarlinkdata').text() ){
+	        		$('tbody td').removeClass('currentDayClass');
 	        		console.log(date);
 	        		console.log(cell);
 	        		console.log( $('#calendarlinkdata').text() );
@@ -106,9 +107,13 @@ var ReservationFormValidator1 = function () {
 		    },
 	        select: function(start, end, allDay) {
 	        	console.log( start.format("DD-MM-YYYY") );
-	        	if( start >= moment().subtract(1, 'days' ) && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
+	        	if( start >= moment() && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+	        	}
+	        	if( start.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
+					$('#mycalendar').val( start.format("DD-MM-YYYY") );
+					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
 	        }
 		});
@@ -167,10 +172,18 @@ var ReservationFormValidator1 = function () {
 		}else{
 			var backdrop = $('.ajax-white-backdrop');
 			backdrop.remove();
-			$('.book').click( function(){
+			$('.partyselection').click( function(){
 				lauchRequest();
-				$('#partybox').addClass('no-display');
-			});	
+				$('#partybox').addClass('no-display');					
+			});
+			$('.selectpartyselection').change( function(){
+				lauchRequest();
+				$('#partybox').addClass('no-display');					
+			});
+			//$('.book').click( function(){
+			//	lauchRequest();
+			//	$('#partybox').addClass('no-display');
+			//});	
 		}
 	};
 	var myfunc=function(e){
@@ -280,6 +293,8 @@ var ReservationFormValidator1 = function () {
 				var nyckel;
 				var key;
 				var slot;
+				var classclosed;
+				var classcolor;
 				var html = $.parseHTML( );
 				$log.append( html );
 				$res.append( html );
@@ -291,7 +306,18 @@ var ReservationFormValidator1 = function () {
 				$.each(data.data, function (key, value) {
 					i++;
 					var serv=key.split("_-_");
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget btn-dark-orange servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\">"+serv[0]+"</button>";
+						console.log( 'closed:'+serv[2] );
+						console.log( 'todaydate:'+todaydate );
+						console.log( 'selecteddate:'+$('#mycalendar').val() );
+						console.log( 'selecteddate:'+moment( $('#mycalendar').val(), 'DD-MM-YYYY' ) );
+						console.log( 'serv[5]:'+ serv[5] );
+						console.log( 'moment(serv[5]): '+moment(serv[5],'HH:mm') );
+						console.log( 'moment(timenow): '+moment(timenow,'HH:mm') );
+					if( serv[2] == 'closed' ){ classclosed = 'disabled';classcolor='';}else{ classclosed = '';classcolor='btn-light-orange';}
+					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[5],'HH:mm') ) ){
+						classclosed = 'disabled';
+					}
+					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});

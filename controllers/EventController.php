@@ -93,11 +93,11 @@ class EventController extends Useraware {
 	
 		if ($rec instanceof \Object\Shift) {
 			$res->success = true;
-			$res->message = "TXT_CREATE_OK" ;
+			$res->message = "TXT_EVENT_CREATE_OK" ;
 			$res->data = $rec->toArray();
 			$res->debug = $this->selectedLocation->getName();
 		} else {
-			$res->message = "TXT_CREATE_ERROR"  ;
+			$res->message = "TXT_EVENT_CREATE_ERROR"  ;
 			$res->data = $rec;
 			$res->debug = $data;
 		}

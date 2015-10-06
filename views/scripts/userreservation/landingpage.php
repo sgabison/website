@@ -1,74 +1,79 @@
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-// The latitude and longitude of your business / place
-<?php if( $this->selectedLocation->getGeolocalisation() ){ ?>
-var position = [<?php echo $this->selectedLocation->getGeolocalisation()->getLatitude();?>, <?php echo $this->selectedLocation->getGeolocalisation()->getLongitude();?>];
-var latdid,longdid;
-latdid=position[0]+0.002;
-longdid=position[1]-0.004;
- 
-function showGoogleMaps() {
- 
-    var latLng = new google.maps.LatLng(position[0], position[1]);
-    var latLng2 = new google.maps.LatLng(latdid, longdid);
- 
-    var mapOptions = {
-        zoom: 16, // initialize zoom level - the max value is 21
-        streetViewControl: false, // hide the yellow Street View pegman
-        scaleControl: true, // allow users to zoom the Google Map
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: latLng2
-    };
-    map = new google.maps.Map(document.getElementById('googlemaps'),  mapOptions);
- 	infoWindow = new google.maps.InfoWindow();
- 	infoWindow.setOptions({
- 		map: map,
-        content: "<div><?php echo $this->selectedLocation->getName();?></div>",
-        position: latLng2,
-    });
-    // Show the default red marker at the location
-    marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        draggable: false,
-        animation: google.maps.Animation.DROP
-    });
-    marker.addListener('click', function() {
-    	map.setZoom(8);
-    	map.setCenter(marker.getPosition());
-  	});
-    infoWindow.open(map, marker);
-}
-google.maps.event.addDomListener(window, 'load', showGoogleMaps);
-<?php } ?>
-</script>
 <div class="panel panel-white" style="height:800px;margin-right:-15px;margin-left:-15px;">
 	<div class="panel-body">
 		<div class="row">
-		    <div id="googlemaps"></div>
-		    	<div class="col-md-6">
+<?php 		if($this->societes){
+				$i=0;
+				foreach($this->societes as $societe){
+					foreach( $societe->getLocations() as $location){ 
+?>
+						<input id="<?= $i;?>" data-long="<?php echo $location->getGeolocalisation()->getLongitude();?>" data-lat="<?php echo $location->getGeolocalisation()->getLatitude();?>" data-name="<?php echo $location->getName();?>" data-address="<?php echo $location->getAddress();?>" data-zip="<?php echo $location->getZip();?>" data-city="<?php echo $location->getCity();?>" data-tel="<?php echo $location->getTel();?>" data-id="<?php echo $location->getId();?>" class="no-display">
+<?php 
+						$i++;
+					} 
+				} 
+			 } 
+?>
+			<input id="len" class="no-display" value="<?= $i;?>">
+		    <div class="col-md-12">
+		    	<div class="col-md-6" id="map2panel">
+					<div class="panel panel-white">
+						<div class="panel-heading">
+							<h4 class="panel-title">Restaurants <span class="text-bold">"La Criée" </span></h4>
+<!--
+							<div class="panel-tools">										
+								<a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+							</div>
+-->
+						</div>
+						<div class="panel-body">
+							<div>
+		   						<div id="map2" style="width:100%;height:600px"></div>
+		   					</div>
+		   				</div>
+		   			</div>
+		   		</div>
+		    	<div class="col-md-6 restaurantpanel no-display">
 				    <div class="panel panel-white" id="contactform">
 						<div class="no-display panel panel-blue introduction">
 							<div class="panel-heading">
 								<h4 class="panel-title"><?php echo $this->selectedLocation->getName();?></h4>
+<!--
 								<div class="panel-tools">
 									<a class="btn btn-xs btn-link introductionclose" href="#"> <i class="fa fa-times"></i> </a>
 								</div>
+-->
 							</div>
 							<div class="panel-body">
 								<div class="btn introductionclose"><?php echo 'Prenez une réservation';?></div>
 							</div>
 						</div>
-						<div class=" reservation">
+						<div class="reservation">
 							<iframe src="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>" width="100%" height="600px" frameborder="0" id="iframe">
 								<p>Votre navigateur ne supporte pas l'élément iframe</p>
 							</iframe>
 						</div>
 				    </div>
 				</div>
-				<div class="col-md-6">
+		    	<div class="col-md-6">
+					<div class="panel panel-white">
+						<div class="panel-heading">
+							<h4 class="panel-title"><span class="text-bold" id="locname"><?php echo $this->selectedLocation->getName();?></span></h4>
+<!--
+							<div class="panel-tools">										
+								<a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+							</div>
+-->
+						</div>
+						<div class="panel-body">
+							<input id="selectedLat" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLatitude();?>">
+							<input id="selectedLong" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLongitude();?>">
+		   					<div id="map3" style="width:100%;height:400px"></div>
+		   				</div>
+		   			</div>
+		   		</div>
+				<div class="col-md-6 restaurantpanel no-display">
 				    <div id="description">
-    					<div class="panel panel-white">
+		  				<div class="panel panel-white">
 							<div class="panel-body">
 								<div class="tabbable">
 									<ul id="myTab2" class="nav nav-tabs">
@@ -146,7 +151,7 @@ google.maps.event.addDomListener(window, 'load', showGoogleMaps);
 							</div>
 						</div>
 				    </div>
-				</div>		
+				</div>
 			</div>
 		</div>
 	</div>

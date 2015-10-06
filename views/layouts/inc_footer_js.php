@@ -88,7 +88,9 @@
 		<!-- end: JAVASCRIPTS REQUIRED FOR THIS  Table export ONLY -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		
-		<?php echo $this->headScript(); ?>
+		<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		
+		<?php echo $this->headScript();?>
 		
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 		<!-- start: CORE JAVASCRIPTS  -->

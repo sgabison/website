@@ -1,6 +1,7 @@
 <div class="panel panel-white" style="height:100%">
 	<div class="panel-heading">
-		<h4 class="panel-title"><?php echo $this->translate('TXT_ERROR');?> </h4>
+		<h4 class="panel-title"><?php echo $this->translate('TXT_ERROR');?> : <span class="text-bold"><?php echo $this->translate($this->error); ?></span></h4>
+		 <span id="clock"></span>
 	</div>
 	<div class="panel-body">
 		<div class="row">

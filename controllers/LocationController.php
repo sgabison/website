@@ -14,7 +14,7 @@ class LocationController extends Useraware
 
     public function locationSetupAction() {
         $societe=$this->societe;
-        if( $this->person->getPermits() != 1 ){ die('You do not have access to this screen'); }
+        if( $this->person->getPermits() != 1 ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_SCREEN') ); }
         //GET SELECTEDLOCATION
         if( $this->getParam('selectedLocationId') ){
 			$locationid=$this->getParam('selectedLocationId');
@@ -24,7 +24,7 @@ class LocationController extends Useraware
         $mylocation=\Object\Location::getById( $locationid, 1);
         if( $mylocation instanceof \Object\Location ){	
         	//CHEK IF AUTHORISATION
-        	if( ! in_array( $mylocation, $societe->getLocations() ) ){ die('You do not have access to this location'); }
+        	if( ! in_array( $mylocation, $societe->getLocations() ) ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_LOCATION') ); }
         	$mylocationarray = $mylocation->toArray();
 	       	foreach ($mylocationarray as $key=>$val){
 	       		if( $key=="geolocalisation" ){

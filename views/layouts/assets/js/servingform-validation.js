@@ -19,6 +19,8 @@ var ServingFormValidator = function () {
 		$('#noserving').removeClass("no-display");
 		$(".copystartinitiate").val( $('#startday').val() );
 		$(".copyendinitiate").val( $('#endday').val() );
+		$(".maxtables").val( $('#maxtables').val() );
+		$(".maxseats").val( $('#maxseats').val() );
 	});
 	
 	$.each([ 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' ], function( index, value ) {

@@ -303,14 +303,14 @@ var SocieteSetupFormValidator = function () {
 				"data": "permits",
 				"orderable": false,
 			    "render": function ( data, type, row ) {
-			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-edit"></i> '+permitsToName(data)+'</a>';
+			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-sitemap"></i> '+permitsToName(data)+'</a>';
 			    }
 			  },
 			  { 
 				"data": "locationid",
 				"orderable": false,
 			    "render": function ( data, type, row ) {
-			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-edit"></i> '+posit[data]+'</a>';
+			      	return '<a href="#" class="btn btn-blue"><i class="fa fa-map-marker"></i> '+posit[data]+'</a>';
 			    }
 			  },
 	          { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-blue tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> </a>'},
