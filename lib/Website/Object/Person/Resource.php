@@ -63,6 +63,7 @@ class Resource extends \Object\Concrete\Resource {
 				$object->setUserOwner ( 1 );
 				$object->setUserModification ( 1 );
 				if (method_exists ( $object, "setAvatar" ))
+					echo $object->getAvatar (); exit;
 					$object->setAvatar ( $this->getDefaultImage () );
 				$object->setPublished ( 1 );
 			}
