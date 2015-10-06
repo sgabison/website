@@ -16,9 +16,6 @@
 				<div class="inline-block">
 					<h5 class="no-margin"> <?= $this->translate('WELCOME')?> </h5>
 					<h4 class="no-margin"> <?= $this->translate('TO_RESAEXPRESS')?> </h4>
-					<a class="btn user-options sb_toggle">
-						<i class="fa fa-cog"></i>
-					</a>
 				</div>
 			</div>
 			<!-- start: MAIN NAVIGATION MENU -->

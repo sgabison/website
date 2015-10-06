@@ -197,8 +197,10 @@ class PersonController extends Useraware
 		if ($person instanceof Object\Person) {
 			$data=$this->requete->params;
 			$customer=Object\Person::getById( $data['id'], 1);
+			//echo basename( 'data: '.$data['avatar'] );
+			//echo basename( 'customer: '.$customer->getAvatar() );
 			if( $customer instanceof Object\Person ){
-				if( ( $customer->getAvatar() !='' ) || ( basename( $data['avatar'] ) != basename( $customer->getAvatar() ) ) ){
+				if( ( $customer->getAvatar() !='' ) && ( basename( $data['avatar'] ) != basename( $customer->getAvatar() ) ) ){
 					if ( !($data['avatar'] instanceof \Asset) and $data['avatar'] )
 					$data['avatar'] = $this->convertToAsset($data['avatar']);
 				}else{
