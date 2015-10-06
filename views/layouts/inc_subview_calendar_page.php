@@ -56,14 +56,7 @@
 					<div class="form-group">
 						<select class="form-control selectpicker event-categories">
 							<?php Foreach ($this->categories as $category): ?>
-							<option data-content="<span 
-								
-								
-								
-								class='event-category event-<?php echo $category?>'><?php echo $this->t($category)?></span>"
-								value="event-
-								<?php echo $category?>">
-								<?php echo $this->t($category)?></option>
+							<option data-content="<span class='event-category event-<?php echo $category?>'><?php echo $this->t($category)?></span>" value="event-<?php echo $category?>"><?php echo $this->t($category)?></option>
 							<?php endforeach ; ?>
 						</select>
 					</div>
@@ -71,8 +64,7 @@
 				<?php endif; ?>
 				<div class="col-md-12">
 					<div class="form-group">
-						<textarea class="summernote"
-							placeholder="<?php echo $this->t('TXT_EVENT_NOTE')?>..."></textarea>
+						<textarea class="summernote" placeholder="<?php echo $this->t('TXT_EVENT_NOTE')?>..."></textarea>
 					</div>
 				</div>
 			</div>
@@ -96,8 +88,7 @@
 			<div class="col-md-12">
 				<h2 class="event-title"></h2>
 				<div class="btn-group options-toggle pull-right">
-					<button class="btn dropdown-toggle btn-transparent-grey"
-						data-toggle="dropdown">
+					<button class="btn dropdown-toggle btn-transparent-grey" data-toggle="dropdown">
 						<i class="fa fa-cog"></i> <span class="caret"></span>
 					</button>
 					<ul role="menu" class="dropdown-menu dropdown-light pull-right">

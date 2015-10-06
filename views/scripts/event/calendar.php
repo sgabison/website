@@ -8,6 +8,7 @@
 										<?php echo $this->t('TXT_TITLE_EVENT')?> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?>
 -->
 										<h4 class="panel-title"><?php echo $this->t('TXT_TITLE_EVENT')?> <span class="text-bold"> <?php echo ($this->selectedLocation)? $this->selectedLocation->getName():$this->t("TXT_CHOISIR_LOCATION");?> </span></h4>
+<!--
 										<div class="panel-tools">
 											<div class="dropdown">
 												<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
@@ -38,6 +39,7 @@
 												<i class="fa fa-times"></i>
 											</a>
 										</div>
+-->
 									</div>
 									<div class="panel-body">
 										<div class="col-sm-12 space20">

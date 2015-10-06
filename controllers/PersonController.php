@@ -191,13 +191,27 @@ class PersonController extends Useraware
 	/**
 	 * update
 	 */
+	public function extractFileName($filename){
+		$data = explode( '/',$filename);
+		return $data[2];
+	}
+	public function extractAvatar($filename){
+		return explode( '/',$filename);
+	}
 	public function update() {
 		$res = new Reponse();
 		$person=Object\Person::getById($this->id);
 		if ($person instanceof Object\Person) {
 			$data=$this->requete->params;
-			if ( !($data['avatar'] instanceof \Asset) and $data['avatar'] )
-			$data['avatar'] = $this->convertToAsset($data['avatar']);
+			$customer=Object\Person::getById( $data['id'], 1);
+			echo $this->extractFileName($customer->getAvatar());
+			echo exit;
+			if( $customer instanceof Object\Person ){
+				if( in_array( $this->extractFileName($customer->getAvatar()), $this->extractAvatar( $data['avatar'] ) ) ){
+					if ( !($data['avatar'] instanceof \Asset) and $data['avatar'] )
+					$data['avatar'] = $this->convertToAsset($data['avatar']);
+				}
+			}
 			if( $data['password'] =="" ){ $data['password']=$person->getPassword();}
 			$person->setValues( $data );
 			$person->save();
