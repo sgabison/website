@@ -133,7 +133,7 @@
 									<?php echo $this->translate('TXT_GUEST_TEL');?><span class="symbol required"></span>
 								</label>
 								<span class="input-icon">
-									<input class="form-control typeahead" id="tel" name="tel"  value='<?php echo $this->tel;?>'>
+									<input type="tel" class="form-control typeahead" id="tel" name="tel"  value='<?php echo $this->tel;?>'>
 								</span>
 							</div>
 							<div class="form-group">

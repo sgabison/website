@@ -20,6 +20,7 @@ var ReservationFormValidator = function () {
 	var intTelData = function(){
 		$("#tel").intlTelInput({ 
 	        defaultCountry: "fr",
+	        autoFormat: false,
 	        preferredCountries: ['fr', 'gb', 'de', 'be'],
 	        utilsScript: "/website/views/layouts/assets/plugins/intl-tel-input-master/lib/libphonenumber/build/utils.js"
 		})
