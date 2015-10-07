@@ -27,10 +27,12 @@ class EventController extends Useraware {
         
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {
-					Main.init();
+					$(".toolbar-subview").removeClass("hidden");
+        			Main.init();
  					Events.init();
 					PagesUserProfile.init();
         			SVExamples.init();
+        			
 				});',
         		'text/javascript',
         		array('noescape' => true));
@@ -133,12 +135,12 @@ class EventController extends Useraware {
 			$shift->save();
 			$res->data =  $shift->toArray();
 			$res->success = true;
-			$res->message ="TXT_UPDATE_OK";
+			$res->message ="TXT_EVENT_CREATE_OK";
 			$res->debug=$dataFormatted;
 		} else {
 			$res->data =  $this->requete->params;
 			$res->success = false;
-			$res->message = "TXT_UPDATE_ERROR" ;
+			$res->message = "TXT_EVENT_UPDATE_FAIL" ;
 		}
 		return $res;
 	}
@@ -151,9 +153,9 @@ class EventController extends Useraware {
 		if ($rec ) {
 			$rec->delete();
 			$res->success = true;
-			$res->message = 'Destroyed';
+			$res->message = 'TXT_EVENT_DESTROY';
 		} else {
-			$res->message = "Failed to destroy";
+			$res->message = "TXT_EVENT_DESTROY_FAIL";
 		}
 		return $res;
 	}

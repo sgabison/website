@@ -1,21 +1,20 @@
-var Events = function() {
+var Calendar = function() {
     "use strict";
     var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
     var defaultRange = new Object;
-	
     defaultRange.start = moment();
     defaultRange.end = moment().add('days', 1);
     //Calendar
     var setFullCalendarEvents = function() {
         var date = new Date();
-		moment.lang(language);
         dateToShow = date;
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
 		var start = new Date(y, m-1, d);
         //var end = new Date(y, m+1, d );
-        var end = new Date(y, m+1, d );
+        var end = new Date(y+1, m, d );
+		
     };
     //function to initiate Full Calendar
     var runFullCalendar = function() {
@@ -55,8 +54,11 @@ var Events = function() {
         var m = date.getMonth();
         var y = date.getFullYear();
         var form = '';
-        $('#full-calendar').fullCalendar({
-        	lang:language,
+        var div = $('#rapport-calendar');
+
+		div.fullCalendar({
+        	lang: language,
+	//		ignoreTimezone :false,
             buttonIcons: {
                 prev: 'fa fa-chevron-left',
                 next: 'fa fa-chevron-right'
@@ -68,7 +70,7 @@ var Events = function() {
             },
             weekends: true,
             firstDay: 1,
-            events: loadEvents,
+            events:  loadEvents,//demoCalendar,
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -105,8 +107,8 @@ var Events = function() {
                     $(this).remove();
                 }
             },
-            selectable: true,
-            selectHelper: true,
+            selectable: false,
+            selectHelper: false,
             select: function(start, end, allDay) {
                 defaultRange.start = moment(start);
                 defaultRange.end = moment(start).add('hours', 1);
@@ -122,26 +124,22 @@ var Events = function() {
             },
             eventClick: function(calEvent, jsEvent, view) {
                 dateToShow = calEvent.start;
-                $.subview({
-                    content: "#readFullEvent",
-                    startFrom: "right",
-                    onShow: function() {
-						console.log(calEvent);
-                        readFullEvents(calEvent.id);
-                    }
-                });
+                
+                var url= "/liste-reservations";
+                var data  = '?calendar='+ moment(calEvent.start).format('DD-MM-YYYY') +
+                '&servingid='+ calEvent.serving_id;
+                window.location=url+ data ;
 
             }
         });
     };
     var editFullEvent = function(el) {
-       
-       $(".close-new-event").off().on("click", function() {
+        $(".close-new-event").off().on("click", function() {
             $(".back-subviews").trigger("click");
         });
         $(".form-full-event .help-block").remove();
         $(".form-full-event .form-group").removeClass("has-error").removeClass("has-success");
-        var $eventDetail = $('.form-full-event .summernote');
+        $eventDetail = $('.form-full-event .summernote');
 
         $eventDetail.summernote({
             oninit: function() {
@@ -205,7 +203,7 @@ var Events = function() {
             $(".form-full-event .event-id").val(el);
 
             for (var i = 0; i < demoCalendar.length; i++) {
-				console.log("editevent", el, demoCalendar[i]);
+
                 if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
@@ -241,7 +239,7 @@ var Events = function() {
                         eventCategory = demoCalendar[i].category;
                     }
                     $('.form-full-event .event-categories option').filter(function() {
-                    // 	console.log(t(eventCategory), eventCategory, $(this).text());
+                    	console.log(t(eventCategory), eventCategory, $(this).text());
                         return ($(this).text().toLowerCase() == t(eventCategory) );
                     }).prop('selected', true);
                     $('.form-full-event .event-categories').selectpicker('render');
@@ -279,15 +277,13 @@ var Events = function() {
         });
     };
     var readFullEvents = function(el) {
-    	 console.log("readfull-event") ;
-         	
+
         $(".edit-event").off().on("click", function() {
 			subViewElement = $(this);
             subViewContent = subViewElement.attr('href');
             $.subview({
                 content: subViewContent,
                 onShow: function() {
-            	console.log("edit",el);
                     editFullEvent(el);
                 },
                 onHide: function() {
@@ -300,12 +296,12 @@ var Events = function() {
 
         $("#readFullEvent").find(".delete-event").off().on("click", function() {
             el = $(this).data("event-id");
-            bootbox.confirm(t('js_sure_cancel'), function(result) {
+            bootbox.confirm("Are you sure to cancel?", function(result) {
                 if (result) {
                     $.blockUI({
-                        message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+                        message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
                     });
-                    var reponse = new Object; 
+                    var reponse = new $.post("page.php", data);; 
     				   reponse.data = "";
 					   reponse.id =  el;
     				   reponse.METHOD = ( is_int(reponse.id) )? 'DELETE':'';
@@ -462,7 +458,7 @@ var Events = function() {
 				reponse.data = newEvent;
 				
                 $.blockUI({
-                    message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+                    message: '<i class="fa fa-spinner fa-spin"></i> Do some ajax to sync with backend...'
                 });
 
                 if ($(".form-full-event .event-id").val() !== "") {
@@ -475,8 +471,8 @@ var Events = function() {
                             var eventIndex = i;
                         }
                     }
- 
-				   reponse.id =  newEvent.id;
+                   console.log("hurra", newEvent);
+   				   reponse.id =  newEvent.id;
 				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
 
 
@@ -502,7 +498,7 @@ var Events = function() {
 
                 } else {
 
-					   // console.log("hurra new event");
+					 //   console.log("hurra new event");
     				   reponse.id =  "";
     				   reponse.METHOD = 'POST';
                         $.ajax({
@@ -530,7 +526,7 @@ var Events = function() {
         });
     };
 	var saveEvent = function (newEvent){
-					    
+					   console.log("hurra save event", newEvent);
 					   var reponse = new Object; 
     				   reponse.data = newEvent;
 					   reponse.id =  newEvent.id;
@@ -545,31 +541,31 @@ var Events = function() {
     							$.unblockUI();
 	    						if (json.success || json.success == 'true') {
 	                                $('#full-calendar').fullCalendar('renderEvent', json.data, true);
-	                                demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
+	                                demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
 	                                toastr.success(json.message);
 	                            }
                         	}
                         });
 	};
 	var loadEvents = function (start,end,timezone,callback){
-					  
+					//   console.log("hurra load events",start,end);
 					   var reponse = new Object; 
     				   reponse.start = start;
 					   reponse.end =  end;
-					   reponse.timezone =  timezone;
+					   reponse.timezone = timezone;
     				   reponse.METHOD = 'GET';
+
                         $.ajax({
-                            url: '/data/event/get-events',
+                            url: '/data/calendar/get-events',
                             dataType: 'json',
                             type : 'POST', // obligatoire
                             data : JSON.stringify(reponse),
                             contentType : "application/json; charset=utf-8",
                             success : function(json) {
     							$.unblockUI();
-	    						if (json.success || json.success == 'true') {	                               
-									callback(json.data);
+	    						if (json.success || json.success == 'true') {	
+									callback( json.data) ;								
 									demoCalendar = $.makeArray(json.data);
-									console.log("loadEvents",demoCalendar);
 	                            }
                         	}
                         });

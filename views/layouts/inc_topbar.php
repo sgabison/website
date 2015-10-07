@@ -7,7 +7,7 @@
 							<i class="fa fa-bars"></i>
 						</a>
 						<!-- start: LOGO -->
-						<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" href="booking">
 							<!--  <img src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/images/logo.png" alt="ResaExpress"/>-->
 							<i class="fa fa-globe">ResaExpress</i>
 						

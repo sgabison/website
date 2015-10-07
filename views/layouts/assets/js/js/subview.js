@@ -39,6 +39,7 @@
 			subview_id.push(settings.content);
 
 			if(subViews.is(":visible") == false) {
+			
 				if(supportTransition) {
 
 					$(".toolbar-tools").css({
@@ -68,7 +69,7 @@
 						$('.main-container').css({
 							'max-height': $windowHeight - topBar.outerHeight(true),
 							'min-height': $windowHeight - topBar.outerHeight(true),
-							'overflow': 'hidden',
+							'overflow': 'hidden'
 						});
 					});
 					switch (settings.startFrom) {
@@ -91,7 +92,7 @@
 											}
 										});
 									} else {
-										$(".subviews-container").html("<h3 class='center'>Sorry this page is not available</h3>");
+										$(".subviews-container").html("<h3 class='center'>Désolé cette page n'est pas accessible</h3>");
 									}
 
 								});
@@ -113,7 +114,7 @@
 											}
 										});
 									} else {
-										$(".subviews-container").html("<h3 class='center'>Sorry this page is not available</h3>");
+										$(".subviews-container").html("<h3 class='center'>Désolé cette page n'est pas accessible</h3>");
 									}
 								});
 							});
@@ -148,7 +149,7 @@
 						$('.main-container').css({
 							'max-height': $windowHeight - topBar.outerHeight(true),
 							'min-height': $windowHeight - topBar.outerHeight(true),
-							'overflow': 'hidden',
+							'overflow': 'hidden'
 						});
 					});
 					switch (settings.startFrom) {
@@ -169,7 +170,7 @@
 											}
 										});
 									} else {
-										$(".subviews-container").html("<h3 class='center'>Sorry this page is not available</h3>");
+										$(".subviews-container").html("<h3 class='center'>D�sol� cette page n'est pas accessible</h3>");
 									}
 
 								});
@@ -191,7 +192,7 @@
 											}
 										});
 									} else {
-										$(".subviews-container").html("<h3 class='center'>Sorry this page is not available</h3>");
+										$(".subviews-container").html("<h3 class='center'>D�sol� cette page n'est pas accessible</h3>");
 									}
 								});
 							});
