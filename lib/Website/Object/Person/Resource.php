@@ -63,7 +63,6 @@ class Resource extends \Object\Concrete\Resource {
 				$object->setUserOwner ( 1 );
 				$object->setUserModification ( 1 );
 				if (method_exists ( $object, "setAvatar" ))
-					echo $object->getAvatar (); exit;
 					$object->setAvatar ( $this->getDefaultImage () );
 				$object->setPublished ( 1 );
 			}
@@ -75,7 +74,6 @@ class Resource extends \Object\Concrete\Resource {
 				if (! $object->getO_key ()) {
 					$folder = $this->getFolderRoot ( );
 					$object->setParent ( $folder );
-						
 					if (! method_exists ( $object, getEmail )) {
 						$key1 = $this->model->getClassName ();
 					} else {

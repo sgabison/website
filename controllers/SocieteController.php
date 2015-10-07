@@ -247,7 +247,7 @@ class SocieteController extends Useraware
 				$row['email']=$_POST['data']['email'];
 				$row['phone']=$_POST['data']['phone'];
 				$row['permits']=$_POST['data']['permits'];
-				$location=Object\Location::getById( $row['locationid'], 1 );
+				$location=Object\Location::getById( $_POST['data']['locationid'], 1 );
 				$row['location']=$location;
 				$row['password']=md5($_POST['data']['password']);
 				$current=Object\Person::getByEmail($row['email'],1);
@@ -260,6 +260,8 @@ class SocieteController extends Useraware
 					if ($result instanceof \Object\Person) {
 						$row['DT_RowId']=$result->getId();
 						$row['id']=$result->getId();
+						$row['locationid']=$result->getLocation()->getId();
+						$row['locationname']=$result->getLocation()->getName();
 						$reponse->success = true;
 						$reponse->message = "TXT_CREATE_OK" ;
 						$reponse->row = $row;

@@ -60,6 +60,8 @@ $fields=array('id','name','description','address','zip','city','tel','email','fa
 	public function createPerson($data=array()){
 		$object = new \Object\Person(); 		
  		$object->setSociete($this);
+ 		$object->setLocation( $data['location'] );
+ 		unset( $data['location'] );
 		return $object->updateData($data);
 	}
 	public function createGuest($data=array()){
