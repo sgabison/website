@@ -161,6 +161,12 @@ console.log( pos );
 																				</label>
 																				<input type="number" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_FAX');?>" name="fax" id="fax" class="form-control limited" maxlength="100" value="<?php echo $this->fax;?>">
 																			</div>
+																			<div class="form-group">
+																				<label class="control-label">
+																					<?php echo $this->translate('TXT_SETUP_SOCIETE_URL');?>
+																				</label>
+																				<input type="text" placeholder="http://www.website.com" name="url" id="url" class="form-control limited" maxlength="100" value="<?php echo $this->url;?>">
+																			</div>
 																		</div>
 																	</div>	
 																</div>

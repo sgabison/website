@@ -24,7 +24,7 @@ class Location extends \Object\Concrete {
 		return (array) $this->getResource()->getPositions();
 	}
 	public function toArray() {
-		$fields=array('id', 'name', 'address', 'zip', 'city', 'email', 'tel', 'fax', 'description', 'maxSeats', 'maxTables', 'maxResaPerUnit', 'resaUnit', 'closingDateStart', 'closingDateEnd', 'mealduration', 'geolocalisation');
+		$fields=array('id', 'name', 'address', 'zip', 'city', 'email', 'tel', 'fax', 'description', 'maxSeats', 'maxTables', 'maxResaPerUnit', 'resaUnit', 'closingDateStart', 'closingDateEnd', 'mealduration', 'geolocalisation', 'url');
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();

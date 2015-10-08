@@ -37,6 +37,7 @@ var SocieteSetupFormValidator = function () {
 			, newSociete.email = $("#email").val()
 			, newSociete.tel = $("#tel").val()
 			, newSociete.fax = $("#fax").val()
+			, newSociete.url = $("#url").val()
 			, newSociete.maxSeats = $("#maxSeats").val()
 			, newSociete.maxTables = $("#maxTables").val()
 			, newSociete.maxResaPerUnit = $("#maxResaPerUnit").val()
@@ -47,7 +48,7 @@ var SocieteSetupFormValidator = function () {
 			, newSociete.closingDateEnd = $("#closingDateEnd").val()
 			, newSociete.lngresult = $("#lngresult").val()
 			, newSociete.latresult = $("#latresult").val()
-			,newSociete.description = $("#presentation").val()
+			, newSociete.description = $("#presentation").val()
 			, newSociete.METHOD = 'PUT';
 			$.blockUI({
 				message: '<i class="fa fa-spinner fa-spin"></i> Veuillez patienter...'
@@ -146,19 +147,23 @@ var SocieteSetupFormValidator = function () {
                 maxResaSeats: {
                     required: true,
                     number: true
+                },
+                url: {
+                    url: true
                 }
             },
             messages: {
-                name: "Please enter the name of the company",
-                address: "Please enter an address for the company",
-                zip: "Please enter a postal code for the company",
-                city: "Please enter a city for the company",
-                tel: "Please enter a telephone number for the company",
-                email: "Please enter an email address for the company",
-                maxSeats: "Please enter a maximum seats value, a numeric value",
-                maxTables: "Please enter a maximum tables value, a numeric value",
-                meallength: "Please enter a maximum length of the meal in minutes, a numeric value",
-                maxResaPerUnit: "Please enter a maximum number of reservations per unit of time, a numeric value"
+                name: t('js_name_please'),
+                address: t('js_address_please'),
+                zip: t('js_zip_please'),
+                city: t('js_city_please'),
+                tel: t('js_tel_please'),
+                email: t('js_email_please'),
+                maxSeats: t('js_maxseats_please'),
+                maxTables: t('js_maxtables_please'),
+                mealduration: t('js_mealduration_please'),
+                maxResaPerUnit:  t('js_maxresperunits_please'),
+                url: t('js_url_please')
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler1.hide();

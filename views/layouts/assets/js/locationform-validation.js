@@ -50,6 +50,7 @@ var LocationFormValidator = function () {
 			, newLocation.email = $("#email").val()
 			, newLocation.tel = $("#tel").val()
 			, newLocation.fax = $("#fax").val()
+			, newLocation.url = $("#url").val()
 			, newLocation.description = $("#presentation").val()
 			, newLocation.resaUnit = $("#resaUnit").val()
 			, newLocation.maxSeats = $("#maxSeats").val()
@@ -281,7 +282,11 @@ var LocationFormValidator = function () {
                 maxResaPerUnit: {
                     required: true,
                     number: true
-                }            },
+                },
+                url: {
+                    url: true
+                }            
+            },
             messages: {
                 name: t('js_name_please'),
                 address: t('js_address_please'),
@@ -293,7 +298,8 @@ var LocationFormValidator = function () {
                 maxSeats: t('js_maxseats_please'),
                 maxTables: t('js_maxtables_please'),
                 maxResaPerUnit: t('js_maxresperunits_please'),
-                mealduration: t('js_mealduration_please')
+                mealduration: t('js_mealduration_please'),
+                url: t('js_url_please')
             },
             invalidHandler: function (event, validator) { //display error alert on form submit
                 successHandler2.hide();

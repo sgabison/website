@@ -26,8 +26,8 @@
 			</div>
 			<!-- end: MAIN CONTAINER -->
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_footer_js.php") ; ?>
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_subview_calendar_page.php") ; ?>
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_subview_sample_contents.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_subview_calendar_page.php") ; ?>
+			<? //include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_subview_sample_contents.php") ; ?>
 		</div>
 		<!-- start: MAIN JAVASCRIPTS -->
 		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/userreservationform-validation.js"></script>
