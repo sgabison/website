@@ -68,6 +68,7 @@ class StatsController extends Useraware {
 	public function statisticsAction() {
 		$this->disableLayout();
 		$this->disableViewAutoRender();
-				
+		$stat=Objet\Stats::getStatistics( $this->selectedLocation->getId() );
+		var_dump( $stat ); exit;
 	}
 }
