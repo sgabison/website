@@ -11,6 +11,7 @@ class Action extends Frontend {
         parent::init();
         $this->createWebsiteSession ( "SITE" );
         $this->storeLanguage();
+
         
     }
     private function createWebsiteSession($name) {

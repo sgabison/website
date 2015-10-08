@@ -176,6 +176,7 @@ var ReservationFormValidator = function () {
 					if (json.success || json.success == 'true') {
 						//var i = $("#reservation-id").val();
 						//reservation[i] = json.data;
+						console.log( json.data );
 						toastr.success(newReservation.lastname + ' '+ json.message);
 		                $('#reservationform').addClass('no-display');
 		                $('#confirmationform').removeClass('no-display');
@@ -185,6 +186,7 @@ var ReservationFormValidator = function () {
 		                $('#finalguesttel').text( newReservation.tel );		                
 		                $('#finaldate').text( newReservation.reservationdate );
 		                $('#finaltimeslot').text( newReservation.start );
+		                $('#finalid').text( json.data.id );
 					}
 				},
 				error: function (request, status, error) {

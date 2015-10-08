@@ -151,8 +151,8 @@ var ReservationFormValidator = function () {
 		var form1 = $('#bookingform');
 		console.log( 'select_location'+$('#select_location').val() );
 		console.log( 'mycalendar: '+$.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
-		form1.attr('action',URL+'/data/userreservation/get-data'); 
-		form1.attr('method','POST');
+		//form1.attr('action',URL+'/data/userreservation/get-data'); 
+		//form1.attr('method','POST');
 		$('#submit2').click( function(event){
 			event.preventDefault();
 			console.log( 'submitted' );
@@ -168,7 +168,7 @@ var ReservationFormValidator = function () {
 			, newReservation.start = $("#slotinput").val()
 			, newReservation.servinginput = $("#servinginput").val()
 			, newReservation.locationid = $("#locationinput").val()
-			, newReservation.reservationid = $("#locationinput").val()
+			//, newReservation.reservationid = $("#locationinput").val()
 			, newReservation.bookingnotes = $("#tags_1").val()
 			, newReservation.METHOD = $("#method").val();
 			$.blockUI({
@@ -193,6 +193,7 @@ var ReservationFormValidator = function () {
 						//var i = $("#reservation-id").val();
 						//reservation[i] = json.data;
 						//toastr.success(newReservation.lastname + ' '+ json.message);
+						console.log( 'json.data'+json.data );
 		                $('#reservationform').addClass('no-display');
 		                $('#confirmationform').removeClass('no-display');
 		                $('#finalpartysize').text( newReservation.partysize );
@@ -204,6 +205,7 @@ var ReservationFormValidator = function () {
 		                $.cookie("email", newReservation.email, { expires: 90, path: '/' });
 		                $.cookie("tel", newReservation.tel, { expires: 90, path: '/' });
 		                $.cookie("guestname", newReservation.lastname, { expires: 90, path: '/' });
+		                $('#finalid').text( json.data.id );
 					}
 				},
 				error: function (request, status, error) {

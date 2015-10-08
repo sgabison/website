@@ -68,7 +68,7 @@ class Resource extends \Object\Concrete\Resource {
     public function getServings(){
 		$result=array();
 		if($this->model->getId() >0 ):
-		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_13` r join object_query_13 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'location' " , $this->model->getId());
+		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_13` r join object_query_13 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'location' ORDER BY o.`title`" , $this->model->getId());
 		$data =$this->db->FetchAll($sql);
 		endif;
 		foreach ($data as $key=>$row){

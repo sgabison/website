@@ -381,7 +381,7 @@ class UserreservationController extends Action
 		if( $this->getParam("selectedLocationid") ){
 			$selectedLocationid=$this->getParam("selectedLocationid");
 		} else {
-			$selectedLocationid=79;
+			$selectedLocationid=944;
 		}
 		$selectedLocation=Object\Location::getById( $selectedLocationid, 1);
 		if( $selectedLocation instanceof Object\Location ){

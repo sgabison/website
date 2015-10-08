@@ -41,7 +41,10 @@ class DefaultController extends Action {
 			->appendBody( \Zend_Json::encode( $tab ) );
 
 	}
-
+	
+	public function defaultAction () {
+	}
+	
     public function layout() {
         $this->enableLayout();
     }

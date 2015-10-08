@@ -293,7 +293,7 @@
 				<div class="successHandler alert alert-success">
 						<h4><?php echo $this->translate('TXT_YOUR_RESERVATION_IS_CONFIRMED');?></h4>
 						<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION');?><br>
-						<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
+						<?php //echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
 				</div>
 				<div class="confirmation1">
 					<div class="panel">
@@ -333,12 +333,12 @@
 							<!--
 							<a class="btn btn-social btn-primary btn-block"><i class="fa fa-facebook"></i> <?php echo $this->translate('TXT_UPDATE_FACEBOOK');?></a>
 							-->
-							<a class="btn btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(RESTAURANT+LUNELLE)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
+							<a class="btn btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(<?php echo str_replace('+', ' ',$this->selectedLocation->getName());?>)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
 		<!--					<a class="btn btn-social btn-primary btn-block" data-target=".bs-example-modal-basic" data-toggle="modal" id="mapmodal" ><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>-->
 							<!--
 							<a class="btn btn-social btn-success btn-block"><i class="fa fa-calendar"></i> <?php echo $this->translate('TXT_UPDATE_CALENDAR');?></a>
 							-->
-							<a class="btn btn-social btn-purple btn-block" href="/reservation"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
+							<a class="btn btn-social btn-purple btn-block" href="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
 						</div>
 					</div>
 					<div class="form-group">

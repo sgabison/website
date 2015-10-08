@@ -1,0 +1,57 @@
+
+.pimcore_area_multilangue_editmode {
+    background: #white;
+    margin: 0px;
+    padding: 0px;
+    color: black;
+}
+.pimcore_area_multilangue_editmode .module {
+    border: none;
+}
+
+
+.pimcore_area_multilangue_editmode div.module div.area-title {
+display: block;
+font-family: "Trebuchet MS", Helvetica, sans-serif;
+font-style: italic;
+font-size: 12px;
+margin-bottom: 0px;
+font-weight: normal;
+text-transform: uppercasecase;
+color:black;
+}
+
+.pimcore_area_multilangue_editmode div.module div.area-title a {
+color:gray;
+}
+
+.pimcore_area_multilangue_editmode .EN {
+background-color:#B0B5BA;
+}
+.pimcore_area_multilangue_editmode div.module div.module-content,
+.pimcore_area_multilangue_editmode div.module div.module-content-header,
+.pimcore_area_multilangue_editmode div.module div.module-content-text {
+padding-top: 0px;
+}
+div.module h3.module-title {
+display: block;
+}
+div.module div.module-open,
+div.module div.module-close {
+	position: absolute;
+	top: 8px;
+	right: 0px;
+	width: 25px;
+	height: 15px;
+	background: transparent url('/website/views/themes/default/img/module-open.png') no-repeat;
+	cursor: pointer;
+}
+
+div.module div.module-close {
+	background-image: url('/website/views/themes/default/img/module-close.png');
+}
+
+div.module div.module-open span, 
+div.module div.module-close span {
+	display: none;
+}

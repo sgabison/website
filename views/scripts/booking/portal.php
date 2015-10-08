@@ -37,7 +37,7 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-lg-4 col-md-5 col-sm-6">
+			<div class="col-lg-4 col-md-5">
 				<div>
 					<?php include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_meteo.php") ; ?>
 				</div>
@@ -45,7 +45,7 @@
 					
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-5">
+			<div class="col-lg-4 col-md-5 col-sm-6">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-blue">
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-7 col-lg-4">
+			<div class="col-lg-4 col-md-5">
 				<div class="panel panel-white">
 					<div class="panel-heading border-light">
 						<h4 class="panel-title">La Criée</h4>

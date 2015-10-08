@@ -194,7 +194,7 @@
 		<div class="successHandler alert alert-success">
 				<h4><?php echo $this->translate('TXT_YOUR_RESERVATION_IS_CONFIRMED');?></h4>
 				<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION');?><br>
-				<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
+				<?php // echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
 		</div>
 		<div class="col-md-6">
 			<div class="panel">
