@@ -69,6 +69,7 @@ class StatsController extends Useraware {
 		$this->disableLayout();
 		$this->disableViewAutoRender();
 		$stat= new \Object\Stats;
+<<<<<<< Updated upstream
 		$result=$stat->getStatistics( $this->selectedLocation->getId() );
 		$reponse = new Reponse ();
 		
@@ -79,5 +80,11 @@ class StatsController extends Useraware {
 		
 		$this->render ( $reponse );
 		
+=======
+		$start=new Zend_Date( '11-09-2015 00:00:00', 'dd-MM-YYYY HH:mm:ss');
+		$end=new Zend_Date( '20-09-2015 00:00:00', 'dd-MM-YYYY HH:mm:ss');
+		$results=$stat->getStatistics( $this->selectedLocation->getId() );
+		var_dump($results);
+>>>>>>> Stashed changes
 	}
 }

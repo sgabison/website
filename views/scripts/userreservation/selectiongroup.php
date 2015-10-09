@@ -3,19 +3,19 @@
 		<tbody>
 			<tr>
 				<td class="col-md-4" style="text-align: center">
-					<i class="fa fa-users fa-lg"></i><br>
+					<span class="badge" id="personspan"> <i class="fa fa-users fa-lg"></i> </span><br>
 					<a class="linkhref calendarhref locationlinkfinal">
 						<span class="text-bold" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> 
 						<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
 					</a>					</td>
 				<td class="col-md-4" style="text-align: center">
-					<i class="fa fa-calendar fa-lg"></i><br>
+					<span class="badge badge-success" id="datespan"> <i class="fa fa-calendar fa-lg"></i> </span><br>
 					<a class="linkhref calendarhref locationlinkfinal">
 						<span class="text-bold" id="calendarlinkdata">Date</span>
 					</a>
 				</td>
 				<td class="col-md-4" style="text-align: center">
-					<i class="fa fa-clock-o fa-lg"></i><br>
+					<span class="badge" id="clockspan"> <i class="fa fa-clock-o fa-lg"></i> </span><br>
 					<a class="linkhref calendarhref locationlinkfinal">
 						<span class="text-bold" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
 					</a>													

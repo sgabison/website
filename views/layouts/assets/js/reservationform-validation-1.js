@@ -230,7 +230,7 @@ var ReservationFormValidator1 = function () {
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success'> "+res[2]+" </span><span class='badge badge-danger'> "+res[3]+" </span><br>"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success'> "+res[2]+" </span><span class='badge badge-danger'> "+res[3]+" </span><br>"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
@@ -317,7 +317,7 @@ var ReservationFormValidator1 = function () {
 					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[5],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
+					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});

@@ -180,7 +180,7 @@
 							</div>
 							<div id="inputs" class="no-display"></div>
 							<div id="registerbutton">
-								<button class="btn btn-dark-orange btn-block" type="submit" value='submit' id='submit'>
+								<button class="btn btn-lg btn-dark-orange btn-block" type="submit" value='submit' id='submit'>
 									<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
 								</button>
 							</div>

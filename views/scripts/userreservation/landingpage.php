@@ -33,28 +33,15 @@
 		   			</div>
 		   		</div>
 		    	<div class="col-md-6 restaurantpanel no-display">
-				    <div class="panel panel-white" id="contactform">
-						<div class="no-display panel panel-blue introduction">
-							<div class="panel-heading">
-								<h4 class="panel-title"><?php echo $this->selectedLocation->getName();?></h4>
-<!--
-								<div class="panel-tools">
-									<a class="btn btn-xs btn-link introductionclose" href="#"> <i class="fa fa-times"></i> </a>
-								</div>
--->
-							</div>
-							<div class="panel-body">
-								<div class="btn introductionclose"><?php echo 'Prenez une réservation';?></div>
-							</div>
-						</div>
-						<div class="reservation">
+				    <div id="contactform">
+						<div class="reservation" style="margin-right:-15px;margin-left:-15px;">
 							<iframe src="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>" width="100%" height="600px" frameborder="0" id="iframe">
 								<p>Votre navigateur ne supporte pas l'élément iframe</p>
 							</iframe>
 						</div>
 				    </div>
 				</div>
-		    	<div class="col-md-6">
+		    	<div class="col-md-6 hidden-xs">
 					<div class="panel panel-white">
 						<div class="panel-heading">
 							<h4 class="panel-title"><span class="text-bold" id="locname"><?php echo $this->selectedLocation->getName();?></span></h4>
@@ -71,7 +58,7 @@
 		   				</div>
 		   			</div>
 		   		</div>
-				<div class="col-md-6 restaurantpanel no-display">
+				<div class="col-md-6 restaurantpanel no-display hidden-xs">
 				    <div id="description">
 		  				<div class="panel panel-white">
 							<div class="panel-body">

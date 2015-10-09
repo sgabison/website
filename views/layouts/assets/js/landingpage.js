@@ -40,7 +40,7 @@ var Maps = function () {
         	lng: $('#selectedLong').val(),
             title: 'marker',
             infoWindow: {
-		        content: '<p>Foobar</p>'
+		        content: '<p>Restaurant</p>'
 		    }
         });
         var map2 = new GMaps({

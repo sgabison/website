@@ -71,16 +71,16 @@ var ReservationFormValidator = function () {
 		if( $('#reg-email').html() =='' ){ 
 			$('#reg-email').html( "<i class='fa fa-square-o fa-lg'></i> Email mandatory" ); $('#reg-email').css("color", "#a94442" ); 
 		}else{ 
-			$('#reg-email').html( "<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+regemail+"</span></a>" ); $('#reg-email').css("color", "#777777" ); }
+			$('#reg-email').html( "<span class='btn dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+regemail+"</span></a>" ); $('#reg-email').css("color", "#777777" ); }
 		if( $('#reg-tel').html() =='' ){ 
 			$('#reg-tel').html("<i class='fa fa-square-o fa-lg'></i> Tel mandatory"); $('#reg-tel').css( "color", "#a94442" );  
 		}else{ 
-			$('#reg-tel').html("<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+ $("#tel").intlTelInput("getNumber")+'</span></a>' ); $('#reg-tel').css( "color", "#777777" ); 
+			$('#reg-tel').html("<span class='btn dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+ $("#tel").intlTelInput("getNumber")+'</span></a>' ); $('#reg-tel').css( "color", "#777777" ); 
 		}
 		if( $('#reg-lastname').html() =='' ){ 
 			$('#reg-lastname').html("<i class='fa fa-square-o fa-lg'></i> Name mandatory"); $('#reg-lastname').css( "color","#a94442" ); 
 		}else{ 
-			$('#reg-lastname').html("<span class='btn btn-sm dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+reglastname+"</span></a>" ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );
+			$('#reg-lastname').html("<span class='btn dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+reglastname+"</span></a>" ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );
 		}	
 	}
 	$('#mycalendar').datepicker({ 
@@ -277,7 +277,7 @@ var ReservationFormValidator = function () {
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-sm "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
@@ -293,6 +293,7 @@ var ReservationFormValidator = function () {
 	}
 	var slotButton = function(locationid, elementid, backdrop){
 			$('#slotgroup').addClass('no-display');
+			$('#clockspan').addClass('badge-success');
 			$('#servinggroup').addClass('no-display');
 			$('#slotlinkdata').text( $('#'+elementid).text() );
 			$('#slotlinkdata').css( 'cursor', 'pointer' );
@@ -313,6 +314,7 @@ var ReservationFormValidator = function () {
 	}
 	var lauchRequest = function(reservationid){
 		$('.bookbutton').addClass('no-display');
+		$('#personspan').addClass('badge-success');
 		$('#selectgroup').removeClass('no-display');
 		$('#calendarbox').addClass('no-display');
 		$('#locationlink').removeClass('no-display');
@@ -367,7 +369,7 @@ var ReservationFormValidator = function () {
 					if( ( formattedtoday == $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-sm buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
+					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});

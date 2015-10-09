@@ -41,7 +41,7 @@
 									</label>
 									<div>
 									<?php $i=0;foreach( $this->selectedLocation->getServings() as $serving){ ?>
-										<button type="button" class="btn btn-sm buttons-widget servingbutton btn-light-orange" value="<?php echo $serving->getId(); ?>" style="margin:5px"><?php echo $serving->getTitle(); ?></button>		
+										<button type="button" class="btn buttons-widget servingbutton btn-light-orange" value="<?php echo $serving->getId(); ?>" style="margin:5px"><?php echo $serving->getTitle(); ?></button>		
 									<?php if($i==0){$servid=$serving->getId();}$i++;} ?>
 									</div>
 								</div>
@@ -68,7 +68,7 @@
 								  })();
 								</script>
 								<div class="form-group">
-									<button class="btn btn-dark-orange btn-block" value='submit' id='submit'>
+									<button class="btn btn-lg btn-dark-orange btn-block" value='submit' id='submit'>
 										<?php echo $this->translate('TXT_GENERATE_LIST');?> <i class="fa fa-arrow-circle-right"></i>
 									</button>
 								</div>

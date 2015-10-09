@@ -74,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-body" style='margin-left:-5px;margin-right:-5px;'>
+		<div class="panel-body" style='margin-left:-15px;margin-right:-15px;'>
 			<div id="reservationform">
 		<!-- start: FORM VALIDATION 1 PANEL -->
 				<form role="form" id="bookingform" novalidate="novalidate">
@@ -105,20 +105,20 @@
 									<tbody>
 										<tr>
 											<td class="col-md-4" style="text-align: center">
-												<i class="fa fa-users fa-lg"></i><br>
+												<span class="badge" id="personspan"> <i class="fa fa-users fa-lg"></i> </span><br>
 												<a class="linkhref calendarhref locationlinkfinal">
 													<span class="text-bold" id="personlinkdata"></span> 
 													<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
 												</a>
 						 					</td>
 											<td class="col-md-4" style="text-align: center">
-												<i class="fa fa-calendar fa-lg"></i><br>
+												<span class="badge badge-success" id="datespan"> <i class="fa fa-calendar fa-lg"></i> </span><br>
 												<a class="linkhref calendarhref locationlinkfinal">
 													<span class="text-bold" id="calendarlinkdata">Date</span>
 												</a>
 											</td>
 											<td class="col-md-4" style="text-align: center">
-												<i class="fa fa-clock-o fa-lg"></i><br>
+												<span class="badge" id="clockspan"> <i class="fa fa-clock-o fa-lg"></i> </span><br>
 												<a class="linkhref calendarhref locationlinkfinal">
 													<span class="text-bold" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
 												</a>													
@@ -289,7 +289,7 @@
 				</form>
 			</div>
 			<!-- start: CONFIRMATION GROUP -->
-			<div class="panel-body no-display panel-white" id="confirmationform">
+			<div class="no-display" id="confirmationform">
 				<div class="successHandler alert alert-success">
 						<h4><?php echo $this->translate('TXT_YOUR_RESERVATION_IS_CONFIRMED');?></h4>
 						<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION');?><br>

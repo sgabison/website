@@ -13,7 +13,7 @@ class Stats extends \Object\Concrete {
 	public $properties = array(); // an array of other misc properties
 	// Converts this Event object back to a plain data array, to be used for generating JSON
 
-	public function getStatistics(){
-		return (array) $this->getResource()->getStatistics();
+	public function getStatistics( $locationid ){
+		return (array) $this->getResource()->getStatistics( $locationid );
 	}
 }
