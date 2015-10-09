@@ -9,7 +9,7 @@ namespace Website\Object;
 
 class Stats extends \Object\Concrete {
 
-	public $name;
+	
 	public $properties = array(); // an array of other misc properties
 	// Converts this Event object back to a plain data array, to be used for generating JSON
 

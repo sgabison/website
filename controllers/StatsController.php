@@ -70,6 +70,14 @@ class StatsController extends Useraware {
 		$this->disableViewAutoRender();
 		$stat= new \Object\Stats;
 		$result=$stat->getStatistics( $this->selectedLocation->getId() );
-		var_dump( $result, $stat ); exit;
+		$reponse = new Reponse ();
+		
+		$reponse->data = $result; 
+		
+		$reponse->message = "TXT_STATS_SENT";
+		$reponse->success = true;
+		
+		$this->render ( $reponse );
+		
 	}
 }
