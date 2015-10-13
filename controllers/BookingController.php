@@ -51,28 +51,13 @@ class BookingController extends Useraware {
 		$this->view->location=$this->selectedLocation;
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-mockjax/jquery.mockjax.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js');
-// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/lib/d3.v3.js');
-// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedAreaChart.js');
-// 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/stackedArea.js');
-//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/nv.d3.min.js');
-//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBarChart.js');
-//		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/nvd3/src/models/historicalBar.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootbox/bootbox.min.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/easy-pie-chart/dist/jquery.easypiechart.min.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-cookie/jquery.cookie.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.appear/jquery.appear.js');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/setupform-validation.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/index.js');		
-		// ex css	$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.css');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/stats.js');
 		$this->view->inlineScript()->appendScript(
 				'jQuery(document).ready(function() { 
 					Main.init();
+					StatisticsForm.init();
 					//TimePickerFormElements.init();
 					//SetupFormValidator.init(); 
 					Index.init();

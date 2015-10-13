@@ -52,3 +52,6 @@ tr.shown td.details-control {
   opacity: 1; /* Set the opacity for a slightly transparent Google Form */ 
   color: white;
 }
+#fullcalendar h2 {
+    font-size: 20px;
+}

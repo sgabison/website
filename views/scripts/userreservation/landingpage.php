@@ -16,8 +16,8 @@
 			<input id="len" class="no-display" value="<?= $i;?>">
 		    <div class="col-md-12">
 		    	<div class="col-md-6" id="map2panel">
-					<div class="panel panel-white">
-						<div class="panel-heading">
+					<div>
+						<div class="">
 							<h4 class="panel-title">Restaurants <span class="text-bold">"La Criée" </span></h4>
 <!--
 							<div class="panel-tools">										
@@ -25,8 +25,8 @@
 							</div>
 -->
 						</div>
-						<div class="panel-body">
-							<div>
+						<div class="">
+							<div style="margin-left:-15px;margin-right:-15px">
 		   						<div id="map2" style="width:100%;height:600px"></div>
 		   					</div>
 		   				</div>
@@ -35,15 +35,15 @@
 		    	<div class="col-md-6 restaurantpanel no-display">
 				    <div id="contactform">
 						<div class="reservation" style="margin-right:-15px;margin-left:-15px;">
-							<iframe src="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>" width="100%" height="600px" frameborder="0" id="iframe">
+							<iframe src="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>" width="100%" height="700px" frameborder="0" id="iframe">
 								<p>Votre navigateur ne supporte pas l'élément iframe</p>
 							</iframe>
 						</div>
 				    </div>
 				</div>
 		    	<div class="col-md-6 hidden-xs">
-					<div class="panel panel-white">
-						<div class="panel-heading">
+					<div class="">
+						<div class="">
 							<h4 class="panel-title"><span class="text-bold" id="locname"><?php echo $this->selectedLocation->getName();?></span></h4>
 <!--
 							<div class="panel-tools">										
@@ -51,7 +51,7 @@
 							</div>
 -->
 						</div>
-						<div class="panel-body">
+						<div class="">
 							<input id="selectedLat" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLatitude();?>">
 							<input id="selectedLong" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLongitude();?>">
 		   					<div id="map3" style="width:100%;height:400px"></div>

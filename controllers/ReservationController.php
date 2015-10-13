@@ -5,12 +5,10 @@ use Pimcore\Model\Asset;
 use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
-
 use Website\Tool\Reponse;
 use Website\Tool\Request;
 
-class ReservationController extends Useraware
-{
+class ReservationController extends Useraware{
 	public function resaserveringsAction() {  
 		$this->disableLayout();  
 		if( $this->getParam('locationid') ){ 
@@ -417,7 +415,7 @@ class ReservationController extends Useraware
 			Maps.init();
 			$("body").on("click", ".locationlinkfinal", function(){	
 				var newresa="newresa";
-				$.ajax({url: "/fr/booking/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
+				$.ajax({url: "/data/reservation/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
 					$("#registerbutton").addClass("no-display");
 					$("a.locationlinkfinal").css( "cursor", "pointer" );

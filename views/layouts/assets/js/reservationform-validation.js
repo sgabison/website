@@ -282,6 +282,7 @@ var ReservationFormValidator = function () {
 	var slotButton = function(locationid, elementid, backdrop){
 			$('#slotinput').val( $('#'+elementid).attr("value") );
 			$('#slotlinkdata').text( $('#'+elementid).attr("value") );
+			$('#slotlinkdata').css( 'cursor', 'pointer' );
 			$('#locationinput').val( locationid );
 			$('#reservationinput').val( reservationid );
 			$('#reservationdateinput').val($('#mycalendar').val());

@@ -24,7 +24,7 @@ var Maps = function () {
 		console.log( 'booktable' );
        	$('.restaurantpanel').removeClass('no-display');
        	$('#map2panel').addClass('no-display');
-       	$('.reservation').html('<iframe src="/reservation?selectedLocationid='+$(this).attr('data-id')+'" width="100%" height="600px" frameborder="0" id="iframe"></iframe>');
+       	$('.reservation').html('<iframe src="/reservation?selectedLocationid='+$(this).attr('data-id')+'" width="100%" height="700px" frameborder="0" id="iframe"></iframe>');
 	});
 	var buttonplace='';
     var runMaps = function () {
@@ -100,7 +100,7 @@ var Maps = function () {
 		                var locid=$('#'+i).attr('data-id');
 		               	$('.restaurantpanel').removeClass('no-display');
 		               	$('#map2panel').addClass('no-display');
-		               	$('.reservation').html('<iframe src="/reservation?selectedLocationid='+locid+'" width="100%" height="600px" frameborder="0" id="iframe"></iframe>');
+		               	$('.reservation').html('<iframe src="/reservation?selectedLocationid='+locid+'" width="100%" height="700px" frameborder="0" id="iframe"></iframe>');
 		            }
 				})
 			});

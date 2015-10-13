@@ -38,47 +38,6 @@
 		<!-- start: CORE JAVASCRIPTS  -->
 		<?php echo $this->headScript(); ?>
 		<!-- end: CORE JAVASCRIPTS  -->
-<script>
-jQuery(document).ready(function() {
-	Main.init();
-	ReservationFormValidator.init();
-	var newresa="newresa";
-	var	today=new Date();
-	var getMonth2=function(date) {
-	   var month = date.getMonth() + 1;
-	   return month < 10 ? "0" + month : "" + month;
-	}
-	var getDate2=function(date) {
-	   var day = date.getDate();
-	   return day < 10 ? "0" + day : "" + day;
-	} 
-	$("body").on("click", ".locationlinkfinal", function(){
-		$('.registergroup').addClass('no-display');
-		$('.registergroup1').addClass('no-display');
-		$('.registergroup2').addClass('no-display');
-		$('.selectgroup').addClass('no-display');
-		$('.slotgroup').addClass('no-display');
-		$('#calendarbox').removeClass('no-display');
-		newdate=$(".mycalendar").datepicker("getDate");
-		$.formattednewDate=function(exampledate, today){
-			if(exampledate==null || exampledate===false){
-				return getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
-			}else{
-				return getDate2(exampledate)+'-'+getMonth2(exampledate)+'-'+exampledate.getFullYear();	
-			}
-		}
-		$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&slot="+ $("#slotlinkdata").text()+"&resadate="+$.formattednewDate(newdate, today)+"&method=CHANGE", success: function(result){
-			$(".selectiongroup").html(result);
-			ReservationFormValidator1.init();
-			$('#calendarlinkdata').text( getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear() );
-			$('.locationlinkfinal').css( 'cursor', 'pointer' );
-			$('#mycalendar').datepicker().on('changeDate', function (ev) {
-			    $('#calendarlinkdata').text( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
-			});
-		}});
-	});
-});
-</script>
 	</body>
 	<!-- end: BODY -->
 </html>

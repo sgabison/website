@@ -411,12 +411,39 @@ class UserreservationController extends Action
 			if( $this->getParam('resadate') ){
 				$this->view->resadate=$this->getParam('resadate');
 			}
-			if( $this->language =='fr'){
-				$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js');
-			}
 		} else {
 			$this->view->warning="This is not a correct location";
 		}
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+			Main.init();
+			ReservationFormValidator.init();
+			var newresa="newresa";
+			var	today=new Date();
+			var getMonth2=function(date) {
+			   var month = date.getMonth() + 1;
+			   return month < 10 ? "0" + month : "" + month;
+			}
+			var getDate2=function(date) {
+			   var day = date.getDate();
+			   return day < 10 ? "0" + day : "" + day;
+			} 
+			$("body").on("click", ".locationlinkfinal", function(){
+				$(".registergroup").addClass("no-display");
+				$(".registergroup1").addClass("no-display");
+				$(".registergroup2").addClass("no-display");
+				$(".selectgroup").addClass("no-display");
+				$(".slotgroup").addClass("no-display");
+				$("#calendarbox").removeClass("no-display");
+				var newresa="newresa";
+				$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
+					$(".selectiongroup").html(result);
+					ReservationFormValidator1.init();
+					$(".locationlinkfinal").css( "cursor", "pointer" );
+				}});
+			});
+			});', 'text/javascript', array (
+			'noescape' => true 
+		) );
 	}
 	public function selectiongroupAction(){
 		$societe=$this->societe;

@@ -114,7 +114,7 @@
 											<td class="col-md-4" style="text-align: center">
 												<span class="badge badge-success" id="datespan"> <i class="fa fa-calendar fa-lg"></i> </span><br>
 												<a class="linkhref calendarhref locationlinkfinal">
-													<span class="text-bold" id="calendarlinkdata">Date</span>
+													<span class="text-bold" id="calendarlinkdata"><?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?></span>
 												</a>
 											</td>
 											<td class="col-md-4" style="text-align: center">
@@ -126,7 +126,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												<?php echo $this->translate('TXT_NAME');?>:
+												<span class="text-bold"><?php echo $this->translate('TXT_NAME');?>:</span>
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-lastname"></span>
@@ -134,7 +134,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												<?php echo $this->translate('TXT_TEL');?>:
+												<span class="text-bold"><?php echo $this->translate('TXT_TEL');?>:</span>
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-tel"></span>
@@ -142,7 +142,7 @@
 										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
-												<?php echo $this->translate('TXT_EMAIL');?>:
+												<span class="text-bold"><?php echo $this->translate('TXT_EMAIL');?>:</span>
 						 					</td>
 						 					<td class="col-md-4 reg-data" colspan="2">
 						 						<span id="reg-email"></span>
@@ -152,40 +152,69 @@
 								</table>
 							</div>
 							<div>
-								<div class="form-group">
-									<div class="panel panel-white" id="calendarbox" >
-										<div id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="date-picker mycalendar" style="width:220px; margin-left:auto; margin-right:auto;"></div>
+								<div class="form-group col-md-12 col-sm-12">
+									<div class="centered" id="calendarbox" >
+										<div class="col-lg-4 col-md-4 col-sm-4"></div>
+										<div class="col-lg-4 col-md-4 col-sm-4">
+											<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE_PARTY');?></span></h4>
+											<div id="fullcalendar" style="max-width:400px;"></div>
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-4"></div>
+										<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="date-picker mycalendar no-display" style="width:220px; margin-left:auto; margin-right:auto;" value="<?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?>">
 									</div>
 								</div>	
-								<div class="form-group" id="peopleselectiongroup">
-									<select id="party" name="party" class="form-control">
-										<?php $i=0; while($i<16){ 
-											$i++;
-											if($i==2){$select='selected';}else{$select='';};
-											echo "<option value='".$i."' ".$select.">".$this->translate('TXT_RESERVATION_FOR')." ".$i." ".$this->translate('TXT_PERSONS')."</option>";
-									     } ?>
-									</select>
+								<div class="form-group col-md-12 col-sm-12" id="peopleselectiongroup">
+									<div id="partybox" style="margin-top:10px; margin-left:-15px; margin-right:-15px">
+										<div class="col-lg-4 col-md-4 col-sm-4"></div>
+										<div class="col-lg-4 col-md-4 col-sm-4">
+											<input id="party" class="no-display">
+											<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
+												<?php $i=0; while($i<7){ 
+													$i++;?>
+												<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+												<?php } ?>
+												<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
+											</div>
+											<div class="col-md-12 form-group morethanseven" style="margin-top:15px">
+												<div class="col-md-2 col-sm-4 col-xs-3 no-display morethanseven" id="lessthansevenbutton">
+													<button type="button" class="btn btn-default"> - </button>
+												</div>
+												<div class="col-md-10 col-sm-8 col-xs-9 form-group no-display morethanseven" id="morethansevenselect">
+													<select id="partyselect" class="form-control selectpartyselection">
+														<option value='8'><?= $this->translate('TXT_FOR');?> 8 <?= $this->translate('TXT_PEOPLE');?></option>
+														<?php $i=7; while($i<16){ 
+															$i++;
+															echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
+													     } ?>
+													</select>
+												</div>
+										 	</div>
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-4"></div>
+									</div>
 								</div>
+<!--
 								<div class="form-group bookbutton" >
 									<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i></span>
 								</div>
+-->
 							</div>
 							<div>
 								<span class='no-display' id='selectgroup'>
 									<span id='servinggroup'>
 										<div class="form-group">
 											<label class="control-label">
-												<?php echo $this->translate('TXT_SELECT_SERVING');?> <span class="symbol required"></span>
+												<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_SERVING');?></span></h4>
 											</label>
-											<div id="servings" class="space20 panel-body buttons-widget"></div>
+											<div id="servings" class="buttons-widget"></div>
 										</div>
 									</span>
 									<span class='no-display' id='slotgroup'>
 										<div class="form-group">
 											<label class="control-label">
-												<?php echo $this->translate('TXT_SELECT_TIMESLOT');?> <span class="symbol required"></span>
+												<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_TIMESLOT');?></span></h4>
 											</label>
-											<div id="slots" class="space20 panel-body buttons-widget"></div>
+											<div id="slots" class="buttons-widget"></div>
 										</div>
 									</span>
 								</span>						
@@ -197,27 +226,27 @@
 							<div class="registergroup1">
 								<div class="form-group">
 									<label class="control-label">
-										<?php echo $this->translate('TXT_YOUR_NAME');?> <span class="symbol required"></span>
+										<h4><span class="text-bold"><?php echo $this->translate('TXT_YOUR_NAME');?> <span class="symbol required"></span> </span></h4>
 									</label>
-									<input type="text" placeholder="<?php echo $this->translate('INSERT_NAME');?>" class="form-control" id="firstlastname" name="firstlastname">
+									<input type="text" placeholder="<?php echo $this->translate('INSERT_NAME');?>" class="form-control" id="firstlastname" name="firstlastname" style="font-size:large">
 								</div>
 								<div class="form-group">
 									<label class="control-label">
-										<?php echo $this->translate('TXT_YOUR_TEL');?><span class="symbol required"></span>
+										<h4><span class="text-bold"><?php echo $this->translate('TXT_YOUR_TEL');?><span class="symbol required"></span> </span></h4>
 									</label>								
 									<span class="input-icon">
-										<input type="tel" class="form-control" id="tel" name="tel">
+										<input type="tel" class="form-control" id="tel" name="tel" style="font-size:large">
 									</span>
 								</div>
 								<div class="form-group">
 									<label class="control-label">
-										<?php echo $this->translate('TXT_YOUR_EMAIL_ADDRESS');?> <span class="symbol required"></span>
+										<h4><span class="text-bold"><?php echo $this->translate('TXT_YOUR_EMAIL_ADDRESS');?> <span class="symbol required"></span> </span></h4>
 									</label>
-									<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email">
+									<input type="email" placeholder="Email@address.com" class="form-control" id="email" name="email" style="font-size:large">
 								</div>
 								<div class="form-group">
-									<button class="btn btn-dark-orange btn-block" id='submit'>
-										<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
+									<button class="btn btn-lg btn-dark-orange btn-block" id='subit'>
+										<?php echo $this->translate('TXT_NEXT_STEP_CONFIRMATION');?> <i class="fa fa-arrow-circle-right"></i>
 									</button>
 								</div>
 							</div>
@@ -225,7 +254,9 @@
 								<div class="form-group">
 									<div class="panel panel-white">
 										<div class="panel-heading">
-											<label class="control-label"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></label>
+											<label class="control-label">
+												<span class="text-bold"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></span>
+											</label>
 											<div class="panel-tools">
 												<div class="dropdown">
 													<a class="panel-collapse expand" href="#"><i class="fa fa-angle-up"></i> <span>Expand</span> </a>
@@ -264,21 +295,21 @@
 									</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="newsletter">
+											<input type="radio" class="grey" value='no' name="newsletter">
 											<?php echo $this->translate('TXT_NO');?>
 										</label>
 										<label class="radio-inline">
-											<input type="radio" class="grey" value="" name="newsletter">
+											<input type="radio" class="grey" value='yes' name="newsletter">
 											<?php echo $this->translate('TXT_YES');?>
 										</label>
 									</div>
-								</div>
+								</div>	
 								<div class="form-group no-display registergroup2">
 									<label>
 										<?php echo $this->translate('TXT_AGREED_TERMS_1');?> <a data-target=".bs-example-modal-basic" data-toggle="modal"><?php echo $this->translate('TXT_TERMS_2');?></a>
 									</label>
 									<div id="inputs"></div>
-									<button class="btn btn-dark-orange btn-block" type="submit" value='submit' id='submit2'>
+									<button class="btn btn-lg btn-dark-orange btn-block" value='submit' id='submit2'>
 										<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
 									</button>
 								</div>
@@ -319,7 +350,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-dark-orange btn-block displaymore">
+						<button class="btn btn-lg btn-dark-orange btn-block displaymore">
 							<?php echo $this->translate('TXT_MORE');?> <i class="fa fa-arrow-circle-right"></i>
 						</button>
 					</div>
@@ -342,7 +373,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button class="btn btn-dark-orange btn-block displayless">
+						<button class="btn btn-lg btn-dark-orange btn-block displayless">
 							<i class="fa fa-arrow-circle-left"></i> <?php echo $this->translate('TXT_LESS');?>
 						</button>
 					</div>

@@ -6,6 +6,7 @@ use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
 use Website\Tool\Reponse;
+use Website\Tool\Request;
 
 class StatsController extends Useraware {
 	public function init() {
@@ -46,45 +47,65 @@ class StatsController extends Useraware {
 		}
 		return $value;
 	}
-	public function dailystatsAction() {
+	public function weeklystatsAction() {
 		$this->disableLayout();
 		$this->disableViewAutoRender();
-		$today=new Zend_date();
-		$day=$today->get('dd-MM-YYYY');
-		$start=new Zend_Date($day.' 00:00:00', 'dd-MM-YYYY HH:mm:ss');
-		$end=new Zend_Date($day.' 23:59:59', 'dd-MM-YYYY HH:mm:ss');
-		$todayts=$today->getTimeStamp();
-		$locations=$this->societe->getLocations();
-		foreach( $locations as $location ){
-			//$reservations=new Object\Reservation\Listing();
-			//$reservations->setCondition("location__id =".$location->getId()." AND start >= ".$start." AND end <= ".$end );
-			//$reservations->setCondition("location__id =".$location->getId() );
-			//foreach( $reservations as $reservation){
-			//	echo $reservation->getId(); echo "<br>";
-			//}
+		$type=$this->getParam('type');
+		$end= new Zend_Date();
+		$end->setTime('23:59:59');
+		$date = new Zend_Date();
+		$date->sub(6, Zend_Date::DAY);
+		$date->setTime('00:00:01');
+		//Build reference array
+		$i=0;
+		//echo $end->getTimestamp(); echo "<br>";
+		while($i<=6){
+			$referencearray[ $date->get('dd-MM-YYYY') ]=0;
+			$date->add(1, Zend_Date::DAY);
+			$i++;
 		}
-		$this->view->reservations=$reservations;
-	}
-	public function statisticsAction() {
-		$this->disableLayout();
-		$this->disableViewAutoRender();
+		//Get the results array
+		$start = new Zend_date;
+		$start->sub(6, Zend_Date::DAY);
+		$start->setTime('00:00:01');
 		$stat= new \Object\Stats;
-<<<<<<< Updated upstream
-		$result=$stat->getStatistics( $this->selectedLocation->getId() );
+		$results=$stat->getStatistics( $this->selectedLocation->getId(), $start, $end );
+		$startoftheweek=$start->get('dd-MM-YYYY');
+		//echo $start->getTimestamp(); echo "<br>";exit;
+		foreach ( $this->selectedLocation->getServings() as $serving ){
+			//initiate orderarray and seatsarray
+			$orderarray=$referencearray;
+			$seatsarray=$referencearray;			
+			foreach( $results as $result ){
+				$datein=date("d-m-Y",$result["date_start"]);
+				if( $serving->getId() == $result['serving_id'] ){
+					$servingid=$result['serving_id'];
+					if ( array_key_exists( $datein , $referencearray ) ){
+						$orderarray[ $datein ] = $result["nbre"];
+						$seatsarray[ $datein ] = $result["couverts"];
+					}
+				}
+			}
+			if( $type == 'seats'){	
+				$servingarray[ $serving->getTitle() ]=$seatsarray;			
+			}else{
+				$servingarray[ $serving->getTitle() ]=$orderarray;
+			}
+		}
 		$reponse = new Reponse ();
-		
-		$reponse->data = $result; 
-		
+		$reponse->data = $servingarray; 
 		$reponse->message = "TXT_STATS_SENT";
 		$reponse->success = true;
-		
 		$this->render ( $reponse );
-		
-=======
-		$start=new Zend_Date( '11-09-2015 00:00:00', 'dd-MM-YYYY HH:mm:ss');
-		$end=new Zend_Date( '20-09-2015 00:00:00', 'dd-MM-YYYY HH:mm:ss');
-		$results=$stat->getStatistics( $this->selectedLocation->getId() );
-		var_dump($results);
->>>>>>> Stashed changes
+	}
+	public function statisticsAction() {
+		$this->layout()->setLayout('portal');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/stats.js');
+		$this->view->inlineScript ()->appendScript ( 'jQuery(document).ready(function() {
+					StatisticsForm.init();
+				});', 'text/javascript', array (
+								'noescape' => true
+		) ); 
 	}
 }

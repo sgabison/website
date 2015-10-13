@@ -268,8 +268,10 @@ var ReservationFormValidator1 = function () {
 		$('#locationlink').removeClass('no-display');
 		var locationid=$('#select_location').val();
 		var locationname=$('#select_location option:selected' ).text();
+		var persondata=$('#party').val();
 		//updatelink();
 		//$('#calendarlinkdata').text(resadate);
+		$('#personlinkdata').text(persondata);
 		$('#locationlinkdata').text(locationname); 
 		var i=0;
 		//clear up the divs
