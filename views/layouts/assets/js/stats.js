@@ -27,7 +27,7 @@ var StatisticsForm = function () {
 								'<div class="space10">'+
 									'<h5 class="text-white semi-bold no-margin p-b-5">'+key+'</h5>'+
 									'<h1>'+totalvarde+'</h1>'+
-									'Réservations'+
+									t('js_orders') + '<br>'+ t('js_last_seven') +
 								'</div>'+
 								'<div>'+
 									'<span class="dynamicsparkline'+i+'">Loading..</span>'+
@@ -65,7 +65,7 @@ var StatisticsForm = function () {
 							'<div class="space10">'+
 								'<h5 class="text-white semi-bold no-margin p-b-5">'+key2+'</h5>'+
 								'<h1>'+totalvarde2+'</h1>'+
-								'Couverts'+
+								t('js_seats') + '<br>'+ t('js_last_seven') +
 							'</div>'+
 							'<div>'+
 								'<span class="dynamicsparkline2'+j+'">Loading..</span>'+
