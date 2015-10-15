@@ -47,7 +47,6 @@ class Resource extends \Object\Concrete\Resource {
     		return $folder;
     	}   	
     }
-    
 
     public static function correctClassname($name) {
     	$tmpFilename = strtolower($name);

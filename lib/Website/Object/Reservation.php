@@ -90,6 +90,13 @@ class Reservation extends \Object\Concrete {
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
 		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsletterConfirmed'=>$data['newsletterConfirmed'] ) );
+		        } else {
+		        	$guest->setPreferredlanguage( $data['preferredlanguage'] );
+		        	$guest->setNewsletterConfirmed( $data['newsletterConfirmed'] );
+		        	$guest->setLastname( $data['lastname'] );
+		        	$guest->setBookingnotes( $data['bookingnotes'] );
+		        	$guest->setEmail( $data['email'] );
+		        	$guest->save();
 		        }
 			}
         }

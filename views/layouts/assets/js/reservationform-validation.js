@@ -62,8 +62,8 @@ var ReservationFormValidator = function () {
 	var inRange=false;
 	//Navigation
 	$('#backselectbutton').click( function(){
-		$('.registergroup').addClass('hidden-sm hidden xs');
-		$('#selectgroup').removeClass('hidden-sm hidden xs');
+		$('.registergroup').addClass('hidden-sm hidden-xs');
+		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
 	var managePartySize = function(){
 		$('#lessthansevenbutton').click( function(){
@@ -311,25 +311,25 @@ var ReservationFormValidator = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
-			$('.registergroup').removeClass('hidden-sm hidden xs');
-			$('.slotlinkdata').addClass('text-success');
-			$('.slotlinkdata').removeClass('text-muted');
-			$('#selectgroup').addClass('hidden-sm hidden xs');
-			$('#slotinput').val( $('#'+elementid).attr("value") );
-			$('#slotlinkdata').text( $('#'+elementid).attr("value") );
-			$('#slotlinkdata').css( 'cursor', 'pointer' );
-			$('#locationinput').val( locationid );
-			$('#reservationinput').val( reservationid );
-			$('#reservationdateinput').val($('#mycalendar').val());
-			$('#id').val( reservationid );
-			console.log( 'elementid: '+elementid);
-			console.log( 'locationid: '+locationid);
-			$('.slotbutton').removeClass('btn-light-orange');
-			$('.slotbutton').removeClass('btn-dark-orange');
-			$('.registergroup').removeClass('no-display');
-			$('#'+elementid).addClass('btn-dark-orange');
-			var backdrop = $('.ajax-white-backdrop');
-			backdrop.remove();
+		$('.registergroup').removeClass('hidden-sm hidden-xs');
+		$('#selectgroup').addClass('hidden-sm hidden-xs');
+		$('.slotlinkdata').addClass('text-success');
+		$('.slotlinkdata').removeClass('text-muted');
+		$('#slotinput').val( $('#'+elementid).attr("value") );
+		$('#slotlinkdata').text( $('#'+elementid).attr("value") );
+		$('#slotlinkdata').css( 'cursor', 'pointer' );
+		$('#locationinput').val( locationid );
+		$('#reservationinput').val( reservationid );
+		$('#reservationdateinput').val($('#mycalendar').val());
+		$('#id').val( reservationid );
+		console.log( 'elementid: '+elementid);
+		console.log( 'locationid: '+locationid);
+		$('.slotbutton').removeClass('btn-light-orange');
+		$('.slotbutton').removeClass('btn-dark-orange');
+		$('.registergroup').removeClass('no-display');
+		$('#'+elementid).addClass('btn-dark-orange');
+		var backdrop = $('.ajax-white-backdrop');
+		backdrop.remove();
 	}
 	var lauchRequest = function(reservationid){
 		$.unblockUI();

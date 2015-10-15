@@ -364,7 +364,6 @@ class ReservationController extends Useraware{
 					}
 				}
 				$this->view->offdaysrange=$fulltext;
-				echo $this->checkClosedServings(); exit;
 				$this->view->closeddays=$this->checkClosedServings( $this->selectedLocation );
 				if( $reservation->getLocation()->getSociete()->getId()==$this->societe->getId() ){
 					$reservationarray=$reservation->toArray();
@@ -517,6 +516,7 @@ class ReservationController extends Useraware{
 			'location'=>$array['locationname'],  
 			'date'=>$array['start']->get('dd-MM-YYYY'), 
 			'slot'=>$array['start']->get('HH:mm'), 
+			'preferredlanguage'=>$array['preferredlanguage'],
 			'locationaddress'=>$sellocation->getAddress(),
 			'locationzip'=>$sellocation->getZip(),
 			'locationcity'=>$sellocation->getCity(),
@@ -530,7 +530,11 @@ class ReservationController extends Useraware{
 		$mail->setParams($parameters);
 		$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
 		$mail->setSubject($subject);
-		$mail->setDocument('/fr/booking/reservation-confirmation');
+		if( $array['preferredlanguage'] != "fr" || $array['preferredlanguage'] != "" ){
+			$mail->setDocument('/fr/booking/reservation-confirmation-en');
+		}else{
+			$mail->setDocument('/fr/booking/reservation-confirmation');
+		}
 		// $mail->setBody($body);
 		$mail->addTo($email);
 		$mail->addBcc('didier.rechatin@gmail.com');

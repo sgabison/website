@@ -536,9 +536,13 @@ class UserreservationController extends Action
 		$mail = new Pimcore_Mail ();
 		$subject='Reservation confirmation';
 		$mail->setParams($parameters);
-		$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
+		$mail->setReplyTo('resaexpress.com@gmail.com', $name=NULL);
 		$mail->setSubject($subject);
-		$mail->setDocument('/fr/booking/reservation-confirmation');
+		if( $array['preferredlanguage'] != "fr" || $array['preferredlanguage'] != "" ){
+			$mail->setDocument('/fr/booking/reservation-confirmation-en');
+		}else{
+			$mail->setDocument('/fr/booking/reservation-confirmation');
+		}
 		// $mail->setBody($body);
 		$mail->addTo($email);
 		$mail->addBcc('didier.rechatin@gmail.com');
