@@ -19,7 +19,7 @@ class Guest extends \Object\Concrete {
 		return  $this->getFirstname().' '.$this->getLastname();
 	}
 	public function toArray() {
-		$fields=array('id','lastname','email','tel','bookingnotes','countrycode');
+		$fields=array('id','lastname','email','tel','bookingnotes','countrycode','preferredlanguage','newsletterConfirmed' );
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();
@@ -34,7 +34,7 @@ class Guest extends \Object\Concrete {
 			$array[$field]=$this->$getter();
 		}
 		$array['full']=$this->getTel().' - '.$this->getLastname();
-		$array['complete']=$this->getTel().'----'.$this->getLastname().'----'.$this->getEmail().'----'.$this->getBookingnotes();
+		$array['complete']=$this->getTel().'----'.$this->getLastname().'----'.$this->getEmail().'----'.$this->getBookingnotes().'----'.$this->getPreferredlanguage().'----'.$this->getNewsletterConfirmed();
 		return $array;
 	}
 

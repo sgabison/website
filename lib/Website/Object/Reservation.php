@@ -27,6 +27,8 @@ class Reservation extends \Object\Concrete {
 		$array['firstlastname']=($this->getGuest())?$this->getGuest()->getLastname():"";
 		$array['tel']=($this->getGuest())?$this->getGuest()->getTel():"";
 		$array['email']=($this->getGuest())?$this->getGuest()->getEmail():"";
+		$array['preferredlanguage']=($this->getGuest())?$this->getGuest()->getPreferredlanguage():"";
+		$array['newsletterConfirmed']=($this->getGuest())?$this->getGuest()->getNewsletterConfirmed():"";
 		return $array;
 	}
 
@@ -87,7 +89,7 @@ class Reservation extends \Object\Concrete {
 		        $guest=\Object\Guest::getByTel($data['tel'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
-		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'] ) );
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsletterConfirmed'=>$data['newsletterConfirmed'] ) );
 		        }
 			}
         }

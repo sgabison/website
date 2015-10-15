@@ -319,10 +319,12 @@ class ReservationController extends Useraware{
 		$mail->addBcc('didier.rechatin@gmail.com');
 		$mail->Send();
 	}
-	public function checkClosedServings(){
-		$servings=$this->selectedLocation->getServings();
+	public function checkClosedServings( $location ){
+		$servings=$location->getServings();
 		$weekClose[0]=1; $weekClose[1]=1; $weekClose[2]=1; $weekClose[3]=1; $weekClose[4]=1; $weekClose[5]=1; $weekClose[6]=1;
 		foreach($servings as $myserving){
+			//echo $this->selectedLocation->getId(); echo "<br>";
+			//echo $myserving->getClosedwednesday(); echo "<br>";
 			$weekClose[1]=$myserving->getClosedmonday()*$weekClose[1];
 			$weekClose[2]=$myserving->getClosedtuesday()*$weekClose[2];
 			$weekClose[3]=$myserving->getClosedwednesday()*$weekClose[3];
@@ -331,6 +333,7 @@ class ReservationController extends Useraware{
 			$weekClose[6]=$myserving->getClosedsaturday()*$weekClose[6];
 			$weekClose[0]=$myserving->getClosedsunday()*$weekClose[0];
 		}
+		//var_dump( $weekClose ); exit;
 		$week="";
 		$week=array();
 		foreach( $weekClose as $key=>$day ){
@@ -340,6 +343,7 @@ class ReservationController extends Useraware{
 	}
     public function reservationAction() {
         $this->layout()->setLayout('portal');
+        //echo $this->selectedLocation->getId(); exit;
 		if( $this->getParam('reservationid') ){
 			$reservationid=$this->getParam('reservationid');
 			$reservation=Object\Reservation::getById( $reservationid );
@@ -360,7 +364,8 @@ class ReservationController extends Useraware{
 					}
 				}
 				$this->view->offdaysrange=$fulltext;
-				$this->view->closeddays=json_encode( $this->checkClosedServings() );
+				echo $this->checkClosedServings(); exit;
+				$this->view->closeddays=$this->checkClosedServings( $this->selectedLocation );
 				if( $reservation->getLocation()->getSociete()->getId()==$this->societe->getId() ){
 					$reservationarray=$reservation->toArray();
 			       	foreach ($reservationarray as $key=>$val){
@@ -368,7 +373,6 @@ class ReservationController extends Useraware{
 			       		$this->view->resachange=true;
 			       		$this->view->selectedlocationid=$reservation->getLocation()->getId();
 			       		$this->view->$key=$val;
-			       		
 			        }
 			        //var_dump($reservationarray);exit;
 				} else {
@@ -388,7 +392,7 @@ class ReservationController extends Useraware{
 					$fulltext=$this->arrayToString( $this->getAllDays( $dayoff->getStart(), $dayoff->getEnd() ) ).",".$fulltext;
 				}
 			}
-			$this->view->closeddays=json_encode( $this->checkClosedServings() );
+			$this->view->closeddays=$this->checkClosedServings( $this->selectedLocation );
 			$this->view->offdaysrange=$fulltext;
 			//echo $this->view->offdaysrange; echo "<br>";
 			//echo $this->view->closeddays; exit;
@@ -414,12 +418,17 @@ class ReservationController extends Useraware{
 			ReservationFormValidator.init();
 			Maps.init();
 			$("body").on("click", ".locationlinkfinal", function(){	
+				$.blockUI({
+					message: "<i class=\"fa fa-spinner fa-spin\"></i> "+t("js_please_wait")
+				});
 				var newresa="newresa";
-				$.ajax({url: "/data/reservation/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
+				$.ajax({url: "/data/reservation/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&preferredlanguage="+ $("#preferredlanguageinput").val()+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
 					$("#registerbutton").addClass("no-display");
+					$(".registergroup").addClass("hidden-sm");
 					$("a.locationlinkfinal").css( "cursor", "pointer" );
 					ReservationFormValidator1.init();
+					$.unblockUI();
 				}});
 			}); 
       		SVExamples.init();

@@ -419,7 +419,7 @@
 				<input name='doaction' value='servingform' style='display:none'>
 				<div class="col-md-4">
 					<button class="btn btn-yellow btn-block" type="submit" value='submit' id='formsubmit'>
-						Register <i class="fa fa-arrow-circle-right"></i>
+						<?php echo $this->translate('TXT_SAVE');?> <i class="fa fa-arrow-circle-right"></i>
 					</button>
 				</div>
 			</div>

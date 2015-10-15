@@ -13,7 +13,7 @@ var ReservationFormValidator1 = function () {
 	}
 	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	var reservationid=$.urlParam('reservationid');
-	console.log( "resadate: ", resadate );
+	//console.log( "resadate: ", resadate );
 	var getMonth2=function(date) {
 	    var month = date.getMonth() + 1;
 	    return month < 10 ? '0' + month : '' + month; // ('' + month) for string result
@@ -24,11 +24,18 @@ var ReservationFormValidator1 = function () {
 	}
 	var	today=new Date();
 	var timenow=today.getHours()+':'+today.getMinutes();
-	console.log( 'timenow'+timenow );
+	var dataInitiation=function(){
+		$('#calendarlinkdata').text( $('#mycalendar').val() );
+	}
+	var managePreferredLanguage=function(){
+		$('.preferredlanguage').click( function(){
+			$('#preferredlanguageinput').val( $(this).attr('language') );
+			$('#preferredlanguageimage').attr("src", "/flags/" + $(this).attr('language') + "-icon.png")
+		});
+	}
 	var todaydate=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
 	var offdays = $('#offdays').val().split(',');
 	var closeddays = $('#closeddays').val().split(',');
-	var resadate=$('#mycalendar').val();
 	var managePartySize = function(){
 		$('#lessthansevenbutton').click( function(){
 			$('.morethanseven').addClass('no-display');
@@ -44,10 +51,14 @@ var ReservationFormValidator1 = function () {
 			$('.partybutton').removeClass('btn-default');
 			$('.partybutton').removeClass('btn-dark-orange');
 			$(this).addClass('btn-dark-orange');
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 		$('#partyselect').on('change', function(){
 			$('#party').val( $('#partyselect').val() );
 			$('#personlinkdata').text( $('#partyselect').val() );
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 	}
 	var loadFullCalendar = function(){
@@ -74,7 +85,7 @@ var ReservationFormValidator1 = function () {
 	        	}
 	        },
 	        dayRender: function (date, cell) {
-				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
+				if ( date.format("DD-MM-YYYY") == $('#mycalendar').val() ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
 				   cell.addClass('currentDayClass');
@@ -106,15 +117,41 @@ var ReservationFormValidator1 = function () {
 	        	}
 		    },
 	        select: function(start, end, allDay) {
-	        	console.log( start.format("DD-MM-YYYY") );
+	        	console.log( "select: ", start.format("DD-MM-YYYY") );
 	        	if( start >= moment() && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+	        		console.log("in range");
+	        		console.log( start.day() );
+	        		console.log( closeddays[0] );
+	        		console.log( closeddays[1] );
+	        		console.log( closeddays[2] );
+	        		console.log( closeddays[3] );
+	        		console.log( closeddays[4] );
+	        		console.log( closeddays[5] );
+	        		console.log( closeddays[6] );
+	        		console.log( $.inArray(start.format("DD-MM-YYYY"), offdays) );
+	        	}else{ 
+	        		console.log("not in range");
+	        		console.log( start.day() );
+	        		console.log( closeddays[0] );
+	        		console.log( closeddays[1] );
+	        		console.log( closeddays[2] );
+	        		console.log( closeddays[3] );
+	        		console.log( closeddays[4] );
+	        		console.log( closeddays[5] );
+	        		console.log( closeddays[6] );
+	        		console.log( $.inArray(start.format("DD-MM-YYYY"), offdays) );
 	        	}
 	        	if( start.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
+				$('#calendarbox').addClass('no-display');
+				$('#partybox').removeClass('no-display');
+				$('#backbutton').removeClass('no-display');
+				$('.calendarlinkdata').addClass('text-success');
+				$('.calendarlinkdata').removeClass('text-muted');
 	        }
 		});
 	}
@@ -125,57 +162,21 @@ var ReservationFormValidator1 = function () {
 		var offdays = $('#offdays').val().split(',');
 		var closeddays = $('#closeddays').val();
 		var inRange=false;
-/*
-		$('.input-group.date').datepicker({ 
-			startDate: "0d",
-			language: $("#language").val(),
-			todayBtn: "linked", 
-			todayHighlight: false, 
-			defaultDate: new Date(), 
-			autoclose: true,
-			datesDisabled: offdays, 
-			format: "dd-mm-yyyy",
-			beforeShowDay: function (date){
-				if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
-					console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
-					return {
-						tooltip: 'Le Restaurant est fermé',
-	                    classes: 'closedDayClass',
-	                    enabled: false
-					}
-				}
-				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
-				var dayFormat = date.getDay();
-				console.log( dayFormat );
-				if( date < today ){
-				  return {
-				  	classes: 'disabled passedDayClass', 
-				  	tooltip: 'Date passée'
-				  };
-				}
-				if( date == today ){
-				  return {
-				  	classes: 'activeDayClass', 
-				  	tooltip: 'Aujourd hui'
-				  };
-				}
-				if( date>today && closeddays.search(dayFormat) >= 0){ 
-				  return {
-				  	classes: 'disabled closedDayClass', 
-				  	tooltip: 'Aucun service ce jour'};
-				}
-			}
-		});
-*/
 		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid') !== 'undefined' && $.urlParam('reservationid')!='' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
 			lauchRequest(reservationid);
 		}else{
 			var backdrop = $('.ajax-white-backdrop');
 			backdrop.remove();
 			$('.partyselection').click( function(){
+				$.blockUI({
+					message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+				});
 				lauchRequest();
 				$('#partybox').addClass('no-display');					
 			});
+				$.blockUI({
+					message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+				});
 			$('.selectpartyselection').change( function(){
 				lauchRequest();
 				$('#partybox').addClass('no-display');					
@@ -230,7 +231,7 @@ var ReservationFormValidator1 = function () {
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success'> "+res[2]+" </span><span class='badge badge-danger'> "+res[3]+" </span><br>"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-lg "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\"><span class='badge badge-success' style='font-size:large'> "+res[2]+" </span><span class='badge badge-danger' style='font-size:large'> "+res[3]+" </span><br>"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
@@ -245,22 +246,27 @@ var ReservationFormValidator1 = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
-			$('#slotinput').val( $('#'+elementid).attr("value") );
-			$('#slotlinkdata').text( $('#'+elementid).attr("value") );
-			$('#locationinput').val( locationid );
-			$('#reservationinput').val( reservationid );
-			$('#reservationdateinput').val( $('#mycalendar').val() );
-			$('#id').val( reservationid );
-			console.log( 'elementid: '+elementid);
-			console.log( 'locationid: '+locationid);
-			$('.slotbutton').removeClass('btn-dark-orange');
-			$('.registergroup').removeClass('no-display');
-			$('#registerbutton').removeClass('no-display');
-			$('#'+elementid).addClass('btn-dark-orange');
-			var backdrop = $('.ajax-white-backdrop');
-			backdrop.remove();
+		$('.registergroup').removeClass('hidden-sm');
+		$('.slotlinkdata').addClass('text-success');
+		$('.slotlinkdata').removeClass('text-muted');
+		$('#selectgroup').addClass('hidden-sm');
+		$('#slotinput').val( $('#'+elementid).attr("value") );
+		$('#slotlinkdata').text( $('#'+elementid).attr("value") );
+		$('#locationinput').val( locationid );
+		$('#reservationinput').val( reservationid );
+		$('#reservationdateinput').val( $('#mycalendar').val() );
+		$('#id').val( reservationid );
+		console.log( 'elementid: '+elementid);
+		console.log( 'locationid: '+locationid);
+		$('.slotbutton').removeClass('btn-dark-orange');
+		$('.registergroup').removeClass('no-display');
+		$('#registerbutton').removeClass('no-display');
+		$('#'+elementid).addClass('btn-dark-orange');
+		var backdrop = $('.ajax-white-backdrop');
+		backdrop.remove();
 	}
 	var lauchRequest = function(reservationid){
+		$.unblockUI();
 		$('.bookbutton').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
 		$('#calendarbox').addClass('no-display');
@@ -276,7 +282,7 @@ var ReservationFormValidator1 = function () {
 		var i=0;
 		//clear up the divs
 		i++;
-		console.log( $('.mycalendar').val() );
+		console.log( 'mycalendar value: ', $('.mycalendar').val() );
 		console.log( i );
 		$('#servings').html(function(){ return '';});
 		$('#slots').html(function(){ return '';});
@@ -302,7 +308,7 @@ var ReservationFormValidator1 = function () {
 				$res.append( html );
 				$input.append( html );
 				//set up input fields
-				var inputs="<input id=\"slotinput\" name=\"slotinput\" class=\"no-display\"><input id=\"servinginput\" name=\"servinginput\" class=\"no-display\"><input id=\"locationinput\" name=\"locationinput\" class=\"no-display\"><input id=\"id\" name=\"id\" class=\"no-display\"><input id=\"reservationinput\" name=\"reservationinput\" class=\"no-display\"><input id=\"reservationdateinput\" name=\"reservationdateinput\" class=\"no-display\">";
+				var inputs="<input id=\"slotinput\" name=\"slotinput\" class=\"no-display\"><input id=\"servinginput\" name=\"servinginput\" class=\"no-display\"><input id=\"locationinput\" name=\"locationinput\" class=\"no-display\"><input id=\"id\" name=\"id\" class=\"no-display\"><input id=\"reservationinput\" name=\"reservationinput\" class=\"no-display\"><input id=\"reservationdateinput\" name=\"reservationdateinput\" class=\"no-display\"><input id=\"preferredlanguage\" name=\"preferredlanguage\" class=\"no-display\">";
 				$input.append( inputs );
 				var i=0;
 				$.each(data.data, function (key, value) {
@@ -319,7 +325,7 @@ var ReservationFormValidator1 = function () {
 					if( ( todaydate == $('#mycalendar').val() )  && ( moment(timenow,'HH:mm') > moment(serv[5],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
+					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-lg buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});
@@ -342,6 +348,8 @@ var ReservationFormValidator1 = function () {
         	managePartySize();
 			reservationSubmit();
 			loadFullCalendar();
+			dataInitiation();
+			managePreferredLanguage();
         }
     };
 }();
