@@ -58,8 +58,10 @@ class UserreservationController extends Action
 		$locarray=array();
 		foreach( $societes as $societe){
 			foreach( $societe->getLocations() as $location ){
-				$loc['lat']=$location->getGeolocalisation()->getLatitude();
-				$loc['lng']=$location->getGeolocalisation()->getLongitude();
+				if( $location->getGeolocalisation() ){
+					$loc['lat']=$location->getGeolocalisation()->getLatitude();
+					$loc['lng']=$location->getGeolocalisation()->getLongitude();
+				}
 				$loc['name']=$location->getName();
 				$loc['address']=$location->getAddress();
 				$loc['zip']=$location->getZip();
@@ -396,7 +398,7 @@ class UserreservationController extends Action
 				}
 			}
 			$this->view->offdaysrange=$fulltext;
-			$this->view->closeddays=json_encode( $this->checkClosedServings() );
+			$this->view->closeddays=$this->checkClosedServings();
 			$this->view->selectedLocation=$selectedLocation;
 			$this->view->resachange=false;			
 

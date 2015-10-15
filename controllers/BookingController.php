@@ -47,7 +47,6 @@ class BookingController extends Useraware {
 		return $value;
 	}
 	public function portalAction() {
-
 		$this->view->location=$this->selectedLocation;
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');

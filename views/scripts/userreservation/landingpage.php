@@ -6,7 +6,7 @@
 				foreach($this->societes as $societe){
 					foreach( $societe->getLocations() as $location){ 
 ?>
-						<input id="<?= $i;?>" data-long="<?php echo $location->getGeolocalisation()->getLongitude();?>" data-lat="<?php echo $location->getGeolocalisation()->getLatitude();?>" data-name="<?php echo $location->getName();?>" data-address="<?php echo $location->getAddress();?>" data-zip="<?php echo $location->getZip();?>" data-city="<?php echo $location->getCity();?>" data-tel="<?php echo $location->getTel();?>" data-id="<?php echo $location->getId();?>" class="no-display">
+						<input id="<?= $i;?>" data-long="<?php if( $location->getGeolocalisation() ){echo $location->getGeolocalisation()->getLongitude();} ?>" data-lat="<?php if( $location->getGeolocalisation() ){echo $location->getGeolocalisation()->getLatitude();} ?>" data-name="<?php echo $location->getName();?>" data-address="<?php echo $location->getAddress();?>" data-zip="<?php echo $location->getZip();?>" data-city="<?php echo $location->getCity();?>" data-tel="<?php echo $location->getTel();?>" data-id="<?php echo $location->getId();?>" class="no-display">
 <?php 
 						$i++;
 					} 

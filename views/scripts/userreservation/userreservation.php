@@ -1,43 +1,9 @@
 <div class="ajax-white-backdrop" style="display: block;"></div>
-<div class="col-md-12 space-20"></div>
-<!--
-<div class="col-md-12 panel panel-white">
-	<div class="panel-heading">
-		<h4 class="panel-title">
-			<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?> 
-			<span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span>
-			<span class="text-bold no-display" id="locationlink">
-				<a class="linkhref locationhref locationlinkfinal">
-					<span id="locationlinkdata"></span>
-				</a> 
-			</span>
-		</h4>
-		<div class="panel-tools">
-			<div class="dropdown">
-				<a data-toggle="dropdown" class="btn btn-xs dropdown-toggle btn-transparent-grey">
-					<i class="fa fa-cog"></i>
-				</a>
-				<ul class="dropdown-menu dropdown-light pull-right" role="menu">
-					<li>
-						<a href="/reservation?lg=fr_FR">
-							<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('FRENCH');?></span> </a>
-					</li>
-					<li>
-						<a href="/reservation?lg=en">
-							<i class="fa fa-angle-up"></i> <span><?php echo $this->translate('ENGLISH');?></span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
--->
 <div class="col-md-12 space-20">
 	<div>
 		<div class="panel-heading">
 			<div style='width:100%; margin-left:-20px;'>
-				<h4 class="panel-title"><span class="btn btn-sm dropdown-toggle btn-transparent-grey locationlinkfinal backbutton" id="backbutton"><i class="fa fa-angle-double-left"></i></span> <?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
+				<h4 class="panel-title"><span class="btn btn-lg dropdown-toggle btn-transparent-grey locationlinkfinal backbutton" id="backbutton"><i class="fa fa-angle-double-left"></i></span> <?php echo $this->translate('TXT_BOOK_A_TABLE');?> <?php echo $this->translate('TXT_AT');?>  <span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span></h4>
 			</div>
 			<!--
 			<div class="panel-tools">
@@ -48,7 +14,7 @@
 			-->
 			<div class="panel-tools" style="opacity:1; margin-right:-15px;">
 				<div class="dropdown">
-					<a data-toggle="dropdown" class="btn btn-sm dropdown-toggle btn-transparent-grey">
+					<a data-toggle="dropdown" class="btn btn-lg dropdown-toggle btn-transparent-grey">
 						<img src="/flags/<?php echo $this->language;?>-icon.png">
 					</a>
 					<ul class="dropdown-menu dropdown-light pull-right" role="menu">
@@ -90,7 +56,7 @@
 							<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'PUT';}else{echo 'POST';}?>" class="no-display">
 							<span class="text-bold" id="locationbox" class="no-display">
 								<input id="language" class="no-display" value="<?php echo $this->language;?>">
-								<input id="closeddays" class="no-display" value=<?php echo $this->closeddays;?>> 
+								<input id="closeddays" class="no-display" value="<?php if( $this->closeddays || $this->closeddays == '0' ){ echo $this->closeddays;}else{ echo '9';}?>"> 
 								<input id="offdays" class="no-display" value="<?php echo $this->offdaysrange;?>"> 
 								<input id="method2" name="method2" value="CHANGE" class="no-display">  
 								<input id="select_location" value='<?php echo $this->selectedLocation->getId();?>' class="no-display" disabled>
@@ -101,29 +67,23 @@
 						<div class="selectiongroup">
 							<!-- start: SUMMARY SELECTION GROUP -->
 							<div>
-								<table class="table table-bordered table-hover" id="sample-table-4" style="table-layout: fixed;">
+								<div class="btn-group btn-group-justified">
+									<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+										<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
+										<span class="text-muted" id="calendarlinkdata"><?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?></span>
+									</a>
+									<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+									<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
+										<span class="text-muted" id="personlinkdata"></span> 
+										<span class="text-muted"><?php echo $this->translate('TXT_PEOPLE');?></span>
+									</a>
+									<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+										<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
+										<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+									</a>	
+								</div>
+								<table class="table table-bordered table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
 									<tbody>
-										<tr>
-											<td class="col-md-4" style="text-align: center">
-												<span class="badge" id="personspan"> <i class="fa fa-users fa-lg"></i> </span><br>
-												<a class="linkhref calendarhref locationlinkfinal">
-													<span class="text-bold" id="personlinkdata"></span> 
-													<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
-												</a>
-						 					</td>
-											<td class="col-md-4" style="text-align: center">
-												<span class="badge badge-success" id="datespan"> <i class="fa fa-calendar fa-lg"></i> </span><br>
-												<a class="linkhref calendarhref locationlinkfinal">
-													<span class="text-bold" id="calendarlinkdata"><?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?></span>
-												</a>
-											</td>
-											<td class="col-md-4" style="text-align: center">
-												<span class="badge" id="clockspan"> <i class="fa fa-clock-o fa-lg"></i> </span><br>
-												<a class="linkhref calendarhref locationlinkfinal">
-													<span class="text-bold" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
-												</a>													
-											</td>
-										</tr>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">
 												<span class="text-bold"><?php echo $this->translate('TXT_NAME');?>:</span>
@@ -164,20 +124,20 @@
 									</div>
 								</div>	
 								<div class="form-group col-md-12 col-sm-12" id="peopleselectiongroup">
-									<div id="partybox" style="margin-top:10px; margin-left:-15px; margin-right:-15px">
+									<div id="partybox" class="no-display" style="margin-top:10px; margin-left:-15px; margin-right:-15px">
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
 										<div class="col-lg-4 col-md-4 col-sm-4">
 											<input id="party" class="no-display">
 											<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 												<?php $i=0; while($i<7){ 
 													$i++;?>
-												<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+												<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-lg btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
 												<?php } ?>
-												<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
+												<button id="morethansevenbutton" type="button" class="btn btn-lg btn-default" style="margin:5px" > + </button>
 											</div>
 											<div class="col-md-12 form-group morethanseven" style="margin-top:15px">
 												<div class="col-md-2 col-sm-4 col-xs-3 no-display morethanseven" id="lessthansevenbutton">
-													<button type="button" class="btn btn-default"> - </button>
+													<button type="button" class="btn btn-lg btn-default"> - </button>
 												</div>
 												<div class="col-md-10 col-sm-8 col-xs-9 form-group no-display morethanseven" id="morethansevenselect">
 													<select id="partyselect" class="form-control selectpartyselection">
@@ -193,11 +153,6 @@
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
 									</div>
 								</div>
-<!--
-								<div class="form-group bookbutton" >
-									<span class="btn btn-dark-orange btn-block book"><?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i></span>
-								</div>
--->
 							</div>
 							<div>
 								<span class='no-display' id='selectgroup'>
@@ -263,21 +218,9 @@
 												</div>
 											</div>
 										</div>
-										<div class="panel-body" style="display:none" id='tagpanel'>
-<!--
-											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_BABY');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_BABY');?></button>
-											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_WHEELCHAIR');?></button>
-											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_SPECIATABLE');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_SPECIATABLE');?></button>
-											<button type="button" class="btn btn-sm btn-tags btn-dark-orange" value="<?php echo $this->translate('TXT_WARNING_NUTALLERGY');?>" style="margin:5px"><?php echo $this->translate('TXT_WARNING_NUTALLERGY');?></button>
+										<div class="panel-body" style="display:none" id='tagpanel'>								
 										<?php foreach( $this->societe->getTags() as $tag){ ?>
-										<button type="button" class="btn btn-sm btn-tags btn-dark-orange" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px"><?php echo $tag->getTag() ?></button>
-										<?php } ?>
-											<input id="tags_1" type="text" value='<?php echo $this->bookingnotes;?>'>
-											<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
-										</div>
--->										
-										<?php foreach( $this->societe->getTags() as $tag){ ?>
-										<a href="#" class="btn btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
+										<a href="#" class="btn btn-lg btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px" data-rel="tooltip" data-original-title="<?php echo $tag->getTag();?>"><i class="fa <?php echo $tag->getIcon() ?>"></i> </a>
 										<?php } ?>
 											<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
 											<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
@@ -361,14 +304,7 @@
 							<h4 class="panel-title"><?php echo $this->translate('TXT_WHAT');?> <span class="text-bold"><?php echo $this->translate('TXT_NEXT');?></span></h4>
 						</div>
 						<div class="panel-body">
-							<!--
-							<a class="btn btn-social btn-primary btn-block"><i class="fa fa-facebook"></i> <?php echo $this->translate('TXT_UPDATE_FACEBOOK');?></a>
-							-->
 							<a class="btn btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(<?php echo str_replace('+', ' ',$this->selectedLocation->getName());?>)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
-		<!--					<a class="btn btn-social btn-primary btn-block" data-target=".bs-example-modal-basic" data-toggle="modal" id="mapmodal" ><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>-->
-							<!--
-							<a class="btn btn-social btn-success btn-block"><i class="fa fa-calendar"></i> <?php echo $this->translate('TXT_UPDATE_CALENDAR');?></a>
-							-->
 							<a class="btn btn-social btn-purple btn-block" href="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
 						</div>
 					</div>

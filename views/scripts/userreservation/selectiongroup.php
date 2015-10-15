@@ -1,4 +1,20 @@
 <div>
+	<div class="btn-group btn-group-justified">
+		<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+			<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
+			<span class="text-muted" id="calendarlinkdata"><?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?></span>
+		</a>
+		<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+		<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
+			<span class="text-muted" id="personlinkdata"></span> 
+			<span class="text-muted"><?php echo $this->translate('TXT_PEOPLE');?></span>
+		</a>
+		<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+			<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
+			<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+		</a>	
+	</div>
+<!--
 	<table class="table table-bordered table-hover" id="sample-table-4" style="table-layout: fixed;">
 		<tbody>
 			<tr>
@@ -21,6 +37,9 @@
 					</a>													
 				</td>
 			</tr>
+-->
+	<table class="table table-bordered table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
+		<tbody>
 			<tr class="registergroup2 no-display">
 				<td class="col-md-4">
 					<span class="text-bold"><?php echo $this->translate('TXT_NAME');?>:</span>
@@ -77,13 +96,13 @@
 				<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 					<?php $i=0; while($i<7){ 
 						$i++;?>
-					<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+					<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-lg btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
 					<?php } ?>
-					<button id="morethansevenbutton" type="button" class="btn btn-default" style="margin:5px" > + </button>
+					<button id="morethansevenbutton" type="button" class="btn btn-lg btn-default" style="margin:5px" > + </button>
 				</div>
 				<div class="col-md-12 form-group morethanseven" style="margin-top:15px">
 					<div class="col-md-2 col-sm-4 col-xs-3 no-display morethanseven" id="lessthansevenbutton">
-						<button type="button" class="btn btn-default"> - </button>
+						<button type="button" class="btn btn-lg btn-default"> - </button>
 					</div>
 					<div class="col-md-10 col-sm-8 col-xs-9 form-group no-display morethanseven" id="morethansevenselect">
 						<select id="partyselect" class="form-control selectpartyselection">

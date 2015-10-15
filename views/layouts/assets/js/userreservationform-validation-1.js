@@ -137,6 +137,8 @@ var ReservationFormValidator1 = function () {
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
+				$('.calendarlinkdata').addClass('text-success');
+				$('.calendarlinkdata').removeClass('text-muted');
 	        }
 		});
 	}
@@ -146,49 +148,6 @@ var ReservationFormValidator1 = function () {
 		var offdays = $('#offdays').val().split(',');
 		var closeddays = $('#closeddays').val();
 		var inRange=false;
-/*
-		$('#mycalendar').datepicker({ 
-			startDate: "0d",
-			language: $("#language").val(),
-			todayBtn: "linked", 
-			todayHighlight: true, 
-			defaultDate: new Date(), 
-			autoclose: true,
-			datesDisabled: offdays, 
-			format: "dd-mm-yyyy",
-			container: '#example-widget-container',
-			beforeShowDay: function (date){
-				if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
-					console.log( getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear() );
-					return {
-						tooltip: 'Le Restaurant est fermé',
-	                    classes: 'closedDayClass',
-	                    enabled: false
-					}
-				}
-				var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
-				var dayFormat = date.getDay();
-				console.log( dayFormat );
-				if( date.setHours(0,0,0,0) < today.setHours(0,0,0,0) ){
-				  return {
-				  	classes: 'disabled passedDayClass', 
-				  	tooltip: 'Date passée'
-				  };
-				}
-				if( date == today ){
-				  return {
-				  	classes: 'activeDayClass', 
-				  	tooltip: 'Aujourd hui'
-				  };
-				}
-				if( date>today && closeddays.search(dayFormat) >= 0){ 
-				  return {
-				  	classes: 'disabled closedDayClass', 
-				  	tooltip: 'Aucun service ce jour'};
-				}
-			}
-		});
-*/
 		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid') !== 'undefined' && $.urlParam('reservationid')!='' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
 			lauchRequest(reservationid);
 			$('#partybox').addClass('no-display');
@@ -203,10 +162,6 @@ var ReservationFormValidator1 = function () {
 				lauchRequest();
 				$('#partybox').addClass('no-display');					
 			});
-//			$('.book').click( function(){
-//				console.log( 'bookclick' );
-//				lauchRequest();	
-//			});	
 		}
 	};
 	var myfunc=function(e){

@@ -119,52 +119,6 @@ var ReservationFormValidator = function () {
 			$('#reg-lastname').html("<span class='btn dropdown-toggle btn-transparent-grey'><i class='fa fa-angle-double-left backbutton'></i></span> <a><span class='text-bold'>"+reglastname+"</span></a>" ); $('#reg-lastname').css( "color","#777777" ); console.log( $("#tel").intlTelInput("getSelectedCountryData").dialCode );
 		}	
 	}
-/*
-	$('#mycalendar').datepicker({ 
-		startDate: "0d",
-		language: $("#language").val(),
-		todayBtn: "linked", 
-		todayHighlight: true, 
-		defaultDate: new Date(), 
-		autoclose: true,
-		datesDisabled: offdays, 
-		format: "dd-mm-yyyy",
-		container: '#example-widget-container',
-		beforeShowDay: function (date){
-			if( date > today && ($.inArray(getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear(), offdays)>=0) ){
-				return {
-					tooltip: 'Le Restaurant est fermé',
-                    classes: 'closedDayClass',
-                    enabled: false
-				}
-			}
-			var dateFormat = getDate2(date)+'-'+getMonth2(date)+'-'+date.getFullYear();
-			var dayFormat = date.getDay();
-			if( date.setHours(0,0,0,0) < today.setHours(0,0,0,0) ){
-			  return {
-			  	classes: 'disabled passedDayClass', 
-			  	tooltip: 'Date passée'
-			  };
-			}
-			if( date == today ){
-			  return {
-			  	classes: 'activeDayClass', 
-			  	tooltip: 'Aujourd hui'
-			  };
-			}
-			if( date>today && closeddays.search(dayFormat) >= 0){ 
-			  return {
-			  	classes: 'disabled closedDayClass', 
-			  	tooltip: 'Aucun service ce jour'};
-			}
-		}
-	});
-	$('#mycalendar').datepicker('show');
-	//INITIATE DATE SUMMARY
-	$('#mycalendar').datepicker().on('changeDate', function (ev) {
-	    $('#calendarlinkdata').text( $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) );
-	});
-*/
 	var loadFullCalendar = function(){
 		$("#fullcalendar").fullCalendar({
 			lang: language,
@@ -217,11 +171,17 @@ var ReservationFormValidator = function () {
 	        	if( start >= moment().subtract(1, 'days' ) && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+	        		console.log("in range");
 	        	}
 	        	if( start.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
+				$('#calendarbox').addClass('no-display');
+				$('#partybox').removeClass('no-display');
+				$('#backbutton').removeClass('no-display');
+				$('.calendarlinkdata').addClass('text-success');
+				$('.calendarlinkdata').removeClass('text-muted');
 	        }
 		});
 	}
