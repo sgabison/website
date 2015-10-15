@@ -25,6 +25,11 @@ var ReservationFormValidator = function () {
 			$('.confirmation2').addClass('no-display');
 		});
 	}
+	var initiateLanguage = function(){
+		if( $.urlParam('lg') != ""){
+			$('#preferredlanguageinput').val( $.urlParam('lg') );
+		}
+	}
 	$.reformatDate=function(dateStr){
 	  var dArr = dateStr.split("-");  // ex input "2010-01-18"
 	  return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0]; //ex out: "18/01/10"
@@ -84,10 +89,14 @@ var ReservationFormValidator = function () {
 			$('.partybutton').removeClass('btn-dark-orange');
 			$(this).addClass('btn-dark-orange');
 			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 		$('#partyselect').on('change', function(){
 			$('#party').val( $('#partyselect').val() );
 			$('#personlinkdata').text( $('#partyselect').val() );
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 	}
 	var formattedtoday=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear();
@@ -122,6 +131,7 @@ var ReservationFormValidator = function () {
 	var loadFullCalendar = function(){
 		$("#fullcalendar").fullCalendar({
 			lang: language,
+			height: 400,
 			header: {
 			    left:   'title',
 			    center: '',
@@ -229,7 +239,8 @@ var ReservationFormValidator = function () {
 			, newReservation.start = $("#slotinput").val()
 			, newReservation.servinginput = $("#servinginput").val()
 			, newReservation.locationid = $("#locationinput").val()
-			, newReservation.newsletter = $("#newsletterinput").val()
+			, newReservation.newsletterConfirmed = $("#newsletterinput").val()
+			, newReservation.preferredlanguage = $("#preferredlanguageinput").val()
 			, newReservation.bookingnotes = $("#tags_1").val()
 			, newReservation.METHOD = $("#method").val();
 			$.blockUI({
@@ -362,6 +373,8 @@ var ReservationFormValidator = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
+			$('.slotlinkdata').addClass('text-success');
+			$('.slotlinkdata').removeClass('text-muted');
 			$('#slotgroup').addClass('no-display');
 			$('#clockspan').addClass('badge-success');
 			$('#servinggroup').addClass('no-display');
@@ -405,6 +418,9 @@ var ReservationFormValidator = function () {
 		$('#servings').html(function(){ return '';});
 		$('#slots').html(function(){ return '';});
 		$('#inputs').html(function(){ return '';});
+		$.blockUI({
+			message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+		});
 		$.ajax({
 			url: URL+"/data/userreservation/resaslot?locationid="+locationid+"&date="+$('#mycalendar').val(),
 			dataType: "json",
@@ -428,6 +444,7 @@ var ReservationFormValidator = function () {
 				var inputs="<input id=\"slotinput\" name=\"slotinput\" class=\"no-display\"><input id=\"servinginput\" name=\"servinginput\" class=\"no-display\"><input id=\"locationinput\" name=\"locationinput\" class=\"no-display\"><input id=\"id\" name=\"id\" class=\"no-display\"><input id=\"reservationinput\" name=\"reservationinput\" class=\"no-display\"><input id=\"reservationdateinput\" name=\"reservationdateinput\" class=\"no-display\"><input id=\"newsletterinput\" name=\"newsletterinput\" class=\"no-display\">";
 				$input.append( inputs );
 				var i=0;
+				$.unblockUI();
 				$.each(data.data, function (key, value) {
 					i++;
 					var serv=key.split("_-_");
@@ -595,6 +612,7 @@ var ReservationFormValidator = function () {
 			loadFullCalendar();
 			managePartySize();
 			manageNewsletter();
+			initiateLanguage();
         }
     };
 }();

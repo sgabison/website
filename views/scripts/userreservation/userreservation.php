@@ -1,5 +1,5 @@
 <div class="ajax-white-backdrop" style="display: block;"></div>
-<div class="col-md-12 space-20">
+<div class="col-md-12 space-20" style="height:2000px">
 	<div>
 		<div class="panel-heading">
 			<div style='width:100%; margin-left:-20px;'>
@@ -85,26 +85,26 @@
 								<table class="table table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
 									<tbody>
 										<tr class="registergroup2 no-display">
-											<td class="col-md-4">
+											<td>
 												<span class="text-bold"><?php echo $this->translate('TXT_NAME');?>:</span>
 						 					</td>
-						 					<td class="col-md-4 reg-data" colspan="2">
+						 					<td class="reg-data" colspan="2">
 						 						<span id="reg-lastname"></span>
 						 					</td>
 										</tr>
 										<tr class="registergroup2 no-display">
-											<td class="col-md-4">
+											<td>
 												<span class="text-bold"><?php echo $this->translate('TXT_TEL');?>:</span>
 						 					</td>
-						 					<td class="col-md-4 reg-data" colspan="2">
+						 					<td class="reg-data" colspan="2">
 						 						<span id="reg-tel"></span>
 						 					</td>
 										</tr>
 										<tr class="registergroup2 no-display">
-											<td class="col-md-4">
+											<td>
 												<span class="text-bold"><?php echo $this->translate('TXT_EMAIL');?>:</span>
 						 					</td>
-						 					<td class="col-md-4 reg-data" colspan="2">
+						 					<td class="reg-data" colspan="2">
 						 						<span id="reg-email"></span>
 						 					</td>
 										</tr>
@@ -116,7 +116,7 @@
 									<div class="centered" id="calendarbox" >
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
 										<div class="col-lg-4 col-md-4 col-sm-4">
-											<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE_PARTY');?></span></h4>
+											<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE');?></span></h4>
 											<div id="fullcalendar" style="max-width:400px;"></div>
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
@@ -128,6 +128,7 @@
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
 										<div class="col-lg-4 col-md-4 col-sm-4">
 											<input id="party" class="no-display">
+											<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
 											<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 												<?php $i=0; while($i<7){ 
 													$i++;?>
@@ -137,7 +138,7 @@
 											</div>
 											<div class="col-md-12 form-group morethanseven" style="margin-top:15px">
 												<div class="col-md-2 col-sm-4 col-xs-3 no-display morethanseven" id="lessthansevenbutton">
-													<button type="button" class="btn btn-lg btn-default"> - </button>
+													<button type="button" class="btn btn-default"> - </button>
 												</div>
 												<div class="col-md-10 col-sm-8 col-xs-9 form-group no-display morethanseven" id="morethansevenselect">
 													<select id="partyselect" class="form-control selectpartyselection">
@@ -238,11 +239,11 @@
 									</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" class="grey" value='no' name="newsletter">
+											<input type="radio" class="grey" value='0' name="newsletter">
 											<?php echo $this->translate('TXT_NO');?>
 										</label>
 										<label class="radio-inline">
-											<input type="radio" class="grey" value='yes' name="newsletter">
+											<input type="radio" class="grey" value='1' name="newsletter">
 											<?php echo $this->translate('TXT_YES');?>
 										</label>
 									</div>
@@ -252,6 +253,7 @@
 										<?php echo $this->translate('TXT_AGREED_TERMS_1');?> <a data-target=".bs-example-modal-basic" data-toggle="modal"><?php echo $this->translate('TXT_TERMS_2');?></a>
 									</label>
 									<div id="inputs"></div>
+									<input id="preferredlanguageinput" name="preferredlanguageinput" class="no-display" value="fr">
 									<button class="btn btn-lg btn-dark-orange btn-block" value='submit' id='submit2'>
 										<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
 									</button>
@@ -304,8 +306,8 @@
 							<h4 class="panel-title"><?php echo $this->translate('TXT_WHAT');?> <span class="text-bold"><?php echo $this->translate('TXT_NEXT');?></span></h4>
 						</div>
 						<div class="panel-body">
-							<a class="btn btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(<?php echo str_replace('+', ' ',$this->selectedLocation->getName());?>)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
-							<a class="btn btn-social btn-purple btn-block" href="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
+							<a class="btn btn-lg btn-social btn-warning btn-block" target="_blank" href="http://maps.google.com/maps?q=<?php echo $this->lat;?>+<?php echo $this->long;?>+(<?php echo str_replace('+', ' ',$this->selectedLocation->getName());?>)&ll=<?php echo $this->lat;?>,<?php echo $this->long;?>&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
+							<a class="btn btn-lg btn-social btn-purple btn-block" href="/reservation?selectedLocationid=<?php echo $this->selectedLocation->getId();?>"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
 						</div>
 					</div>
 					<div class="form-group">

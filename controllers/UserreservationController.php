@@ -430,6 +430,9 @@ class UserreservationController extends Action
 			   return day < 10 ? "0" + day : "" + day;
 			} 
 			$("body").on("click", ".locationlinkfinal", function(){
+				$.blockUI({
+					message: "<i class=\"fa fa-spinner fa-spin\"></i> "+t("js_please_wait")
+				});
 				$(".registergroup").addClass("no-display");
 				$(".registergroup1").addClass("no-display");
 				$(".registergroup2").addClass("no-display");
@@ -441,6 +444,7 @@ class UserreservationController extends Action
 					$(".selectiongroup").html(result);
 					ReservationFormValidator1.init();
 					$(".locationlinkfinal").css( "cursor", "pointer" );
+					$.unblockUI();
 				}});
 			});
 			});', 'text/javascript', array (

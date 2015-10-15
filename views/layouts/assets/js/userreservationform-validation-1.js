@@ -42,6 +42,11 @@ var ReservationFormValidator1 = function () {
 	var dataInitiation=function(){
 		$('#calendarlinkdata').text( $('#mycalendar').val() );
 	}
+	var initiateLanguage = function(){
+		if( $.urlParam('lg') != ""){
+			$('#preferredlanguageinput').val( $.urlParam('lg') );
+		}
+	}
 	var	today=new Date();
 	var timenow=today.getHours()+':'+today.getMinutes();
 	console.log( 'timenow'+timenow );
@@ -70,15 +75,20 @@ var ReservationFormValidator1 = function () {
 			$('.partybutton').removeClass('btn-dark-orange');
 			$(this).addClass('btn-dark-orange');
 			$("html, body").animate({ scrollTop: 0 }, "slow");
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 		$('#partyselect').on('change', function(){
 			$('#party').val( $('#partyselect').val() );
 			$('#personlinkdata').text( $('#partyselect').val() );
+			$('.personlinkdata').addClass('text-success');
+			$('.personlinkdata').removeClass('text-muted');
 		});
 	}	
 	var loadFullCalendar = function(){
 		$("#fullcalendar").fullCalendar({
 			lang: language,
+			height: 400,
 			header: {
 			    left:   'title',
 			    center: '',
@@ -235,6 +245,8 @@ var ReservationFormValidator1 = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
+			$('.slotlinkdata').addClass('text-success');
+			$('.slotlinkdata').removeClass('text-muted');
 			$('#slotgroup').addClass('no-display');
 			$('#clockspan').addClass('badge-success');
 			$('#servinggroup').addClass('no-display');
@@ -335,6 +347,7 @@ var ReservationFormValidator1 = function () {
 			loadFullCalendar();
 			manageNewsletter();
 			dataInitiation();
+			initiateLanguage();
         }
     };
 }();
