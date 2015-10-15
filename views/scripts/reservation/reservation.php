@@ -222,9 +222,9 @@
 				</div>
 				<div class="panel-body">
 					<a class="btn btn-lg btn-social btn-primary btn-block" data-target=".bs-example-modal-basic" data-toggle="modal" id="mapmodal" ><i class="fa fa-map-marker"></i> <?php echo $this->translate('TXT_CHECK_LOCATION');?></a>
-					<a class="btn btn-lg btn-social btn-facebook btn-block" href="/liste-reservations-search"><i class="fa fa-gears"></i> <?php echo $this->translate('TXT_LIST_RESERVATION');?></a>
-					<a class="btn btn-lg btn-social btn-success btn-block" href="/evenements"><i class="fa fa-calendar"></i> <?php echo $this->translate('TXT_TITLE_EVENT');?></a>
-					<a class="btn btn-lg btn-social btn-purple btn-block" href="/reserver"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
+					<a class="btn btn-lg btn-social btn-facebook btn-block" href="/liste-reservations-search?selectedLocationId=<?= $this->selectedLocation->getId();?>"><i class="fa fa-gears"></i> <?php echo $this->translate('TXT_LIST_RESERVATION');?></a>
+					<a class="btn btn-lg btn-social btn-success btn-block" href="/evenements?selectedLocationId=<?= $this->selectedLocation->getId();?>"><i class="fa fa-calendar"></i> <?php echo $this->translate('TXT_TITLE_EVENT');?></a>
+					<a class="btn btn-lg btn-social btn-purple btn-block" href="/reserver?selectedLocationId=<?= $this->selectedLocation->getId();?>"><i class="fa fa-reply"></i> <?php echo $this->translate('TXT_MAKE_NEW_RESERVATION');?></a>
 				</div>
 			</div>
 		</div>
