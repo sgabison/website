@@ -6,11 +6,13 @@
 			<span class="text-bold"> <?php echo $this->selectedLocation->getName();?></span>
 			<span id="clock"></span>
 		</h4>
+<!--
 		<div class="panel-tools">
 			<a class="panel-expand" href="#">
 				<i class="fa fa-expand"></i> <span><?php echo $this->translate('TXT_FULLSCREEN');?></span>
 			</a>
 		</div>
+-->
 		<span class="text-bold" id="locationbox">
 			<input id="language" class="no-display" value="<?php echo $this->language;?>">
 			<input id="closeddays" class="no-display" value="<?php if( $this->closeddays || $this->closeddays == '0' ){ echo $this->closeddays;}else{ echo '9';}?>"> 

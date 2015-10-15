@@ -62,8 +62,8 @@ var ReservationFormValidator = function () {
 	var inRange=false;
 	//Navigation
 	$('#backselectbutton').click( function(){
-		$('.registergroup').addClass('hidden-sm');
-		$('#selectgroup').removeClass('hidden-sm');
+		$('.registergroup').addClass('hidden-sm hidden xs');
+		$('#selectgroup').removeClass('hidden-sm hidden xs');
 	});
 	var managePartySize = function(){
 		$('#lessthansevenbutton').click( function(){
@@ -311,10 +311,10 @@ var ReservationFormValidator = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
-			$('.registergroup').removeClass('hidden-sm');
+			$('.registergroup').removeClass('hidden-sm hidden xs');
 			$('.slotlinkdata').addClass('text-success');
 			$('.slotlinkdata').removeClass('text-muted');
-			$('#selectgroup').addClass('hidden-sm');
+			$('#selectgroup').addClass('hidden-sm hidden xs');
 			$('#slotinput').val( $('#'+elementid).attr("value") );
 			$('#slotlinkdata').text( $('#'+elementid).attr("value") );
 			$('#slotlinkdata').css( 'cursor', 'pointer' );

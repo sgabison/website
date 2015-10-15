@@ -14,7 +14,7 @@
 			<span class="text-muted" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
 		</a>	
 	</div>
-	<table class="table table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
+	<table class="table table-hover registergroup2 no-display">
 		<tbody>
 			<tr class="registergroup2 no-display">
 				<td class="col-md-4">
@@ -55,19 +55,25 @@
 		<div id="calendarbox" class="panel panel-white">
 			<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resadate){echo $this->resadate;}?>" style="width:205px">
 			<div class="col-md-12 col-sm-12">
+<!--
 				<div class="col-md-4 col-sm-4"></div>
 				<div class="col-md-4 col-sm-4">
+-->
 					<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE');?></span></h4>
 					<div id="fullcalendar" style="max-width:400px;"></div>
+<!--
 				</div>
 				<div class="col-md-4 col-sm-4"></div>
+-->
 			</div>
 		</div>
 	</div>	
 	<div class="form-group col-md-12 col-sm-12" id="peopleselectiongroup">
 		<div id="partybox" class="no-display" style="margin-top:10px; margin-left:-15px; margin-right:-15px">
+<!--
 			<div class="col-md-4 col-sm-4"></div>
 			<div class="col-md-4 col-sm-4">
+-->
 				<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
 				<input id="party" class="no-display" value="<?php if($this->partysize){echo $this->partysize;}?>">
 				<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
@@ -91,8 +97,10 @@
 						</select>
 					</div>
 				</div>
+<!--
 			</div>
 			<div class="col-md-4 col-sm-4"></div>
+-->
 		</div>
 	</div>
 <div>
