@@ -82,7 +82,7 @@
 										<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
 									</a>	
 								</div>
-								<table class="table table-bordered table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
+								<table class="table table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
 									<tbody>
 										<tr class="registergroup2 no-display">
 											<td class="col-md-4">

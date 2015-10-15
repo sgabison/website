@@ -99,7 +99,7 @@ var ReservationFormValidator1 = function () {
 	        	}
 	        },
 	        dayRender: function (date, cell) {
-				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
+				if ( date.format("DD-MM-YYYY") == $('#mycalendar').val() ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
 				   cell.addClass('currentDayClass');
@@ -219,7 +219,7 @@ var ReservationFormValidator1 = function () {
 					}else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-lg "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
 					$res.append( button );
 					console.log('roulante',j);
 				});
@@ -310,7 +310,7 @@ var ReservationFormValidator1 = function () {
 					if( ( formattedtoday == $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
+					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-lg buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});

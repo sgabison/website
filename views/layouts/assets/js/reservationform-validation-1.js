@@ -122,26 +122,8 @@ var ReservationFormValidator1 = function () {
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
 	        		console.log("in range");
-	        		console.log( start.day() );
-	        		console.log( closeddays[0] );
-	        		console.log( closeddays[1] );
-	        		console.log( closeddays[2] );
-	        		console.log( closeddays[3] );
-	        		console.log( closeddays[4] );
-	        		console.log( closeddays[5] );
-	        		console.log( closeddays[6] );
-	        		console.log( $.inArray(start.format("DD-MM-YYYY"), offdays) );
 	        	}else{ 
 	        		console.log("not in range");
-	        		console.log( start.day() );
-	        		console.log( closeddays[0] );
-	        		console.log( closeddays[1] );
-	        		console.log( closeddays[2] );
-	        		console.log( closeddays[3] );
-	        		console.log( closeddays[4] );
-	        		console.log( closeddays[5] );
-	        		console.log( closeddays[6] );
-	        		console.log( $.inArray(start.format("DD-MM-YYYY"), offdays) );
 	        	}
 	        	if( start.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
