@@ -437,7 +437,7 @@ class UserreservationController extends Action
 				$(".slotgroup").addClass("no-display");
 				$("#calendarbox").removeClass("no-display");
 				var newresa="newresa";
-				$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
+				$.ajax({url: "/fr/booking/userselectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val() +"&slot="+ $("#slotlinkdata").text()+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
 					ReservationFormValidator1.init();
 					$(".locationlinkfinal").css( "cursor", "pointer" );

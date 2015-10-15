@@ -39,6 +39,9 @@ var ReservationFormValidator1 = function () {
 	        $('#newsletterinput').val( $(this).val() );
 	    });
 	} 
+	var dataInitiation=function(){
+		$('#calendarlinkdata').text( $('#mycalendar').val() );
+	}
 	var	today=new Date();
 	var timenow=today.getHours()+':'+today.getMinutes();
 	console.log( 'timenow'+timenow );
@@ -137,6 +140,9 @@ var ReservationFormValidator1 = function () {
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
+				$('#calendarbox').addClass('no-display');
+				$('#partybox').removeClass('no-display');
+				$('#backbutton').removeClass('no-display');
 				$('.calendarlinkdata').addClass('text-success');
 				$('.calendarlinkdata').removeClass('text-muted');
 	        }
@@ -328,6 +334,7 @@ var ReservationFormValidator1 = function () {
 			reservationSubmit();
 			loadFullCalendar();
 			manageNewsletter();
+			dataInitiation();
         }
     };
 }();

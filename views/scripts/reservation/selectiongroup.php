@@ -33,7 +33,7 @@
 			</a>
 			<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 				<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
-				<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+				<span class="text-muted" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
 			</a>	
 		</div>
 		<div class="form-group">		

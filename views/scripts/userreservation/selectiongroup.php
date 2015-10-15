@@ -6,38 +6,14 @@
 		</a>
 		<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 		<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
-			<span class="text-muted" id="personlinkdata"></span> 
+			<span class="text-muted" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> 
 			<span class="text-muted"><?php echo $this->translate('TXT_PEOPLE');?></span>
 		</a>
 		<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 			<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
-			<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
+			<span class="text-muted" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
 		</a>	
 	</div>
-<!--
-	<table class="table table-bordered table-hover" id="sample-table-4" style="table-layout: fixed;">
-		<tbody>
-			<tr>
-				<td class="col-md-4" style="text-align: center">
-					<span class="badge" id="personspan"> <i class="fa fa-users fa-lg"></i> </span><br>
-					<a class="linkhref calendarhref locationlinkfinal">
-						<span class="text-bold" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> 
-						<span class="text-bold"><?php echo $this->translate('TXT_PEOPLE');?></span>
-					</a>					</td>
-				<td class="col-md-4" style="text-align: center">
-					<span class="badge badge-success" id="datespan"> <i class="fa fa-calendar fa-lg"></i> </span><br>
-					<a class="linkhref calendarhref locationlinkfinal">
-						<span class="text-bold" id="calendarlinkdata"><?php if($this->resadate){echo $this->resadate;}?></span>
-					</a>
-				</td>
-				<td class="col-md-4" style="text-align: center">
-					<span class="badge" id="clockspan"> <i class="fa fa-clock-o fa-lg"></i> </span><br>
-					<a class="linkhref calendarhref locationlinkfinal">
-						<span class="text-bold" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
-					</a>													
-				</td>
-			</tr>
--->
 	<table class="table table-bordered table-hover registergroup2 no-display" id="sample-table-4" style="table-layout: fixed;">
 		<tbody>
 			<tr class="registergroup2 no-display">
