@@ -6,6 +6,7 @@ use Pimcore\Model\Object;
 use Pimcore\Mail;
 use Pimcore\Tool;
 use Website\Tool\Reponse;
+use Website\Tool\Request;
 
 class GuestController extends Useraware {
 
@@ -125,6 +126,7 @@ class GuestController extends Useraware {
 				'jQuery(document).ready(function() {
 					Main.init();
 					GuestList.init();
+				FormGuestValidator.init();
 				});',
 				'text/javascript',
 				array('noescape' => true)); // Disable CDATA comments
@@ -132,16 +134,18 @@ class GuestController extends Useraware {
 	public function profileAction () {
 	
 		$this->layout ()->setLayout ( 'portal' );
-		$this->view->guest= ($this->getParam("id"))?\Object\Guest::getById($this->getParam("id")) : null ;
+		$this->id=$this->getParam("id");
+		$this->view->guest= ($this->id)?\Object\Guest::getById($this->id) : null ;
 	
-		// $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/table-guest-list.js');
-	
+		$this->view->listReservations = $this->listReservationsByGuest();
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/form-guest-validation.js');
 		$this->view->inlineScript()->appendScript(
-				'jQuery(document).ready(function() {
-					Main.init();
+				'jQuery(document).ready(function() {	
+					FormGuestValidator.init();
 				});',
 				'text/javascript',
-				array('noescape' => true)); // Disable CDATA comments
+				array('noescape' => true));
+
 	}
 	public function getDataAction () {
 		// Get Request methode json decode
@@ -203,11 +207,11 @@ class GuestController extends Useraware {
 	 */
 	public function update() {
 		$res = new Reponse();
-		$serving=\Object\Serving::getById($this->id);
-		if ($serving instanceof Pimcore\Model\Object\Serving) {
-			$serving->setValues( $this->requete->params );
-			$serving->save();
-			$res->data =  $serving->toArray();
+		$guest=\Object\Guest::getById($this->id);
+		if ($guest instanceof Pimcore\Model\Object\Guest) {
+			$guest->setValues( $this->requete->params );
+			$guest->save();
+			$res->data =  $guest->toArray();
 			$res->success = true;
 			$res->message ="TXT_UPDATE_OK";
 		} else {
@@ -222,7 +226,7 @@ class GuestController extends Useraware {
 	 */
 	public function destroy() {
 		$res = new Reponse();
-		$rec= \Object\Serving::getById($this->id);
+		$rec= \Object\Guest::getById($this->id);
 		if ($rec ) {
 			$rec->delete();
 			$res->success = true;
@@ -231,6 +235,12 @@ class GuestController extends Useraware {
 			$res->message = "Failed to destroy";
 		}
 		return $res;
+	}
+	public function listReservationsByGuest(){
+		$optionalParams = array('guestid' => $this->id);
+		$useLayout = false;
+		return Document_Service::render(Document::getById(85), $optionalParams, $useLayout);
+		
 	}
 	
 }

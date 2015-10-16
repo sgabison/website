@@ -65,13 +65,15 @@
 												<div class="arrow"></div>
 												<div class="popover-content">
 													<!-- start: SEARCH FORM -->
-													<form class="" id="searchform" action="/data/guest/search">
+													<form  id="searchform" action="/data/guest/search">
 														<div class="input-group">
-															<input type="text" name="q" class="form-control" placeholder="Search">
 															<span class="input-group-btn">
-																<button class="btn btn-main-color btn-squared" type="button">
+																<button id ="searchformbutton" class="btn btn-main-color btn-squared" type="button">
 																	<i class="fa fa-search"></i>
-																</button> </span>
+																</button> 
+															</span>
+															<input type="text" name="q" class="form-control" placeholder="<?php echo $this->t('TXT_SEARCH') ?>" >
+															
 														</div>
 													</form>
 													<!-- end: SEARCH FORM -->

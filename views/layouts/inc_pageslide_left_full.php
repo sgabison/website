@@ -17,9 +17,6 @@
 				<div class="inline-block">
 					<h5 class="no-margin"> <?php echo $this->t('TXT_WELCOME')?></h5>
 					<h4 class="no-margin"> <?= $this->person->getName();?> </h4>
-					<a class="btn user-options sb_toggle">
-						<i class="fa fa-cog"></i>
-					</a>
 				</div>
 			</div>
 			<?php endif;?>

@@ -13,10 +13,10 @@ class Guest extends \Object\Concrete {
 	public $properties = array(); // an array of other misc properties
 	// Converts this Event object back to a plain data array, to be used for generating JSON
 	public function getFullName(){
-		return  $this->getFirstname().' '.$this->getLastname();
+		return  ucfirst($this->getFirstname()).' '.ucfirst($this->getLastname());
 	}
 	public function getName(){
-		return  $this->getFirstname().' '.$this->getLastname();
+		return  $this->getFullName();
 	}
 	public function toArray() {
 		$fields=array('id','lastname','email','tel','bookingnotes','countrycode','preferredlanguage','newsletterConfirmed' );

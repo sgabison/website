@@ -379,6 +379,16 @@ var Main = function() {
         $('.menu-search').on('click', function(e) {
             e.preventDefault();
         });
+     // function to click on searchformButton
+        $("#searchformbutton").on('click',function(e) {
+		 	e.preventDefault();
+		 	var q= $("input:text[name=q]").val();
+		 	if(q){
+			$("#searchform").submit();
+			}
+		 	
+		});
+
     };
     //function to activate the Tooltips, if present
     var runTooltips = function() {

@@ -5,6 +5,7 @@ var TimePickerFormElements = function() {"use strict";
 	};
 }
 var FormElements = function() {"use strict";
+
 	//function to initiate jquery.inputlimiter
 	var runInputLimiter = function() {
 		$('.limited').inputlimiter({
@@ -182,6 +183,7 @@ var FormElements = function() {"use strict";
 			runTagsInput();
 			runSummerNote();
 			runCKEditor();
+			
 		}
 	};
 }();
