@@ -298,6 +298,7 @@ class ReservationController extends Useraware{
 			'partysize'=>$array['partysize'], 
 			'serving'=>$array['servingtitle'], 
 			'location'=>$array['locationname'],  
+			'preferredlanguage'=>$array['preferredlanguage'],
 			'date'=>$array['start']->get('dd-MM-YYYY'), 
 			'slot'=>$array['start']->get('HH:mm'), 
 			'locationaddress'=>$sellocation->getAddress(),
@@ -313,7 +314,11 @@ class ReservationController extends Useraware{
 		$mail->setParams($parameters);
 		$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
 		$mail->setSubject($subject);
-		$mail->setDocument('/fr/booking/cancellation-confirmation');
+		if( $array['preferredlanguage'] == "fr" ){
+			$mail->setDocument('/fr/booking/cancellation-confirmation');
+		}else{
+			$mail->setDocument('/fr/booking/cancellation-confirmation-en');
+		}
 		// $mail->setBody($body);
 		$mail->addTo($email);
 		$mail->addBcc('didier.rechatin@gmail.com');
@@ -463,6 +468,9 @@ class ReservationController extends Useraware{
 		switch ($method) {
 			case 'PUT':
 				$reponse= $this->update();
+				if ($reponse->success) :
+					$this->sendModification($reponse->data);
+				endif;
 				break;
 			case 'CHANGE':
 				$reponse= $this->update();
@@ -508,66 +516,75 @@ class ReservationController extends Useraware{
 	}
 	public function sendConfirmation($array){
 		$email=$array['email'];
-		$sellocation=Object\Location::getById($array['locationid'],1);
-		$parameters = array(
-			'bookingref'=>$array['id'], 
-			'partysize'=>$array['partysize'], 
-			'serving'=>$array['servingtitle'], 
-			'location'=>$array['locationname'],  
-			'date'=>$array['start']->get('dd-MM-YYYY'), 
-			'slot'=>$array['start']->get('HH:mm'), 
-			'preferredlanguage'=>$array['preferredlanguage'],
-			'locationaddress'=>$sellocation->getAddress(),
-			'locationzip'=>$sellocation->getZip(),
-			'locationcity'=>$sellocation->getCity(),
-			'locationtel'=>$sellocation->getTel(), 
-			'locationemail'=>$sellocation->getEmail(), 
-			'locationcity'=>$sellocation->getCity(), 
-			'locationurl'=>$sellocation->getUrl(), 
-			'guestname'=>$array['firstlastname']);
-		$mail = new Pimcore_Mail ();
-		$subject='Reservation confirmation';
-		$mail->setParams($parameters);
-		$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
-		$mail->setSubject($subject);
-		if( $array['preferredlanguage'] != "fr" || $array['preferredlanguage'] != "" ){
-			$mail->setDocument('/fr/booking/reservation-confirmation-en');
-		}else{
-			$mail->setDocument('/fr/booking/reservation-confirmation');
+		if( $email != ''){
+			$sellocation=Object\Location::getById($array['locationid'],1);
+			$parameters = array(
+				'bookingref'=>$array['id'], 
+				'partysize'=>$array['partysize'], 
+				'serving'=>$array['servingtitle'], 
+				'location'=>$array['locationname'],  
+				'date'=>$array['start']->get('dd-MM-YYYY'), 
+				'slot'=>$array['start']->get('HH:mm'), 
+				'preferredlanguage'=>$array['preferredlanguage'],
+				'locationaddress'=>$sellocation->getAddress(),
+				'locationzip'=>$sellocation->getZip(),
+				'locationcity'=>$sellocation->getCity(),
+				'locationtel'=>$sellocation->getTel(), 
+				'locationemail'=>$sellocation->getEmail(), 
+				'locationcity'=>$sellocation->getCity(), 
+				'locationurl'=>$sellocation->getUrl(), 
+				'guestname'=>$array['firstlastname']);
+			$mail = new Pimcore_Mail ();
+			$subject='Reservation confirmation';
+			$mail->setParams($parameters);
+			$mail->setReplyTo('info@demo.gabison.com', $name=NULL);
+			$mail->setSubject($subject);
+			if( $array['preferredlanguage'] == "fr" ){
+				$mail->setDocument('/fr/booking/reservation-confirmation');
+			}else{
+				$mail->setDocument('/fr/booking/reservation-confirmation-en');
+			}
+			// $mail->setBody($body);
+			$mail->addTo($email);
+			$mail->addBcc('didier.rechatin@gmail.com');
+			$mail->Send();
 		}
-		// $mail->setBody($body);
-		$mail->addTo($email);
-		$mail->addBcc('didier.rechatin@gmail.com');
-		$mail->Send();
 	}
 	public function sendModification($array){
 		$email=$array['email'];
-		$sellocation=Object\Location::getById($array['locationid'],1);
-		$parameters = array(
-			'bookingref'=>$array['id'], 
-			'partysize'=>$array['partysize'], 
-			'serving'=>$array['servingtitle'], 
-			'location'=>$array['locationname'],  
-			'date'=>$array['start']->get('dd-MM-YYYY'), 
-			'slot'=>$array['start']->get('HH:mm'), 
-			'locationaddress'=>$sellocation->getAddress(),
-			'locationzip'=>$sellocation->getZip(),
-			'locationcity'=>$sellocation->getCity(),
-			'locationtel'=>$sellocation->getTel(), 
-			'locationemail'=>$sellocation->getEmail(), 
-			'locationcity'=>$sellocation->getCity(), 
-			'locationurl'=>$sellocation->getUrl(), 
-			'guestname'=>$array['firstlastname']);
-		$mail = new Pimcore_Mail ();
-		$subject='Modification of Reservation';
-		$mail->setParams($parameters);
-		$mail->setReplyTo('resaexpress.com@gmail.com', $name=NULL);
-		$mail->setSubject($subject);
-		$mail->setDocument('/fr/booking/modification-confirmation');
-		// $mail->setBody($body);
-		$mail->addTo($email);
-		$mail->addBcc('didier.rechatin@gmail.com');
-		$mail->Send();
+		if( $email != ''){
+			$sellocation=Object\Location::getById($array['locationid'],1);
+			$parameters = array(
+				'bookingref'=>$array['id'], 
+				'partysize'=>$array['partysize'], 
+				'serving'=>$array['servingtitle'], 
+				'location'=>$array['locationname'],  
+				'date'=>$array['start']->get('dd-MM-YYYY'), 
+				'slot'=>$array['start']->get('HH:mm'),
+				'preferredlanguage'=>$array['preferredlanguage'],
+				'locationaddress'=>$sellocation->getAddress(),
+				'locationzip'=>$sellocation->getZip(),
+				'locationcity'=>$sellocation->getCity(),
+				'locationtel'=>$sellocation->getTel(), 
+				'locationemail'=>$sellocation->getEmail(), 
+				'locationcity'=>$sellocation->getCity(), 
+				'locationurl'=>$sellocation->getUrl(), 
+				'guestname'=>$array['firstlastname']);
+			$mail = new Pimcore_Mail ();
+			$subject='Modification of Reservation';
+			$mail->setParams($parameters);
+			$mail->setReplyTo('resaexpress.com@gmail.com', $name=NULL);
+			$mail->setSubject($subject);
+			if( $array['preferredlanguage'] == "fr" ){
+				$mail->setDocument('/fr/booking/modification-confirmation');
+			}else{
+				$mail->setDocument('/fr/booking/modification-confirmation-en');
+			}
+			// $mail->setBody($body);
+			$mail->addTo($email);
+			$mail->addBcc('didier.rechatin@gmail.com');
+			$mail->Send();
+		}
 	}
 	/**
 	 * create
