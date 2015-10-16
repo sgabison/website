@@ -169,6 +169,7 @@ var ReservationFormValidator = function () {
 		var newReservation = new Object;
 		  newReservation.id= $("#id").val() 
 		, newReservation.lastname = $("#firstlastname").val()
+		, newReservation.custname = $("#firstlastname").val()
 		, newReservation.datereservation = moment().format('DD-MM-YYYY')
 		, newReservation.reservationdate = $("#reservationdateinput").val()
 		, newReservation.email = $("#email").val()
@@ -446,11 +447,11 @@ var ReservationFormValidator = function () {
                     minlength: 2
                 },
                 email: {
-                    required: true,
+                    //required: true,
                     email: true
                 },
                 tel: {
-                    required: true,
+                    //required: true,
                     number: true,
                     //minlength: 10
                 }

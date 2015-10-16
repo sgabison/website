@@ -12,7 +12,7 @@ class Reservation extends \Object\Concrete {
 	public $name;
 	public $properties = array(); // an array of other misc properties
 	public function toArray() {
-		$fields=array('id', 'bookingref', 'bookingnotes', 'status', 'partysize', 'actualpartysize', 'datereservation', 'actualstart', 'start', 'end', 'arrived' );
+		$fields=array('id', 'bookingref', 'bookingnotes', 'status', 'partysize', 'actualpartysize', 'datereservation', 'actualstart', 'start', 'end', 'arrived', 'custname' );
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();
@@ -98,6 +98,19 @@ class Reservation extends \Object\Concrete {
 		        	$guest->setEmail( $data['email'] );
 		        	$guest->save();
 		        }
+			}elseif( $data['email'] ){
+		        $guest=\Object\Guest::getByTel($data['email'], 1);
+		        if ( ! $guest instanceof \Object\Guest ){ 
+		        	$guest = new \Object\Guest();
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsletterConfirmed'=>$data['newsletterConfirmed'] ) );
+		        } else {
+		        	$guest->setPreferredlanguage( $data['preferredlanguage'] );
+		        	$guest->setNewsletterConfirmed( $data['newsletterConfirmed'] );
+		        	$guest->setLastname( $data['lastname'] );
+		        	$guest->setBookingnotes( $data['bookingnotes'] );
+		        	$guest->setTel( $data['tel'] );
+		        	$guest->save();	
+		        }		
 			}
         }
         $result=array();
@@ -107,6 +120,7 @@ class Reservation extends \Object\Concrete {
         $result['countrycode']=$data['countrycode'];
         $result['email']=$data['email'];
         $result['lastname']=$data['lastname'];
+        $result['custname']=$data['custname'];
         $result['actualpartysize']=$data['actualpartysize'];
         $result['partysize']=$data['partysize'];
         $result['status']=$data['status'];

@@ -84,7 +84,7 @@
 							</div>
 							<div id="partybox" class="no-display">
 								<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
-								<input id="party" class="no-display">
+								<!--<input id="party" class="no-display">-->
 								<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 									<?php $i=0; while($i<7){ 
 										$i++;?>
@@ -135,7 +135,7 @@
 									<h4><span class="text-bold"><?php echo $this->translate('TXT_GUEST_NAME');?></span></h4>
 								</label>
 								<span class="input-icon">
-								<input type="text" placeholder="Insert your Name" class="form-control" id="firstlastname" name="firstlastname" value='<?php echo $this->firstlastname;?>' style="font-size:large">
+								<input type="text" placeholder="Insert your Name" class="form-control" id="firstlastname" name="firstlastname" value='<?php if($this->firstlastname){echo $this->firstlastname;}else{echo $this->custname;}?>' style="font-size:large">
 								<i class="fa fa-user"></i>
 								</span>
 							</div>
@@ -175,6 +175,7 @@
 								</span></h4>
 							</div>
 							<div id="inputs" class="no-display"></div>
+							<input id="party" class="no-display" value="<?php if($this->partysize){echo $this->partysize;}?>">
 							<input id="preferredlanguageinput" name="preferredlanguageinput" class="no-display" value="fr">
 							<div id="registerbutton">
 								<button class="btn btn-lg btn-dark-orange btn-block" value='submit' id='submit'>
@@ -189,9 +190,15 @@
 	</div>
 	<div class="panel-body no-display" id="confirmationform">
 		<div class="successHandler alert alert-success">
-				<h4><?php echo $this->translate('TXT_YOUR_RESERVATION_IS_CONFIRMED');?></h4>
-				<?php echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION');?><br>
-				<?php // echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
+				<?php if( $this->getParam('reservationid') ){ ?>
+					<h4><?php echo $this->translate('TXT_THE_CHANGE_OF_RESERVATION_IS_CONFIRMED');?></h4>
+					<?php echo $this->translate('TXT_CUST_WILL RECEIVE_CHANGE_CONFIRMATION');?><br>
+					<?php // echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>				
+				<?php }else{ ?>
+					<h4><?php echo $this->translate('TXT_THE_RESERVATION_IS_CONFIRMED');?></h4>
+					<?php echo $this->translate('TXT_CUST_WILL RECEIVE_CONFIRMATION');?><br>
+					<?php // echo $this->translate('TXT_YOU_WILL RECEIVE_CONFIRMATION_SMS');?>
+				<?php } ?>
 		</div>
 		<div class="col-md-6">
 			<div class="panel">

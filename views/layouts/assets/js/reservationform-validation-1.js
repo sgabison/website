@@ -228,10 +228,10 @@ var ReservationFormValidator1 = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
-		$('.registergroup').removeClass('hidden-sm hidden xs');
+		$('.registergroup').removeClass('hidden-sm hidden-xs');
 		$('.slotlinkdata').addClass('text-success');
 		$('.slotlinkdata').removeClass('text-muted');
-		$('#selectgroup').addClass('hidden-sm hidden xs');
+		$('#selectgroup').addClass('hidden-sm hidden-xs');
 		$('#slotinput').val( $('#'+elementid).attr("value") );
 		$('#slotlinkdata').text( $('#'+elementid).attr("value") );
 		$('#locationinput').val( locationid );

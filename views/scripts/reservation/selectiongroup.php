@@ -50,7 +50,7 @@
 		</div>
 		<div id="partybox" class="no-display" style="margin-top:10px">
 			<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
-			<input id="party" class="no-display" value="<?php if($this->partysize){echo $this->partysize;}?>">
+			<!--<input id="party" class="no-display" value="<?php if($this->partysize){echo $this->partysize;}?>">-->
 			<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
 				<?php $i=0; while($i<7){ 
 					$i++;?>

@@ -29,12 +29,15 @@
 						<i class="fa fa-fast-backward"></i>
 					</a>
 					<a class="btn btn-blue"  data-target=".bs-example-modal-basic" data-toggle="modal">
-						<i class="fa fa-refresh"></i> <?php echo $this->calendar;?>
+						<?php echo $this->calendar;?>
 					</a> 
 					<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>" class="btn btn-blue hidden-xs">
 						<i class="fa fa-fast-forward"></i>
 					</a>
 				</div>
+				<a class="btn btn-blue" href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->calendar;?>">
+					<i class="fa fa-refresh"></i> 
+				</a>
 				<div class="pull-right">
 					<button data-table="#reservationList" class="btn btn-orange print-table">
 						<!--<?= $this->translate("Print")?>-->
@@ -43,6 +46,7 @@
 					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:30px">
 					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
 					<ul class="dropdown-menu dropdown-light pull-right">
+<!--
 						<li><a href="#" class="export-pdf" data-table="#reservationList"
 							data-ignoreColumn="0,2,5"> <img
 								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png'
@@ -85,12 +89,14 @@
 								width='24px'> Save as JSON
 						</a>
 						</li>
+-->
 						<li><a href="#" class="export-excel" data-table="#reservationList"
 							data-ignoreColumn="0,2,5"> <img
 								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
 								width='24px'> Export to Excel
 						</a>
 						</li>
+<!--
 						<li><a href="#" class="export-doc" data-table="#reservationList"
 							data-ignoreColumn="0,2,5"> <img
 								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/word.png'
@@ -103,6 +109,7 @@
 								width='24px'> Export to PowerPoint
 						</a>
 						</li>
+-->
 					</ul>
 				</div>
 			</span>	
@@ -124,6 +131,7 @@
 					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:30px">
 					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
 					<ul class="dropdown-menu dropdown-light pull-right">
+<!--
 						<li><a href="#" class="export-pdf" data-table="#reservationList" data-ignoreColumn="0,2,5"> <img src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png' width='24px'> Save as PDF
 						</a>
 						</li>
@@ -159,12 +167,14 @@
 								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/json.png'
 								width='24px'> Save as JSON
 						</a>
+-->
 						</li>
 						<li><a href="#" class="export-excel" data-table="#reservationList"
 							data-ignoreColumn="0,2,5"> <img
 								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
 								width='24px'> Export to Excel
 						</a>
+<!--
 						</li>
 						<li><a href="#" class="export-doc" data-table="#reservationList"
 							data-ignoreColumn="0,2,5"> <img
@@ -178,6 +188,7 @@
 								width='24px'> Export to PowerPoint
 						</a>
 						</li>
+-->
 					</ul>
 				</div>
 			</span>
