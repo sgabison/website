@@ -138,10 +138,12 @@ var TableReservationList = function () {
 					            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
 								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guestemail.toUpperCase()+' "><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
 					        '</tr>'+
+/*
 					        '<tr>'+
 					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
 								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
 					        '</tr>'+
+*/
 					    '</table>'+
 					'</div>'+
 				'</div>'+
@@ -513,14 +515,26 @@ var TableReservationList = function () {
 
 			} );
 	};
-    $('#checkcancelled').on('switchChange.bootstrapSwitch', function() {
-    	$("#reservationList").dataTable().fnDraw();
-    	return false;
-    });
-    $('#checkarrived').on('switchChange.bootstrapSwitch', function() {
-    	$("#reservationList").dataTable().fnDraw();
-    	return false;
-    });
+	$('#checkcancelled').iCheck();
+	$('#checkarrived').iCheck();
+	var manageCheckBoxes=function(){
+		$('#checkcancelled').on('ifChecked', function(event){
+	    	$("#reservationList").dataTable().fnDraw();
+	    	return false;
+		});
+		$('#checkcancelled').on('ifUnchecked', function(event){
+	    	$("#reservationList").dataTable().fnDraw();
+	    	return false;
+		});
+		$('#checkarrived').on('ifChecked', function(event){
+	    	$("#reservationList").dataTable().fnDraw();
+	    	return false;
+		});
+		$('#checkarrived').on('ifUnchecked', function(event){
+	    	$("#reservationList").dataTable().fnDraw();
+	    	return false;
+		});
+	}
 	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
 			var nTr = oSettings.aoData[ iDataIndex ].nTr;
 			console.log( 'checkarrived', $('#checkarrived').is(":checked") );
@@ -567,6 +581,7 @@ var TableReservationList = function () {
 			loadFullCalendar();
 			runTouchSpin();
 			pickerTime();
+			manageCheckBoxes();
         }
     };
 }();

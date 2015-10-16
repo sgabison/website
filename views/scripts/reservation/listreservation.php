@@ -35,18 +35,12 @@
 						<i class="fa fa-fast-forward"></i>
 					</a>
 				</div>
-				<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>">
-					<input id="checkarrived" type="checkbox" class="checkbox-inline checkbox make-switch tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_ARRIVED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_ARRIVED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
-				</span>
-				<span class="tooltips" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>">
-					<input id="checkcancelled" type="checkbox" class="checkbox-inline checkbox make-switch bootstrap-switch-success tooltips" data-on-text="O" data-off-text="X" data-label-text="<?= $this->translate('STATUS_CANCELLED')?>" data-rel="tooltip" data-original-title="<?= $this->translate('STATUS_CANCELLED_EXPLANATION')?>" data-on-color="success" data-off-color="warning">
-				</span>
 				<div class="pull-right">
 					<button data-table="#reservationList" class="btn btn-orange print-table">
 						<!--<?= $this->translate("Print")?>-->
 						<i class="fa fa-print"></i>
 					</button> 
-					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:50px">
+					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:30px">
 					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
 					<ul class="dropdown-menu dropdown-light pull-right">
 						<li><a href="#" class="export-pdf" data-table="#reservationList"
@@ -111,15 +105,7 @@
 						</li>
 					</ul>
 				</div>
-			</span>
-<!--
-			<span class="actionitems">
-				<h4 class="panel-title">
-					<?= $this->translate("TXT_DATE")?>: <span class="text-bold"><?php echo $this->calendar;?></span> / <?php echo $this->translate("TXT_SERVING")?>: <span class="text-bold"><?= strtoupper($this->servingname);?></span>
-				<h4>
-			</span>
--->
-			
+			</span>	
 			<span class="guestactionitems" class="no-display">
 				<button class="btn btn-blue">
 					<i class="fa fa-user"></i> <?php echo $this->guestname;?>
@@ -135,7 +121,7 @@
 						<!--<?= $this->translate("Print")?>-->
 						<i class="fa fa-print"></i>
 					</button> 
-					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:50px">
+					<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle" style="margin-right:30px">
 					<i class="fa fa-share-square"></i> <i class="fa fa-angle-down"></i></button>
 					<ul class="dropdown-menu dropdown-light pull-right">
 						<li><a href="#" class="export-pdf" data-table="#reservationList" data-ignoreColumn="0,2,5"> <img src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png' width='24px'> Save as PDF
@@ -196,9 +182,9 @@
 				</div>
 			</span>
 		</div>
-		<div class="panel-tools">
-			<a class="config" href="#"> <i class="fa fa-cog"></i><span> </span></a>
-			<a class="panel-expand" href="#"> <i class="fa fa-expand"></i><span> </span></a>
+		<div class="panel-tools btn btn-default config">
+			<i class="fa fa-cog"></i><span> </span>
+			<!--<a class="panel-expand" href="#"> <i class="fa fa-expand"></i><span> </span></a>-->
 		</div>
 	</div>
 	<input id="servinglist" class="no-display value="<?php echo addslashes($servingstring);?>">
@@ -222,7 +208,17 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<div class="col-md-12 space20">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<label class="checkbox-inline text-bold" style="font-size:large">
+								<input type="checkbox" class="flat-grey" value="1" id="checkarrived"  name="checkarrived"> <?= $this->translate('EXCLUDE_STATUS_ARRIVED')?>
+							</label>
+						</div>
+						<div class="col-md-6">
+							<label class="checkbox-inline text-bold" style="font-size:large">
+								<input type="checkbox" class="flat-grey" value="1" id="checkcancelled"  name="checkcancelled"> <?= $this->translate('EXCLUDE_STATUS_CANCELLED')?>
+							</label>
+						</div>
 					</div>
 <!--
 					<div class="col-md-12">
