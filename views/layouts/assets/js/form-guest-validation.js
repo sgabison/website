@@ -64,8 +64,8 @@ var FormGuestValidator = function () {
             ignore: "",
             rules: {
                 firstname: {
-                    minlength: 1,
-                    required: true
+                    minlength: 1
+    //               , required: true
                 },
                 lastname: {
                     minlength: 2,
@@ -73,14 +73,17 @@ var FormGuestValidator = function () {
                 },
                 email: {
                     email: true
+                },
+                tel: {
+                	minlength:10
                 }
             },
             messages: {
                 firstname: t ("js_first_name_please"),
                 lastname: t ("js_last_name_please"),
-                email: {
-                    email: t ("js_emailformat_please")
-                }
+                email: t ("js_emailformat_please"),
+                tel: t('js_minimum_10_car')
+                
             },
             groups: {
                 DateofBirth: "dd mm yyyy"

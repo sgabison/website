@@ -22,7 +22,7 @@
 		<div id="panel_edit_account" class="tab-pane fade in active"">
 			<form id="form-guest" novalidate="novalidate">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="errorHandler alert alert-danger no-display">
 							<i class="fa fa-times-sign"></i> <?= $this->translate("TXT_YOU_HAVE_ERRORS")?>
 					</div>
@@ -51,11 +51,14 @@
 																</label>
 							</div>
 						</div>
+						
+							<input class="guest-index hide" type="text"> 
+							<input class="guest-id hide" name="id" type="text"
+								value="<?= $this->guest->getId();?>"> 
+							<input class="guest-form-method hide" type="text" value="PUT"> 
+					<!-- 
 						<div class="form-group">
-							<input class="guest-index hide" type="text"> <input
-								class="guest-id hide" name="id" type="text"
-								value="<?= $this->guest->getId();?>"> <input
-								class="guest-form-method hide" type="text" value="PUT"> <label
+						<label
 								class="control-label">
 							<?= $this->translate("FIRSTNAME")?> <span class="symbol required"></span>
 							</label> <input type="text"
@@ -63,9 +66,10 @@
 								class="form-control guest-firstname" name="firstname"
 								value="<?= $this->guest->getFirstname();?>">
 						</div>
+					-->
 						<div class="form-group">
 							<label class="control-label">
-							<?= $this->translate("LASTNAME")?> <span class="symbol required"></span>
+							<?= $this->translate("TXT_LASTNAME")?> <span class="symbol required"></span>
 							</label> <input type="text"
 								placeholder="<?= $this->translate('INSERT_LASTNAME')?>"
 								class="form-control guest-lastname" name="lastname"
@@ -74,20 +78,20 @@
 
 						<div class="form-group">
 							<label class="control-label">
-							<?= $this->translate("EMAIL")?> <span class="symbol required"></span>
+							<?= $this->translate("TXT_EMAIL")?>
 							</label> <input type="email" placeholder=""
 								class="form-control guest-email" name="email"
 								value="<?= $this->guest->getEmail();?>">
 						</div>
 						<div class="form-group">
 							<label class="control-label">
-							<?= $this->translate("PHONE")?> 
+							<?= $this->translate("TXT_PHONE")?> 
 							</label> <input type="tel" placeholder=""
 								class="form-control guest-email" name="tel"
 								value="<?= $this->guest->getTel();?>">
 						</div>
 					</div>
-
+<!-- 
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="control-label"> Twitter </label> <span
@@ -108,33 +112,22 @@
 							</span>
 						</div>
 						<div class="form-group">
-							<label class="control-label"> Github </label> <span
-								class="input-icon"> <input class="form-control" type="text"
-								placeholder=""> <i class="fa fa-github"></i>
-							</span>
-						</div>
-						<div class="form-group">
-							<label class="control-label"> Linkedin </label> <span
-								class="input-icon"> <input class="form-control" type="text"
-								placeholder=""> <i class="fa fa-linkedin"></i>
-							</span>
-						</div>
-						<div class="form-group">
 							<label class="control-label"> Skype </label> <span
 								class="input-icon"> <input class="form-control" type="text"
 								placeholder=""> <i class="fa fa-skype"></i>
 							</span>
 						</div>
 					</div>
+-->
 				</div>
 
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="pull-right">
 							<div class="btn-group">
 								<button class="btn btn-info save-guest" type="submit">
-														<?= $this->translate("TXT_SAVE")?>
-													</button>
+									<?= $this->translate("TXT_SAVE")?>
+								</button>
 							</div>
 						</div>
 					</div>

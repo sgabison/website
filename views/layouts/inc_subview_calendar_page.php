@@ -64,7 +64,7 @@
 				<?php endif; ?>
 				<div class="col-md-12">
 					<div class="form-group">
-						<textarea class="summernote" placeholder="<?php echo $this->t('TXT_EVENT_NOTE')?>..."></textarea>
+						<textarea class="summernote" placeholder="<?php echo $this->t('TXT_EVENT_NOTE')?>"></textarea>
 					</div>
 				</div>
 			</div>
