@@ -23,6 +23,7 @@ var SocieteSetupFormValidator = function () {
 	var permitsToName=function(value){
 		if( value==1 ){ return t('Administrator'); }
 		if( value==2 ){ return t('Manager'); }
+		if( value==3 ){ return t('Supervisor'); }
 	}
 	$('#closingDateStart').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
 	$('#closingDateEnd').datepicker({ todayHighlight: true, defaultDate: new Date(), autoclose: true });
@@ -193,6 +194,29 @@ var SocieteSetupFormValidator = function () {
             }
         });
     };
+//    var myFunction = function(){
+		var test= [];
+		$.ajax({
+			url: '/data/societe/location-list',
+			dataType: 'json',
+			async: false,
+			type:'POST', //obligatoire
+			contentType: "application/json; charset=utf-8",
+			success: function(json) {
+				if (json.success || json.success == 'true') {
+					$.each(json.data, function(key, value){
+				        var obj= { "label" : value, "value" : key};
+				        test.push(obj);
+				    });
+				    console.log( 'test: ',test );
+//				    return test;
+				}
+			},
+			error: function (request, status, error) {
+				alert(error);
+			}        
+		});
+//    }
     var loadPersons = function () {
 	    var editor = new $.fn.dataTable.Editor( {
 	        ajax: "/data/societe/persons-list",
@@ -237,12 +261,19 @@ var SocieteSetupFormValidator = function () {
 	                name: "locationname",
 	                type: "hidden"
 	            }, {
+	                label: t('js_accessed_locations'),
+	                name: "accesslocations",
+	                type: "checkbox",
+					options: test
+	            }, {
 	                label: t('js_permits'),
 	                name: "permits",
 	                type:  "select",
 	                options: [
 	                    { label: "Administrator", value: "1" },
+	                    { label: "Supervisor",    value: "3" },
 	                    { label: "Manager",       value: "2" }]
+
 	            }, {
 	                label: t('js_location'),
 	                name: "locationid",
@@ -254,6 +285,11 @@ var SocieteSetupFormValidator = function () {
 	                type: "password"
 	            }
 	        ]
+	    } );
+	    editor.dependent( 'permits', function ( val ) {
+	        return val === '2' || val === '1' ?
+	            { hide: ['accesslocations'] } :
+	            { show: ['accesslocations'] };
 	    } );
 	    // Edit record
 	    $('#personlist').on('click', 'a.editor_edit', function (e) {
@@ -300,6 +336,10 @@ var SocieteSetupFormValidator = function () {
 			  { data: "lastname" },
 			  { data: "email" },
 			  { data: "phone" },
+			  { 
+			  	"data": "accesslocations",
+			  	"visible": false
+			  },
 			  { 
 			  	"data": "locationname",
 			  	"visible": false 
@@ -553,7 +593,6 @@ var SocieteSetupFormValidator = function () {
 	                    { label: "bug",  		value: "fa-bug" }
 	                ]
 	            }
-	            
 	        ]
 	    } );
 	    $('#tagslist').on( 'click', 'tbody td.details-control', function () {

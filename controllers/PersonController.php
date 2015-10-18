@@ -239,9 +239,7 @@ class PersonController extends Useraware
 	}
 
     public function objectFormAction() {
-
         $success = false;
-
         // getting parameters is very easy ... just call $this->getParam("yorParamKey"); regardless if's POST or GET
         if($this->getParam("firstname") && $this->getParam("lastname") && $this->getParam("email") && $this->getParam("terms")) {
             $success = true;

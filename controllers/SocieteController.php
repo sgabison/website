@@ -201,6 +201,21 @@ class SocieteController extends Useraware
 		}
 		return $res;
 	}
+	public function locationListAction(){
+		$this->disableLayout();
+		$this->disableViewAutoRender();	
+		$reponse = new Reponse();
+		$locations=$this->societe->getLocations();
+		foreach( $locations as $location){
+			$data[ $location->getId() ]=$location->getName();
+		}
+		$reponse->success = true;
+		$reponse->message = "LIST_LOCATIONS" ;
+		$reponse->data = $data;
+		$reponse->debug = "";
+		$this->render($reponse);
+	}
+	
 	public function personsListAction(){
 		//get societe/location and serving
 		$reponse = new Reponse();
@@ -222,6 +237,14 @@ class SocieteController extends Useraware
 			}
 			//if EDIT
 			if($_POST['action'] =="edit"){
+				$accesslocations='';
+				if($_POST['data']['accesslocations']){
+					foreach( $_POST['data']['accesslocations'] as $accessed){
+						$accesslocations=$accessed.'|'.$accesslocations;
+					}
+				}else{
+					$accesslocations=$_POST['data']['locationid'];
+				}
 				$person=\Object\Person::getById( $_POST['id'] );
 				if($person instanceof Object_Person){
 					$person->setFirstname($_POST['data']['firstname']);
@@ -229,6 +252,7 @@ class SocieteController extends Useraware
 					$person->setEmail($_POST['data']['email']);
 					$person->setPhone($_POST['data']['phone']);
 					$person->setPermits($_POST['data']['permits']);
+					$person->setAccesslocations($accesslocations);
 					$location=Object\Location::getById( $_POST['data']['locationid'], 1 );
 					$person->setLocation( $location );
 					$person->setPassword(md5($_POST['data']['password']));
@@ -242,11 +266,20 @@ class SocieteController extends Useraware
 			}
 			//if CREATE
 			if($_POST['action'] =="create"){
+				$accesslocations='';
+				if($_POST['data']['accesslocations']){
+					foreach( $_POST['data']['accesslocations'] as $accessed){
+						$accesslocations=$accessed.'|'.$accesslocations;
+					}
+				}else{
+					$accesslocations=$_POST['data']['locationid'];
+				}
 				$row['firstname']=$_POST['data']['firstname'];
 				$row['lastname']=$_POST['data']['lastname'];
 				$row['email']=$_POST['data']['email'];
 				$row['phone']=$_POST['data']['phone'];
 				$row['permits']=$_POST['data']['permits'];
+				$row['accesslocations']=$accesslocations;
 				$location=Object\Location::getById( $_POST['data']['locationid'], 1 );
 				$row['location']=$location;
 				$row['password']=md5($_POST['data']['password']);

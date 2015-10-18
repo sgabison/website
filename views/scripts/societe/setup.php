@@ -2,50 +2,6 @@
 <script type="text/javascript">
 var geocoder;
 var map;
-/*
-function initialize() {
-	geocoder = new google.maps.Geocoder();
-	var latlng = new google.maps.LatLng(<?php echo $this->lat;?>, <?php echo $this->long;?>);
-	var mapOptions = {
-		zoom: 15,
-		center: latlng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	}
-	var marker = new google.maps.Marker({
-		position: latlng,
-		map: map,
-		title: 'Hello World!'
-	});
-	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-}
-
-function codeAddress() {
-	var address = document.getElementById('address').value + ',' + document.getElementById('city') .value + ',' + document.getElementById('zip').value;
-	geocoder.geocode( { 'address': address}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK) {
-			map.setCenter(results[0].geometry.location);
-			var marker = new google.maps.Marker({
-				map: map,
-				position: results[0].geometry.location
-			});
-			var htmllat=results[0].geometry.location.lat();
-			var htmllng=results[0].geometry.location.lng();
-			$("#latresult").val(htmllat);
-			$("#lngresult").val(htmllng);
-		} else {
-			alert('Geocode was not successful for the following reason: ' + status);
-		}
-	});
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-function resetMap(m) {
-   var x = m.getZoom(); 
-   var c = m.getCenter();
-   google.maps.event.trigger(m, 'resize');
-   m.setZoom(x);
-   m.setCenter(c);
-};
-*/
 var posit=[];
 var pos=[];
 var k;
@@ -358,6 +314,7 @@ console.log( pos );
 							                <th><?php echo $this->translate('TXT_LASTNAME');?></th>
 							                <th><?php echo $this->translate('TXT_EMAIL');?></th>
 							                <th><?php echo $this->translate('TXT_PHONE');?></th>
+							                <th></th>
 							                <th></th>
 							                <th><?php echo $this->translate('TXT_PERMISSION');?></th>
 							                <th><?php echo $this->translate('TXT_LOCATION');?></th>

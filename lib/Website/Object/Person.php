@@ -43,7 +43,7 @@ class Person extends \Object\Concrete {
 				"phone",
 				"address",
 				"city",
-			//	"avatar",
+				"accesslocations",
 				"permits" 
 		);
 // 		$fieldDefinitions = $this->geto_class ()->getFieldDefinitions ();
