@@ -126,7 +126,7 @@ class GuestController extends Useraware {
 				'jQuery(document).ready(function() {
 					Main.init();
 					GuestList.init();
-				FormGuestValidator.init();
+	
 				});',
 				'text/javascript',
 				array('noescape' => true)); // Disable CDATA comments
@@ -134,7 +134,7 @@ class GuestController extends Useraware {
 	public function profileAction () {
 	
 		$this->layout ()->setLayout ( 'portal' );
-		$this->id=$this->getParam("id");
+		$this->id=$this->getParam("guestid");
 		$this->view->guest= ($this->id)?\Object\Guest::getById($this->id) : null ;
 	
 		$this->view->listReservations = $this->listReservationsByGuest();
@@ -237,10 +237,9 @@ class GuestController extends Useraware {
 		return $res;
 	}
 	public function listReservationsByGuest(){
-		$optionalParams = array('guestid' => $this->id);
+		$optionalParams = array('guestid' => $this->id, 'calendar'=>'15-10-2015');
 		$useLayout = false;
-		return Document_Service::render(Document::getById(85), $optionalParams, $useLayout);
-		
+		return Document_Service::render(Document::getById(85), $optionalParams, $useLayout);	
 	}
 	
 }
