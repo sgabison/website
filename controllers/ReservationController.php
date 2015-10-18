@@ -359,6 +359,9 @@ class ReservationController extends Useraware{
 				if( $this->person->getPermits == 2 ){
 					if( $this->person->getLocation()->getId() != $reservation->getLocation()->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_LOCATION') ); }
 				}
+				if( $this->person->getPermits == 3 ){
+					if( !in_array($reservation->getLocation()->getId(), $accesslocationsidarray) ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_LOCATION') ); }
+				}
 				if( $reservation->getLocation()->getId() != $this->selectedLocation->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_RESERVATION') ); }
 				$today=new zend_date();
 				$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
@@ -819,6 +822,10 @@ class ReservationController extends Useraware{
 					$myreservation->setArrived($arrived);
 					$myreservation->save();
 					$data=$_POST['data'];
+					if( $myreservation->getLocation() instanceof Object_Location ){
+						$data['locationid']=$myreservation->getLocation()->getId();
+						$data['locationname']=$myreservation->getLocation()->getName();
+					}
 					$data['DT_RowId']="row_".$_POST['data']['id'];
 					$reponse->message='TXT_RESERVATION_LIST';
 					$reponse->success=true;
@@ -869,7 +876,8 @@ class ReservationController extends Useraware{
 			$resa['locationid']=$reservation->getLocation()->getId();
 			$resa['locationname']=$reservation->getLocation()->getName();
 		}else{
-			$resa['locationid']=''; $resa['locationname']='';
+			$resa['locationid']=''; 
+			$resa['locationname']='';
 		}
 		if( $this->language == "fr" ){
 			if( $reservation->getStatus() == "Cancelled" ){ $resa['status']="Annulé"; } else { $resa['status']=$reservation->getStatus(); }

@@ -245,6 +245,16 @@ console.log( pos );
 																		<i class="fa fa-hand-o-right"></i>
 																	</span>
 																</div>														
+
+																<div class="form-group">
+																	<label class="control-label">
+																		<?php echo $this->translate('TXT_SETUP_SOCIETE_MINUTES_BEFORE_CLOSING');?><span class="symbol required"></span>
+																	</label>														
+																	<span class="input-icon">
+																		<input type="number" class="form-control" name="minutesBeforeService" id="minutesBeforeService" value="<?php echo $this->minutesBeforeService;?>">
+																		<i class="fa fa-hand-o-right"></i>
+																	</span>
+																</div>														
 														</div>
 														</div>
 														</div>

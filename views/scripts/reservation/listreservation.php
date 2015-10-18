@@ -123,6 +123,9 @@
 				<button class="btn btn-blue" id="datedisplay">
 					<i class="fa fa-calendar"></i> <?= $this->translate('TXT_DISPLAY_DATE')?>
 				</button>
+				<button class="btn btn-blue" id="locationdisplay">
+					<i class="fa fa-map-marker"></i> <?= $this->translate('TXT_DISPLAY_LOCATION')?>
+				</button>
 				<div class="pull-right">
 					<button data-table="#reservationList" class="btn btn-orange print-table">
 						<!--<?= $this->translate("Print")?>-->
@@ -268,6 +271,8 @@
 						<tr>
 							<th></th>
 							<th></th>
+							<th><?= $this->translate("TXT_HEADER_LOCATIONID")?></th>
+							<th><?= $this->translate("TXT_HEADER_LOCATION_NAME")?></th>
 							<th><?= $this->translate("TXT_HEADER_DATE_RESERVATION")?></th>
 							<th><?= $this->translate("TXT_HEADER_TIMESLOT")?></th>
 							<th><?= $this->translate("TXT_HEADER_REF")?></th>

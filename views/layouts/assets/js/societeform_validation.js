@@ -44,6 +44,7 @@ var SocieteSetupFormValidator = function () {
 			, newSociete.maxResaPerUnit = $("#maxResaPerUnit").val()
 			, newSociete.maxResaSeats = $("#maxResaSeats").val()
 			, newSociete.mealduration = $("#mealduration").val()
+			, newSociete.minutesBeforeService = $("#minutesBeforeService").val()
 			, newSociete.resaUnit = $("#resaUnit").val()
 			, newSociete.closingDateStart = $("#closingDateStart").val()
 			, newSociete.closingDateEnd = $("#closingDateEnd").val()
@@ -149,6 +150,10 @@ var SocieteSetupFormValidator = function () {
                     required: true,
                     number: true
                 },
+                minutesBeforeService: {
+                    required: true,
+                    number: true
+                },
                 url: {
                     url: true
                 }
@@ -164,6 +169,7 @@ var SocieteSetupFormValidator = function () {
                 maxTables: t('js_maxtables_please'),
                 mealduration: t('js_mealduration_please'),
                 maxResaPerUnit:  t('js_maxresperunits_please'),
+                minutesBeforeService: t('js_minutesBeforeService'),
                 url: t('js_url_please')
             },
             invalidHandler: function (event, validator) { //display error alert on form submit

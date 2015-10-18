@@ -55,8 +55,19 @@ var ReservationFormValidator = function () {
 	    var day = date.getDate();
 	    return day < 10 ? '0' + day : '' + day; // ('' + month) for string result
 	} 
+	var formatTel=function(tel){
+		return '('+tel.substring(0,2)+')-'+tel.substring(2,4)+'-'+tel.substring(4,6)+'-'+tel.substring(6,8)+'-'+tel.substring(8,10);
+	}
 	var	today=new Date();
 	var timenow=today.getHours()+':'+today.getMinutes();
+	var timeslotToMinute=function( timeslot ){
+		var arr=timeslot.split(':');
+		var result=Number(arr[0]*60)+Number(arr[1]);
+		return result;
+	}
+    var compareTime=function( timenow, timeslot, minutes ){
+		return (Number(timeslotToMinute( timenow ))+Number(minutes)) > timeslotToMinute( timeslot );
+    }
 	console.log( 'timenow'+timenow );
 	var todaydate=getDate2(today)+'-'+getMonth2(today)+'-'+today.getFullYear(); 
 	var thisDay=today.getDay();
@@ -312,7 +323,11 @@ var ReservationFormValidator = function () {
 	var myfunc=function(e){
 		var elementid;
 		elementid=e.currentTarget.id;
-     	servingButton( e.data.data, e.data.reservationid,e.data.locationid,elementid ) ;
+		if ( $('#mycalendar').val() == formattedtoday && compareTime( timenow, $(this).attr('datatime'), $(this).attr('dataminutes') ) ){
+			bootbox.alert(t('js_toolate_part1')+' '+formatTel($(this).attr('tel')));
+		}else{
+			servingButton( e.data.data, e.data.reservationid,e.data.locationid,elementid ) ;
+		}
 	}
 	var myfunc2=function(e){
 		var elementid;
@@ -358,7 +373,7 @@ var ReservationFormValidator = function () {
 					} else {classresult = 'btn-dark-green';
 						selectedid='slotbutton'+res[1];
 					}
-					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-lg "+classresult+" slotbutton\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
+					var button="<button name=\"slotbutton\" id=\"slotbutton"+j+"\" type=\"button\" class=\"btn btn-lg "+classresult+" slotbutton alert_callback\" value=\""+slot+"\" style=\"margin:5px\">"+slot+"</button>";
 					$res.append( button );
 				});
 			}	
@@ -372,7 +387,7 @@ var ReservationFormValidator = function () {
 			backdrop.remove();
 		}
 	}
-	var slotButton = function(locationid, elementid, backdrop){
+	var slotButton = function(locationid, elementid, backdrop){	
 			$('.slotlinkdata').addClass('text-success');
 			$('.slotlinkdata').removeClass('text-muted');
 			$('#slotgroup').addClass('no-display');
@@ -455,7 +470,7 @@ var ReservationFormValidator = function () {
 					if( ( formattedtoday == $.formattedDate( $('#mycalendar').datepicker("getDate"), today ) )  && ( moment(timenow,'HH:mm') > moment(serv[4],'HH:mm') ) ){
 						classclosed = 'disabled';
 					}
-					var button="<button id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-lg buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
+					var button="<button tel=\""+serv[7]+"\" dataminutes=\""+serv[6]+"\" datatime=\""+serv[4]+"\" id=\"servingbutton"+i+"\" type=\"button\" class=\"btn btn-lg buttons-widget "+classcolor+" servingbutton\" serving=\""+key+"\" value=\""+serv[1]+"\" style=\"margin:5px\""+classclosed+">"+serv[0]+"</button>";
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});

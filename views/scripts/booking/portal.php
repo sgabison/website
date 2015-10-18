@@ -22,13 +22,13 @@
 					</div>
 					<div class="panel-body">
 						<div class="space20">
-							<a class="btn btn-block btn-lg btn-blue" href='/reserver'><?php echo $this->translate('TXT_BOOK_A_TABLE');?><a>
+							<a class="btn btn-block btn-lg btn-red" href='/reserver'><?php echo $this->translate('TXT_BOOK_A_TABLE');?><a>
 						</div>
 						<div class="space20">
 							<a class="btn btn-block btn-lg btn-blue" href='/liste-reservations?calendar=<?php $today=new Zend_Date();echo $today->get("dd-MM-YYYY");?>'><?php echo $this->translate('TXT_LIST_RESERVATIONS_TODAY');?><a>
 						</div>						
 						<div class="space20">
-							<a class="btn btn-block btn-lg btn-blue" href='/booking-calendar'><?php echo $this->translate('TXT_CALENDRIER_RESERVATION');?><a>
+							<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'><?php echo $this->translate('TXT_CALENDRIER_RESERVATION');?><a>
 						</div>						
 					</div>
 				</div>

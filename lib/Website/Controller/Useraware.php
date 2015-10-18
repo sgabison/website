@@ -58,6 +58,20 @@ class Useraware extends Action {
     	}
 		if( $this->person->getPermits() == 2 ){
 			$this->view->selectedLocation = $this->selectedLocation = $this->person->getLocation();
+		}elseif( $this->person->getPermits() == 3 ){
+			$accesslocationsidarray=explode( '|', $this->person->getAccesslocations() );
+			$locations=array();
+			foreach( $accesslocationsidarray as $accesslocationid ){
+				$locationitem=\Object\Location::getById($accesslocationid);
+				if( $locationitem instanceof \Object\Location){
+					array_push( $locations, $locationitem );
+				}
+			}
+			$this->view->locations=$locations;
+			$this->view->accesslocationsidarray=$accesslocationsidarray;
+			if( in_array( $location, $locations ) ){
+				$this->view->selectedLocation = $this->selectedLocation =$location;
+			}
 		}else{
 			if( $location->getSociete()->getName() == $this->person->getSociete()->getName() ){
     			$this->view->selectedLocation = $this->selectedLocation =$location;

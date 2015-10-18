@@ -156,6 +156,9 @@ var TableReservationList = function () {
 					'<div class="panel-body">'+
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
+					            '<td>'+t('location')+'</td>'+  '<td colspan="2"><b>'+d.locationname+'</b></td>'+
+					        '</tr>'+
+					        '<tr>'+
 					            '<td>'+t('js_serving')+'</td>'+  '<td colspan="2"><b>'+d.servingtitle+'</b></td>'+
 					        '</tr>'+
 					        '<tr>'+
@@ -327,9 +330,15 @@ var TableReservationList = function () {
 				});	 
 		    } );
 		    $("#datedisplay").click( function(e) {
-		        var column = table.column( '2' );
+		        var column = table.column( '4' );
 		        column.visible( ! column.visible() );
-		        var col = table.column( '5' );
+		        var col = table.column( '7' );
+		        col.visible( ! col.visible() );
+		    });
+		    $("#locationdisplay").click( function(e) {
+		        var column = table.column( '3' );
+		        column.visible( ! column.visible() );
+		        var col = table.column( '10' );
 		        col.visible( ! col.visible() );
 		    });
 		 	$(".search-select").on("select2-removed", function(e) {
@@ -369,6 +378,17 @@ var TableReservationList = function () {
 		                	return "<a class='btn btn-default'><i class='fa fa-plus-square'> </i></a>"
 		                }
 		            },
+					{ 
+						"data": "locationid", 
+						"visible": false 
+					},
+					{ 
+						"data": "locationname", 
+						"visible": false,
+						"render": function (data, type, row){
+							return '<h4><strong>'+data+'</strong></h4>';
+						} 
+					},
 					{ 
 						"data": "datereservation", 
 						"visible": false,
@@ -492,7 +512,7 @@ var TableReservationList = function () {
 				order: [ 1, 'asc' ],
 				aaSorting  : [[1, 'asc']],
 				aLengthMenu  : [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-				iDisplayLength : 10,
+				iDisplayLength : 100,
 				initComplete: function(settings, json) {
     				console.log( 'DataTables has finished its initialisation.' );
     				//$('.checkbox').iCheck({checkboxClass: 'icheckbox_square-grey'});
@@ -538,18 +558,18 @@ var TableReservationList = function () {
 	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
 			var nTr = oSettings.aoData[ iDataIndex ].nTr;
 			console.log( 'checkarrived', $('#checkarrived').is(":checked") );
-			console.log( 'arrived', aData[10] );
-			console.log( 'serving', aData[16] );
+			console.log( 'arrived', aData[12] );
+			console.log( 'serving', aData[18] );
 			console.log( 'checkcancelled', $('#checkcancelled').is(":checked") );
-			console.log( 'cancelled', aData[9] );
-			if( aData[10]=='<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>' ){
+			console.log( 'cancelled', aData[11] );
+			if( aData[12]=='<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>' ){
 				if( $('#checkarrived').is(":checked") ){
 					return false;
 				}else{
 					return true;
 				}
 			} else {
-				if( aData[9]=='Cancelled'  || aData[9]=='Annulé' ){
+				if( aData[11]=='Cancelled'  || aData[11]=='Annulé' ){
 					if( $('#checkcancelled').is(":checked") ){
 						return false;
 					}else{

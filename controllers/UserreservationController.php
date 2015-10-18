@@ -319,9 +319,9 @@ class UserreservationController extends Action
 						//echo "<br>";echo "<br>";
 					}
 					if ( $myserving->getId() == $myreservationservingid ){
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_selected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend.'_-_'.$location->getSociete()->getMinutesBeforeService().'_-_'.$location->getTel()]=$resatime;
 					}else{
-						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_notselected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend]=$resatime;
+						$resafinal[$myserving->getTitle().'_-_'.$myserving->getId().'_-_notselected_-_'.$closed.'_-_'.$servingstart.'_-_'.$servingend.'_-_'.$location->getSociete()->getMinutesBeforeService().'_-_'.$location->getTel()]=$resatime;
 					}
 			}
 			$reponse = new Reponse();

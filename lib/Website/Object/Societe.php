@@ -46,7 +46,7 @@ class Societe extends \Object\Concrete {
 		endif;
     }
 	public function toArray() {
-$fields=array('id','name','description','address','zip','city','tel','email','fax','maxSeats','maxTables','resaUnit','maxResaPerUnit','maxResaSeats','mealduration','latlngresult', 'url');
+$fields=array('id','name','description','address','zip','city','tel','email','fax','maxSeats','maxTables','resaUnit','maxResaPerUnit','maxResaSeats','mealduration','latlngresult', 'url', 'minutesBeforeService');
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();

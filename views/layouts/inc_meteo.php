@@ -4,6 +4,7 @@
 		<h4 class="panel-title">
 			<?php if($this->location) : echo $this->location->getCity() ; endif;?>
 		</h4>
+<!--
 		<div class="panel-tools">
 			<div class="dropdown">
 				<a data-toggle="dropdown"
@@ -32,6 +33,7 @@
 				class="fa fa-times"></i>
 			</a>
 		</div>
+-->
 	</div>
 	<div class="panel-body">
 		<div class="row center-block">
