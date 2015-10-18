@@ -2,10 +2,10 @@
 		<!--[if lt IE 9]>
 			<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/respond.min.js"></script>
 			<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/excanvas.min.js"></script>
-			<script type="text/javascript" src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jQuery/jquery-1.11.1.min.js"></script>
+			<script type="text/javascript" src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 		<![endif]-->
 		<!--[if gte IE 9]><!-->
-			<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jQuery/jquery-2.1.1.min.js"></script>
+			<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<!--<![endif]-->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/i18next/1.6.3/i18next-1.6.3.min.js"></script>
 		<script>		

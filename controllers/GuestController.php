@@ -63,7 +63,9 @@ class GuestController extends Useraware {
 			$data=array();
 			if ($this->getParam("q")) {
 				$data =$this->societe->getGuests($this->getParam("q"));
-			} 
+			} else {
+				$data =$this->societe->getGuests();
+			}
 			if($data) {
 				$reponse->message='TXT_GUEST_LIST';
 				$reponse->success=true;

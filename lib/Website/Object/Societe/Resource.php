@@ -85,6 +85,7 @@ class Resource extends \Object\Concrete\Resource {
 		$searchCondition=  " and ( o.lastname like '{$qlike}' or o.tel like '{$qlike}' or o.email like '{$qlike}') ";
 		endif;
 		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_12` r join object_query_12 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'societe' " , $this->model->getId()).$searchCondition ;
+		$sql.= " order by o.lastname asc";
 		$data =$this->db->FetchAll($sql);
 
 		endif;

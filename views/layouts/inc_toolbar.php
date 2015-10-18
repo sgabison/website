@@ -2,7 +2,7 @@
 						<div class="toolbar row">
 							<div class="col-sm-6 hidden-xs">
 								<div class="page-header">
-									<h1><?php echo $this->document->getTitle()?><small><?php echo $this->societe->getName()?></small></h1>
+									<h1><?php echo $this->t($this->document->getTitle())?><small><?php echo $this->societe->getName()?></small></h1>
 								</div>
 							</div>
 							<div class="col-sm-6 col-xs-12">

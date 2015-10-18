@@ -37,10 +37,10 @@
 					<a href="/reserver"><i class="fa fa-pencil-square-o"></i> <span class="title"><?php echo $this->t('TXT_PRENDRE_RESERVATION')?></span> </a>
 				</li>
 				<li>
-					<a href="/liste-reservations-search"><i class="fa fa-bars"></i> <span class="title"><?php echo $this->t('TXT_LIST_RESERVATION')?></span> </a>
+					<a href="/booking-calendar"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_CALENDRIER_RESERVATION')?></span> </a>
 				</li>
 				<li>
-					<a href="/booking-calendar"><i class="fa fa-calendar"></i> <span class="title"><?php echo $this->t('TXT_CALENDRIER_RESERVATION')?></span> </a>
+					<a href="/guests"><i class="fa fa-male"></i> <span class="title"><?php echo $this->t('TXT_LIST_GUEST')?></span> </a>
 				</li>
 				
 <!--

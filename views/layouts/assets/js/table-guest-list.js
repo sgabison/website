@@ -86,8 +86,8 @@ var GuestList = function () {
 							}
 						}
 					],
-					order: [ 1, 'asc' ],
-					aaSorting  : [[1, 'asc']],
+					order: [ 2, 'asc' ],
+					aaSorting  : [[1, 'desc'],[2, 'asc']],
 					aLengthMenu  : [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
 					iDisplayLength : 10,
 
