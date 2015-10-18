@@ -52,8 +52,8 @@
 -->
 						</div>
 						<div class="">
-							<input id="selectedLat" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLatitude();?>">
-							<input id="selectedLong" class="no-display" value="<?php echo $this->selectedLocation->getGeolocalisation()->getLongitude();?>">
+							<input id="selectedLat" class="no-display" value="<?php if($this->selectedLocation->getGeolocalisation()){echo $this->selectedLocation->getGeolocalisation()->getLatitude();}?>">
+							<input id="selectedLong" class="no-display" value="<?php if($this->selectedLocation->getGeolocalisation()){echo $this->selectedLocation->getGeolocalisation()->getLongitude();}?>">
 		   					<div id="map3" style="width:100%;height:400px"></div>
 		   				</div>
 		   			</div>
