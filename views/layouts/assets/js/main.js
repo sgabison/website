@@ -1446,7 +1446,9 @@ var Main = function() {
     var runDataTableSettings= function (){
     	if ( language =="fr"){
      		$.extend( true, $.fn.DataTable.defaults, {
-    		    "searching": true,	    
+    		    "searching": true,	
+    		    "dom": 'Bfrtip',
+
 				"language": {
 			        processing:     "Traitement en cours...",
 			        search:         "Rechercher&nbsp;:",

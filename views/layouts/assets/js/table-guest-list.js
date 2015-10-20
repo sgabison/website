@@ -53,8 +53,36 @@ var GuestList = function () {
 //				oTable.on( 'click', 'tbody td:not(:first-child)', function (e) {
 //					editor.inline( this );
 //				} );
-				oTable.DataTable( {
-					dom: "Tfrtip",
+				var table= oTable.DataTable( {
+					
+			    buttons: [
+		           {
+					 extend : 'print',
+					 exportOptions : {
+		        	   		columns : [ 1, 2, 3, 4 ]
+						},
+						className:'btn-white',
+						text:'<i class="fa fa-print"></i>'
+		           },
+		           {
+						 extend : 'copyHtml5',
+						 exportOptions : {
+			        	   		columns : [ 1, 2, 3, 4 ]
+							},
+							className:'btn-white',
+							text:'<i class="fa fa-copy"></i>'
+			           },
+			           {
+							 extend : 'excel',
+							 exportOptions : {
+				        	   		columns : [0, 1, 2, 3, 4 ]
+								},
+								className:'btn-white',
+								text:'<i class="fa fa-edit"></i>'
+					    }
+		            
+		        ],
+			 
 					ajax: {
 							"url":url,
 							"data": function ( d ) {
@@ -99,6 +127,9 @@ var GuestList = function () {
 						]
 					}
 				} );
+				table.buttons().container()
+			    .appendTo( $('.print-table:eq(0)') );
+
 	};
     return {
         //main function to initiate template pages

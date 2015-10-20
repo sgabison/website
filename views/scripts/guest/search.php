@@ -5,95 +5,12 @@
 		<h4 class="panel-title">
 			<span class="text-bold"><?= $this->translate("TXT_LIST_GUEST")?> <?= $this->societe->getName()?></span>
 			<?php if($this->q) : ?><?= $this->translate("TXT_RECHERCHE")?> : <?php echo $this->q ?><?php endif;?>
-		</h4>
-
+			<div class="print-table pull-right"></div>
+		</h4>		
 	</div>
+	
 	<div class="panel-body">
-<!--
-		<div class="row">
-			<div class="col-md-12 space20">
 
-				<button href="#newSearch" class="btn btn-blue new-search">
-					<?= $this->translate("Action 1")?>
-					<i class="fa fa-plus"></i>
-				</button>
-
-				<div class="pull-right">
-					<button data-table="#guestList" class="btn btn-orange print-table">
-						<?= $this->translate("Print")?>
-						<i class="fa fa-print"></i>
-					</button>
-					<button data-toggle="dropdown"
-						class="btn btn-blue dropdown-toggle">
-						Export <i class="fa fa-angle-down"></i>
-					</button>
-					<ul class="dropdown-menu dropdown-light pull-right">
-						<li><a href="#" class="export-pdf" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/pdf.png'
-								width='24px'> Save as PDF
-						</a>
-						</li>
-						<li><a href="#" class="export-png" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/png.png'
-								width='24px'> Save as PNG
-						</a>
-						</li>
-						<li><a href="#" class="export-csv" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/csv.png'
-								width='24px'> Save as CSV
-						</a>
-						</li>
-						<li><a href="#" class="export-txt" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/txt.png'
-								width='24px'> Save as TXT
-						</a>
-						</li>
-						<li><a href="#" class="export-xml" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xml.png'
-								width='24px'> Save as XML
-						</a>
-						</li>
-						<li><a href="#" class="export-sql" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/sql.png'
-								width='24px'> Save as SQL
-						</a>
-						</li>
-						<li><a href="#" class="export-json" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/json.png'
-								width='24px'> Save as JSON
-						</a>
-						</li>
-						<li><a href="#" class="export-excel" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/xls.png'
-								width='24px'> Export to Excel
-						</a>
-						</li>
-						<li><a href="#" class="export-doc" data-table="#guestList"
-							data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/word.png'
-								width='24px'> Export to Word
-						</a>
-						</li>
-						<li><a href="#" class="export-powerpoint"
-							data-table="#guestList" data-ignoreColumn="0,2,5"> <img
-								src='<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/icons/ppt.png'
-								width='24px'> Export to PowerPoint
-						</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-		-->
 		<div class="row">
 			<!-- le contenu ici -->
 
@@ -111,6 +28,17 @@
 							<th><?php echo $this->translate('TXT_RESERVATION');?></th>
 						</tr>
 					</thead>
+					<tfoot>
+						<tr>
+							<th></th>
+							<th><?php echo $this->translate('TXT_ID');?></th>
+							<th><?php echo $this->translate('TXT_LASTNAME');?></th>
+							<th><?php echo $this->translate('TXT_TEL');?></th>
+							<th><?php echo $this->translate('TXT_EMAIL');?></th>
+							<th><?php echo $this->translate('TXT_EDIT');?></th>
+							<th><?php echo $this->translate('TXT_RESERVATION');?></th>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>
