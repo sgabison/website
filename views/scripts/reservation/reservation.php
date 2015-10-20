@@ -170,7 +170,7 @@
 							<div class="form-group">
 								<h4><span class="text-bold">
 									<label class="checkbox-inline">
-										<input type="checkbox" class="grey" value="1" id="newsletterConfirmed"  name="newsletterConfirmed" <?php if($this->newsletterConfirmed == '1'){ echo 'checked';}?>> <?php echo $this->translate('TXT_NEWSLETTER_SIGNUP');?>
+										<input type="checkbox" class="grey" value="1" id="newsLetter"  name="newsLetter" <?php if($this->newsLetter == '1'){ echo 'checked';}?>> <?php echo $this->translate('TXT_NEWSLETTER_SIGNUP');?>
 									</label>
 								</span></h4>
 							</div>

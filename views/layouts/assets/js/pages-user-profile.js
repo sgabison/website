@@ -33,6 +33,14 @@ var PagesUserProfile = function() {
 		});
 	};
 	// function to initiate Callback on Checkbox and RadioButton
+	var manageNewsletter=function(){
+		$('#newsLetter').on( 'ifChecked', function(){
+			$('#newsLetter').val('1')
+		});
+		$('#newsLetter').on( 'ifUnchecked', function(){
+			$('#newsLetter').val('0')
+		});
+	}
 	var runCallbackIcheck = function() {
 		var checkboxP = $('input.checkbox-position');
 
@@ -602,6 +610,7 @@ var PagesUserProfile = function() {
 			runContributorsFormValidation();
 			runSubViews();
 			runCallbackIcheck();
+			manageNewsletter();
 		}
 	};
 }();

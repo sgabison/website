@@ -799,6 +799,8 @@ class ReservationController extends Useraware{
 							$guest->setLastname($_POST['data']['guestname']);
 							$guest->setTel($_POST['data']['guesttel']);
 							$guest->setBookingnotes($_POST['data']['bookingnotes']);
+							$guest->setPreferredlanguage($_POST['data']['preferredlanguage']);
+							$guest->setNewsLetter($_POST['data']['newsLetter']);
 							$guest->save();
 						}
 					}
@@ -889,6 +891,8 @@ class ReservationController extends Useraware{
 			$resa['guestname']=$reservation->getGuest()->getLastname();
 			$resa['guestemail']=$reservation->getGuest()->getEmail();
 			$resa['guesttel']=$reservation->getGuest()->getTel();
+			$resa['preferredlanguage']=$reservation->getGuest()->getPreferredlanguage();
+			$resa['newsLetter']=$reservation->getGuest()->getNewsLetter();
 		}else{
 			$resa['guestid']=''; $resa['guestname']=''; $resa['guestemail']='';$resa['guesttel']='';
 		}

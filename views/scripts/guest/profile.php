@@ -56,17 +56,6 @@
 							<input class="guest-id hide" name="id" type="text"
 								value="<?= $this->guest->getId();?>"> 
 							<input class="guest-form-method hide" type="text" value="PUT"> 
-					<!-- 
-						<div class="form-group">
-						<label
-								class="control-label">
-							<?= $this->translate("FIRSTNAME")?> <span class="symbol required"></span>
-							</label> <input type="text"
-								placeholder="<?= $this->translate('INSERT_FIRSTNAME')?>"
-								class="form-control guest-firstname" name="firstname"
-								value="<?= $this->guest->getFirstname();?>">
-						</div>
-					-->
 						<div class="form-group">
 							<label class="control-label">
 							<?= $this->translate("TXT_LASTNAME")?> <span class="symbol required"></span>
@@ -75,36 +64,36 @@
 								class="form-control guest-lastname" name="lastname"
 								value="<?= $this->guest->getLastname();?>">
 						</div>
-
 						<div class="form-group">
 							<label class="control-label">
 							<?= $this->translate("TXT_EMAIL")?>
-							</label> <input type="email" placeholder=""
+							</label> <input type="email" placeholder="" id="email"
 								class="form-control guest-email" name="email"
 								value="<?= $this->guest->getEmail();?>">
 						</div>
 						<div class="form-group">
 							<label class="control-label">
 							<?= $this->translate("TXT_PHONE")?> 
-							</label> <input type="tel" placeholder=""
+							</label> <input type="tel" placeholder="" id="tel"
 								class="form-control guest-email" name="tel"
 								value="<?= $this->guest->getTel();?>">
 						</div>
 					</div>
-<!-- 
+ 
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class="control-label"> Twitter </label> <span
-								class="input-icon"> <input class="form-control" type="text"
-								placeholder=""> <i class="fa fa-twitter"></i>
-							</span>
+							<label class="control-label"> <?= $this->translate("TXT_PREFERRED_LANGUAGE")?> </label> 
+							<select class="form-control"  id="preferredlanguage" name="preferredlanguage">
+								<option value="en" <?php if($this->guest->getPreferredlanguage() == 'en'){echo 'selected';}?>> <?= $this->translate("ENGLISH")?></option>
+								<option value="fr" <?php if($this->guest->getPreferredlanguage() == 'fr'|| $this->guest->getPreferredlanguage() == '' ){echo 'selected';}?>> <?= $this->translate("FRENCH")?></option>
+							</select>
 						</div>
 						<div class="form-group">
-							<label class="control-label"> Facebook </label> <span
-								class="input-icon"> <input class="form-control" type="text"
-								placeholder=""> <i class="fa fa-facebook"></i>
-							</span>
+							<label class="control-label"> <?php echo $this->translate("TXT_NEWSLETTER");?></label> 
+							<input type="checkbox" class="grey" id="newsLetter" name="newsLetter" placeholder="" <?php if( $this->guest->getNewsLetter() =='1'){echo "checked value='1'";}else{echo "value='0'";}?>>
 						</div>
+						
+<!--
 						<div class="form-group">
 							<label class="control-label"> Google Plus </label> <span
 								class="input-icon"> <input class="form-control" type="text"
@@ -117,8 +106,9 @@
 								placeholder=""> <i class="fa fa-skype"></i>
 							</span>
 						</div>
-					</div>
 -->
+					</div>
+
 				</div>
 
 				<div class="row">

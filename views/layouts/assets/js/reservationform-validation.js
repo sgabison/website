@@ -181,7 +181,7 @@ var ReservationFormValidator = function () {
 		, newReservation.locationid = $("#locationinput").val()
 		, newReservation.reservationid = $("#locationinput").val()
 		, newReservation.preferredlanguage = $("#preferredlanguageinput").val()
-		, newReservation.newsletterConfirmed = $("#newsletterConfirmed").val()
+		, newReservation.newsLetter = $("#newsLetter").val()
 		, newReservation.bookingnotes = $("#tags_1").val()
 		, newReservation.METHOD = $("#method").val();
 		$.blockUI({
@@ -557,7 +557,7 @@ var ReservationFormValidator = function () {
 			} 
 			if( completeset[5] == 1 ){
 				console.log( "completeset[5]: ", completeset[5] );
-				$('#newsletterConfirmed').iCheck('check');
+				$('#newsLetter').iCheck('check');
 			}
 	    },
 	    ajax: {

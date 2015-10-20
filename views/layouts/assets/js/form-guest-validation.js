@@ -16,9 +16,10 @@ var FormGuestValidator = function () {
     			, newguest.lastname = $("input[name=lastname]").val()
     			, newguest.firstname = $("input[name=firstname]").val()
     			, newguest.title = $("input[name=title]").val()
-
     			, newguest.email = $("#email").val()
     			, newguest.tel = $("#tel").val()
+    			, newguest.preferredlanguage = $("#preferredlanguage").val()
+    			, newguest.newsLetter = $("#newsLetter").val()
     			, newguest.METHOD = 'PUT';
     			$.blockUI({
     				message: '<i class="fa fa-spinner fa-spin"></i>'+ t("Veuillez patienter")+'...'

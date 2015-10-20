@@ -19,7 +19,7 @@ class Guest extends \Object\Concrete {
 		return  $this->getFullName();
 	}
 	public function toArray() {
-		$fields=array('id','lastname','email','tel','bookingnotes','countrycode','preferredlanguage','newsletterConfirmed' );
+		$fields=array('id','lastname','email','tel','bookingnotes','countrycode','preferredlanguage','newsletterConfirmed', 'newsLetter' );
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();

@@ -28,7 +28,7 @@ class Reservation extends \Object\Concrete {
 		$array['tel']=($this->getGuest())?$this->getGuest()->getTel():"";
 		$array['email']=($this->getGuest())?$this->getGuest()->getEmail():"";
 		$array['preferredlanguage']=($this->getGuest())?$this->getGuest()->getPreferredlanguage():"";
-		$array['newsletterConfirmed']=($this->getGuest())?$this->getGuest()->getNewsletterConfirmed():"";
+		$array['newsLetter']=($this->getGuest())?$this->getGuest()->getNewsLetter():"";
 		return $array;
 	}
 
@@ -89,10 +89,10 @@ class Reservation extends \Object\Concrete {
 		        $guest=\Object\Guest::getByTel($data['tel'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
-		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsletterConfirmed'=>$data['newsletterConfirmed'] ) );
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsLetter'=>$data['newsLetter'] ) );
 		        } else {
 		        	$guest->setPreferredlanguage( $data['preferredlanguage'] );
-		        	$guest->setNewsletterConfirmed( $data['newsletterConfirmed'] );
+		        	$guest->setNewsLetter( $data['newsLetter'] );
 		        	$guest->setLastname( $data['lastname'] );
 		        	$guest->setBookingnotes( $data['bookingnotes'] );
 		        	$guest->setEmail( $data['email'] );
@@ -102,10 +102,10 @@ class Reservation extends \Object\Concrete {
 		        $guest=\Object\Guest::getByTel($data['email'], 1);
 		        if ( ! $guest instanceof \Object\Guest ){ 
 		        	$guest = new \Object\Guest();
-		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsletterConfirmed'=>$data['newsletterConfirmed'] ) );
+		        	$guest->updateData( array('tel'=>$data['tel'], 'email'=>$data['email'], 'lastname'=>$data['lastname'], 'societe'=>$societe, 'dateregister'=>$date, 'location'=>$location, 'bookingnotes'=>$data['bookingnotes'], 'countrycode'=>$data['countrycode'], 'preferredlanguage'=>$data['preferredlanguage'], 'newsLetter'=>$data['newsLetter'] ) );
 		        } else {
 		        	$guest->setPreferredlanguage( $data['preferredlanguage'] );
-		        	$guest->setNewsletterConfirmed( $data['newsletterConfirmed'] );
+		        	$guest->setNewsLetter( $data['newsLetter'] );
 		        	$guest->setLastname( $data['lastname'] );
 		        	$guest->setBookingnotes( $data['bookingnotes'] );
 		        	$guest->setTel( $data['tel'] );
