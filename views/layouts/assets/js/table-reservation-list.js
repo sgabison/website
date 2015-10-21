@@ -360,8 +360,8 @@ var TableReservationList = function () {
 						$row.addClass('danger');
 					}
 				},
-				dom: "Tfrtip",
-				//dom: 'Rlfrtip',
+				dom: "BTfrtip",
+				//dom: 'Tfrtip',
 				ajax: {
 						"url":url,
 						"data": function ( d ) {
@@ -385,6 +385,7 @@ var TableReservationList = function () {
 					{ 
 						"data": "locationname", 
 						"visible": false,
+						"orderable":true,
 						"render": function (data, type, row){
 							return '<h4><strong>'+data+'</strong></h4>';
 						} 
@@ -392,6 +393,7 @@ var TableReservationList = function () {
 					{ 
 						"data": "datereservation", 
 						"visible": false,
+						"orderable":true,
 						"render": function (data, type, row){
 							return '<h4><strong>'+data+'</strong></h4>';
 						} 
@@ -399,6 +401,8 @@ var TableReservationList = function () {
 					{ 
 						"data": "start",
 						"className": 'starttime',
+					    "name" : "printable",
+					    "orderable":true,
 						"render": function ( data, type, row ) {
 							return '<a class="btn btn-blue" data-target=".arrivaltime" data-toggle="modal" rowid="'+row.id+'"><i class="fa fa-clock-o"></i> <span class="starttime">'+data+'<span></a>';
 						}
@@ -411,6 +415,7 @@ var TableReservationList = function () {
 					},
 					{ 
 						"data": "guestname",
+						'name':"printable",
 						"render": function (data, type, row){
 							return '<h4><strong>'+data+'</strong></h4>';
 						}
@@ -418,13 +423,14 @@ var TableReservationList = function () {
 					{ 
 						"data": "partysize",
 						"className": 'partysize',
+						'name':"printable",
 						"render": function (data, type, row){
 							return '<a class="btn btn-blue nrpeople" data-target=".nr-of-people" data-toggle="modal"><i class="fa fa-group"></i> <span class="people">'+data+'<span></a>';
 						}
 					},
 					{ 
 						"data": "bookingref", 
-						"visible": false 
+						"visible": false
 					},
 					{ 
 						"data": "bookingnotes",
@@ -498,17 +504,64 @@ var TableReservationList = function () {
 					},
 					{ 
 						"data": "guestemail", 
-						"visible": false
+						"visible": false,
+						"name" : "no-printable"
 					},
 					{ 
 						"data": "guesttel", 
+						"name" : "printable",
 						"visible": false
 					},
 					{ 
 						"data": "servingtitle", 
+						"name" : "printable",
 						"visible": false
-					}
+					},
+					{ 
+					"data": "bookingnotes",
+					"visible":false,
+					"name" : "printable",
+	                "render": function ( data, type, row ) {
+	                	
+	                    return data;
+	                }	
+				},
 					],
+					    buttons: [
+				           {
+							 extend : 'print',
+							 exportOptions : {
+				        	   		columns: ['printable:name'] 
+								},
+								className:'btn-white',
+								text:'<i class="fa fa-print"></i>',
+								fnCellRender: function ( sValue, iColumn, nTr, iDataIndex ) {
+			                        // Append the text 'TableTools' to column 5
+			                        if ( iColumn >1 ) {
+			                            return sValue +" TableTools";
+			                        }
+			                        return sValue;
+			                    }
+				           },
+				           {
+								 extend : 'copyHtml5',
+								 exportOptions : {
+					        	   		columns : ['printable:name',':visible'] 
+									},
+									className:'btn-white',
+									text:'<i class="fa fa-copy"></i>'
+					           },
+					           {
+									 extend : 'excel',
+									 exportOptions : {
+						        	   		columns :['printable:name',':visible'] 
+										},
+										className:'btn-white',
+										text:'<i class="fa fa-edit"></i>'
+							    }
+				            
+				        ],
+
 				order: [ 1, 'asc' ],
 				aaSorting  : [[1, 'asc']],
 				aLengthMenu  : [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
@@ -534,6 +587,9 @@ var TableReservationList = function () {
 		        }
 
 			} );
+		table.buttons().container()
+		    .appendTo( $('.print-table:eq(0)') );
+
 	};
 	$('#checkcancelled').iCheck();
 	$('#checkarrived').iCheck();

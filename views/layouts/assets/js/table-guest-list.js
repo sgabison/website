@@ -80,7 +80,6 @@ var GuestList = function () {
 								className:'btn-white',
 								text:'<i class="fa fa-edit"></i>'
 					    }
-		            
 		        ],
 			 
 					ajax: {

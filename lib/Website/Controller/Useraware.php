@@ -29,7 +29,7 @@ class Useraware extends Action {
     			$this->forward ( "form-login", "login" );
     		}
     	} else {    		
-    		$this->view->person = $this->person = \Object\Person::getById(248) ;   		
+    		$this->view->person = $this->person = \Object\Person::getById(590) ;   		
     	}
     	if($this->person)  {
     		

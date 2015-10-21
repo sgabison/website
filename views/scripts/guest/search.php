@@ -8,12 +8,8 @@
 			<div class="print-table pull-right"></div>
 		</h4>		
 	</div>
-	
 	<div class="panel-body">
-
 		<div class="row">
-			<!-- le contenu ici -->
-
 			<div class="table-responsive col-md-12 space20">
 
 				<table id="guestList" class="display table table-striped">
