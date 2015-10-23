@@ -74,8 +74,7 @@ class Shift extends \Object\Concrete {
 		endif;
 		return $format ;
 	}
-	public function format_to_pim($data=array()){
-		
+	public function format_to_pim($data=array()){		
 		foreach ($data as $name => $value) {
 			if (in_array($name, array('start', 'end'))) {
 				$dataFormatted[$name] =self::parseDateTime($value);

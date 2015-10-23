@@ -174,6 +174,26 @@ class EventController extends Useraware {
 		endif;
 
 	}
+	public function createArray( $start, $end, $title ){
+		$array=array();
+		$array["id"]="statutory"; 
+		$array["title"]=$title;
+		$array["allDay"]= true;
+		$array["className"]="generic";
+		$array["category"]="generic";
+		$array["content"]="";
+		$array["bookable"]=NULL;
+		$array["start"]=$start;
+		$array["end"]=$end;
+		$array["person"]="";
+		return $array;
+	}
+	public function toStartDate($date){
+		return new Zend_Date( $date.'T02:00:00', 'YYYY-MM-DDTHH:mm:ss' );
+	}
+	public function toEndDate($date){
+		return new Zend_Date( $date.'T03:00:00', 'YYYY-MM-DDTHH:mm:ss' );
+	}
 	public function getEventsAction() {
 		$this->requete=new Request ( )	;
 		$data=$this->requete->params;
@@ -198,21 +218,35 @@ class EventController extends Useraware {
 		$data [] = $range_start->toString ( \Zend_Date::ISO_8601 );
 		$data [] = $range_end->toString ( \Zend_Date::ISO_8601 );
 		// Parse the timezone parameter if it is present.
-
-
 		$input_arrays = ($this->selectedLocation)? $this->selectedLocation->getShifts( $range_start, $range_end ): array(); //new Object\Shift\Listing (); // json_decode($json, true);
 		                                             
 		// Accumulate an output array of event data arrays.
 		$output_arrays = array ();
 		foreach ( $input_arrays as $event ) {
-
 			if ($event->isWithinDayRange ( $range_start, $range_end )) {
 				$output_arrays [] = $event->toCalendar ();
 			}
 		}
-		
 		// Send JSON to the client.
 		$reponse = new Reponse ();
+
+		$start=new Zend_date( $range_start );
+		$end=new Zend_date( $range_end );	
+		$holidays=[];
+		$holidays['newyear']=$start->get('YYYY').'-01-01';
+		$holidays['firstmay']=$start->get('YYYY').'-05-01';
+		$holidays['eightmay']=$start->get('YYYY').'-05-08';
+		$holidays['bastille']=$start->get('YYYY').'-07-16';
+		$holidays['virginmary']=$start->get('YYYY').'-08-15';
+		$holidays['allsaints']=$start->get('YYYY').'-11-01';
+		$holidays['rememberance']=$start->get('YYYY').'-11-11';
+		$holidays['xmas']=$start->get('YYYY').'-12-25';
+		
+		foreach($holidays as $key=>$holiday){
+			if( $this->toStartDate($holiday)->isLater($start) && $this->toStartDate($holiday)->isEarlier($end) ){
+				array_push( $output_arrays, $this->createArray( $this->toStartDate( $holiday )->toString(\Zend_Date::ISO_8601), $this->toEndDate( $holiday )->toString(\Zend_Date::ISO_8601), $key ) );
+			}
+		} 
 		
 		$reponse->data = $output_arrays; // $input_arrays;
 		$reponse->message = "TXT_SHIFTS_SENT";

@@ -3,40 +3,8 @@ var Events = function() {
     var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
     var defaultRange = new Object;
     var $eventDetail = $('.form-full-event .summernote');
-    var ascension=['2016/05/05','2017/05/25','2018/05/10','2019/05/30','2020/05/21'];
-    var whitmonday=['2016/05/16','2017/06/05','2018/05/21','2019/06/10','2020/06/01'];
-    var eastersunday=['2016/03/27','2017/04/16','2018/04/01','2019/04/21','2020/04/12'];
-    var eastermonday=['2016/03/28','2017/04/17','2018/04/02','2019/04/22','2020/04/13'];
-    var mothersday=['2016/05/29','2017/05/28','2018/05/27'];
-    var checkHoliday=function(date){
-    	if( $.inArray( date.format('YYYY/MM/DD'), ascension) >=0 ){ return t('ascension');}
-    	else if( $.inArray( date.format('YYYY/MM/DD'), whitmonday) >=0 ){ return t('whitmonday');}
-    	else if( $.inArray( date.format('YYYY/MM/DD'), eastermonday) >=0 ){ return t('eastermonday');}
-    	else if( date.format('MM') =='01' && date.format('DD') =='01'){ return t('new_years_eve');}
-    	else if( date.format('MM') =='05' && date.format('DD') =='01' ){ return t('first_of_may');}
-    	else if( date.format('MM') =='05' && date.format('DD') =='08' ){ return t('victory_day');}
-    	else if( date.format('MM') =='07' && date.format('DD') =='16' ){ return t('bastille_day');}
-    	else if( date.format('MM') =='08' && date.format('DD') =='15' ){ return t('virgin_mary');}
-    	else if( date.format('MM') =='11' && date.format('DD') =='01' ){ return t('all_saints_day');}
-    	else if( date.format('MM') =='11' && date.format('DD') =='11' ){ return t('rememberance_day');}
-    	else if( date.format('MM') =='12' && date.format('DD') =='25' ){ return t('christmas');}
-    	else{ return ''};
-    }
-    var checkExtraDay=function(date){
-    	if( $.inArray( date.format('YYYY/MM/DD'), ascension) >=0 ){ return t('mothers_day');}
-    	if( (date.format('MM') =='06') && (date.day() == '0') && (date.date() >= 15) && (date.date() <= 21) ){ return t('fathers_day');}
-    	if( (date.format('MM') =='03') && (date.day() == '0') && (date.date() >= 1) && (date.date() <= 7) ){ return t('grandmas_day');}
-    	if( (date.format('MM') =='10') && (date.day() == '0') && (date.date() >= 1) && (date.date() <= 7) ){ return t('grandpas_day');}
-    	if( date.format('MM') =='01' && date.format('DD') =='06'){ return t('epiphany');}
-    	else if( date.format('MM') =='02' && date.format('DD') =='09' ){ return t('mardi_gras');}
-    	else if( date.format('MM') =='02' && date.format('DD') =='14' ){ return t('st_valentin');}
-    	else if( date.format('MM') =='03' && date.format('DD') =='08' ){ return t('intl_womans_day');}
-    	else if( date.format('MM') =='03' && date.format('DD') =='17' ){ return t('st_patrick');}
-    	else if( date.format('MM') =='06' && date.format('DD') =='21' ){ return t('fete_musique');}
-    	else if( date.format('MM') =='10' && date.format('DD') =='31' ){ return t('halloween');}
-    	else{ return ''};
-    }
     console.log('$eventDetail', $eventDetail);
+
     defaultRange.start = moment();
     defaultRange.end = moment().add('days', 1);
     //Calendar
@@ -66,6 +34,7 @@ var Events = function() {
                 }
             });
         });
+
         $('#event-categories div.event-category').each(function() {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
@@ -106,13 +75,19 @@ var Events = function() {
             eventLimit: true, // allow "more" link when too many events
             droppable: true, // this allows things to be dropped onto the calendar !!!
             drop: function(date, allDay) { // this function is called when something is dropped
+
                 // retrieve the dropped element's stored Event Object
                 var originalEventObject = $(this).data('eventObject');
+
+
                 var $categoryClass = $(this).attr('data-class');
                 var $category = $categoryClass.replace("event-", "").toLowerCase().replace(/\b[a-z]/g, function(letter) {
                     return letter.toUpperCase();
                 });
                 // we need to copy it, so that multiple events don't have a reference to the same object
+
+
+
                 var newEvent = new Object;
                 newEvent.title = originalEventObject.title;
                 newEvent.start = new Date(date);
@@ -121,10 +96,11 @@ var Events = function() {
                 newEvent.className = $categoryClass;
                 newEvent.category = t($category);
                 newEvent.content = "";
-                newEvent.bookable = false;
 				console.log("save event dropped",$category, t($category));
 				saveEvent(newEvent);
+
              //   $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+
                 // is the "remove after drop" checkbox checked?
                 if ($('#drop-remove').is(':checked')) {
                     // if so, remove the element from the "Draggable Events" list
@@ -147,8 +123,8 @@ var Events = function() {
                 });
             },
             eventClick: function(calEvent, jsEvent, view) {
-                dateToShow = calEvent.start;
                 if(calEvent.id != 'statutory' && calEvent.id != 'extraday'){
+	                dateToShow = calEvent.start;
 	                $.subview({
 	                    content: "#readFullEvent",
 	                    startFrom: "right",
@@ -167,19 +143,10 @@ var Events = function() {
             		element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
             	}
 		    },
-		    dayRender: function (date, cell) {
-				 if( checkHoliday(date) !='' ){
-				 	date = moment(date, 'yyyy-MM-dd');
-		         	cell.css('background-color', '#FAA732');
-				 }
-				 if( checkExtraDay(date) !='' ){
-				 	date = moment(date, 'yyyy-MM-dd');
-		         	cell.css('background-color', '#FEE6C4');
-				 }
-		    }
         });
     };
     var editFullEvent = function(el) {
+       
        $(".close-new-event").off().on("click", function() {
             $(".back-subviews").trigger("click");
         });
@@ -217,7 +184,7 @@ var Events = function() {
             $('.form-full-event .all-day-range').hide();
             $(".form-full-event .event-start-date").val(defaultRange.start);
             $(".form-full-event .event-end-date").val(defaultRange.end);
-			$(".form-full-event .event-bookable").prop("checked", false);
+
             $('.form-full-event .no-all-day-range .event-range-date').val(moment(defaultRange.start).format('DD/MM/YYYY h:mm A') + ' - ' + moment(defaultRange.end).format('DD/MM/YYYY h:mm A'))
                 .daterangepicker({
                     startDate: defaultRange.start,
@@ -238,18 +205,19 @@ var Events = function() {
             }).prop('selected', true);
             $('.form-full-event .event-categories').selectpicker('render');
             $eventDetail.code($eventDetail.attr("placeholder"));
+
             defaultRange.start = moment();
             defaultRange.end = moment().add('days', 1);
+
         } else {
+
             $(".form-full-event .event-id").val(el);
+
             for (var i = 0; i < demoCalendar.length; i++) {
 				console.log("editevent", el, demoCalendar[i]);
                 if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
-                    if ( demoCalendar[i].bookable ){
-                   	 	$(".form-full-event .event-bookable").prop('checked', true);
-                    }
                     $(".form-full-event .event-start-date").val(moment(demoCalendar[i].start));
                     $(".form-full-event .event-end-date").val(moment(demoCalendar[i].end));
                     if (typeof $('.form-full-event .no-all-day-range .event-range-date').data('daterangepicker') == "undefined") {
@@ -261,6 +229,7 @@ var Events = function() {
                                 timePickerIncrement: 10,
                                 format: 'DD/MM/YYYY h:mm A'
                             });
+
                         $('.form-full-event .all-day-range .event-range-date').val(moment(demoCalendar[i].start).format('DD/MM/YYYY') + ' - ' + moment(demoCalendar[i].end).format('DD/MM/YYYY'))
                             .daterangepicker({
                                 startDate: moment(demoCalendar[i].start),
@@ -291,6 +260,7 @@ var Events = function() {
                         $eventDetail.code($eventDetail.attr("placeholder"));
                     }
                 }
+
             }
         }
         $('.form-full-event .all-day').bootstrapSwitch();
@@ -334,7 +304,9 @@ var Events = function() {
                 }
             });
         });
+
         $(".delete-event").data("event-id", el);
+
         $("#readFullEvent").find(".delete-event").off().on("click", function() {
             el = $(this).data("event-id");
             bootbox.confirm(t('js_sure_cancel'), function(result) {
@@ -362,11 +334,14 @@ var Events = function() {
                             }
                         }
                     });
+
                 }
             });
         });
         for (var i = 0; i < demoCalendar.length; i++) {
             if (demoCalendar[i].id == el) {
+
+
                 $("#readFullEvent .event-allday").hide();
                 $("#readFullEvent .event-end").empty().hide();
                 $("#readFullEvent .event-title").empty().text(demoCalendar[i].title);
@@ -380,12 +355,12 @@ var Events = function() {
                 } else {
                     eventCategory = demoCalendar[i].category;
                 }
-                if( demoCalendar[i].bookable ){
-                	$("#readFullEvent .event-bookable").empty().html("<strong><label class='checkbox-inline'><input type='checkbox' class='grey' id='bookable' checked disabled>"+t('unbookable_event')+"</label></strong>");
-                }else{
-                	$("#readFullEvent .event-bookable").empty().html("<strong><label class='checkbox-inline'><input type='checkbox' class='grey' id='bookable' disabled>"+t('bookable_event')+"</label></strong>");
-                }
-                $("#readFullEvent .event-category").empty().removeAttr("class").addClass("event-category " + eventClass).text(eventCategory);
+
+                $("#readFullEvent .event-category")
+                    .empty()
+                    .removeAttr("class")
+                    .addClass("event-category " + eventClass)
+                    .text(eventCategory);
                 if (demoCalendar[i].allDay) {
                     $("#readFullEvent .event-allday").show();
                     $("#readFullEvent .event-start").empty().html("<p>Start:</p> <div class='event-day'><h2>" + moment(demoCalendar[i].start).format('DD') + "</h2></div><div class='event-date'><h3>" + moment(demoCalendar[i].start).format('dddd') + "</h3><h4>" + moment(demoCalendar[i].start).format('MMMM YYYY') + "</h4></div>");
@@ -402,10 +377,14 @@ var Events = function() {
                         }
                     }
                 }
+
                 $("#readFullEvent .event-content").empty().html(demoCalendar[i].content);
+
                 break;
             }
+
         }
+
     };
 	var is_int = function (value){
 	  if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
@@ -415,9 +394,11 @@ var Events = function() {
 	  }
 	};
     var runFullCalendarValidation = function(el) {
+
         var formEvent = $('.form-full-event');
         var errorHandler2 = $('.errorHandler', formEvent);
         var successHandler2 = $('.successHandler', formEvent);
+
         formEvent.validate({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
@@ -480,7 +461,6 @@ var Events = function() {
                 newEvent.allDay = $(".form-full-event .all-day").bootstrapSwitch('state');
                 newEvent.className = $(".form-full-event .event-categories option:checked").val();
                 newEvent.category = $(".form-full-event .event-categories option:checked").text();
-                newEvent.bookable= $(".form-full-event .event-bookable").is(":checked");
                 if ($eventDetail.code() !== "" && $eventDetail.code().replace(/(<([^>]+)>)/ig, "") !== "" && $eventDetail.code() !== $eventDetail.attr("placeholder")) {
                     newEvent.content = $eventDetail.code();
                 } else {
@@ -493,6 +473,7 @@ var Events = function() {
                 $.blockUI({
                     message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
                 });
+
                 if ($(".form-full-event .event-id").val() !== "") {
                     el = $(".form-full-event .event-id").val();
                     var actual_event = $('#full-calendar').fullCalendar('clientEvents', el);
@@ -503,9 +484,12 @@ var Events = function() {
                             var eventIndex = i;
                         }
                     }
+ 
 				   reponse.id =  newEvent.id;
 				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
-                   $.ajax({
+
+
+                    $.ajax({
                         url: '/data/event/get-data',
                         dataType: 'json',
                         type : 'POST', // obligatoire
@@ -524,104 +508,80 @@ var Events = function() {
                             }
                         }
                     });
+
                 } else {
-				   // console.log("hurra new event");
-   				   reponse.id =  "";
-   				   reponse.METHOD = 'POST';
-                   $.ajax({
-                       url: '/data/event/get-data',
-                       dataType: 'json',
-                       type : 'POST', // obligatoire
-                       data : JSON.stringify(reponse),
-                       contentType : "application/json; charset=utf-8",
-                       success : function(json) {
-							$.unblockUI();
-							if (json.success || json.success == 'true') {
-	                            $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
-	                            demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
-	                            $.hideSubview();
-	                            toastr.success(json.message);
+
+					   // console.log("hurra new event");
+    				   reponse.id =  "";
+    				   reponse.METHOD = 'POST';
+                        $.ajax({
+                            url: '/data/event/get-data',
+                            dataType: 'json',
+                            type : 'POST', // obligatoire
+                            data : JSON.stringify(reponse),
+                            contentType : "application/json; charset=utf-8",
+                            success : function(json) {
+    							$.unblockUI();
+	    						if (json.success || json.success == 'true') {
+	                                $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+	                                demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+	                                $.hideSubview();
+	                                toastr.success(json.message);
+	                            }
                         	}
-                       	}
-                   });
+                        });
+
                 }
+
+
+
             }
         });
     };
-	var saveEvent = function (newEvent){				    
-		var reponse = new Object; 
-		reponse.data = newEvent;
-		reponse.id =  newEvent.id;
-		reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
-		$.ajax({
-			url: '/data/event/get-data',
-			dataType: 'json',
-			type : 'POST', // obligatoire
-			data : JSON.stringify(reponse),
-			contentType : "application/json; charset=utf-8",
-			success : function(json) {
-				$.unblockUI();
-				if (json.success || json.success == 'true') {
-				$('#full-calendar').fullCalendar('renderEvent', json.data, true);
-				demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
-				toastr.success(json.message);
-				}
-			}
-		});
+	var saveEvent = function (newEvent){
+					    
+					   var reponse = new Object; 
+    				   reponse.data = newEvent;
+					   reponse.id =  newEvent.id;
+    				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
+                        $.ajax({
+                            url: '/data/event/get-data',
+                            dataType: 'json',
+                            type : 'POST', // obligatoire
+                            data : JSON.stringify(reponse),
+                            contentType : "application/json; charset=utf-8",
+                            success : function(json) {
+    							$.unblockUI();
+	    						if (json.success || json.success == 'true') {
+	                                $('#full-calendar').fullCalendar('renderEvent', json.data, true);
+	                                demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
+	                                toastr.success(json.message);
+	                            }
+                        	}
+                        });
 	};
-	var loadEvents = function (start,end,timezone,callback){ 
-		var reponse = new Object; 
-		reponse.start = start;
-		reponse.end =  end;
-		reponse.timezone =  timezone;
-		reponse.METHOD = 'GET';
-		$.ajax({
-			url: '/data/event/get-events',
-			dataType: 'json',
-			type : 'POST', // obligatoire
-			data : JSON.stringify(reponse),
-			contentType : "application/json; charset=utf-8",
-			success : function(json) {
-				$.unblockUI();
-				if (json.success || json.success == 'true') {	                               
-					callback(json.data);
-					demoCalendar = $.makeArray(json.data);
-					console.log("loadEvents",demoCalendar);
-				}
-			}
-		});
-	}
-	var addHolidays=function(){
-		var start= moment();
-		var end= moment();
-		start.subtract(200, 'days');
-		end.add(365, 'days');
-		var vardate=start;
-		var i=0;
-		while (vardate < end){
-			if( checkHoliday(vardate) != '' ){
-				addCalanderEvent('statutory', vardate, end, checkHoliday(vardate));
-			}
-			if( checkExtraDay(vardate) != '' ){
-				addCalanderEvent('extraday', vardate, end, checkExtraDay(vardate));
-			}
-			vardate.add(1, 'days');
-			i++;
-		}
-	}
-	var addCalanderEvent = function(id, vardate, end, title){
-		var eventObject = {
-			title: title,
-			allDay: true,
-			start: vardate,
-			id: id,
-			color: '#DDEEFF',
-			rendering: 'background',
-			backgroundColor: '#FF0000',
-			startEditable: false
-		};
-		$('#full-calendar').fullCalendar('renderEvent', eventObject, true);
-		return eventObject;
+	var loadEvents = function (start,end,timezone,callback){
+					  
+					   var reponse = new Object; 
+    				   reponse.start = start;
+					   reponse.end =  end;
+					   reponse.timezone =  timezone;
+    				   reponse.METHOD = 'GET';
+                        $.ajax({
+                            url: '/data/event/get-events',
+                            dataType: 'json',
+                            type : 'POST', // obligatoire
+                            data : JSON.stringify(reponse),
+                            contentType : "application/json; charset=utf-8",
+                            success : function(json) {
+    							$.unblockUI();
+	    						if (json.success || json.success == 'true') {	                               
+									callback(json.data);
+									demoCalendar = $.makeArray(json.data);
+									console.log("loadEvents",demoCalendar);
+	                            }
+                        	}
+                        });
 	}
     // on hide event's form destroy summernote and bootstrapSwitch plugins
     var hideEditEvent = function() {
@@ -635,7 +595,6 @@ var Events = function() {
             setFullCalendarEvents();
 			runFullCalendar();
 			runFullCalendarValidation();
-			addHolidays();
         }
     };
 }();
