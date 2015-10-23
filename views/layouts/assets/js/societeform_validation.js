@@ -589,6 +589,7 @@ var SocieteSetupFormValidator = function () {
 	                    { label: "cutlery",  	value: "fa-cutlery" },
 	                    { label: "calendar",  	value: "fa-calendar" },
 	                    { label: "gift",  		value: "fa-gift" },
+	                    { label: "birthday",  	value: "fa-birthday-cake" },
 	                    { label: "group",  		value: "fa-group" },
 	                    { label: "male",  		value: "fa-male" },
 	                    { label: "warning",  	value: "fa-warning" },

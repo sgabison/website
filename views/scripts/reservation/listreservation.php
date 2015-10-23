@@ -167,6 +167,7 @@
 							<th><?= $this->translate("TXT_HEADER_GUEST_EMAIL")?></th>
 							<th><?= $this->translate("TXT_HEADER_GUEST_TEL")?></th>
 							<th><?= $this->translate("TXT_SERVING")?></th>
+							<th></th>
 						</tr>
 					</thead>
 				</table>

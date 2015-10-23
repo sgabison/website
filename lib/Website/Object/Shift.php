@@ -21,7 +21,7 @@ class Shift extends \Object\Concrete {
 	public function __construct($array=array(), $timezone=null) {
 		// Record misc properties
 		foreach ($array as $name => $value) {
-			if (!in_array($name, array('title', 'allDay', 'start', 'end','css','category','content'))) {
+			if (!in_array($name, array('titre', 'allDay', 'start', 'end','css','category','content','bookable'))) {
 				$this->properties[$name] = $value;
 			}
 		}
@@ -100,6 +100,7 @@ class Shift extends \Object\Concrete {
 		$array['className'] = $this->getCss();
 		$array['category'] = $this->getCategory();
 		$array['content'] = $this->getContent();
+		$array['bookable'] = $this->getBookable();
 		
 		$format=$this->getFormat();
 

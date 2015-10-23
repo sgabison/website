@@ -409,6 +409,7 @@ var TableReservationList = function () {
 					},
 					{ 	
 						"data": "id",
+						"name" : "printable",
 						"render": function (data, type, row){
 							return '<h4><strong>'+data+'</strong></h4>';
 						} 
@@ -521,11 +522,14 @@ var TableReservationList = function () {
 					"data": "bookingnotes",
 					"visible":false,
 					"name" : "printable",
-	                "render": function ( data, type, row ) {
-	                	
+	                "render": function ( data, type, row ) {	
 	                    return data;
-	                }	
-				},
+	                	}
+	                },
+					{ 
+					"data": "arrived",
+					"visible":false
+					}
 					],
 					    buttons: [
 				           {
@@ -613,27 +617,21 @@ var TableReservationList = function () {
 	}
 	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
 			var nTr = oSettings.aoData[ iDataIndex ].nTr;
-			console.log( 'checkarrived', $('#checkarrived').is(":checked") );
-			console.log( 'arrived', aData[12] );
-			console.log( 'serving', aData[18] );
-			console.log( 'checkcancelled', $('#checkcancelled').is(":checked") );
-			console.log( 'cancelled', aData[11] );
-			if( aData[12]=='<input type="checkbox" class="checkbox-inline checkbox editor-active make-switch" checked>' ){
+			if( aData[20]=='1' ){
 				if( $('#checkarrived').is(":checked") ){
 					return false;
 				}else{
 					return true;
 				}
-			} else {
-				if( aData[11]=='Cancelled'  || aData[11]=='Annulé' ){
-					if( $('#checkcancelled').is(":checked") ){
-						return false;
-					}else{
-						return true;
-					}					
-				}{
+			}
+			if( aData[11]=='Cancelled'  || aData[11]=='Annulé' ){
+				if( $('#checkcancelled').is(":checked") ){
+					return false;
+				}else{
 					return true;
-				}
+				}					
+			}{
+				return true;
 			}
    	} );
 //	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {

@@ -11,8 +11,35 @@
 				<div>
 					<?php include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_meteo.php") ; ?>
 				</div>
-				<div>
-					
+				<div class="panel panel-red">
+					<div class="panel-heading border-light">
+						<h4 class="panel-title"><?php echo $this->translate('TXT_TODAY');?></h4>
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-6">
+							<div class="actual-date">
+								<span class="actual-day"></span>
+								<span class="actual-month"></span>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="clock-wrapper">
+										<div class="clock">
+											<div class="circle">
+												<div class="face">
+													<div id="hour"></div>
+													<div id="minute"></div>
+													<div id="second"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">

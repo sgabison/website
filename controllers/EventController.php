@@ -24,7 +24,7 @@ class EventController extends Useraware {
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-events.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.pulsate/jquery.pulsate.min.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-user-profile.js');
-        
+//        $this->view->headScript()->appendFile('http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js');
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {
 					$(".toolbar-subview").removeClass("hidden");
@@ -88,11 +88,8 @@ class EventController extends Useraware {
 	public function create() {
 		$res = new Reponse();
 		$data=$this->requete->params;
-
 		$dataFormatted = \Object\Shift::format_to_pim($data);
-		
 		$rec = $this->selectedLocation->createShift($dataFormatted);
-	
 		if ($rec instanceof \Object\Shift) {
 			$res->success = true;
 			$res->message = "TXT_EVENT_CREATE_OK" ;

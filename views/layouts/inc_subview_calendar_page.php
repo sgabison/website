@@ -9,25 +9,19 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<input class="event-id hide" type="text"> <input
-							class="event-name form-control" name="eventName" type="text"
-							placeholder="<?php echo $this->t('TXT_EVENT_NAME')?>">
+						<input class="event-id hide" type="text"> <input class="event-name form-control" name="eventName" type="text" placeholder="<?php echo $this->t('TXT_EVENT_NAME')?>">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<input type="checkbox" class="all-day" data-label-text="<?= $this->t("All-Day")?>"
-							data-on-text="<?= $this->t('True')?>" data-off-text="<?= $this->t('False')?>">
+						<input type="checkbox" class="all-day" data-label-text="<?= $this->t("All-Day")?>" data-on-text="<?= $this->t('True')?>" data-off-text="<?= $this->t('False')?>">
 					</div>
 				</div>
 				<div class="no-all-day-range">
 					<div class="col-md-8">
 						<div class="form-group">
 							<div class="form-group">
-								<span class="input-icon"> <input type="text"
-									class="event-range-date form-control" name="eventRangeDate"
-									placeholder="<?php echo $this->t('TXT_EVENT_RANGE')?>" /> <i
-									class="fa fa-clock-o"></i>
+								<span class="input-icon"> <input type="text" class="event-range-date form-control" name="eventRangeDate" placeholder="<?php echo $this->t('TXT_EVENT_RANGE')?>" /> <i class="fa fa-clock-o"></i>
 								</span>
 							</div>
 						</div>
@@ -37,10 +31,7 @@
 					<div class="col-md-8">
 						<div class="form-group">
 							<div class="form-group">
-								<span class="input-icon"> <input type="text"
-									class="event-range-date form-control" name="ad_eventRangeDate"
-									placeholder="<?php echo $this->t('TXT_EVENT_RANGE')?>" /> <i
-									class="fa fa-calendar"></i>
+								<span class="input-icon"> <input type="text" class="event-range-date form-control" name="ad_eventRangeDate" placeholder="<?php echo $this->t('TXT_EVENT_RANGE')?>" /> <i class="fa fa-calendar"></i>
 								</span>
 							</div>
 						</div>
@@ -51,7 +42,14 @@
 					<input type="text" class="event-end-date" name="eventEndDate" />
 				</div>
 				<?php if($this->categories):?>
-
+				<div class="col-md-12">
+					<div class="form-group" style="margin-left:5px">
+						<label class="checkbox-inline">
+							<input type="checkbox" class="grey event-bookable">
+							<?php echo $this->t("bookable")?>
+						</label>
+					</div>
+				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<select class="form-control selectpicker event-categories">
@@ -92,8 +90,7 @@
 						<i class="fa fa-cog"></i> <span class="caret"></span>
 					</button>
 					<ul role="menu" class="dropdown-menu dropdown-light pull-right">
-						<li><a href="#newFullEvent" class="edit-event"> <i
-								class="fa fa-pencil"></i> <?php echo $this->t('TXT_BUTTON_EDIT')?>
+						<li><a href="#newFullEvent" class="edit-event"> <i class="fa fa-pencil"></i> <?php echo $this->t('TXT_BUTTON_EDIT')?>
 						</a>
 						</li>
 						<li><a href="#" class="delete-event"> <i class="fa fa-times"></i>
@@ -104,9 +101,11 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<span class="event-category event-cancelled">Cancelled</span> <span
-					class="event-allday"><i class='fa fa-check'></i> <?= $this->t("All-Day")?>
+				<span class="event-category event-cancelled">Cancelled</span> <span	class="event-allday"><i class='fa fa-check'></i> <?= $this->t("All-Day")?>
 				</span>
+			</div>
+			<div class="col-md-12">
+				<div class="event-bookable"></div>
 			</div>
 			<div class="col-md-12">
 				<div class="row">
@@ -131,9 +130,7 @@
 <!-- *** SHOW CALENDAR *** -->
 <div id="showCalendar" class="col-md-10 col-md-offset-1">
 	<div class="barTopSubview">
-		<a href="#newEvent" class="new-event button-sv"
-			data-subviews-options='{"onShow": "editEvent()"}'><i
-			class="fa fa-plus"></i> <?php echo $this->t('TXT_ADD_EVENT')?> </a>
+		<a href="#newEvent" class="new-event button-sv" data-subviews-options='{"onShow": "editEvent()"}'><i class="fa fa-plus"></i> <?php echo $this->t('TXT_ADD_EVENT')?> </a>
 	</div>
 	<div id="calendar"></div>
 </div>

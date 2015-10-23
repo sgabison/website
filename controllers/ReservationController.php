@@ -396,9 +396,12 @@ class ReservationController extends Useraware{
 			$fulltext="";
 			foreach( $this->selectedLocation->getShifts($today, $sixmonthsfromnow) as $dayoff ){
 				if( $dayoff->getAllDay()==1 ){
-					$fulltext=$this->arrayToString( $this->getAllDays( $dayoff->getStart(), $dayoff->getEnd() ) ).",".$fulltext;
+					if( $dayoff->getBookable() == '1' ){
+						$fulltext=$this->arrayToString( $this->getAllDays( $dayoff->getStart(), $dayoff->getEnd() ) ).",".$fulltext;
+					}
 				}
 			}
+			//exit;
 			$this->view->closeddays=$this->checkClosedServings( $this->selectedLocation );
 			$this->view->offdaysrange=$fulltext;
 			//echo $this->view->offdaysrange; echo "<br>";
