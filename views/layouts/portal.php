@@ -6,7 +6,7 @@
 		<div class="main-wrapper">
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_topbar.php") ; ?>
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_left_full.php") ; ?>
-			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_right.php") ; ?>
+			<? // include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_pageslide_right.php") ; ?>
 
 			<!-- start: MAIN CONTAINER -->
 			<div class="main-container inner">

@@ -2,15 +2,17 @@ var Events = function() {
     "use strict";
     var dateToShow, calendar, demoCalendar, eventClass, eventCategory, subViewElement, subViewContent, $eventDetail;
     var defaultRange = new Object;
+    var DPlocale = new Object;
+    var DPlocaleDate = 'DD/MM/YYYY';
     var $eventDetail = $('.form-full-event .summernote');
     console.log('$eventDetail', $eventDetail);
-
+   
     defaultRange.start = moment();
     defaultRange.end = moment().add('days', 1);
     //Calendar
     var setFullCalendarEvents = function() {
         var date = new Date();
-		moment.lang(language);
+        moment.lang(language);
         dateToShow = date;
         var d = date.getDate();
         var m = date.getMonth();
@@ -96,7 +98,6 @@ var Events = function() {
                 newEvent.className = $categoryClass;
                 newEvent.category = t($category);
                 newEvent.content = "";
-				console.log("save event dropped",$category, t($category));
 				saveEvent(newEvent);
 
              //   $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
@@ -142,11 +143,11 @@ var Events = function() {
             		element.find('.fc-title').parent().removeClass('fc-content');
             		element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
             	}
-		    },
+		    }
         });
     };
     var editFullEvent = function(el) {
-       
+    	
        $(".close-new-event").off().on("click", function() {
             $(".back-subviews").trigger("click");
         });
@@ -181,20 +182,20 @@ var Events = function() {
             $(".form-full-event .event-id").val("");
             $(".form-full-event .event-name").val("");
             $(".form-full-event .all-day").bootstrapSwitch('state', true);
-            $('.form-full-event .all-day-range').hide();
+            $('.form-full-event .no-all-day-range').hide();
             $(".form-full-event .event-start-date").val(defaultRange.start);
             $(".form-full-event .event-end-date").val(defaultRange.end);
 
-            $('.form-full-event .no-all-day-range .event-range-date').val(moment(defaultRange.start).format('DD/MM/YYYY h:mm A') + ' - ' + moment(defaultRange.end).format('DD/MM/YYYY h:mm A'))
+            $('.form-full-event .no-all-day-range .event-range-date').val(moment(defaultRange.start).format(DPlocale.format) + ' - ' + moment(defaultRange.end).format(DPlocale.format))
                 .daterangepicker({
                     startDate: defaultRange.start,
                     endDate: defaultRange.end,
                     timePicker: true,
                     timePickerIncrement: 30,
-                    format: 'DD/MM/YYYY h:mm A'
+                    format: DPlocale.format
                 });
 
-            $('.form-full-event .all-day-range .event-range-date').val(moment(defaultRange.start).format('DD/MM/YYYY') + ' - ' + moment(defaultRange.end).format('DD/MM/YYYY'))
+            $('.form-full-event .all-day-range .event-range-date').val(moment(defaultRange.start).format(DPlocaleDate) + ' - ' + moment(defaultRange.end).format(DPlocaleDate))
                 .daterangepicker({
                     startDate: defaultRange.start,
                     endDate: defaultRange.end
@@ -214,34 +215,76 @@ var Events = function() {
             $(".form-full-event .event-id").val(el);
 
             for (var i = 0; i < demoCalendar.length; i++) {
-				console.log("editevent", el, demoCalendar[i]);
+				
                 if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
+                    if(demoCalendar[i].allDay){
+                        $('.form-full-event .no-all-day-range').hide();
+                        $('.form-full-event .all-day-range').show();
+                    }else{
+                    	$('.form-full-event .all-day-range').hide();
+                    	$('.form-full-event .no-all-day-range').show();
+                    }
+                                
+		            if (language !='fr') {
+		                DPlocale = {
+		                  format: 'MM/DD/YYYY h:mm A',
+		                  separator: ' - ',
+		                  applyLabel: 'Apply',
+		                  cancelLabel: 'Cancel',
+		                  fromLabel: 'From',
+		                  toLabel: 'To',
+		                  customRangeLabel: 'Custom',
+		                  daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+		                  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		                  firstDay: 1
+		                };
+		                DPlocaleDate = 'MM/DD/YYYY';
+		              } else {
+		                  DPlocale = {
+		                            format: 'DD/MM/YYYY h:mm A',
+		                            separator: ' - ',
+		                            applyLabel: 'Valider',
+		                            cancelLabel: 'Annuler',
+		                            fromLabel: 'De',
+		                            toLabel: 'A',
+		                            customRangeLabel: 'Custom',
+		                            daysOfWeek: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve','Sa'],
+		                            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+		                            firstDay: 1
+		                          };
+		                  DPlocaleDate = 'DD/MM/YYYY';
+		              } 
+                    
                     $(".form-full-event .event-start-date").val(moment(demoCalendar[i].start));
                     $(".form-full-event .event-end-date").val(moment(demoCalendar[i].end));
                     if (typeof $('.form-full-event .no-all-day-range .event-range-date').data('daterangepicker') == "undefined") {
-                        $('.form-full-event .no-all-day-range .event-range-date').val(moment(demoCalendar[i].start).format('DD/MM/YYYY h:mm A') + ' - ' + moment(demoCalendar[i].end).format('DD/MM/YYYY h:mm A'))
-                            .daterangepicker({
-                                startDate: moment(moment(demoCalendar[i].start)),
-                                endDate: moment(moment(demoCalendar[i].end)),
-                                timePicker: true,
-                                timePickerIncrement: 10,
-                                format: 'DD/MM/YYYY h:mm A'
-                            });
-
-                        $('.form-full-event .all-day-range .event-range-date').val(moment(demoCalendar[i].start).format('DD/MM/YYYY') + ' - ' + moment(demoCalendar[i].end).format('DD/MM/YYYY'))
+                        $('.form-full-event .no-all-day-range .event-range-date').val(moment(demoCalendar[i].start).format(DPlocale.format) + ' - ' + moment(demoCalendar[i].end).format(DPlocale.format))
                             .daterangepicker({
                                 startDate: moment(demoCalendar[i].start),
-                                endDate: moment(demoCalendar[i].end)
+                                endDate: moment(demoCalendar[i].end),
+                                timePicker: true,
+                                timePickerIncrement: 10,
+                                format: DPlocale.format,
+                                locale: DPlocale ,
+                                timePicker24Hour : true
+                            });
+
+                        $('.form-full-event .all-day-range .event-range-date').val(moment(demoCalendar[i].start).format(DPlocaleDate) + ' - ' + moment(demoCalendar[i].end).format(DPlocaleDate))
+                            .daterangepicker({
+                                startDate: moment(demoCalendar[i].start),
+                                endDate: moment(demoCalendar[i].end),
+                                format: DPlocale.format,
+                                locale: DPlocale
                             });
                     } else {
-                        $('.form-full-event .no-all-day-range .event-range-date').val(moment(demoCalendar[i].start).format('DD/MM/YYYY h:mm A') + ' - ' + moment(demoCalendar[i].end).format('DD/MM/YYYY h:mm A'))
-                            .data('daterangepicker').setStartDate(moment(moment(demoCalendar[i].start)));
-                        $('.form-full-event .no-all-day-range .event-range-date').data('daterangepicker').setEndDate(moment(moment(demoCalendar[i].end)));
-                        $('.form-full-event .all-day-range .event-range-date').val(moment(demoCalendar[i].start).format('DD/MM/YYYY') + ' - ' + moment(demoCalendar[i].end).format('DD/MM/YYYY'))
-                            .data('daterangepicker').setStartDate(demoCalendar[i].start);
-                        $('.form-full-event .all-day-range .event-range-date').data('daterangepicker').setEndDate(demoCalendar[i].end);
+                        $('.form-full-event .no-all-day-range .event-range-date').val(moment(demoCalendar[i].start).format(DPlocale.format) + ' - ' + moment(demoCalendar[i].end).format(DPlocale.format))
+                            .data('daterangepicker').setStartDate(moment(demoCalendar[i].start).format(DPlocale.format));
+                        $('.form-full-event .no-all-day-range .event-range-date').data('daterangepicker').setEndDate(moment(demoCalendar[i].end).format(DPlocale.format));
+                        $('.form-full-event .all-day-range .event-range-date').val(moment(demoCalendar[i].start).format(DPlocaleDate) + ' - ' + moment(demoCalendar[i].end).format(DPlocaleDate))
+                            .data('daterangepicker').setStartDate(moment(demoCalendar[i].start).format(DPlocaleDate));
+                        $('.form-full-event .all-day-range .event-range-date').data('daterangepicker').setEndDate(moment(demoCalendar[i].end).format(DPlocaleDate));
                     }
 
                     if (demoCalendar[i].category == "" || typeof demoCalendar[i].category == "undefined") {
@@ -272,12 +315,12 @@ var Events = function() {
             if (state) {
                 $("#newFullEvent").find(".no-all-day-range").hide();
                 $("#newFullEvent").find(".all-day-range").show();
-                $("#newFullEvent").find('.all-day-range .event-range-date').val(startDate.format('DD/MM/YYYY') + ' - ' + endDate.format('DD/MM/YYYY')).data('daterangepicker').setStartDate(startDate);
+                $("#newFullEvent").find('.all-day-range .event-range-date').val(startDate.format(DPlocaleDate) + ' - ' + endDate.format(DPlocaleDate)).data('daterangepicker').setStartDate(startDate);
                 $("#newFullEvent").find('.all-day-range .event-range-date').data('daterangepicker').setEndDate(endDate);
             } else {
                 $("#newFullEvent").find(".no-all-day-range").show();
                 $("#newFullEvent").find(".all-day-range").hide();
-                $("#newFullEvent").find('.no-all-day-range .event-range-date').val(startDate.format('DD/MM/YYYY h:mm A') + ' - ' + endDate.format('DD/MM/YYYY h:mm A')).data('daterangepicker').setStartDate(startDate);
+                $("#newFullEvent").find('.no-all-day-range .event-range-date').val(startDate.format(DPlocale.format) + ' - ' + endDate.format(DPlocale.format)).data('daterangepicker').setStartDate(startDate);
                 $("#newFullEvent").find('.no-all-day-range .event-range-date').data('daterangepicker').setEndDate(endDate);
             }
 
