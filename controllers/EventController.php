@@ -174,9 +174,9 @@ class EventController extends Useraware {
 		endif;
 
 	}
-	public function createArray( $start, $end, $title ){
+	public function createArray( $type, $start, $end, $title ){
 		$array=array();
-		$array["id"]="statutory"; 
+		$array["id"]=$type; 
 		$array["title"]=$title;
 		$array["allDay"]= true;
 		$array["className"]="generic";
@@ -241,13 +241,57 @@ class EventController extends Useraware {
 		$holidays['allsaints']=$start->get('YYYY').'-11-01';
 		$holidays['rememberance']=$start->get('YYYY').'-11-11';
 		$holidays['xmas']=$start->get('YYYY').'-12-25';
+		$holidays['easter2016']='2016-03-27';
+		$holidays['easter2017']='2017-03-16';
+		$holidays['easter2018']='2018-04-01';
+		$holidays['easter2019']='2019-04-21';
+		$holidays['easter2020']='2020-04-12';
+		$holidays['eastermonday2016']='2016-03-28';
+		$holidays['eastermonday2017']='2017-03-17';
+		$holidays['eastermonday2018']='2018-04-02';
+		$holidays['eastermonday2019']='2019-04-22';
+		$holidays['eastermonday2020']='2020-04-13';
+		$holidays['ascension2016']='2016-05-05';
+		$holidays['ascension2017']='2017-05-25';
+		$holidays['ascension2018']='2018-05-10';
+		$holidays['ascension2019']='2019-05-30';
+		$holidays['ascension2020']='2020-05-21';
+		$holidays['whitmonday2016']='2016-05-16';
+		$holidays['whitmonday2017']='2017-06-05';
+		$holidays['whitmonday2018']='2018-05-21';
+		$holidays['whitmonday2019']='2019-06-10';
+		$holidays['whitmonday2020']='2020-06-01';
+		$extradays=[];
+		$extradays['mothersday2016']='2016-05-29';
+		$extradays['mothersday2017']='2017-05-28';
+		$extradays['mothersday2018']='2018-05-27';
+		$extradays['fathersday2016']='2016-06-21';
+		$extradays['fathersday2017']='2017-06-18';
+		$extradays['fathersday2018']='2018-06-15';
+		$extradays['grandfathersday2016']='2016-10-02';
+		$extradays['grandfathersday2017']='2017-10-01';
+		$extradays['grandfathersday2018']='2018-10-07';
+		$extradays['grandmothersday2016']='2016-03-06';
+		$extradays['grandmothersday2017']='2017-03-05';
+		$extradays['grandmothersday2018']='2018-03-04';
+		$extradays['epiphany']=$start->get('YYYY').'-01-06';
+		$extradays['mardi_gras']=$start->get('YYYY').'-02-09';
+		$extradays['st_valentin']=$start->get('YYYY').'-02-14';
+		$extradays['womans_day']=$start->get('YYYY').'-03-08';
+		$extradays['st_patrick']=$start->get('YYYY').'-03-17';
+		$extradays['fete_musique']=$start->get('YYYY').'-06-21';
+		$extradays['halloween']=$start->get('YYYY').'-10-31';
 		
 		foreach($holidays as $key=>$holiday){
 			if( $this->toStartDate($holiday)->isLater($start) && $this->toStartDate($holiday)->isEarlier($end) ){
-				array_push( $output_arrays, $this->createArray( $this->toStartDate( $holiday )->toString(\Zend_Date::ISO_8601), $this->toEndDate( $holiday )->toString(\Zend_Date::ISO_8601), $key ) );
+				array_push( $output_arrays, $this->createArray( 'statutory', $this->toStartDate( $holiday )->toString(\Zend_Date::ISO_8601), $this->toEndDate( $holiday )->toString(\Zend_Date::ISO_8601), $key ) );
 			}
 		} 
-		
+		foreach($extradays as $key=>$extraday){
+			if( $this->toStartDate($extraday)->isLater($start) && $this->toStartDate($extraday)->isEarlier($end) ){
+				array_push( $output_arrays, $this->createArray( 'extraday', $this->toStartDate( $extraday )->toString(\Zend_Date::ISO_8601), $this->toEndDate( $extraday )->toString(\Zend_Date::ISO_8601), $key ) );
+			}
+		} 		
 		$reponse->data = $output_arrays; // $input_arrays;
 		$reponse->message = "TXT_SHIFTS_SENT";
 		$reponse->success = true;		

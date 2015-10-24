@@ -9,6 +9,18 @@ tr.shown td.details-control {
     background: #5F8295;
     color: #FFFFFF
 }
+.holidayClass{
+    background: #F5C6F4 !important;
+    color: #FFFFFF
+}
+.eventholidayClass{
+    background: #F5C6F4 !important;
+    color: #FFFFFF
+}
+.extradayClass{
+	background:#FAE3FA !important;
+	color: #FFFFFF
+}
 .closedDayClass{
     background: #FFFFFF;
     color: #D0D3D8;

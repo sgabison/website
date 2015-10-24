@@ -139,10 +139,18 @@ var Events = function() {
             eventRender: function(event, element) {
             	console.log( 'event.title', event.id );
             	console.log( 'element', element );
-            	if( event.id=='statutory' || event.id=='extraday'){
+            	if( event.id=='statutory'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('holidayClass');
+            		element.find('.fc-title').parent().removeClass('fc-content');
+            		element.find('.fc-title').parent().prepend("<img src='/flags/fr-icon.png'>");
+            	}
+            	if( event.id=='extraday'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('extradayClass');
             		element.find('.fc-title').parent().removeClass('fc-content');
             		element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
-            	}
+            	}            	
 		    }
         });
     };
