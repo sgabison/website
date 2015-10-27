@@ -43,21 +43,27 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-				<div class="panel panel-white">
-					<div class="panel-heading border-light">
-						<h4 class="panel-title"><?php echo $this->translate('TXT_QUICK_ACCESS');?></h4>
-					</div>
-					<div class="panel-body">
-						<div class="space20">
-							<a class="btn btn-block btn-lg btn-red" href='/reserver'><?php echo $this->translate('TXT_BOOK_A_TABLE');?><a>
+				<div class="row">
+					<div class="panel panel-white">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title"><?php echo $this->translate('TXT_QUICK_ACCESS');?></h4>
 						</div>
-						<div class="space20">
-							<a class="btn btn-block btn-lg btn-blue" href='/liste-reservations?calendar=<?php $today=new Zend_Date();echo $today->get("dd-MM-YYYY");?>'><?php echo $this->translate('TXT_LIST_RESERVATIONS_TODAY');?><a>
-						</div>						
-						<div class="space20">
-							<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'><?php echo $this->translate('TXT_CALENDRIER_RESERVATION');?><a>
-						</div>						
+						<div class="panel-body">
+							<div class="space20">
+								<a class="btn btn-block btn-lg btn-red" href='/reserver'><?php echo $this->translate('TXT_BOOK_A_TABLE');?><a>
+							</div>
+							<div class="space20">
+								<a class="btn btn-block btn-lg btn-blue" href='/liste-reservations?calendar=<?php $today=new Zend_Date();echo $today->get("dd-MM-YYYY");?>'><?php echo $this->translate('TXT_LIST_RESERVATIONS_TODAY');?><a>
+							</div>						
+							<div class="space20">
+								<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'><?php echo $this->translate('TXT_CALENDRIER_RESERVATION');?><a>
+							</div>						
+						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="addsparkline3"></div>
+					<div class="addsparkline4"></div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">

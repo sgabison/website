@@ -51,10 +51,18 @@ class StatsController extends Useraware {
 		$this->disableLayout();
 		$this->disableViewAutoRender();
 		$type=$this->getParam('type');
-		$end= new Zend_Date();
-		$end->setTime('23:59:59');
-		$date = new Zend_Date();
-		$date->sub(6, Zend_Date::DAY);
+		$timeline=$this->getParam('timeline');
+		if($timeline=="past"){
+			$end= new Zend_Date();
+			$end->setTime('23:59:59');
+			$date = new Zend_Date();
+			$date->sub(6, Zend_Date::DAY);
+		}else{
+			$start= new Zend_Date();
+			$start->setTime('00:00:01');
+			$date = new Zend_Date();
+			$end = new Zend_Date();
+		}
 		$date->setTime('00:00:01');
 		//Build reference array
 		$i=0;
@@ -66,8 +74,13 @@ class StatsController extends Useraware {
 		}
 		//Get the results array
 		$start = new Zend_date;
-		$start->sub(6, Zend_Date::DAY);
-		$start->setTime('00:00:01');
+		if($timeline=="past"){
+			$start->sub(6, Zend_Date::DAY);
+			$start->setTime('00:00:01');
+		}else{
+			$end->add(6, Zend_Date::DAY);
+			$end->setTime('23:59:59');
+		}
 		$stat= new \Object\Stats;
 		$results=$stat->getStatistics( $this->selectedLocation->getId(), $start, $end );
 		$startoftheweek=$start->get('dd-MM-YYYY');
