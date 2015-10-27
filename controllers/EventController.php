@@ -24,7 +24,7 @@ class EventController extends Useraware {
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-events.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.pulsate/jquery.pulsate.min.js');
         $this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/pages-user-profile.js');
-//        $this->view->headScript()->appendFile('http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js');
+
         $this->view->inlineScript()->appendScript(
         		'jQuery(document).ready(function() {
 					$(".toolbar-subview").removeClass("hidden");

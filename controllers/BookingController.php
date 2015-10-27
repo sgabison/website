@@ -48,6 +48,17 @@ class BookingController extends Useraware {
 	}
 	public function portalAction() {
 		$this->view->location=$this->selectedLocation;
+		$servings=$this->selectedLocation->getServings();
+		$this->view->count=count( $servings );
+		$start=new Zend_Date();
+		$start->setTime( "00:01:00" );
+		$end=new Zend_Date();
+		$end->setTime( "23:59:59" );
+		$this->view->reporttodaydata=$this->selectedLocation->getResource()->getRapportReservations($start, $end);
+		$start->addDay(1);
+		$end->addDay(1);
+		$this->view->reporttomorrowdata=$this->selectedLocation->getResource()->getRapportReservations($start, $end);
+		$this->view->servingarray=$servingarray;
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
@@ -57,14 +68,10 @@ class BookingController extends Useraware {
 				'jQuery(document).ready(function() { 
 					Main.init();
 					StatisticsForm.init();
-					//TimePickerFormElements.init();
-					//SetupFormValidator.init(); 
 					Index.init();
 				});',
 				'text/javascript',
 				array('noescape' => true)); // Disable CDATA comments
-
-
 	}
 	public function getGuestListAction(){
 		
