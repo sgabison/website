@@ -38,14 +38,15 @@
 																<?= $this->t("Gender")?>
 															</label>
 							<div>
-								<label class="radio-inline"> <input type="radio" class="grey"
-									value="Female" name="title" id="title_female"
-									<?php if($this->guest->getTitle()=="Female") :?>
+								<label class="radio-inline"> <input type="radio" class="grey"  value="Female" name="title" id="title_female"
+									<?php if($this->guest->getTitle()!="Male") :?>
 									checked="checked" <?php endif;?>>
 																	<?= $this->t("Female")?>
-																</label> <label class="radio-inline"> <input
+																</label> 
+								<label class="radio-inline"> 
+									<input
 									type="radio" class="grey" value="Male" name="title"
-									id="title_male" <?php if($this->guest->getTitle()=="Male") :?>
+									id="title_male" <?php if($this->guest->getTitle()==="Male") :?>
 									checked="checked" <?php endif;?>>
 																	<?= $this->t("Male")?>
 																</label>

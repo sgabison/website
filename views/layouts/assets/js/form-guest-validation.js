@@ -15,12 +15,13 @@ var FormGuestValidator = function () {
     			  newguest.id= $("input[name=id]").val() 
     			, newguest.lastname = $("input[name=lastname]").val()
     			, newguest.firstname = $("input[name=firstname]").val()
-    			, newguest.title = $("input[name=title]").val()
+    			, newguest.title = $("input[name=title]:checked").val()
     			, newguest.email = $("#email").val()
     			, newguest.tel = $("#tel").val()
     			, newguest.preferredlanguage = $("#preferredlanguage").val()
     			, newguest.newsLetter = $("#newsLetter").val()
     			, newguest.METHOD = 'PUT';
+    			  console.log('title', newguest.title);
     			$.blockUI({
     				message: '<i class="fa fa-spinner fa-spin"></i>'+ t("Veuillez patienter")+'...'
     			});
