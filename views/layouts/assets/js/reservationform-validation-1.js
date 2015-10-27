@@ -70,11 +70,22 @@ var ReservationFormValidator1 = function () {
 			    center: '',
 			    right:  'prev,next'
 			},
+			events: loadEvents,
 			weekends: true,
 			selectable: true,
 	        selectHelper: false,
 	        defaultDate: moment( $('#mycalendar').val(), 'DD-MM-YYYY' ),
 	        dayClick: function(date, jsEvent, view) {
+	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
+		        	console.log('works');
+		        	$('tbody td').removeClass('currentDayClass');
+		        	$(this).addClass('currentDayClass');
+	        	}else{
+	        		console.log('don t works');
+		        	$(this).removeClass('fc-highlight');
+	        	}
+	        },
+	        eventClick: function(date, jsEvent, view) {
 	        	if( ( date >= moment().subtract(1, 'days' ) && date.day() != closeddays[0] && date.day() != closeddays[1] && date.day() != closeddays[2] && date.day() != closeddays[3] && date.day() != closeddays[4] && date.day() != closeddays[5] && date.day() != closeddays[6] && $.inArray(date.format("DD-MM-YYYY"), offdays)==-1 ) || ( closeddays == "" ) ){
 		        	console.log('works');
 		        	$('tbody td').removeClass('currentDayClass');
@@ -116,6 +127,28 @@ var ReservationFormValidator1 = function () {
 			       cell.prop('title', t('js_passed_date'));	        		
 	        	}
 		    },
+            eventRender: function(event, element) {
+            	console.log( 'event.title', event.id );
+            	console.log( 'element', element );
+            	if( event.id=='statutory'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('holidayClass');
+            		//element.find('.fc-title').parent().remove();
+					var tooltip = event.Description;
+		            $(element).attr("data-original-title", tooltip);
+		            $(element).tooltip({ container: "body"});
+            		//element.find('.fc-title').parent().prepend("<img src='/flags/fr-icon.png'>");
+            	}
+            	if( event.id=='extraday'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('extradayClass');
+            		//element.find('.fc-title').parent().remove();
+					var tooltip = event.Description;
+		            $(element).attr("data-original-title", tooltip);
+		            $(element).tooltip({ container: "body"});
+            		//element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
+            	}            	
+		    },
 	        select: function(start, end, allDay) {
 	        	console.log( "select: ", start.format("DD-MM-YYYY") );
 	        	if( start >= moment() && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
@@ -135,6 +168,27 @@ var ReservationFormValidator1 = function () {
 				$('.calendarlinkdata').addClass('text-success');
 				$('.calendarlinkdata').removeClass('text-muted');
 	        }
+		});
+	}
+	var loadEvents = function (start,end,timezone,callback){				  
+		var reponse = new Object; 
+		reponse.start = start;
+		reponse.end =  end;
+		reponse.timezone =  timezone;
+		reponse.METHOD = 'GET';
+		$.ajax({
+			url: '/data/event/get-holidays',
+			dataType: 'json',
+			type : 'POST', // obligatoire
+			data : JSON.stringify(reponse),
+			contentType : "application/json; charset=utf-8",
+			success : function(json) {
+				if (json.success || json.success == 'true') {	                               
+					callback(json.data);
+					//demoCalendar = $.makeArray(json.data);
+					//console.log("loadEvents",demoCalendar);
+				 }
+			}
 		});
 	}
 	var reservationSubmit= function(){

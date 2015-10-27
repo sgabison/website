@@ -1,73 +1,6 @@
 var ReservationFormValidator = function () {
 	"use strict";
 	var backdrop = $('.ajax-white-backdrop2');
-/*
-    var ascension=['2016/05/05','2017/05/25','2018/05/10','2019/05/30','2020/05/21'];
-    var whitmonday=['2016/05/16','2017/06/05','2018/05/21','2019/06/10','2020/06/01'];
-    var eastersunday=['2016/03/27','2017/04/16','2018/04/01','2019/04/21','2020/04/12'];
-    var eastermonday=['2016/03/28','2017/04/17','2018/04/02','2019/04/22','2020/04/13'];
-    var mothersday=['2016/05/29','2017/05/28','2018/05/27'];
-    var checkHoliday=function(date){
-    	if( $.inArray( date.format('YYYY/MM/DD'), ascension) >=0 ){ return t('ascension');}
-    	else if( $.inArray( date.format('YYYY/MM/DD'), whitmonday) >=0 ){ return t('whitmonday');}
-    	else if( $.inArray( date.format('YYYY/MM/DD'), eastermonday) >=0 ){ return t('eastermonday');}
-    	else if( date.format('MM') =='01' && date.format('DD') =='01'){ return t('new_years_eve');}
-    	else if( date.format('MM') =='05' && date.format('DD') =='01' ){ return t('first_of_may');}
-    	else if( date.format('MM') =='05' && date.format('DD') =='08' ){ return t('victory_day');}
-    	else if( date.format('MM') =='07' && date.format('DD') =='16' ){ return t('bastille_day');}
-    	else if( date.format('MM') =='08' && date.format('DD') =='15' ){ return t('virgin_mary');}
-    	else if( date.format('MM') =='11' && date.format('DD') =='01' ){ return t('all_saints_day');}
-    	else if( date.format('MM') =='11' && date.format('DD') =='11' ){ return t('rememberance_day');}
-    	else if( date.format('MM') =='12' && date.format('DD') =='25' ){ return t('christmas');}
-    	else{ return ''};
-    }
-    var checkExtraDay=function(date){
-    	if( $.inArray( date.format('YYYY/MM/DD'), ascension) >=0 ){ return t('mothers_day');}
-    	if( (date.format('MM') =='06') && (date.day() == '0') && (date.date() >= 15) && (date.date() <= 21) ){ return t('fathers_day');}
-    	if( (date.format('MM') =='03') && (date.day() == '0') && (date.date() >= 1) && (date.date() <= 7) ){ return t('grandmas_day');}
-    	if( (date.format('MM') =='10') && (date.day() == '0') && (date.date() >= 1) && (date.date() <= 7) ){ return t('grandpas_day');}
-    	if( date.format('MM') =='01' && date.format('DD') =='06'){ return t('epiphany');}
-    	else if( date.format('MM') =='02' && date.format('DD') =='09' ){ return t('mardi_gras');}
-    	else if( date.format('MM') =='02' && date.format('DD') =='14' ){ return t('st_valentin');}
-    	else if( date.format('MM') =='03' && date.format('DD') =='08' ){ return t('intl_womans_day');}
-    	else if( date.format('MM') =='03' && date.format('DD') =='17' ){ return t('st_patrick');}
-    	else if( date.format('MM') =='06' && date.format('DD') =='21' ){ return t('fete_musique');}
-    	else if( date.format('MM') =='10' && date.format('DD') =='31' ){ return t('halloween');}
-    	else{ return ''};
-    }
-	var addHolidays=function(){
-		var start= moment();
-		var end= moment();
-		start.subtract(200, 'days');
-		end.add(365, 'days');
-		var vardate=start;
-		var i=0;
-		while (vardate < end){
-			if( checkHoliday(vardate) != '' ){
-				addCalanderEvent('statutory', vardate, end, checkHoliday(vardate));
-			}
-			if( checkExtraDay(vardate) != '' ){
-				addCalanderEvent('extraday', vardate, end, checkExtraDay(vardate));
-			}
-			vardate.add(1, 'days');
-			i++;
-		}
-	}
-	var addCalanderEvent = function(id, vardate, end, title){
-		var eventObject = {
-			title: title,
-			allDay: true,
-			start: vardate,
-			id: id,
-			color: '#DDEEFF',
-			rendering: 'background',
-			backgroundColor: '#FF0000',
-			startEditable: false
-		};
-		$("#fullcalendar").fullCalendar('renderEvent', eventObject, true);
-		return eventObject;
-	}
-*/
 	backdrop.remove();
 	$(document).scrollTop(0);
 	$.urlParam = function(name){
@@ -166,6 +99,7 @@ var ReservationFormValidator = function () {
 			    center: '',
 			    right:  'prev,next'
 			},
+			events: loadEvents,
 			weekends: true,
 			selectable: true,
 	        selectHelper: false,
@@ -181,15 +115,6 @@ var ReservationFormValidator = function () {
 	        	}
 	        },
 	        dayRender: function (date, cell) {
-/*
-				if( checkHoliday(date) !='' ){
-				 	date = moment(date, 'yyyy-MM-dd');
-		         	cell.css('background-color', '#5EF6FF');
-				 }else if( checkExtraDay(date) !='' ){
-				 	date = moment(date, 'yyyy-MM-dd');
-		         	cell.css('background-color', '#B2FAFE');
-				 }
-*/
 				if ( date.format("DD-MM-YYYY") == moment().format("DD-MM-YYYY") ){
 				   cell.removeClass("fc-state-highlight");
 				   cell.removeClass("fc-today");
@@ -214,16 +139,28 @@ var ReservationFormValidator = function () {
 			       cell.prop('title', t('js_passed_date'));	        		
 	        	}
 		    },
-/*
             eventRender: function(event, element) {
             	console.log( 'event.title', event.id );
             	console.log( 'element', element );
-            	if( event.id=='statutory' || event.id=='extraday'){
-            		element.find('.fc-title').parent().removeClass('fc-content');
-            		element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
+            	if( event.id=='statutory'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('holidayClass');
+            		//element.find('.fc-title').parent().remove();
+					var tooltip = event.Description;
+		            $("td[data-date='"+dataToFind+"']").attr("data-original-title", tooltip);
+		            $("td[data-date='"+dataToFind+"']").tooltip({ container: "body"});
+            		//element.find('.fc-title').parent().prepend("<img src='/flags/fr-icon.png'>");
             	}
+            	if( event.id=='extraday'){
+            		var dataToFind = moment(event.start).format('YYYY-MM-DD');
+    				$("td[data-date='"+dataToFind+"']").addClass('extradayClass');
+            		//element.find('.fc-title').parent().remove();
+					var tooltip = event.Description;
+		            $("td[data-date='"+dataToFind+"']").attr("data-original-title", tooltip);
+		            $("td[data-date='"+dataToFind+"']").tooltip({ container: "body"});
+            		//element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
+            	}            	
 		    },
-*/
 	        select: function(start, end, allDay) {
 	        	console.log( "select: ",start.format("DD-MM-YYYY") );
 	        	if( start >= moment().subtract(1, 'days' ) && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
@@ -243,6 +180,27 @@ var ReservationFormValidator = function () {
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
 	        }
+		});
+	}
+	var loadEvents = function (start,end,timezone,callback){				  
+		var reponse = new Object; 
+		reponse.start = start;
+		reponse.end =  end;
+		reponse.timezone =  timezone;
+		reponse.METHOD = 'GET';
+		$.ajax({
+			url: '/data/event/get-holidays',
+			dataType: 'json',
+			type : 'POST', // obligatoire
+			data : JSON.stringify(reponse),
+			contentType : "application/json; charset=utf-8",
+			success : function(json) {
+				if (json.success || json.success == 'true') {	                               
+					callback(json.data);
+					//demoCalendar = $.makeArray(json.data);
+					//console.log("loadEvents",demoCalendar);
+				 }
+			}
 		});
 	}
 	var reservationDataLoad = function () {

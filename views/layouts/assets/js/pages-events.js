@@ -87,9 +87,6 @@ var Events = function() {
                     return letter.toUpperCase();
                 });
                 // we need to copy it, so that multiple events don't have a reference to the same object
-
-
-
                 var newEvent = new Object;
                 newEvent.title = originalEventObject.title;
                 newEvent.start = new Date(date);
@@ -191,7 +188,7 @@ var Events = function() {
             $(".form-full-event .event-id").val("");
             $(".form-full-event .event-name").val("");
             $(".form-full-event .all-day").bootstrapSwitch('state', true);
-            $('.form-full-event .no-all-day-range').hide();
+            $(".form-full-event .no-all-day-range").hide();
             $(".form-full-event .event-start-date").val(defaultRange.start);
             $(".form-full-event .event-end-date").val(defaultRange.end);
 
@@ -525,7 +522,6 @@ var Events = function() {
                 $.blockUI({
                     message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
                 });
-
                 if ($(".form-full-event .event-id").val() !== "") {
                     el = $(".form-full-event .event-id").val();
                     var actual_event = $('#full-calendar').fullCalendar('clientEvents', el);
@@ -536,11 +532,8 @@ var Events = function() {
                             var eventIndex = i;
                         }
                     }
- 
 				   reponse.id =  newEvent.id;
 				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
-
-
                     $.ajax({
                         url: '/data/event/get-data',
                         dataType: 'json',
@@ -550,10 +543,8 @@ var Events = function() {
                         success : function(json) {
 							$.unblockUI();
 							if (json.success || json.success == 'true') {
-
                                 $('#full-calendar').fullCalendar('removeEvents', actual_event.id);
                                 $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
-
                                 demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
                                 $.hideSubview();
                                 toastr.success(json.message);
@@ -562,78 +553,74 @@ var Events = function() {
                     });
 
                 } else {
-
-					   // console.log("hurra new event");
-    				   reponse.id =  "";
-    				   reponse.METHOD = 'POST';
-                        $.ajax({
-                            url: '/data/event/get-data',
-                            dataType: 'json',
-                            type : 'POST', // obligatoire
-                            data : JSON.stringify(reponse),
-                            contentType : "application/json; charset=utf-8",
-                            success : function(json) {
-    							$.unblockUI();
-	    						if (json.success || json.success == 'true') {
-	                                $('#full-calendar').fullCalendar('renderEvent', newEvent, true);
-	                                demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
-	                                $.hideSubview();
-	                                toastr.success(json.message);
-	                            }
-                        	}
-                        });
-
+					// console.log("hurra new event");
+					reponse.id =  "";
+					reponse.METHOD = 'POST';
+					$.ajax({
+						url: '/data/event/get-data',
+						dataType: 'json',
+						type : 'POST', // obligatoire
+						data : JSON.stringify(reponse),
+						contentType : "application/json; charset=utf-8",
+						success : function(json) {
+							$.unblockUI();
+							if (json.success || json.success == 'true') {
+								$('#full-calendar').fullCalendar('renderEvent', newEvent, true);
+								demoCalendar = $("#full-calendar").fullCalendar("clientEvents");
+								$.hideSubview();
+								toastr.success(json.message);
+							}
+						}
+                    });
                 }
-
-
-
             }
         });
     };
-	var saveEvent = function (newEvent){
-					    
-					   var reponse = new Object; 
-    				   reponse.data = newEvent;
-					   reponse.id =  newEvent.id;
-    				   reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
-                        $.ajax({
-                            url: '/data/event/get-data',
-                            dataType: 'json',
-                            type : 'POST', // obligatoire
-                            data : JSON.stringify(reponse),
-                            contentType : "application/json; charset=utf-8",
-                            success : function(json) {
-    							$.unblockUI();
-	    						if (json.success || json.success == 'true') {
-	                                $('#full-calendar').fullCalendar('renderEvent', json.data, true);
-	                                demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
-	                                toastr.success(json.message);
-	                            }
-                        	}
-                        });
+	var saveEvent = function (newEvent){  
+		var reponse = new Object; 
+		reponse.data = newEvent;
+		reponse.id =  newEvent.id;
+		reponse.METHOD = ( is_int(reponse.id) )?'PUT':'POST';
+		$.ajax({
+			url: '/data/event/get-data',
+			dataType: 'json',
+			type : 'POST', // obligatoire
+			data : JSON.stringify(reponse),
+			contentType : "application/json; charset=utf-8",
+			success : function(json) {
+				$.unblockUI();
+				if (json.success || json.success == 'true') {
+				$('#full-calendar').fullCalendar('renderEvent', json.data, true);
+				demoCalendar = $('#full-calendar').fullCalendar('clientEvents');
+				toastr.success(json.message);
+				}
+			}
+		});
 	};
 	var loadEvents = function (start,end,timezone,callback){
-					  
-					   var reponse = new Object; 
-    				   reponse.start = start;
-					   reponse.end =  end;
-					   reponse.timezone =  timezone;
-    				   reponse.METHOD = 'GET';
-                        $.ajax({
-                            url: '/data/event/get-events',
-                            dataType: 'json',
-                            type : 'POST', // obligatoire
-                            data : JSON.stringify(reponse),
-                            contentType : "application/json; charset=utf-8",
-                            success : function(json) {
-    							$.unblockUI();
-	    						if (json.success || json.success == 'true') {	                               
-									callback(json.data);
-									demoCalendar = $.makeArray(json.data);
-									console.log("loadEvents",demoCalendar);
-	                            }
-                        	}
-                        });
+		$.blockUI({
+			message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
+		});					  
+		var reponse = new Object; 
+		reponse.start = start;
+		reponse.end =  end;
+		reponse.timezone =  timezone;
+		reponse.METHOD = 'GET';
+		$.ajax({
+			url: '/data/event/get-events',
+			dataType: 'json',
+			type : 'POST', // obligatoire
+			data : JSON.stringify(reponse),
+			contentType : "application/json; charset=utf-8",
+			success : function(json) {
+				$.unblockUI();
+				if (json.success || json.success == 'true') {	                               
+					callback(json.data);
+					demoCalendar = $.makeArray(json.data);
+					console.log("loadEvents",demoCalendar);
+				 }
+			}
+		});
 	}
     // on hide event's form destroy summernote and bootstrapSwitch plugins
     var hideEditEvent = function() {
