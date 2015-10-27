@@ -108,6 +108,7 @@ var Events = function() {
                     $(this).remove();
                 }
             },
+            eventLimitClick:"day",
             selectable: true,
             selectHelper: true,
             select: function(start, end, allDay) {
