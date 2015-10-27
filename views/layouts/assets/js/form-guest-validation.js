@@ -21,7 +21,7 @@ var FormGuestValidator = function () {
     			, newguest.preferredlanguage = $("#preferredlanguage").val()
     			, newguest.newsLetter = $("#newsLetter").val()
     			, newguest.METHOD = 'PUT';
-    			  console.log('title', newguest.title);
+    			  
     			$.blockUI({
     				message: '<i class="fa fa-spinner fa-spin"></i>'+ t("Veuillez patienter")+'...'
     			});
