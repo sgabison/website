@@ -88,9 +88,16 @@
 								<option value="fr" <?php if($this->guest->getPreferredlanguage() == 'fr'|| $this->guest->getPreferredlanguage() == '' ){echo 'selected';}?>> <?= $this->translate("FRENCH")?></option>
 							</select>
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="margin-left:20px">
 							<label class="control-label"> <?php echo $this->translate("TXT_NEWSLETTER");?></label> 
 							<input type="checkbox" class="grey" id="newsLetter" name="newsLetter" placeholder="" <?php if( $this->guest->getNewsLetter() =='1'){echo "checked value='1'";}else{echo "value='0'";}?>>
+						</div>
+						<div class="pull-right">
+							<div class="btn-group">
+								<button class="btn btn-info save-guest" type="submit">
+									<?= $this->translate("TXT_SAVE")?>
+								</button>
+							</div>
 						</div>
 						
 <!--
@@ -112,14 +119,9 @@
 				</div>
 
 				<div class="row">
+					<div class="col-md-6"></div>
 					<div class="col-md-6">
-						<div class="pull-right">
-							<div class="btn-group">
-								<button class="btn btn-info save-guest" type="submit">
-									<?= $this->translate("TXT_SAVE")?>
-								</button>
-							</div>
-						</div>
+
 					</div>
 				</div>
 

@@ -65,7 +65,7 @@
 					<?php foreach( $this->reporttodaydata as $report){?>
 					<div class="col-md-6">
 						<div class="space20">
-							<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'>
+							<a class="btn btn-block btn-lg btn-blue" href='/booking-calendar'>
 								<h5 class="text-white semi-bold no-margin p-b-5"><?php echo $report['serving_name'];?></h5>
 								<h1><?php echo $report['nbre'];?></h1>
 								<span style="font-size:small"><?php echo $this->translate('ORDERS');?></span><br>
