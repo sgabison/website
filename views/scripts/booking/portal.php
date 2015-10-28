@@ -61,41 +61,64 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="addsparkline3"></div>
-					<div class="addsparkline4"></div>
-				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 				<div class="row">
-					<?php foreach( $this->reporttodaydata as $report){?>
-					<div class="col-md-6">
-						<div class="space20">
-							<a class="btn btn-block btn-lg btn-blue" href='/booking-calendar'>
-								<h5 class="text-white semi-bold no-margin p-b-5"><?php echo $report['serving_name'];?></h5>
-								<h1><?php echo $report['nbre'];?></h1>
-								<span style="font-size:small"><?php echo $this->translate('ORDERS');?></span><br>
-								<span style="font-size:small"><?php echo $this->translate('TXT_TODAY');?></span>
-							<a>
+					<div>
+						<div class="panel-heading">
+							<h4 class="panel-title"><?php echo $this->translate('QUICK_SUMMARY');?></h4>
+						</div>
+						<div class="panel-body">
+							<?php foreach( $this->todayreport as $report){?>
+							<div class="col-md-6">
+								<div class="space20">
+									<a class="btn btn-block btn-lg btn-blue" href='/booking-calendar'>
+										<h5 class="text-white semi-bold no-margin p-b-5"><?php echo $report['name'];?></h5>
+										<h1><?php echo $report['nbre'];?></h1>
+										<span style="font-size:small"><?php echo $this->translate('ORDERS');?></span><br>
+										<span style="font-size:small"><?php echo $this->translate('TXT_TODAY');?></span>
+									<a>
+								</div>
+							</div>
+							<?php } ?>
+							<?php foreach( $this->tomorrowreport as $report){?>
+							<div class="col-md-6">
+								<div class="space20">
+									<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'>
+										<h5 class="text-white semi-bold no-margin p-b-5"><?php echo $report['name'];?></h5>
+										<h1><?php echo $report['couverts'];?></h1>
+										<span style="font-size:small"><?php echo $this->translate('SEATS');?></span><br>
+										<span style="font-size:small"><?php echo $this->translate('TXT_TOMORROW');?></span>
+									<a>
+								</div>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php foreach( $this->reporttomorrowdata as $report){?>
-					<div class="col-md-6">
-						<div class="space20">
-							<a class="btn btn-block btn-lg btn-green" href='/booking-calendar'>
-								<h5 class="text-white semi-bold no-margin p-b-5"><?php echo $report['serving_name'];?></h5>
-								<h1><?php echo $report['nbre'];?></h1>
-								<span style="font-size:small"><?php echo $this->translate('SEATS');?></span><br>
-								<span style="font-size:small"><?php echo $this->translate('TXT_TOMORROW');?></span>
-							<a>
-						</div>
-					</div>
-					<?php } ?>
 				</div>
-				<div class="row">
-					<div class="addsparkline"></div>
-					<div class="addsparkline2"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-white">
+					<div class="panel-heading border-light">
+						<h4 class="panel-title"><?php echo $this->translate('LAST_SEVEN');?></h4>
+					</div>
+					<div class="panel-body">
+						<div class="addsparkline"></div>
+						<div class="addsparkline2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-white">
+					<div class="panel-heading border-light">
+						<h4 class="panel-title"><?php echo $this->translate('NEXT_SEVEN');?></h4>
+					</div>
+					<div class="panel-body">
+						<div class="addsparkline3"></div>
+						<div class="addsparkline4"></div>
+					</div>
 				</div>
 			</div>
 		</div>

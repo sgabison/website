@@ -358,7 +358,7 @@ class EventController extends Useraware {
 			$extradays['Epiphanie.']=$end->get('YYYY').'-01-06';
 			$extradays['mardi.gras']=$start->get('YYYY').'-02-09';
 			$extradays['St.valentin']=$start->get('YYYY').'-02-14';
-			$extradays['Jour Femme']=$start->get('YYYY').'-03-08';
+			$extradays['Womans.day']=$start->get('YYYY').'-03-08';
 			$extradays['St.Patrick']=$start->get('YYYY').'-03-17';
 			$extradays['Fete_musique']=$start->get('YYYY').'-06-21';
 			$extradays['Halloween']=$start->get('YYYY').'-10-31';		

@@ -32,7 +32,6 @@ var StatisticsForm = function () {
 								'<div>'+
 									'<span class="dynamicsparkline'+i+'">Loading..</span>'+
 								'</div>'+
-								'<span class="text-light"><i class="fa fa-clock-o"></i> 1 hour ago</span>'+
 							'</div>'+
 						'</div>'+
 					'</div>';

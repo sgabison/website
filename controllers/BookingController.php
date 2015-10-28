@@ -59,6 +59,32 @@ class BookingController extends Useraware {
 		$end->addDay(1);
 		$this->view->reporttomorrowdata=$this->selectedLocation->getResource()->getRapportReservations($start, $end);
 		$this->view->servingarray=$servingarray;
+		foreach( $servings as $serving ){
+			$array['nbre']=0; 
+			$array['couverts']=0;
+			$array['name']=$serving->getTitle();
+			foreach( $this->view->reporttodaydata as $report ){
+				if( $report['serving_id'] == $serving->getId() ){
+					$array['nbre']=$report['nbre'];
+					$array['couverts']=$report['couverts'];
+				} 
+			}
+			$resulttoday[ $serving->getId() ]=$array;
+		}
+		$this->view->todayreport=$resulttoday;
+		foreach( $servings as $serving ){
+			$array['nbre']=0; 
+			$array['couverts']=0;
+			$array['name']=$serving->getTitle();
+			foreach( $this->view->reporttomorrowdata as $report ){
+				if( $report['serving_id'] == $serving->getId() ){
+					$array['nbre']=$report['nbre'];
+					$array['couverts']=$report['couverts'];
+				} 
+			}
+			$resulttomorrow[ $serving->getId() ]=$array;
+		}
+		$this->view->tomorrowreport=$resulttomorrow;
 		$this->layout ()->setLayout ( 'portal' );
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery.sparkline/jquery.sparkline.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
