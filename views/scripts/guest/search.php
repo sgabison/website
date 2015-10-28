@@ -5,7 +5,7 @@
 		<h4 class="panel-title">
 			<span class="text-bold"><?= $this->translate("TXT_LIST_GUEST")?> <?= $this->societe->getName()?></span>
 			<?php if($this->q) : ?><?= $this->translate("TXT_RECHERCHE")?> : <?php echo $this->q ?><?php endif;?>
-			<div class="print-table pull-right"></div>
+			<div class="print-table pull-right hidden-xs hidden-sm hidden-print"></div>
 		</h4>		
 	</div>
 	<div class="panel-body">
@@ -24,17 +24,7 @@
 							<th><?php echo $this->translate('TXT_RESERVATION');?></th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<th></th>
-							<th><?php echo $this->translate('TXT_ID');?></th>
-							<th><?php echo $this->translate('TXT_LASTNAME');?></th>
-							<th><?php echo $this->translate('TXT_TEL');?></th>
-							<th><?php echo $this->translate('TXT_EMAIL');?></th>
-							<th><?php echo $this->translate('TXT_EDIT');?></th>
-							<th><?php echo $this->translate('TXT_RESERVATION');?></th>
-						</tr>
-					</tfoot>
+					
 				</table>
 			</div>
 		</div>

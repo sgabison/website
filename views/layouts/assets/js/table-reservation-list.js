@@ -409,7 +409,8 @@ var TableReservationList = function () {
 					},
 					{ 	
 						"data": "id",
-						"name" : "printable",
+						"name" : "no-printable",
+						"visible": false,
 						"render": function (data, type, row){
 							return '<h4><strong>'+data+'</strong></h4>';
 						} 
@@ -461,7 +462,7 @@ var TableReservationList = function () {
 		                    } 
 		                    return wheelchair + baby + allergy + party + bug + group + warning;
 		                	},
-		                "className": "dt-body-center"	
+		                "className": "dt-body-center hidden-xs hidden-sm"	
 					},
 					{ 
 						"data": "status",

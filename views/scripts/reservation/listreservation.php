@@ -49,14 +49,14 @@
 				<button class="btn btn-blue" id="datedisplay">
 					<i class="fa fa-calendar"></i> <?= $this->translate('TXT_DISPLAY_DATE')?>
 				</button>
-				<button class="btn btn-blue" id="locationdisplay">
+				<button class="btn btn-blue hidden-xs hidden-sm" id="locationdisplay">
 					<i class="fa fa-map-marker"></i> <?= $this->translate('TXT_DISPLAY_LOCATION')?>
 				</button>
 
 			</div>
 
 		</h4>
-		<div class="panel-tools">
+		<div class="panel-tools hidden-xs hidden-sm hidden-print">
 			<div class="print-table">
 				<a class="btn btn-default config pull-right"> <span><i
 						class="fa fa-cog"></i></span>
