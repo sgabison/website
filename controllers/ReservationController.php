@@ -437,6 +437,16 @@ class ReservationController extends Useraware{
 					$("#registerbutton").addClass("no-display");
 					$(".registergroup").addClass("hidden-sm");
 					$("a.locationlinkfinal").css( "cursor", "pointer" );
+					$(".personlinkfinal").click( function(){
+						$("#calendarbox").addClass("no-display");
+						$("#partybox").removeClass("no-display");
+						$("#selectgroup").addClass("no-display");
+					});
+					$(".slotlinkfinal").click( function(){
+						$("#calendarbox").addClass("no-display");
+						$("#partybox").addClass("no-display");
+						$("#selectgroup").removeClass("no-display");
+					});
 					ReservationFormValidator1.init();
 					$.unblockUI();
 				}});

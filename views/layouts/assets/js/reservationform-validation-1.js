@@ -27,6 +27,16 @@ var ReservationFormValidator1 = function () {
 	var dataInitiation=function(){
 		$('#calendarlinkdata').text( $('#mycalendar').val() );
 	}
+	$('.personlinkfinal').click( function(){
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').removeClass('no-display');
+		$('#selectgroup').addClass('no-display');
+	});
+	$('.slotlinkfinal').click( function(){
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').addClass('no-display');
+		$('#selectgroup').removeClass('no-display');
+	});
 	var managePreferredLanguage=function(){
 		$('.preferredlanguage').click( function(){
 			$('#preferredlanguageinput').val( $(this).attr('language') );

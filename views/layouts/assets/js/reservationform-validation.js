@@ -31,6 +31,16 @@ var ReservationFormValidator = function () {
 	    var d = new Date();
 	    document.getElementById("clock").innerHTML = d.toLocaleTimeString('fr-FR');
 	}
+	$('.personlinkfinal').click( function(){
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').removeClass('no-display');
+		$('#selectgroup').addClass('no-display');
+	});
+	$('.slotlinkfinal').click( function(){
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').addClass('no-display');
+		$('#selectgroup').removeClass('no-display');
+	});
 	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	$('[data-toggle="tooltip"]').tooltip();
 	var managePreferredLanguage=function(){

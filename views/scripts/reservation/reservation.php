@@ -61,11 +61,11 @@
 									<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
 									<span class="text-muted" id="calendarlinkdata"><?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?></span>
 								</a>
-								<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+								<a class="linkhref calendarhref personlinkfinal btn btn-default">
 								<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
 									<span class="text-muted" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> <span class="text-muted"><?php echo $this->translate('TXT_PEOPLE');?></span>
 								</a>
-								<a class="linkhref calendarhref locationlinkfinal btn btn-default">
+								<a class="linkhref calendarhref slotlinkfinal btn btn-default">
 									<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
 									<span class="text-muted" id="slotlinkdata"><?php echo $this->translate('TXT_TIME');?></span>
 								</a>	
@@ -97,7 +97,7 @@
 								</div>
 								<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
 									<select id="partyselect" class="form-control selectpartyselection" style="font-size:large">
-										<option value='8'><?= $this->translate('TXT_FOR');?> 10 <?= $this->translate('TXT_PEOPLE');?></option>
+										<option value='10'><?= $this->translate('TXT_FOR');?> 10 <?= $this->translate('TXT_PEOPLE');?></option>
 										<?php $i=10; while($i<25){ 
 											$i++;
 											echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
