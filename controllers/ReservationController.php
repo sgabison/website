@@ -7,7 +7,7 @@ use Pimcore\Mail;
 use Pimcore\Tool;
 use Website\Tool\Reponse;
 use Website\Tool\Request;
-
+$time=time();
 class ReservationController extends Useraware{
 	public function resaserveringsAction() {  
 		$this->disableLayout();  
@@ -348,7 +348,6 @@ class ReservationController extends Useraware{
 	}
     public function reservationAction() {
         $this->layout()->setLayout('portal');
-        //echo $this->selectedLocation->getId(); exit;
 		if( $this->getParam('reservationid') ){
 			$reservationid=$this->getParam('reservationid');
 			$reservation=Object\Reservation::getById( $reservationid );
@@ -391,7 +390,7 @@ class ReservationController extends Useraware{
 		}else{
 			//SET RESACHANGE TO FALSE
 			$this->view->resachange=false;			
-			$today=new zend_date();
+			$today=new Zend_Date();
 			$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 			$fulltext="";
 			foreach( $this->selectedLocation->getShifts($today, $sixmonthsfromnow) as $dayoff ){
@@ -401,7 +400,7 @@ class ReservationController extends Useraware{
 					}
 				}
 			}
-			//exit;
+	        //echo $this->selectedLocation->getId(); exit;
 			$this->view->closeddays=$this->checkClosedServings( $this->selectedLocation );
 			$this->view->offdaysrange=$fulltext;
 			//echo $this->view->offdaysrange; echo "<br>";

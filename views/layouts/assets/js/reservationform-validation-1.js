@@ -132,7 +132,7 @@ var ReservationFormValidator1 = function () {
 		        	cell.addClass('currentDayClass');	        		
 	        	}
 	        	if( date < moment().subtract(1, 'days' ) ){
-			       cell.css("background-color", "#EEEEEE");
+			       cell.css("background-color", "#BBBBBB");
 			       cell.css("cursor", "not-allowed");
 			       cell.prop('title', t('js_passed_date'));	        		
 	        	}
@@ -144,19 +144,15 @@ var ReservationFormValidator1 = function () {
             		var dataToFind = moment(event.start).format('YYYY-MM-DD');
     				$("td[data-date='"+dataToFind+"']").addClass('holidayClass');
             		//element.find('.fc-title').parent().remove();
-					var tooltip = event.Description;
-		            $(element).attr("data-original-title", tooltip);
-		            $(element).tooltip({ container: "body"});
             		//element.find('.fc-title').parent().prepend("<img src='/flags/fr-icon.png'>");
+            		return false;
             	}
             	if( event.id=='extraday'){
             		var dataToFind = moment(event.start).format('YYYY-MM-DD');
     				$("td[data-date='"+dataToFind+"']").addClass('extradayClass');
             		//element.find('.fc-title').parent().remove();
-					var tooltip = event.Description;
-		            $(element).attr("data-original-title", tooltip);
-		            $(element).tooltip({ container: "body"});
             		//element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
+            		return false;
             	}            	
 		    },
 	        select: function(start, end, allDay) {

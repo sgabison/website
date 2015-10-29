@@ -156,19 +156,15 @@ var ReservationFormValidator = function () {
             		var dataToFind = moment(event.start).format('YYYY-MM-DD');
     				$("td[data-date='"+dataToFind+"']").addClass('holidayClass');
             		//element.find('.fc-title').parent().remove();
-					var tooltip = event.Description;
-		            $("td[data-date='"+dataToFind+"']").attr("data-original-title", tooltip);
-		            $("td[data-date='"+dataToFind+"']").tooltip({ container: "body"});
             		//element.find('.fc-title').parent().prepend("<img src='/flags/fr-icon.png'>");
+            		return false;
             	}
             	if( event.id=='extraday'){
             		var dataToFind = moment(event.start).format('YYYY-MM-DD');
     				$("td[data-date='"+dataToFind+"']").addClass('extradayClass');
             		//element.find('.fc-title').parent().remove();
-					var tooltip = event.Description;
-		            $("td[data-date='"+dataToFind+"']").attr("data-original-title", tooltip);
-		            $("td[data-date='"+dataToFind+"']").tooltip({ container: "body"});
             		//element.find('.fc-title').parent().prepend("<img src='/logos/party.gif' width='12' height='12'>");
+            		return false;
             	}            	
 		    },
 	        select: function(start, end, allDay) {
