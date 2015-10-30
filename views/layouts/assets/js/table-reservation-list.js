@@ -558,6 +558,14 @@ var TableReservationList = function () {
 			                    }
 				           },
 				           {
+								 extend : 'pdf',
+								 exportOptions : {
+					        	   		columns : [ 'printable:name']
+									},
+									className:'btn-white',
+									text:'<i class="fa fa-download"></i>'
+					           },
+				           {
 								 extend : 'copyHtml5',
 								 exportOptions : {
 					        	   		columns : ['printable:name',':visible'] 

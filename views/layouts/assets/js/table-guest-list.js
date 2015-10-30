@@ -65,6 +65,14 @@ var GuestList = function () {
 						text:'<i class="fa fa-print"></i>'
 		           },
 		           {
+						 extend : 'pdf',
+						 exportOptions : {
+			        	   		columns : [ 1, 2, 3, 4 ]
+							},
+							className:'btn-white',
+							text:'<i class="fa fa-download"></i>'
+			           },
+		           {
 						 extend : 'copyHtml5',
 						 exportOptions : {
 			        	   		columns : [ 1, 2, 3, 4 ]
@@ -72,6 +80,14 @@ var GuestList = function () {
 							className:'btn-white',
 							text:'<i class="fa fa-copy"></i>'
 			           },
+			           {
+							 extend : 'pdf',
+							 exportOptions : {
+				        	   		columns : [ 1, 2, 3, 4 ]
+								},
+								className:'btn-white',
+								text:'<i class="fa fa-sign-out"></i>'
+				           },
 			           {
 							 extend : 'excel',
 							 exportOptions : {
