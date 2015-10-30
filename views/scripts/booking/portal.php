@@ -13,7 +13,7 @@
 						<?php echo $this->translate('TXT_INTRODUCTION');?>
 					</a>
 				</li>
-				<li>
+				<li class="stats">
 					<a href="#statistics" data-toggle="tab">
 						<?php echo $this->translate('TXT_STATISTICS');?>
 					</a>
