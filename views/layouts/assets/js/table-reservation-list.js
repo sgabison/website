@@ -126,6 +126,19 @@ var TableReservationList = function () {
 	    $.each(array, function( index, value ) {
 	    	html=html+'<a class="btn btn-blue tooltips" data-original-title="Edit" style="margin-right:10px">'+value+'</a>'
 	    });
+	    var emailaddon='';
+	    var smsaddon='';
+	    if( d.guesttel ){
+	    	//smsaddon='<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>';
+	    	smsaddon='<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+'<td><span class="btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+d.guesttel+'</a></td>';
+	    }else{
+	    	smsaddon='<td><i class="fa fa-lg fa-mobile-phone"></i>'+'<td><span class="btn btn-blue tooltips"><i class="fa fa-lg fa-mobile-phone"></i> '+t('no_tel_recorded')+'</a></span></td>';
+	    }
+	    if( d.guestemail ){ 
+	    	emailaddon='<td><i class="fa fa-lg fa-envelope-o"></i></td>'+'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guestemail.toUpperCase()+' "><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>';
+	    }else{
+	    	emailaddon='<td><i class="fa fa-lg fa-envelope-o"></i>'+'<td><span class="btn btn-blue tooltips"><i class="fa fa-lg fa-envelope-o"></i> '+t('no_email_recorded')+'</a></span></td>';
+	    }
 	    return '<div class="row">'+
 	    	'<div class="col-md-6">'+
 			    '<div class="panel panel-white">'+
@@ -135,15 +148,11 @@ var TableReservationList = function () {
 					'<div class="panel-body">'+
 					    '<table cellpadding="10" cellspacing="10" border="0" class="table">'+
 					        '<tr>'+
-					            '<td><i class="fa fa-lg fa-envelope-o"></i></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guestemail+'" resa="'+d.id+'" class="sendmail btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guestemail.toUpperCase()+' "><i class="fa fa-lg fa-envelope-o"></i> '+t('send_mail')+'</a></td>'+
+					        emailaddon +
 					        '</tr>'+
-/*
 					        '<tr>'+
-					            '<td><i class="fa fa-lg fa-mobile-phone"></i></td>'+
-								'<td><a data-toggle="modal" id="modal_ajax_demo_btn" data="'+d.guesttel+'" resa="'+d.id+'" class="sendtext btn btn-blue tooltips" data-rel="tooltip" data-original-title=" '+d.guesttel+' "><i class="fa fa-lg fa-mobile-phone"></i> '+t('send_sms')+'</a></td>'+
+					        smsaddon +
 					        '</tr>'+
-*/
 					    '</table>'+
 					'</div>'+
 				'</div>'+

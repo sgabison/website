@@ -4,18 +4,14 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<div class="actionitems">
-				<button data-toggle="dropdown"
-					class="btn btn-blue dropdown-toggle tooltips" data-rel="tooltip"
-					data-original-title="<?= $this->selectedLocation->getName();?>">
+				<button data-toggle="dropdown" class="btn btn-blue dropdown-toggle tooltips" data-rel="tooltip" data-original-title="<?= $this->selectedLocation->getName();?>">
 					<?= strtoupper($this->servingname);?> <i class="fa fa-angle-down"></i>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a
-						href="/liste-reservations?servingid=&calendar=<?php echo $this->calendar;?>"><?= $this->translate("TXT_ALL_SERVICES")?> 
+					<li><a href="/liste-reservations?servingid=&calendar=<?php echo $this->calendar;?>"><?= $this->translate("TXT_ALL_SERVICES")?> 
 						</a></li>
 					<?php $servingstring="";$i=0;foreach( $this->servings as $serving ){ ?>
-					<li><a
-						href="/liste-reservations?servingid=<?php echo $serving->getId();?>&calendar=<?php echo $this->calendar;?>"><span
+					<li><a href="/liste-reservations?servingid=<?php echo $serving->getId();?>&calendar=<?php echo $this->calendar;?>"><span
 							class="servinglink" value="<?php echo $serving->getId();?>"><?php echo $serving->getTitle();?></span>
 					</a></li>
 					<?php
@@ -24,17 +20,13 @@
 					?>
 				</ul>
 				<div class="btn-group">
-					<a
-						href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->daybefore;?>"
+					<a href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->daybefore;?>"
 						class="btn btn-blue hidden-xs"> <i class="fa fa-fast-backward"></i>
-					</a> <a class="btn btn-blue" data-target=".bs-example-modal-basic"
-						data-toggle="modal">
+					</a> <a class="btn btn-blue" data-target=".bs-example-modal-basic" data-toggle="modal">
 						<?php echo $this->calendar;?>
-					</a> <a
-						href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>"
+					</a> <a	href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->dayafter;?>"
 						class="btn btn-blue hidden-xs"> <i class="fa fa-fast-forward"></i>
-					</a> <a class="btn btn-blue"
-						href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->calendar;?>">
+					</a> <a class="btn btn-blue" href="/liste-reservations?servingid=<?php echo $this->getParam('servingid');?>&calendar=<?php echo $this->calendar;?>">
 						<i class="fa fa-refresh"></i>
 					</a>
 				</div>
@@ -69,20 +61,15 @@
 	</div>
 
 	<input id="servinglist" class="no-display value="<?php echo addslashes($servingstring);?>">
-	<input id='selectedLocationId' class="no-display"
-		value='<?php echo $this->selectedLocation->getId();?>'> <input
-		id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
-	<input id='dayafter' class='no-display'
-		value='<?php echo $this->dayafter;?>'> <input id='daybefore'
-		class='no-display' value='<?php echo $this->daybefore;?>'> <input
-		id='servingid' class='no-display'
-		value='<?php echo $this->getParam("servingid");?>'> <input
-		id='guestid' class='no-display'
-		value='<?php echo $this->getParam("guestid");?>'> <input id='warning'
-		class='no-display' value='<?php echo $this->warning;?>'> <input
-		id='cancelled' class='no-display'
-		value='<?php echo $this->cancelled;?>'> <input id='arrived'
-		class='no-display' value='<?php echo $this->arrived;?>'>
+	<input id='selectedLocationId' class="no-display" value='<?php echo $this->selectedLocation->getId();?>'> 
+	<input id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
+	<input id='dayafter' class='no-display' value='<?php echo $this->dayafter;?>'> 
+	<input id='daybefore' class='no-display' value='<?php echo $this->daybefore;?>'> 
+	<input id='servingid' class='no-display' value='<?php echo $this->getParam("servingid");?>'> 
+	<input id='guestid' class='no-display' value='<?php echo $this->getParam("guestid");?>'> 
+	<input id='warning' class='no-display' value='<?php echo $this->warning;?>'> 
+	<input id='cancelled' class='no-display' value='<?php echo $this->cancelled;?>'> 
+	<input id='arrived' class='no-display' value='<?php echo $this->arrived;?>'>
 
 
 	<div class="panel-body">
@@ -99,17 +86,15 @@
 					<div class="panel-body">
 						<div class="col-md-12">
 							<div class="col-md-6">
-								<label class="checkbox-inline text-bold"
-									style="font-size: large"> <input type="checkbox"
-									class="flat-grey" value="1" id="checkarrived"
-									name="checkarrived"> <?= $this->translate('EXCLUDE_STATUS_ARRIVED')?>
+								<label class="checkbox-inline text-bold" style="font-size: large"> 
+								<input type="checkbox" class="flat-grey" value="1" id="checkarrived" name="checkarrived"> 
+								<?= $this->translate('EXCLUDE_STATUS_ARRIVED')?>
 							</label>
 							</div>
 							<div class="col-md-6">
-								<label class="checkbox-inline text-bold"
-									style="font-size: large"> <input type="checkbox"
-									class="flat-grey" value="1" id="checkcancelled"
-									name="checkcancelled"> <?= $this->translate('EXCLUDE_STATUS_CANCELLED')?>
+								<label class="checkbox-inline text-bold" style="font-size: large"> 
+								<input type="checkbox" class="flat-grey" value="1" id="checkcancelled" name="checkcancelled"> 
+								<?= $this->translate('EXCLUDE_STATUS_CANCELLED')?>
 							</label>
 							</div>
 						</div>
@@ -178,8 +163,7 @@
 	<div id="ajax-modal" class="modal extended-modal fade no-display"
 		tabindex="-1"></div>
 </div>
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-	tabindex="-1" class="modal bs-example-modal-basic fade">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal bs-example-modal-basic fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -199,13 +183,11 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-		tabindex="-1" class="modal nr-of-people fade">
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal nr-of-people fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
 					<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_UPDATE_PARTYSIZE")?></h4>
 				</div>
 				<div class="modal-body">
@@ -229,13 +211,11 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-		tabindex="-1" class="modal arrivaltime fade">
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal arrivaltime fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
 					<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_UPDATE_ARRIVALTIME")?></h4>
 				</div>
 				<div class="modal-body">
@@ -243,9 +223,8 @@
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
 							<div class="input-group input-append bootstrap-timepicker">
-								<input type="text" id="arrivaltime" name="arrivaltime"
-									class="form-control time-picker initiate"> <span
-									class="input-group-addon add-on"><i class="fa fa-clock-o"></i></span>
+								<input type="text" id="arrivaltime" name="arrivaltime" class="form-control time-picker initiate"> 
+								<span class="input-group-addon add-on"><i class="fa fa-clock-o"></i></span>
 							</div>
 						</div>
 						<div class="col-md-4">
