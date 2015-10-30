@@ -70,7 +70,7 @@
 								<div class="btn-group btn-group-justified">
 									<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 										<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
-										<span class="text-muted" id="calendarlinkdata"><?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?></span>
+										<span class="text-muted" id="calendarlinkdata"><?php $date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');?></span>
 									</a>
 									<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 									<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
@@ -124,7 +124,7 @@
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4"></div>
 -->
-										<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="date-picker mycalendar no-display" style="width:220px; margin-left:auto; margin-right:auto;" value="<?php $date=new \Zend_date(); echo $date->get('dd-MM-yyyy');?>">
+										<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="date-picker mycalendar no-display" style="width:220px; margin-left:auto; margin-right:auto;" value="<?php $date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');?>">
 									</div>
 								</div>	
 								<div class="form-group col-md-12 col-sm-12" id="peopleselectiongroup">
