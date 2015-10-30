@@ -258,8 +258,8 @@ class EventController extends Useraware {
 		$this->render ( $reponse );
 	}
 	public function getSpecialEventsAction($range_start, $range_end, $output_arrays){
-		$start=new Zend_date( $range_start );
-		$end=new Zend_date( $range_end );
+		$start=new Zend_Date( $range_start );
+		$end=new Zend_Date( $range_end );
 		$holidays=[];
 		$extradays=[];
 		if( $this->language != 'fr'){

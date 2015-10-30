@@ -120,7 +120,7 @@ class UserreservationController extends Action
 					$mealduration=($mealduration*60);
 					$slots=0;
 					while($timestart+$slots < $timeend-$mealduration){
-						$timeslotunix=new Zend_date($timestart+$slots);
+						$timeslotunix=new Zend_Date($timestart+$slots);
 						$timeslot=$timeslotunix->get(Zend_Date::HOUR).":".$timeslotunix->get(Zend_Date::MINUTE);
 						array_push($resatime, $timeslot);
 						$slots=$slots+$unit;
@@ -388,7 +388,7 @@ class UserreservationController extends Action
 		$selectedLocation=Object\Location::getById( $selectedLocationid, 1);
 		if( $selectedLocation instanceof Object\Location ){
 			$this->selectedLocation=$selectedLocation;
-			$today=new zend_date();
+			$today=new Zend_Date();
 			$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 			$fulltext="";
 			$this->view->societe=$this->selectedLocation->getSociete();

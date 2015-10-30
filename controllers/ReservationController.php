@@ -40,7 +40,7 @@ class ReservationController extends Useraware{
 					$mealduration=($mealduration*60);
 					$slots=0;
 					while($timestart+$slots < $timeend-$mealduration){
-						$timeslotunix=new Zend_date($timestart+$slots);
+						$timeslotunix=new Zend_Date($timestart+$slots);
 						$timeslot=$timeslotunix->get(Zend_Date::HOUR).":".$timeslotunix->get(Zend_Date::MINUTE);
 						array_push($resatime, $timeslot);
 						$slots=$slots+$unit;
@@ -362,7 +362,7 @@ class ReservationController extends Useraware{
 					if( !in_array($reservation->getLocation()->getId(), $accesslocationsidarray) ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_LOCATION') ); }
 				}
 				if( $reservation->getLocation()->getId() != $this->selectedLocation->getId() ){ $this->_forward('error', 'booking',null,array('error'=>'TXT_NO_ACCESS_RESERVATION') ); }
-				$today=new zend_date();
+				$today=new Zend_Date();
 				$sixmonthsfromnow=$today->add('6', Zend_Date::MONTH);
 				$fulltext="";
 				foreach( $reservation->getLocation()->getShifts($today, $sixmonthsfromnow) as $dayoff ){
@@ -711,11 +711,11 @@ class ReservationController extends Useraware{
 			$this->view->viewcol=$array;
 		}
 		$calendar=$this->getParam('calendar');
-		if( $calendar=='' ){ $date=new Zend_date(); $calendar=$date->get('dd-MM-YYYY'); }
+		if( $calendar=='' ){ $date=new Zend_Date(); $calendar=$date->get('dd-MM-YYYY'); }
 
-		$dayafter=new Zend_date($calendar, "dd-MM-YYYY");
+		$dayafter=new Zend_Date($calendar, "dd-MM-YYYY");
 		$dayafter->add('24:00:00', Zend_Date::TIMES);
-		$daybefore=new Zend_date($calendar, "dd-MM-YYYY");
+		$daybefore=new Zend_Date($calendar, "dd-MM-YYYY");
 		$daybefore->sub('24:00:00', Zend_Date::TIMES);
 		$this->view->dayafter=$dayafter->get('dd-MM-YYYY');
 		$this->view->daybefore=$daybefore->get('dd-MM-YYYY');
@@ -850,7 +850,7 @@ class ReservationController extends Useraware{
 					$reponse->debug= $this->reformatDate($_POST['data']);
 				}
 			}else{
-				if( !$calendar ){ $date=new Zend_date(); $calendar=$date->get('dd-MM-YYYY'); }
+				if( !$calendar ){ $date=new Zend_Date(); $calendar=$date->get('dd-MM-YYYY'); }
 				$calendarstart=$calendar.' '.'00:00:00';
 				$calendarend=$calendar.' '.'23:59:59';
 				$calendarstart=new Zend_Date( $calendarstart, 'dd-MM-YYYY HH:mm:ss');
