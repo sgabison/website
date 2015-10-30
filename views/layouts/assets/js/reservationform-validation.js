@@ -35,11 +35,17 @@ var ReservationFormValidator = function () {
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').removeClass('no-display');
 		$('#selectgroup').addClass('no-display');
+		$('#registerbutton').addClass('no-display');
+		$('.registergroup').addClass('hidden-sm hidden-xs');
+		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
 	$('.slotlinkfinal').click( function(){
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
+		$('#registerbutton').addClass('no-display');
+		$('.registergroup').addClass('hidden-sm hidden-xs');
+		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
 	$('a.locationlinkfinal').css( 'cursor', 'pointer' );
 	$('[data-toggle="tooltip"]').tooltip();
@@ -374,6 +380,7 @@ var ReservationFormValidator = function () {
 		$('.slotbutton').removeClass('btn-light-orange');
 		$('.slotbutton').removeClass('btn-dark-orange');
 		$('.registergroup').removeClass('no-display');
+		$('#registerbutton').removeClass('no-display');
 		$('#'+elementid).addClass('btn-dark-orange');
 		var backdrop = $('.ajax-white-backdrop');
 		backdrop.remove();
@@ -383,6 +390,7 @@ var ReservationFormValidator = function () {
 		$('.bookbutton').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
 		$('#calendarbox').addClass('no-display');
+		$('#locationbox').addClass('no-display');
 		$('#locationlink').removeClass('no-display');
 		var locationid=$('#select_location').val();
 		var locationname=$('#select_location option:selected' ).text();
