@@ -315,7 +315,7 @@ var TableReservationList = function () {
 		            // Open this row
 		            row.child( format(row.data()) ).show();
 		            tr.addClass('shown');
-		            $('.tooltips').tooltip();
+		  			$('.tooltips').tooltip();
 		        }
 				var $modal = $('#ajax-modal');
 				$('#ajax-modal').data('book_id', 5);
@@ -582,6 +582,7 @@ var TableReservationList = function () {
 				iDisplayLength : 100,
 				initComplete: function(settings, json) {
     				console.log( 'DataTables has finished its initialisation.' );
+    				$('.tooltips').tooltip();
     				//$('.checkbox').iCheck({checkboxClass: 'icheckbox_square-grey'});
   				},
 				tableTools: {
@@ -601,9 +602,7 @@ var TableReservationList = function () {
 		        }
 
 			} );
-		table.buttons().container()
-		    .appendTo( $('.print-table:eq(0)') );
-
+		table.buttons().container().appendTo( $('.print-table:eq(0)') );
 	};
 	$('#checkcancelled').iCheck();
 	$('#checkarrived').iCheck();
