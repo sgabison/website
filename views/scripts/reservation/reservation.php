@@ -59,7 +59,7 @@
 							<div class="btn-group btn-group-justified">
 								<a class="linkhref calendarhref locationlinkfinal btn btn-default">
 									<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
-									<span class="text-muted" id="calendarlinkdata"><?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?></span>
+									<span class="text-muted" id="calendarlinkdata"><?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');}?></span>
 								</a>
 								<a class="linkhref calendarhref personlinkfinal btn btn-default">
 								<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
@@ -78,7 +78,7 @@
 							<div id="calendarbox">
 								<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE');?></span></h4>
 								<div class="col-md-12">
-									<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_date(); echo $date->get('dd-MM-yyyy');}?>" style="width:205px">
+									<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');}?>" style="width:205px">
 									<div id="fullcalendar" style="margin-left:-15px; margin-right:-15px"></div>
 								</div>
 							</div>

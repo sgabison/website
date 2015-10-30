@@ -909,7 +909,10 @@ class ReservationController extends Useraware{
 			$resa['preferredlanguage']=$reservation->getGuest()->getPreferredlanguage();
 			$resa['newsLetter']=$reservation->getGuest()->getNewsLetter();
 		}else{
-			$resa['guestid']=''; $resa['guestname']=''; $resa['guestemail']='';$resa['guesttel']='';
+			$resa['guestid']=''; 
+			$resa['guestname']=$reservation->getCustname(); 
+			$resa['guestemail']='';
+			$resa['guesttel']='';
 		}
 		if( $reservation->getPerson() instanceof Object_Person ){
 			$resa['personid']=$reservation->getPerson()->getId();
