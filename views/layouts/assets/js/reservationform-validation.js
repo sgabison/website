@@ -32,6 +32,7 @@ var ReservationFormValidator = function () {
 	    document.getElementById("clock").innerHTML = d.toLocaleTimeString('fr-FR');
 	}
 	$('.personlinkfinal').click( function(){
+		$('#notesgroup').addClass('no-display');
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').removeClass('no-display');
 		$('#selectgroup').addClass('no-display');
@@ -40,9 +41,19 @@ var ReservationFormValidator = function () {
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
 	$('.slotlinkfinal').click( function(){
+		$('#notesgroup').addClass('no-display');
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
+		$('#registerbutton').addClass('no-display');
+		$('.registergroup').addClass('hidden-sm hidden-xs');
+		$('#selectgroup').removeClass('hidden-sm hidden-xs');
+	});
+	$('.noteslinkfinal').click( function(){
+		$('#notesgroup').removeClass('no-display');
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').addClass('no-display');
+		$('#selectgroup').addClass('no-display');
 		$('#registerbutton').addClass('no-display');
 		$('.registergroup').addClass('hidden-sm hidden-xs');
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
@@ -364,6 +375,8 @@ var ReservationFormValidator = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
+		$('#notesgroup').removeClass('no-display');
+		$('#selectgroup').addClass('no-display');
 		$('.registergroup').removeClass('hidden-sm hidden-xs');
 		$('#selectgroup').addClass('hidden-sm hidden-xs');
 		$('.slotlinkdata').addClass('text-success');

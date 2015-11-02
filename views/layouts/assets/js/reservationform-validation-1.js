@@ -28,6 +28,7 @@ var ReservationFormValidator1 = function () {
 		$('#calendarlinkdata').text( $('#mycalendar').val() );
 	}
 	$('.personlinkfinal').click( function(){
+		$('#notesgroup').addClass('no-display');
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').removeClass('no-display');
 		$('#selectgroup').addClass('no-display');
@@ -36,9 +37,19 @@ var ReservationFormValidator1 = function () {
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
 	$('.slotlinkfinal').click( function(){
+		$('#notesgroup').addClass('no-display');
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').addClass('no-display');
 		$('#selectgroup').removeClass('no-display');
+		$('#registerbutton').addClass('no-display');
+		$('.registergroup').addClass('hidden-sm hidden-xs');
+		$('#selectgroup').removeClass('hidden-sm hidden-xs');
+	});
+	$('.noteslinkfinal').click( function(){
+		$('#notesgroup').removeClass('no-display');
+		$('#calendarbox').addClass('no-display');
+		$('#partybox').addClass('no-display');
+		$('#selectgroup').addClass('no-display');
 		$('#registerbutton').addClass('no-display');
 		$('.registergroup').addClass('hidden-sm hidden-xs');
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
@@ -294,6 +305,8 @@ var ReservationFormValidator1 = function () {
 		}
 	}
 	var slotButton = function(locationid, elementid, backdrop){
+		$('#notesgroup').removeClass('no-display');
+		$('#selectgroup').addClass('no-display');
 		$('.registergroup').removeClass('hidden-sm hidden-xs');
 		$('.slotlinkdata').addClass('text-success');
 		$('.slotlinkdata').removeClass('text-muted');
@@ -390,6 +403,19 @@ var ReservationFormValidator1 = function () {
 			}
 		});
 	}
+	var runTagsInput = function() {
+		$('#tags_2').tagsInput({
+			width: 'auto',
+			onRemoveTag: function(value){ $('a[value="'+value+'"]').removeClass('no-display'); },
+			onAddTag: function(value){ console.log(value);}
+		});
+	}
+	var feedTags = function() {
+		$('.btn-tags').click( function(){
+			$(this).addClass('no-display');
+			$('#tags_2').addTag( $(this).attr("value") );		
+		});
+	};
     return {
         //main function to initiate template pages
         init: function () {
@@ -398,6 +424,8 @@ var ReservationFormValidator1 = function () {
 			loadFullCalendar();
 			dataInitiation();
 			managePreferredLanguage();
+			runTagsInput();
+			feedTags();
         }
     };
 }();
