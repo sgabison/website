@@ -43,11 +43,8 @@
 				</div>
 				<?php if($this->categories):?>
 				<div class="col-md-12">
-					<div class="form-group" style="margin-left:5px">
-						<label class="checkbox-inline">
-							<input type="checkbox" class="grey event-bookable">
-							<?php echo $this->t("bookable")?>
-						</label>
+					<div class="form-group">
+						<input type="checkbox" class="event-bookable" data-label-text="<?= $this->t("bookable_question")?>" data-on-text="<?= $this->t('True')?>" data-off-text="<?= $this->t('False')?>">
 					</div>
 				</div>
 				<div class="col-md-12">

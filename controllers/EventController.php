@@ -182,7 +182,7 @@ class EventController extends Useraware {
 		$array["className"]="generic";
 		$array["category"]="generic";
 		$array["content"]="";
-		$array["bookable"]=NULL;
+		$array["bookable"]=false;
 		$array["start"]=$start;
 		$array["end"]=$end;
 		$array["person"]="";

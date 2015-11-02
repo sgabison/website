@@ -188,6 +188,7 @@ var Events = function() {
             $(".form-full-event .event-id").val("");
             $(".form-full-event .event-name").val("");
             $(".form-full-event .all-day").bootstrapSwitch('state', true);
+            $(".form-full-event .event-bookable").bootstrapSwitch('state', false);
             $(".form-full-event .no-all-day-range").hide();
             $(".form-full-event .event-start-date").val(defaultRange.start);
             $(".form-full-event .event-end-date").val(defaultRange.end);
@@ -200,13 +201,11 @@ var Events = function() {
                     timePickerIncrement: 30,
                     format: DPlocale.format
                 });
-
             $('.form-full-event .all-day-range .event-range-date').val(moment(defaultRange.start).format(DPlocaleDate) + ' - ' + moment(defaultRange.end).format(DPlocaleDate))
                 .daterangepicker({
                     startDate: defaultRange.start,
                     endDate: defaultRange.end
                 });
-
             $('.form-full-event .event-categories option').filter(function() {
                 return ($(this).text() == "Generic");
             }).prop('selected', true);
@@ -215,24 +214,20 @@ var Events = function() {
 
             defaultRange.start = moment();
             defaultRange.end = moment().add('days', 1);
-
         } else {
-
             $(".form-full-event .event-id").val(el);
-
             for (var i = 0; i < demoCalendar.length; i++) {
-				
                 if (demoCalendar[i].id == el) {
                     $(".form-full-event .event-name").val(demoCalendar[i].title);
                     $(".form-full-event .all-day").bootstrapSwitch('state', demoCalendar[i].allDay);
+                    $(".form-full-event .event-bookable").bootstrapSwitch('state', demoCalendar[i].bookable);
                     if(demoCalendar[i].allDay){
                         $('.form-full-event .no-all-day-range').hide();
                         $('.form-full-event .all-day-range').show();
                     }else{
                     	$('.form-full-event .all-day-range').hide();
                     	$('.form-full-event .no-all-day-range').show();
-                    }
-                                
+                    }                   
 		            if (language !='fr') {
 		                DPlocale = {
 		                  format: 'MM/DD/YYYY h:mm A',
@@ -313,7 +308,7 @@ var Events = function() {
             }
         }
         $('.form-full-event .all-day').bootstrapSwitch();
-
+		$('.form-full-event .event-bookable').bootstrapSwitch();
         $('.form-full-event .all-day').on('switchChange.bootstrapSwitch', function(event, state) {
             $(".daterangepicker").hide();
             var startDate = moment($("#newFullEvent").find(".event-start-date").val());
@@ -508,6 +503,7 @@ var Events = function() {
                 newEvent.start = new Date($('.form-full-event .event-start-date').val());
                 newEvent.end = new Date($('.form-full-event .event-end-date').val());
                 newEvent.allDay = $(".form-full-event .all-day").bootstrapSwitch('state');
+                newEvent.bookable = $(".form-full-event .event-bookable").bootstrapSwitch('state');
                 newEvent.className = $(".form-full-event .event-categories option:checked").val();
                 newEvent.category = $(".form-full-event .event-categories option:checked").text();
                 if ($eventDetail.code() !== "" && $eventDetail.code().replace(/(<([^>]+)>)/ig, "") !== "" && $eventDetail.code() !== $eventDetail.attr("placeholder")) {
@@ -626,6 +622,7 @@ var Events = function() {
     var hideEditEvent = function() {
         $.hideSubview();
         $(".form-full-event .all-day").bootstrapSwitch('destroy');
+        $(".form-full-event .event-bookable").bootstrapSwitch('destroy');
         $('.form-full-event .summernote').destroy();
 
     };
