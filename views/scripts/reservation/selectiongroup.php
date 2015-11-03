@@ -1,45 +1,4 @@
-<div class="ajax-white-backdrop2" style="display: block;"></div>
-<div class="panel panel-white">
-	<div class="panel-heading">
-		<h4 class="panel-title"><span class="btn btn-lg btn-transparent-grey locationlinkfinal backbutton no-display" id="backbutton"><i class="fa fa-angle-double-left"> </i></span> <?php echo $this->translate('TXT_SELECTION_PANEL');?></h4>
-	</div>
-	<div class="panel-tools" style="opacity:1;">
-		<div class="dropdown">
-			<a data-toggle="dropdown" class="btn btn-lg dropdown-toggle btn-transparent-grey">
-				<img id="preferredlanguageimage" src="/flags/<?php if( $this->preferredlanguage ){echo $this->preferredlanguage;}elseif( $this->getParam('preferredlanguage')){echo $this->getParam('preferredlanguage');}else{echo 'fr';}?>-icon.png">
-			</a>
-			<ul class="dropdown-menu dropdown-light pull-right" role="menu">
-				<li>
-					<a><?php echo $this->translate('PREFERRED_LANGUAGE');?></a>
-				</li>
-				<li class="preferredlanguage" language="fr"><a>
-					<img src="/flags/fr-icon.png"> <span><?php echo $this->translate('FRENCH');?></span>
-				</a></li>
-				<li class="preferredlanguage" language="en"><a>
-					<img src="/flags/gb-icon.png"> <span><?php echo $this->translate('ENGLISH');?></span>
-				</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="panel-body">
-		<div class="btn-group btn-group-justified">
-			<a class="linkhref calendarhref locationlinkfinal btn btn-default">
-				<i class="fa fa-calendar fa-lg text-muted calendarlinkdata"></i><br>
-				<span class="text-muted" id="calendarlinkdata"><?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new Zend_Date(); echo $date->get('dd-MM-yyyy');}?></span>
-			</a>
-			<a class="linkhref calendarhref personlinkfinal btn btn-default">
-			<i class="fa fa-users fa-lg text-muted personlinkdata"></i><br>
-				<span class="text-muted" id="personlinkdata"><?php if($this->partysize){echo $this->partysize;}?></span> <span class="text-muted"><?php echo $this->translate('TXT_PEOPLE');?></span>
-			</a>
-			<a class="linkhref calendarhref slotlinkfinal btn btn-default">
-				<i class="fa fa-clock-o fa-lg text-muted slotlinkdata"></i><br>
-				<span class="text-muted" id="slotlinkdata"><?php if($this->slot){echo $this->slot;}else{echo $this->translate('TXT_TIME');}?></span>
-			</a>	
-			<a class="linkhref calendarhref noteslinkfinal btn btn-default">
-				<i class="fa fa-pencil fa-lg text-muted noteslinkdata"></i><br>
-				<span class="text-muted" id="noteslinkdata"><?php echo $this->translate('TXT_NOTES');?></span>
-			</a>	
-		</div>
+<div class="ajax-white-backdrop2" style="display: block;"></div>		
 		<div class="form-group">		
 			<div class="text-bold no-display" id="locationlink">
 				<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'CHANGE';}else{echo 'POST';}?>" class="no-display">
@@ -85,24 +44,5 @@
 				<div id="slots" class="space20 panel-body buttons-widget"></div>
 			</div>
 		</div>
-		<span class='no-display' id='notesgroup'>
-			<div class="panel panel-white">
-				<div class="panel-heading">
-					<label class="control-label"><h4><span class="text-bold"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></span></h4></label>
-					<div class="panel-tools">
-						<div class="dropdown">
-							<a class="panel-collapse collapses"><i class="fa fa-angle-up"></i> <span>Collapse</span> </a>
-						</div>
-					</div>
-				</div>
-				<div class="panel-body" id='tagpanel'>								
-					<?php foreach( $this->societe->getTags() as $tag){ ?>
-					<a class="btn btn-lg btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px"><i class="fa <?php echo $tag->getIcon() ?>"></i><span style="font-size:small"><br><?php echo $tag->getCode();?></span> </a>
-					<?php } ?>
-					<input id="tags_2" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
-					<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
-				</div>
-			</div>
-		</span>
 	</div>
 </div>

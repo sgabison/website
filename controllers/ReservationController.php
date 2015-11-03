@@ -431,8 +431,12 @@ class ReservationController extends Useraware{
 					message: "<i class=\"fa fa-spinner fa-spin\"></i> "+t("js_please_wait")
 				});
 				var newresa="newresa";
-				$.ajax({url: "/data/reservation/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&preferredlanguage="+ $("#preferredlanguageinput").val()+"&notes="+ $("#tags_1").val()+"&method=CHANGE", success: function(result){
+				$.ajax({url: "/data/reservation/selectiongroup?locationid="+$("#select_location").val()+"&partysize="+ $("#party").val()+"&resadate="+ $("#mycalendar").val()+"&slot="+ $("#slotlinkdata").text()+"&preferredlanguage="+ $("#preferredlanguageinput").val()+"&method=CHANGE", success: function(result){
 					$(".selectiongroup").html(result);
+					$("#calendarbox").removeClass("no-display");
+					$("#notesgroup").addClass("no-display");
+					$("#selectgroup").addClass("no-display");
+					$("#partybox").addClass("no-display");
 					$("#registerbutton").addClass("no-display");
 					$(".registergroup").addClass("hidden-sm");
 					$("a.locationlinkfinal").css( "cursor", "pointer" );
@@ -456,7 +460,6 @@ class ReservationController extends Useraware{
 						$("#calendarbox").addClass("no-display");
 						$("#partybox").addClass("no-display");
 						$("#selectgroup").addClass("no-display");
-						$("#registerbutton").addClass("no-display");
 						$(".registergroup").addClass("hidden-sm hidden-xs");
 						$("#selectgroup").removeClass("hidden-sm hidden-xs");
 					});
@@ -472,8 +475,6 @@ class ReservationController extends Useraware{
 	}
 	public function selectiongroupAction(){
 		//FIND A WAY TO FETCH THE SOCIETE VALUE
-		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css');
-		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.js');
 		$societe=$this->societe;
 		if ($societe instanceof Object_Societe ) {
 			$this->view->locations = $societe->getLocations();

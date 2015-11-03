@@ -177,7 +177,14 @@ var ReservationFormValidator1 = function () {
 	        	if( start >= moment() && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+	        		$('#reservationdateinput').text( start.format("DD-MM-YYYY") );
 	        		console.log("in range");
+					$('#calendarbox').addClass('no-display');
+					$('#partybox').removeClass('no-display');
+					$('#backbutton').removeClass('no-display');
+					$('#selectgroup').removeClass('no-display');
+					$('.calendarlinkdata').addClass('text-success');
+					$('.calendarlinkdata').removeClass('text-muted');
 	        	}else{ 
 	        		console.log("not in range");
 	        	}
@@ -185,11 +192,6 @@ var ReservationFormValidator1 = function () {
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );	        	
 	        	}
-				$('#calendarbox').addClass('no-display');
-				$('#partybox').removeClass('no-display');
-				$('#backbutton').removeClass('no-display');
-				$('.calendarlinkdata').addClass('text-success');
-				$('.calendarlinkdata').removeClass('text-muted');
 	        }
 		});
 	}
@@ -207,9 +209,7 @@ var ReservationFormValidator1 = function () {
 			contentType : "application/json; charset=utf-8",
 			success : function(json) {
 				if (json.success || json.success == 'true') {	                               
-					callback(json.data);
-					//demoCalendar = $.makeArray(json.data);
-					//console.log("loadEvents",demoCalendar);
+					callback(json.data);;
 				 }
 			}
 		});
@@ -221,30 +221,22 @@ var ReservationFormValidator1 = function () {
 		var offdays = $('#offdays').val().split(',');
 		var closeddays = $('#closeddays').val();
 		var inRange=false;
-		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid') !== 'undefined' && $.urlParam('reservationid')!='' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
-			lauchRequest(reservationid);
-		}else{
-			var backdrop = $('.ajax-white-backdrop');
-			backdrop.remove();
-			$('.partyselection').click( function(){
-				$.blockUI({
-					message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
-				});
-				lauchRequest();
-				$('#partybox').addClass('no-display');					
+		var backdrop = $('.ajax-white-backdrop');
+		backdrop.remove();
+		$('.partyselection').click( function(){
+			$.blockUI({
+				message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
 			});
-				$.blockUI({
-					message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
-				});
-			$('.selectpartyselection').change( function(){
-				lauchRequest();
-				$('#partybox').addClass('no-display');					
+			lauchRequest();
+			$('#partybox').addClass('no-display');					
+		});
+			$.blockUI({
+				message: '<i class="fa fa-spinner fa-spin"></i> '+t('js_please_wait')
 			});
-			//$('.book').click( function(){
-			//	lauchRequest();
-			//	$('#partybox').addClass('no-display');
-			//});	
-		}
+		$('.selectpartyselection').change( function(){
+			lauchRequest();
+			$('#partybox').addClass('no-display');					
+		});
 	};
 	var myfunc=function(e){
 		var elementid;
@@ -294,15 +286,10 @@ var ReservationFormValidator1 = function () {
 					$res.append( button );
 				});
 			}	
-		});		
-		if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
-			$( document ).one( slotButton(locationid, selectedid) );
-			$('.slotbutton').bind( 'click', {locationid: locationid}, myfunc2);
-		}else{
-			$('.slotbutton').bind( 'click', {locationid: locationid}, myfunc2);
-			var backdrop = $('.ajax-white-backdrop');
-			backdrop.remove();
-		}
+		});	
+		$('.slotbutton').bind( 'click', {locationid: locationid}, myfunc2);
+		var backdrop = $('.ajax-white-backdrop');
+		backdrop.remove();
 	}
 	var slotButton = function(locationid, elementid, backdrop){
 		$('#notesgroup').removeClass('no-display');
@@ -390,32 +377,15 @@ var ReservationFormValidator1 = function () {
 					$log.append( button );
 					if( serv[2] == 'selected'){ elementid='servingbutton'+i;}							
 				});
-				if( $.urlParam('reservationid') !== null && $.urlParam('reservationid')!='' && $.urlParam('reservationid')!='undefined' && $('#method').val()=='PUT' && $('#method2').val()=='PUT'){
-					$( document ).one( servingButton(data,reservationid,locationid,elementid) );
-				}else{
-					var backdrop = $('.ajax-white-backdrop');
-					backdrop.remove();
-					$('.servingbutton').bind( 'click', {data: data, reservationid: reservationid, locationid: locationid, elementid: 'no' }, myfunc);
-				}
+				var backdrop = $('.ajax-white-backdrop');
+				backdrop.remove();
+				$('.servingbutton').bind( 'click', {data: data, reservationid: reservationid, locationid: locationid, elementid: 'no' }, myfunc);
 			},
 			error: function (request, status, error) {
 				alert(error);
 			}
 		});
 	}
-	var runTagsInput = function() {
-		$('#tags_2').tagsInput({
-			width: 'auto',
-			onRemoveTag: function(value){ $('a[value="'+value+'"]').removeClass('no-display'); },
-			onAddTag: function(value){ console.log(value);}
-		});
-	}
-	var feedTags = function() {
-		$('.btn-tags').click( function(){
-			$(this).addClass('no-display');
-			$('#tags_2').addTag( $(this).attr("value") );		
-		});
-	};
     return {
         //main function to initiate template pages
         init: function () {
@@ -424,8 +394,6 @@ var ReservationFormValidator1 = function () {
 			loadFullCalendar();
 			dataInitiation();
 			managePreferredLanguage();
-			runTagsInput();
-			feedTags();
         }
     };
 }();

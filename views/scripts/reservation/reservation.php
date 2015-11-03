@@ -32,7 +32,7 @@
 						<i class="fa fa-ok"></i> <?php echo $this->translate('TXT_VALIDATION');?>
 					</div>
 				</div>
-				<div class="col-md-6 selectiongroup">
+				<div class="col-md-6">
 					<div class="panel panel-white">
 						<div class="panel-heading">
 							<h4 class="panel-title"><span class="btn btn-lg btn-transparent-grey locationlinkfinal backbutton no-display" id="backbutton"><i class="fa fa-angle-double-left"> </i></span> <?php echo $this->translate('TXT_SELECTION_PANEL');?></h4>
@@ -74,51 +74,62 @@
 									<span class="text-muted" id="noteslinkdata"><?php echo $this->translate('TXT_NOTES');?></span>
 								</a>	
 							</div>
-							<div class="form-group">
-								<span class="text-bold no-display" id="locationlink">
-									<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'PUT';}else{echo 'POST';}?>" class="no-display">
+							
+	
+							
+							<div id="selectiongroup">
+<!--------------------------------------------SELECTION GROUP START------------------------------------------->
+								<div class="form-group">
+									<span class="text-bold no-display" id="locationlink">
+										<input id="method" name="method" value="<?php if($this->getParam('reservationid')){echo 'PUT';}else{echo 'POST';}?>" class="no-display">
+									</span>
+								</div>
+								<span id="calendarbox">
+									<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE');?></span></h4>
+									<div class="col-md-12">
+										<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');}?>" style="width:205px">
+										<div id="fullcalendar" style="margin-left:-15px; margin-right:-15px"></div>
+									</div>
 								</span>
+								
+								<span id="partybox" class="no-display">
+									<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
+									<!--<input id="party" class="no-display">-->
+									<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
+										<?php $i=0; while($i<10){ 
+											$i++;?>
+										<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-lg btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
+										<?php } ?>
+										<button id="morethansevenbutton" type="button" class="btn btn-lg btn-default" style="margin:5px" > + </button>
+									</div>
+									<div class="col-md-2 no-display morethanseven" id="lessthansevenbutton" style="margin-top:15px">
+										<button type="button" class="btn btn-lg btn-default"> - </button>
+									</div>
+									<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
+										<select id="partyselect" class="form-control selectpartyselection" style="font-size:large">
+											<option value='10'><?= $this->translate('TXT_FOR');?> 10 <?= $this->translate('TXT_PEOPLE');?></option>
+											<?php $i=10; while($i<25){ 
+												$i++;
+												echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
+										     } ?>
+										</select>
+									</div>
+								</span>
+								
+								<span class='no-display' id='selectgroup'>
+									<div class="form-group">
+										<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_SERVING');?></span></h4>
+										<div id="servings" class="space20 panel-body buttons-widget"></div>
+									</div>
+									<div class="form-group">
+										<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_TIMESLOT');?></span></h4>
+										<div id="slots" class="space20 panel-body buttons-widget"></div>
+									</div>
+								</span>
+<!--------------------------------------------SELECTION GROUP END------------------------------------------->
 							</div>
-							<div id="calendarbox">
-								<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_DATE');?></span></h4>
-								<div class="col-md-12">
-									<input id="mycalendar" name="calendar" type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker mycalendar no-display" value="<?php if($this->resachange){echo $this->start->get('dd-MM-YYYY');}else{$date=new \Zend_Date(); echo $date->get('dd-MM-yyyy');}?>" style="width:205px">
-									<div id="fullcalendar" style="margin-left:-15px; margin-right:-15px"></div>
-								</div>
-							</div>
-							<div id="partybox" class="no-display">
-								<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_PARTY');?></span></h4>
-								<!--<input id="party" class="no-display">-->
-								<div class="col-md-12 form-group lessthanseven" style="margin-top:10px">
-									<?php $i=0; while($i<10){ 
-										$i++;?>
-									<button id="partybutton<?php echo $i;?>" type="button" class="btn btn-lg btn-default partybutton partyselection" style="margin:5px" value="<?php echo $i;?>"> <?php echo $i;?> </button>
-									<?php } ?>
-									<button id="morethansevenbutton" type="button" class="btn btn-lg btn-default" style="margin:5px" > + </button>
-								</div>
-								<div class="col-md-2 no-display morethanseven" id="lessthansevenbutton" style="margin-top:15px">
-									<button type="button" class="btn btn-lg btn-default"> - </button>
-								</div>
-								<div class="col-md-10 form-group no-display morethanseven" id="morethansevenselect" style="margin-top:15px">
-									<select id="partyselect" class="form-control selectpartyselection" style="font-size:large">
-										<option value='10'><?= $this->translate('TXT_FOR');?> 10 <?= $this->translate('TXT_PEOPLE');?></option>
-										<?php $i=10; while($i<25){ 
-											$i++;
-											echo "<option value='".$i."' ".$select.">".$this->translate('TXT_FOR')." ".$i." ".$this->translate('TXT_PEOPLE')."</option>";
-									     } ?>
-									</select>
-								</div>
-							</div>
-							<span class='no-display' id='selectgroup'>
-								<div class="form-group">
-									<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_SERVING');?></span></h4>
-									<div id="servings" class="space20 panel-body buttons-widget"></div>
-								</div>
-								<div class="form-group">
-									<h4><span class="text-bold"><?php echo $this->translate('TXT_SELECT_TIMESLOT');?></span></h4>
-									<div id="slots" class="space20 panel-body buttons-widget"></div>
-								</div>
-							</span>
+
+
 
 							<span class='no-display' id='notesgroup'>
 								<div class="panel panel-white">

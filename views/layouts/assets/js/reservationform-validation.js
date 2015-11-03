@@ -54,7 +54,6 @@ var ReservationFormValidator = function () {
 		$('#calendarbox').addClass('no-display');
 		$('#partybox').addClass('no-display');
 		$('#selectgroup').addClass('no-display');
-		$('#registerbutton').addClass('no-display');
 		$('.registergroup').addClass('hidden-sm hidden-xs');
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
@@ -189,6 +188,7 @@ var ReservationFormValidator = function () {
 	        	if( start >= moment().subtract(1, 'days' ) && start.day() != closeddays[0] && start.day() != closeddays[1] && start.day() != closeddays[2] && start.day() != closeddays[3] && start.day() != closeddays[4] && start.day() != closeddays[5] && start.day() != closeddays[6] && $.inArray(start.format("DD-MM-YYYY"), offdays)==-1 ){
 					$('#mycalendar').val( start.format("DD-MM-YYYY") );
 					$('#calendarlinkdata').text( start.format("DD-MM-YYYY") );
+					$('#reservationdateinput').val( start.format("DD-MM-YYYY") );
 	        		console.log("in range");
 					$('#calendarbox').addClass('no-display');
 					$('#partybox').removeClass('no-display');
@@ -593,7 +593,6 @@ var ReservationFormValidator = function () {
 	        console.log('selecteditem',item.value);
 	        var completeset=item.value.split("----");
 	        console.log( 'tel', completeset[0] );
-	        $('#tags_1').importTags('');
 	        $('#tel').val( completeset[0] );
 	        $( "#tel" ).focus();     
 			$('#firstlastname').val( completeset[1] );
@@ -607,16 +606,11 @@ var ReservationFormValidator = function () {
 				$('#tagpanel').show();
 				$('.panel-collapse').find("span").text("Collapses");
 				$('#tagpanel').focus();
-				var $custtags=completeset[3].split(',');
-				$.each( $custtags, function( key, value ) {
-				  	$('#tags_1').addTag( value );
-				});
 			}else{
 				$('.panel-collapse').addClass('expand');
 				$('.panel-collapse').removeClass('collapses');				
 				$('#tagpanel').hide();
 				$('.panel-collapse').find("span").text("Expand");
-				$('#tags_1').importTags('');
 			}
 			if( completeset[4] != '' ){
 				$('#preferredlanguageimage').attr("src", "/flags/" + completeset[4] + "-icon.png");
@@ -670,9 +664,6 @@ var ReservationFormValidator = function () {
 			runSelect2();
 			intTelData();
 			managePreferredLanguage();
-/*
-			addHolidays();
-*/
         }
     };
 }();
