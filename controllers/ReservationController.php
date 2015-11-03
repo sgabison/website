@@ -563,7 +563,6 @@ class ReservationController extends Useraware{
 				'locationcity'=>$sellocation->getCity(),
 				'locationtel'=>$sellocation->getTel(), 
 				'locationemail'=>$sellocation->getEmail(), 
-				'locationcity'=>$sellocation->getCity(), 
 				'locationurl'=>$sellocation->getUrl(), 
 				'guestname'=>$array['firstlastname']);
 			$mail = new Pimcore_Mail ();
