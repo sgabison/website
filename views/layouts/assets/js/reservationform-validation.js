@@ -87,10 +87,12 @@ var ReservationFormValidator = function () {
 	console.log( "closeddays: ", closeddays );
 	var inRange=false;
 	//Navigation
+/*
 	$('#backselectbutton').click( function(){
 		$('.registergroup').addClass('hidden-sm hidden-xs');
 		$('#selectgroup').removeClass('hidden-sm hidden-xs');
 	});
+*/
 	var managePartySize = function(){
 		$('#lessthansevenbutton').click( function(){
 			$('.morethanseven').addClass('no-display');

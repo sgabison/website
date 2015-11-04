@@ -157,7 +157,9 @@
 				<div class="col-md-6 no-display registergroup">
 					<div class="panel panel-white">
 						<div class="panel-heading">
-							<h4 class="panel-title"><span class="btn btn-lg btn-transparent-grey backselectbutton" id="backselectbutton"><i class="fa fa-angle-double-left"> </i></span> <?php echo $this->translate('TXT_REGISTRATION_PANEL');?></h4>
+							<h4 class="panel-title">
+							<!--<span class="btn btn-lg btn-transparent-grey backselectbutton" id="backselectbutton"><i class="fa fa-angle-double-left"> </i></span>--> 
+							<?php echo $this->translate('TXT_REGISTRATION_PANEL');?></h4>
 						</div>
 						<div class="panel-body">
 							<div class="form-group connected-group">

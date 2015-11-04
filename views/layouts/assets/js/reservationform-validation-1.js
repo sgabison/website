@@ -214,6 +214,7 @@ var ReservationFormValidator1 = function () {
 			}
 		});
 	}
+/*
 	var reservationSubmit= function(){
 		var	today=new Date();
 		var thisDay=today.getDay();
@@ -386,11 +387,12 @@ var ReservationFormValidator1 = function () {
 			}
 		});
 	}
+*/
     return {
         //main function to initiate template pages
         init: function () {
         	managePartySize();
-			reservationSubmit();
+			//reservationSubmit();
 			loadFullCalendar();
 			dataInitiation();
 			managePreferredLanguage();
