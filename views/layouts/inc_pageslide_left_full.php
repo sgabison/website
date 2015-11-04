@@ -27,7 +27,7 @@
 				</li>
 <?php if( $this->person->getPermits() == 1 ){ ?>
 				<li>
-					<a href="/societe#<?php echo strtolower( $this->translate('TXT_SOCIETE_LOCATIONS_TAB') );?>"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
+					<a href="/societe"><i class="fa fa-building"></i> <span class="title"><?php echo $this->t('TXT_SOCIETE')?></span> </a>
 				</li>
 <?php } ?>
 				<li>
