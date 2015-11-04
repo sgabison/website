@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="table-responsive col-md-12 space20">
 
-				<table id="guestList" class="display table table-striped">
+				<table id="guestList" class="display table table-striped responsive" width="100%">
 					<thead>
 						<tr>
 							<th></th>

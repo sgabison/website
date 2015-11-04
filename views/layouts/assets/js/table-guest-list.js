@@ -54,7 +54,7 @@ var GuestList = function () {
 //					editor.inline( this );
 //				} );
 				var table= oTable.DataTable( {
-					
+				responsive: true,	
 			    buttons: [
 		           {
 					 extend : 'print',
