@@ -34,7 +34,7 @@ class Guest extends \Object\Concrete {
 			$array[$field]=$this->$getter();
 		}
 		$array['full']=$this->getTel().' - '.$this->getLastname();
-		$array['complete']=$this->getTel().'----'.$this->getLastname().'----'.$this->getEmail().'----'.$this->getBookingnotes().'----'.$this->getPreferredlanguage().'----'.$this->getNewsletter();
+		$array['complete']=$this->getTel().'----'.$this->getLastname().'----'.$this->getEmail().'----'.$this->getBookingnotes().'----'.$this->getPreferredlanguage().'----'.$this->getNewsLetter();
 		return $array;
 	}
 

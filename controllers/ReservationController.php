@@ -754,6 +754,7 @@ class ReservationController extends Useraware{
 			$this->view->warning="nosearch";
 		}
 		$this->reservationsArray();
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
 		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');

@@ -190,13 +190,14 @@
 							<div class="form-group">
 								<h4><span class="text-bold">
 									<label class="checkbox-inline">
-										<input type="checkbox" class="square-black" value="1" id="newsLetter"  name="newsLetter" <?php if($this->newsLetter == '1'){ echo 'checked';}?>> <?php echo $this->translate('TXT_NEWSLETTER_SIGNUP');?>
+										<input type="checkbox" value="1" id="newsLetter"  name="newsLetter" <?php if($this->newsLetter == '1'){ echo 'checked';}?>> <?php echo $this->translate('TXT_NEWSLETTER_SIGNUP');?>
 									</label>
 								</span></h4>
 							</div>
 							<div id="inputs" class="no-display"></div>
 							<input id="party" class="no-display" value="<?php if($this->partysize){echo $this->partysize;}?>">
 							<input id="preferredlanguageinput" name="preferredlanguageinput" class="no-display" value="fr">
+							<input id="newsLetterinput" name="newsLetterinput" class="no-display" value="0">
 							<div id="registerbutton">
 								<button class="btn btn-lg btn-dark-orange btn-block" value='submit' id='submit'>
 									<?php echo $this->translate('TXT_BOOK_A_TABLE');?> <i class="fa fa-arrow-circle-right"></i>
