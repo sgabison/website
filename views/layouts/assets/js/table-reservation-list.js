@@ -447,29 +447,86 @@ var TableReservationList = function () {
 						"data": "bookingnotes",
 		                "render": function ( data, type, row ) {
 		                	var array=data.split(',');
-		                	var wheelchair ='';var baby ='';var allergy ='';var party ='';var bug ='';var group ='';var warning ='';
+		                	var wheelchair ='';var baby ='';var allergy ='';var party ='';var bug ='';var group ='';var warning ='';var addedcomment='';
 		                    if ( $.inArray('Chaise roulante', array) >=0 || $.inArray('Wheelchair', array) >=0  ) {
 		                        var wheelchair='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_wheelchair')+'"><i class="fa fa-wheelchair"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Chaise roulante'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Wheelchair'
+								});
 		                    } 
 		                    if ( $.inArray('Baby on board', array) >=0 || $.inArray('Bébé à bord', array) >=0  ){
 		                    	var baby='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_baby')+'"><i class="fa fa-female"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Baby on board'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Bébé à bord'
+								});
 		                    } 
-		                    if ( $.inArray('Nut Allergy', array) >=0 || $.inArray('Allergie aux noix', array) >=0 ){
+		                    if ( $.inArray('Allergies', array) >=0 || $.inArray('Allergies', array) >=0 || $.inArray('Nut Allergy', array) >=0 || $.inArray('Allergie aux noix', array) >=0 ){
 		                    	var allergy='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_allergy')+'"><i class="fa fa-medkit"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Allergies'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Nut Allergy'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Allergie aux noix'
+								});
 		                    } 
 		                    if ( $.inArray('client pénible', array) >=0 || $.inArray('picky customer', array) >=0 ){
 		                    	var bug='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_picky')+'"><i class="fa fa-bug"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'client pénible'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'picky customer'
+								});
 		                    } 
 		                    if ( $.inArray('Célébration', array) >=0 || $.inArray('Party', array) >=0 ){
 		                    	var party='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_party')+'"><i class="fa fa-gift"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Célébration'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Party'
+								});
 		                    } 
 		                    if ( $.inArray('Groupe entreprise', array) >=0 || $.inArray('Company party', array) >=0 ){
 		                    	var group='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_group')+'"><i class="fa fa-group"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Groupe entreprise'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Company party'
+								});
 		                    } 
-		                    if ( $.inArray('Special Table', array) >=0 || $.inArray('Spéciale table', array) >=0  || $.inArray('Table particulière', array) >=0 ){
+		                    if ( $.inArray('Special Table', array) >=0 || $.inArray('Spéciale table', array) >=0  || $.inArray('Table particulière', array) >=0  || $.inArray('Table spéciale', array) >=0 ){
 		                    	var warning='<a class="btn btn-dark-orange tooltips" data-rel="tooltip" data-original-title="'+t('js_specialtable')+'"><i class="fa fa-warning"></i></a> ';
+			                    array = $.grep(array, function(value) {
+									  return value != 'Special Table'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Spéciale table'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Table particulière'
+								});
+			                    array = $.grep(array, function(value) {
+									  return value != 'Table spéciale'
+								});
 		                    } 
-		                    return wheelchair + baby + allergy + party + bug + group + warning;
+		                    if ( array.length > 0 && array[0] != ''){
+		                    	console.log( 'array', array );
+		                    	console.log( 'array[0]', array[0] );
+		                    	var addedcomment='<a class="btn btn-light-orange tooltips" data-rel="tooltip" data-original-title="'+array.toString()+'"><i class="fa fa-info"></i></a> ';
+
+		                    }
+		                    return wheelchair + baby + allergy + party + bug + group + warning + addedcomment;
 		                	},
 		                "className": "dt-body-center hidden-xs hidden-sm"	
 					},
