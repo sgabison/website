@@ -135,7 +135,7 @@ class GuestController extends Useraware {
 	}
 	public function profileAction () {
 	
-		$this->layout ()->setLayout ( 'portal' );
+		$this->layout ()->setLayout ( 'portal_ajax' );
 		$this->id=$this->getParam("guestid");
 		$this->view->guest= ($this->id)?\Object\Guest::getById($this->id) : null ;
 	
@@ -147,6 +147,8 @@ class GuestController extends Useraware {
 				});',
 				'text/javascript',
 				array('noescape' => true));
+		$this->view->Ajax= $this->getRequest()->isXmlHttpRequest();
+		 
 
 	}
 	public function getDataAction () {

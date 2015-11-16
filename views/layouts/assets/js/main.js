@@ -14,11 +14,14 @@ var isIE8 = false,
     topBar = $(".topbar"),
     mainContainer = $(".main-container"),
     mainContent = $(".main-content"),
-    footer = $(".main-wrapper > footer"),
-    language='fr', //default
+    footer = $(".main-wrapper > footer");
+  
 	t = function(key){
-		return i18n.t(key.toLowerCase());
+	
+		return i18n.t(key.toLowerCase(), {locale: function(){ return language ; } } );
+		
 	};
+	console.log( 'Offsite 3 ', language, i18n.t("offsite"),  t("Offsite") );
 var thisSlider, actualItemWidth, newItemWidth, activeAnimation = false,
     hoverSideBar = false;;
 	$.urlParam = function(name){
@@ -1475,7 +1478,12 @@ var Main = function() {
     		} );
     	}
     };
-
+    var runAjaxSettings = function(){
+    	$( document ).one('ajaxComplete', function() {
+    		toastr.success("Ajax completed");
+    	});
+    };
+    
 
     return {
         //main function to initiate template pages
@@ -1513,7 +1521,9 @@ var Main = function() {
             runMsViewport();
             runTimeStamp();
             runDataTableSettings();
+            runAjaxSettings();
             documentEvents();
+            console.log("main init done");
         }
     };
 }();

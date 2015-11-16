@@ -35,8 +35,8 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="control-label">
-																<?= $this->t("Gender")?>
-															</label>
+								<?= $this->t("Gender")?>
+							</label>
 							<div>
 								<label class="radio-inline"> <input type="radio" class="grey"  value="Female" name="title" id="title_female"
 									<?php if($this->guest->getTitle()!="Male") :?>
