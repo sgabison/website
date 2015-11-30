@@ -709,6 +709,7 @@ class ReservationController extends Useraware{
 		$this->view->cancelled=$this->getParam('cancelled');
 		$this->view->arrived=$this->getParam('arrived');
 		$guestid=$this->getParam('guestid');
+		$this->view->allTables=$this->location->getTables();
 		$this->view->servings=$this->selectedLocation->getServings();
 		if( $guestid != '' ){
 			$guest=Object\Guest::getById($guestid, 1);
@@ -757,6 +758,11 @@ class ReservationController extends Useraware{
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/timepicker-form-elements.js');
 		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/select2/select2.min.js');
+		//tags input
+		$this->view->headLink()->appendStylesheet(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css');
+		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.js');
+
+
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/table-reservation-list.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js');
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js');
@@ -939,6 +945,19 @@ class ReservationController extends Useraware{
 			$resa['servingtitle']=$reservation->getServing()->getTitle();
 		}else{
 			$resa['servingid']=''; $resa['servingtitle']='';
+		}
+		if( $reservation->getTable() ){
+			$i=0;
+			foreach ( $reservation->getTable() as $table ){
+				if( $i==0 ){
+					$resa['table']=$table->getTable();
+				}else{
+					$resa['table']=$resa['table'].','.$table->getTable();
+				}
+				$i++;
+			}
+		}else{
+			$resa['table']='';
 		}
 		$resa['datereservation']=$reservation->getStart()->get('dd-MM-YYY');
 		$resa['start']=$reservation->getStart()->get('HH:mm');

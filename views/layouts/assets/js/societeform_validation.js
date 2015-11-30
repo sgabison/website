@@ -318,7 +318,7 @@ var SocieteSetupFormValidator = function () {
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
-	    $('a.editor_create').on('click', function (e) {
+	    $('.editor_create_person').on('click', function (e) {
 	        e.preventDefault();
 	 
 	        editor.create( {
@@ -480,7 +480,7 @@ var SocieteSetupFormValidator = function () {
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
-	    $('a.editor_create').on('click', function (e) {
+	    $('.editor_create_location').on('click', function (e) {
 	        e.preventDefault();
 	        editor2.create( {
 	            title: t("js_create_new_record"),
@@ -635,9 +635,9 @@ var SocieteSetupFormValidator = function () {
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
-	    $('a.editor_create').on('click', function (e) {
+	    $('.editor_create_tag').on('click', function (e) {
 	        e.preventDefault();
-	        editor.create( {
+	        editor3.create( {
 	            title: t("js_create_new_record"),
 	            buttons: t("js_add")
 	        } );

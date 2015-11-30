@@ -54,6 +54,7 @@ var LocationFormValidator = function () {
 			, newLocation.description = $("#presentation").val()
 			, newLocation.resaUnit = $("#resaUnit").val()
 			, newLocation.maxSeats = $("#maxSeats").val()
+			, newLocation.nrOfRooms = $("#nrOfRooms").val()
 			, newLocation.maxTables = $("#maxTables").val()
 			, newLocation.maxResaPerUnit = $("#maxResaPerUnit").val()
 			, newLocation.mealduration = $("#mealduration").val()
@@ -162,7 +163,7 @@ var LocationFormValidator = function () {
 	        } );
 	    } ); 
 	    // Activate an inline edit on click of a table cell
-	    $('a.editor_create').on('click', function (e) {
+	    $('.editor_create_serving').on('click', function (e) {
 	        e.preventDefault();
 	        editor.create( {
 	            title: t('js_create_new_record'),
@@ -202,6 +203,139 @@ var LocationFormValidator = function () {
 				}
 			  },
 	          { data: null, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
+	        ],
+			order: [ 1, 'asc' ],
+			tableTools: {
+			  sRowSelect: "os",
+			  sRowSelector: 'td:first-child',
+			  aButtons: [{ sExtends: "editor_create", editor: editor }]
+			}
+		} );
+	}
+	var loadTables = function () {
+	    // Edit record
+	    var editor;
+	    editor = new $.fn.dataTable.Editor( {
+	        ajax: "/data/table/table-list?locationid="+locationid,
+	        table: "#tablelist",
+	        i18n: {
+				create: {
+					button: t("js_new"),
+					title:  t("js_create_new_record"),
+					submit: t("js_create")
+				},
+				edit: {
+					button: t("js_modify"),
+					title:  t("js_modify_entry"),
+					submit: t("js_renew"),
+				},
+				remove: {
+					button: t("js_delete"),
+					title:  t("js_delete"),
+					submit: t("js_delete"),
+					confirm: {
+						_: t("js_delete_n_lines"),
+						1: t("js_delete_1_lines")
+					}
+				},
+				error: {
+					system: t("js_error_admin")
+				}
+	        },
+	        fields: [ {
+	                label: t("js_salle"),
+	                name: "salle",
+	                type:  "select",
+	                options: myFunction()
+	            }, {
+	                label: t("js_table"),
+	                name: "table",
+	            }, {
+	                label: t("js_seats"),
+	                name: "seats"
+	            }, {
+	                label: t("js_description"),
+	                name: "description"
+	            }, {
+	                label: t("js_id"),
+	                name: "id",
+		            type: "readonly"
+	            }
+	        ]
+	    } );
+	    $('#tablelist').on('click', 'a.editor_edit', function (e) {
+	        e.preventDefault();
+	        editor.edit( $(this).closest('tr'), {
+	            title: t('js_modify_entry'),
+	            buttons: t('js_update'),
+	        } );
+	    } );
+		editor.on( 'onInitCreate', function () {
+		 	//editor.hide('table');
+		 	//editor.hide('seats');
+		 	//editor.hide('description');
+		 	editor.hide('id');
+		});
+	    // Delete a record
+	    $('#tablelist').on('click', 'a.editor_remove', function (e) {
+	        e.preventDefault();
+	        editor.remove( $(this).closest('tr'), {
+	            title: t('js_delete'),
+	            message: t('js_delete_record_confirm'),
+	            buttons: t('js_delete')
+	        } );
+	    } ); 
+	    // Activate an inline edit on click of a table cell
+	    $('.editor_create_table').on('click', function (e) {
+	        e.preventDefault();
+	        editor.create( {
+	            title: t('js_create_new_record'),
+	            buttons: t('js_create')
+	        } );
+	    } );
+/*		editor.on( 'postCreate', function ( e, json, data ) {
+			var id = json.row.DT_RowId;
+		    window.location.href="/serving-setup?servingid="+id;
+		} );
+*/	    $('#tablelist').on( 'click', 'tbody td:not(:first-child)', function (e) {
+	    	if ( $(this).index() < 5 ) {
+		        editor.inline( this );
+	    	}
+	    } );
+		$('#tablelist').DataTable( {
+			dom: "Tfrtip",
+			ajax: "/data/table/table-list?locationid="+locationid,
+			columns: [
+			  { data: null, defaultContent: '', orderable: false },
+			  { 
+			  	"data": "salle",
+			  	"type": "number",
+			    "render": function ( data, type, row ) {
+			      	return '<span class="btn btn-default">'+t('js_salle')+' '+data+'</span>';
+			    } 
+			  },
+			  { 
+			  	"data": "table",
+			  	"type": "number",
+			    "render": function ( data, type, row ) {
+			      	return '<span class="btn btn-blue">'+t('js_table')+' '+data+'</span>';
+			    }
+			  },
+			  { 
+			  	"data": "seats",
+			  	"type": "number",
+			    "render": function ( data, type, row ) {
+			      	return '<strong>'+data+'</strong>';
+			    } 
+			  },
+			  { 
+			  	"data": "description",
+			    "render": function ( data, type, row ) {
+			      	return '<strong>'+data+'</strong>';
+			    } 
+			  },
+			  { data: null, orderable: false, defaultContent: '<a href="" class="btn btn-blue tooltips editor_edit"data-original-title="Edit"><i class="fa fa-edit"></i> </a>'},
+	          { data: null, defaultContent: '<a href="" class="btn btn-red tooltips editor_remove" data-original-title="Remove"><i class="fa fa-times fa fa-white"></i> </a>'}
 			],
 			order: [ 1, 'asc' ],
 			tableTools: {
@@ -210,6 +344,14 @@ var LocationFormValidator = function () {
 			  aButtons: [{ sExtends: "editor_create", editor: editor }]
 			}
 		} );
+	}
+	var myFunction = function(){
+		var n=$('#nrOfRooms').val();
+		var result=[];
+		for(var i=1;i<=n;i++){
+			result.push({"label": i, "value": i});
+		}
+		return result;
 	}
 	var validateCheckRadio = function (val) {
         $("input[type='radio'], input[type='checkbox']").on('ifChecked', function(event) {
@@ -336,6 +478,7 @@ var LocationFormValidator = function () {
             validateCheckRadio();
             runValidator2();
             loadServings();
+            loadTables();
             changeLocation();
             runAutosize();
         }

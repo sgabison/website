@@ -11,6 +11,7 @@ class Resource extends \Object\Concrete\Resource {
 	public function getClassName() {
 		return $this->model->getClassName ();
 	}
+
 	public function init() {
 		parent::init ();
 	}
@@ -84,8 +85,7 @@ class Resource extends \Object\Concrete\Resource {
     			$object->setUserModification ( 1 );
     			if (method_exists ( $object, "N" )) $object->setDateregister( $date->get () );
     			$object->setPublished ( 1 );
-    		}
-    			
+    		}	
     		if ($object instanceof \Object\Serving) {
     			$object->setValues ( $data );
     			$date = new \Zend_Date ();
@@ -106,7 +106,6 @@ class Resource extends \Object\Concrete\Resource {
     	} catch ( \Exception $e ) {
     		\Logger::warning ( $e->getMessage () );
     		return false;
-    
     	}
     } 
 }

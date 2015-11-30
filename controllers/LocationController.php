@@ -83,7 +83,7 @@ class LocationController extends Useraware
 				$reponse= $this->destroy();
 				break;
 			case 'GET':			
-				$reponse= $this->view();			
+				$reponse= $this->view();
 				break;
 			default:
 				$reponse = new Reponse();

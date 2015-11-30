@@ -621,10 +621,13 @@ var ReservationFormValidator = function () {
 				$('#tagpanel').hide();
 				$('.panel-collapse').find("span").text("Expand");
 			}
-			if( completeset[4] != '' ){
+			if( completeset[4] == '' ||  completeset[4] == 'undefined' ){
+				$('#preferredlanguageimage').attr("src", "/flags/fr-icon.png");
+				$('#preferredlanguageinput').val( "fr" );				
+			} else {
 				$('#preferredlanguageimage').attr("src", "/flags/" + completeset[4] + "-icon.png");
 				$('#preferredlanguageinput').val( completeset[4] );
-			} 
+			}
 			if( completeset[5] == 1 ){
 				console.log( "completeset[5]: ", completeset[5] );
 				//$('#newsLetter').iCheck('check');

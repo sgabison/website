@@ -93,6 +93,7 @@
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/js/subview-examples2.js"></script>
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 		
+<<<<<<< Updated upstream
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-typeahead/bootstrap-typeahead.js"></script>
 		
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/truncate/jquery.truncate.js"></script>
@@ -102,6 +103,17 @@
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery.jsonify/jquery.jsonify-0.3.min.js"></script>
 		<script type="text/javascript"  src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
 		<script  type="text/javascript" src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/iCheck/jquery.icheck.min.js"></script>
+=======
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-typeahead/bootstrap-typeahead.js"></script>
+		<!--<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/typeaheadbundle/typeahead.bundle.js"></script>-->
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/truncate/jquery.truncate.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/summernote/dist/summernote.min.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery.jsonify/jquery.jsonify-0.3.min.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js"></script>
+		<script src="<?= PIMCORE_WEBSITE_LAYOUTS?>/assets/plugins/iCheck/jquery.icheck.min.js"></script>
+>>>>>>> Stashed changes
 		<!-- end: JAVASCRIPTS REQUIRED FOR SUBVIEW CONTENTS -->
 		<!-- start: JAVASCRIPTS REQUIRED FOR THIS DATATABLE ONLY -->
 		

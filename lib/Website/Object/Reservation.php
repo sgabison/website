@@ -29,6 +29,7 @@ class Reservation extends \Object\Concrete {
 		$array['email']=($this->getGuest())?$this->getGuest()->getEmail():"";
 		$array['preferredlanguage']=($this->getGuest())?$this->getGuest()->getPreferredlanguage():"";
 		$array['newsLetter']=($this->getGuest())?$this->getGuest()->getNewsLetter():"";
+		$array['table']=($this->getTable())?$this->getTable():"";
 		return $array;
 	}
 

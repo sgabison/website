@@ -77,6 +77,20 @@ class Resource extends \Object\Concrete\Resource {
 		}
     	return $result;
     }
+
+   public function getTables(){
+        $result=array();
+        if($this->model->getId() >0 ):
+        $sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_20` r join object_query_20 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'location' ORDER BY o.`salle`" , $this->model->getId());
+        $data =$this->db->FetchAll($sql);
+        endif;
+        foreach ($data as $key=>$row){
+            $loc = \Object\Table::getById( $row["src_id"] );
+            if (  $loc instanceof \Object\Table ) $result[]= $loc ;
+        }
+        return $result;
+    }
+
     public function getShifts($from=null , $to=null){
     	$result=array();
     	$condition="";

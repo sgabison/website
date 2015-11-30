@@ -14,6 +14,12 @@ class Location extends \Object\Concrete {
 	// Constructs an Event object from the given array of key=>values.
 	// You can optionally force the timezone of the parsed dates.
 	
+	public function getTables(){
+		return (array) $this->getResource()->getTables();
+	}
+	public function getAvailableTables(){
+		return (array) $this->getResource()->getAvailableTables();
+	}
 	public function getServings(){
 		return (array) $this->getResource()->getServings();
 	}
@@ -24,7 +30,7 @@ class Location extends \Object\Concrete {
 		return (array) $this->getResource()->getPositions();
 	}
 	public function toArray() {
-		$fields=array('id', 'name', 'address', 'zip', 'city', 'email', 'tel', 'fax', 'description', 'maxSeats', 'maxTables', 'maxResaPerUnit', 'resaUnit', 'closingDateStart', 'closingDateEnd', 'mealduration', 'geolocalisation', 'url');
+		$fields=array('id', 'name', 'address', 'zip', 'city', 'email', 'tel', 'fax', 'description', 'nrOfRooms', 'maxSeats', 'maxTables', 'maxResaPerUnit', 'resaUnit', 'closingDateStart', 'closingDateEnd', 'mealduration', 'geolocalisation', 'url');
 		Foreach($fields as $field){
 			$getter= 'get'.ucfirst($field);
 			$array[$field]=$this->$getter();
@@ -39,6 +45,11 @@ class Location extends \Object\Concrete {
 	}
 	public function createServing($data=array()){
 		$object = new \Object\Serving(); 		
+ 		$object->setLocation($this);
+		return $object->updateData($data);
+	}
+	public function createTable($data=array()){
+		$object = new \Object\Table(); 		
  		$object->setLocation($this);
 		return $object->updateData($data);
 	}

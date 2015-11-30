@@ -60,7 +60,7 @@
 
 	</div>
 
-	<input id="servinglist" class="no-display value="<?php echo addslashes($servingstring);?>">
+	<input id="servinglist" class="no-display" value="<?php echo addslashes($servingstring);?>">
 	<input id='selectedLocationId' class="no-display" value='<?php echo $this->selectedLocation->getId();?>'> 
 	<input id='calendar' class='no-display' value='<?php echo $this->calendar;?>'>
 	<input id='dayafter' class='no-display' value='<?php echo $this->dayafter;?>'> 
@@ -142,6 +142,7 @@
 							<th><?= $this->translate("TXT_HEADER_REF")?></th>
 							<th><?= $this->translate("TXT_HEADER_GUESTNAME")?></th>
 							<th><?= $this->translate("TXT_HEADER_PARTYSIZE")?></th>
+							<th><?= $this->translate("TXT_HEADER_TABLE"); ?></th>
 							<th><?= $this->translate("TXT_HEADER_REFERENCE")?></th>
 							<th><?= $this->translate("TXT_HEADER_NOTES")?></th>
 							<th><?= $this->translate("TXT_HEADER_STATUS")?></th>
@@ -229,6 +230,52 @@
 						</div>
 						<div class="col-md-4">
 							<button id="changearrivaltime" class="btn btn-blue"><?= $this->translate("CHANGE")?></button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-default" type="button">
+					<?= $this->translate("TXT_CLOSE")?>
+				</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal tableallocation fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+					<h4 id="myModalLabel" class="modal-title"><?= $this->translate("TXT_UPDATE_TABLE_ALLOCATION")?></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-4 col-md-offset_2">
+							<span class='no-display' id='notesgroup'>
+								<div class="panel panel-white">
+									<div class="panel-heading">
+										<label class="control-label"><h4><span class="text-bold"><?php echo $this->translate('TXT_SPECIFIC_REQUESTS');?></span></h4></label>
+										<div class="panel-tools">
+											<div class="dropdown">
+												<a class="panel-collapse collapses"><i class="fa fa-angle-up"></i> <span>Collapse</span> </a>
+											</div>
+										</div>
+									</div>
+									<div class="panel-body" id='tagpanel'>								
+										<?php foreach( $this->societe->getTags() as $tag){ ?>
+										<a class="btn btn-lg btn-tags btn-dark-orange tooltips" data="<?php echo $tag->getId();?>" value="<?php echo $tag->getTag();?>" style="margin:5px"><i class="fa <?php echo $tag->getIcon() ?>"></i><span style="font-size:small"><br><?php echo $tag->getCode();?></span> </a>
+										<?php } ?>
+										<input id="tags_1" type="text" class="tags" value='<?php echo $this->bookingnotes;?>'>
+										<input id="tags_code" type="text" class="no-display" value='<?php echo $this->bookingnotes;?>'>
+									</div>
+								</div>
+							</span>
+
+						</div>
+						<div class="col-md-4">
+							<button id="changetableallocation" class="btn btn-blue"><?= $this->translate("CHANGE")?></button>
 						</div>
 					</div>
 				</div>

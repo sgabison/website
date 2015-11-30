@@ -275,6 +275,7 @@ console.log( pos );
 														<div class="row">
 														<div class="panel panel-white">
 															<div class="panel-body">
+																<button class="editor_create_tag btn btn-blue"><?php echo $this->translate('CREATE_NEW_TAG');?></button>
 																<table id="tagslist" class="table">
 															        <thead>
 															            <tr>
@@ -316,6 +317,7 @@ console.log( pos );
 								
 							</div>
 							<div class="tab-pane fade" id="staff">
+								<button class="editor_create_person btn btn-blue"><?php echo $this->translate('CREATE_NEW_STAFF');?></button>
 								<table id="personlist" class="table">
 							        <thead>
 							            <tr>
@@ -352,6 +354,7 @@ console.log( pos );
 										</div>
 									</div>
 									<div class="col-md-12 <?php if( $this->copyinfo == '1' ){ echo 'no-display';}?>" id="nocopybox" >
+										<button class="editor_create_location btn btn-blue"><?php echo $this->translate('CREATE_NEW_LOCATION');?></button>
 										<table id="locationlist" class="table">
 									        <thead>
 									            <tr>

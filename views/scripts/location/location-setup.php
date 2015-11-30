@@ -101,6 +101,8 @@
 							<label class="control-label">
 								<?php echo strtoupper( $this->translate('TXT_SERVING_LIST') );?>
 							</label>								
+							<br>
+							<button class="editor_create_serving btn btn-blue"><?php echo $this->translate('CREATE_NEW_SERVING');?></button>						
 						<table id="servinglist" class="table">
 				        <thead>
 				            <tr>
@@ -120,7 +122,45 @@
 			<hr>
 			<div class="row">
 				<div class="col-md-12">
+					<div class="col-md-12">
+							<label class="control-label">
+								<?php echo strtoupper( $this->translate('TXT_TABLE_LIST') );?>
+							</label>
+							<br>
+							<button class="editor_create_table btn btn-blue"><?php echo $this->translate('CREATE_NEW_TABLE');?></button>						
+						<table id="tablelist" class="table">
+				        <thead>
+				            <tr>
+				                <th></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_SALLE') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_TABLE') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_SEATS') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_DESCRIPTION') );?></th>
+				                <th><?php echo strtoupper( $this->translate('TXT_ID') );?></th>
+				                <th></th>
+				            </tr>
+				        </thead>
+						</table>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-12">
 					<div class="col-md-6">
+						<div class="col-md-12 form-group form-horizontal">
+							<div class="col-md-6">
+								<label class="control-label">
+									<?php echo $this->translate('TXT_SETUP_SOCIETE_NUMBER_OF_ROOMS');?> <span class="symbol required"></span>
+								</label>
+							</div>
+							<div class="col-md-6">
+								<span class="input-icon">
+									<input type="number" placeholder="<?php echo $this->translate('TXT_SETUP_SOCIETE_PLACEHOLDER_NUMBER_OF_ROOMS');?>" class="form-control" id="nrOfRooms" name="nrOfRooms" style="width=20px" value="<?php echo $this->nrOfRooms;?>">
+									<i class="fa fa-hand-o-right"></i>
+								</span>
+							</div>
+						</div>
 						<div class="col-md-12 form-group form-horizontal">
 							<div class="col-md-6">
 								<label class="control-label">

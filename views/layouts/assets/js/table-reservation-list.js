@@ -208,6 +208,9 @@ var TableReservationList = function () {
 					label: "partysize:",
 					name: "partysize"
 				}, {
+					label: "Table:",
+					name: "table"
+				}, {
 					label: "BookingRef:",
 					name: "bookingref",
 					type: "hidden"
@@ -437,6 +440,13 @@ var TableReservationList = function () {
 						'name':"printable",
 						"render": function (data, type, row){
 							return '<a class="btn btn-blue nrpeople" data-target=".nr-of-people" data-toggle="modal"><i class="fa fa-group"></i> <span class="people">'+data+'<span></a>';
+						}
+					},
+					{ 
+						"data": "table", 
+						'name':"printable",
+						"render": function (data, type, row){
+							return '<a class="btn btn-blue" data-target=".tableallocation" data-toggle="modal"><span class="tablealloc">'+data+'<span></a>';
 						}
 					},
 					{ 
@@ -691,14 +701,14 @@ var TableReservationList = function () {
 	}
 	$.fn.dataTableExt.afnFiltering.push( function( oSettings, aData, iDataIndex ) {
 			var nTr = oSettings.aoData[ iDataIndex ].nTr;
-			if( aData[20]=='1' ){
+			if( aData[21]=='1' ){
 				if( $('#checkarrived').is(":checked") ){
 					return false;
 				}else{
 					return true;
 				}
 			}
-			if( aData[11]=='Cancelled'  || aData[11]=='Annulé' ){
+			if( aData[12]=='Cancelled'  || aData[12]=='Annulé' ){
 				if( $('#checkcancelled').is(":checked") ){
 					return false;
 				}else{
