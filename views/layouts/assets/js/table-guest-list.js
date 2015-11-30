@@ -3,7 +3,7 @@ var GuestList = function () {
 	var doTable = function () {
 			var oTable=$("#guestList");
 			var url ="/data/guest/get-guest-list";
-			var q = $.urlParam('q');
+			var q = $.urlParam('q') ;
 			var editor = new $.fn.dataTable.Editor( {
 					ajax: url,
 					table: "#guestList",

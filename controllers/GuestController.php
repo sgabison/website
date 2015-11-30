@@ -125,13 +125,13 @@ class GuestController extends Useraware {
 		$this->view->q= $this->getParam("q");
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/table-guest-list.js');
 		$this->view->inlineScript()->appendScript(
-				'jQuery(document).ready(function() {
-					Main.init();
-					GuestList.init();
-	
-				});',
+				'
+					if (!isAjax) Main.init();
+					GuestList.init();	
+				
+				',
 				'text/javascript',
-				array('noescape' => true)); // Disable CDATA comments
+				array('noescape' => false)); // Disable CDATA comments
 	}
 	public function profileAction () {
 	
@@ -142,9 +142,9 @@ class GuestController extends Useraware {
 		$this->view->listReservations = $this->listReservationsByGuest();
 		$this->view->headScript()->appendFile(PIMCORE_WEBSITE_LAYOUTS.'/assets/js/form-guest-validation.js');
 		$this->view->inlineScript()->appendScript(
-				'jQuery(document).ready(function() {	
+				'	
 					FormGuestValidator.init();
-				});',
+				',
 				'text/javascript',
 				array('noescape' => true));
 		$this->view->Ajax= $this->getRequest()->isXmlHttpRequest();

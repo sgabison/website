@@ -1,6 +1,11 @@
+	  <script>		
+	  	var isAjax= <?php echo ($this->isAjax)? 1:0;?>;
+	  	console.log("isAjax :", isAjax, "<?php echo $this->isAjax;?>");
+	  </script>
+<?php if(!$this->isAjax) :?>
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_head.php") ; ?>
 	<!-- start: BODY -->
-	<body>
+	<body class="single-page" >
 			<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_slidingbar.php") ; ?>
 
 		<div class="main-wrapper">
@@ -44,3 +49,7 @@
 	</body>
 	<!-- end: BODY -->
 </html>
+<?php else :?>
+	<?= $this->layout()->content; ?>
+	<? include( PIMCORE_LAYOUTS_DIRECTORY ."/inc_footer_js_ajax.php") ; ?>
+<?php endif;?>

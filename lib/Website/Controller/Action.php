@@ -11,8 +11,7 @@ class Action extends Frontend {
         parent::init();
         $this->createWebsiteSession ( "SITE" );
         $this->storeLanguage();
-
-        
+     
     }
     private function createWebsiteSession($name) {
     	$mySessionSite = new \Zend_Session_Namespace ( $name );
@@ -52,12 +51,17 @@ class Action extends Frontend {
     	}
     	
     	$this->view->languageOptions= $languageOptions;
+    	$this->view->isAjax = $this->isAjax();
     }
 
     // function to destroy the session-namespace
     public function destroyWebsiteSession() {
     	$this->mySessionSite->unsetAll (); // destroys the namespace
     }
+    public function isAjax(){
+    	$this->isAjax= !empty($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']);
+    	return $this->isAjax;
+       }
 	public function render( $response,$field=null ){
 		$this->disableLayout();
 		$this->disableViewAutoRender();		

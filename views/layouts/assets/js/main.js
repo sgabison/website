@@ -170,7 +170,7 @@ var Main = function() {
     };
     //function to close searchbox, pageslide-left and pageslide-right when the user clicks outside of them
     var documentEvents = function() {
-        $("html").click(function(e) {
+        $("html").off().click(function(e) {
             if (!e.isDefaultPrevented()) {
                 if ($('.search-box').is(":visible")) {
                     $('.search-box').velocity({
@@ -207,7 +207,7 @@ var Main = function() {
 
     // function to handle SlideBar Toggle
     var runSideBarToggle = function() {
-        $(".sb_toggle").click(function() {
+        $(".sb_toggle").off().click(function() {
             var sb_toggle = $(this);
             $("#slidingbar").slideToggle("fast", function() {
                 if (sb_toggle.hasClass('open')) {
@@ -223,7 +223,6 @@ var Main = function() {
         $windowWidth = viewport().width;
         $windowHeight = viewport().height;
         runContainerHeight();
-
     };
 
     //function to adapt the Main Content height to the Main Navigation height
@@ -336,14 +335,14 @@ var Main = function() {
         $("#users").css({
             minHeight: $("#users .users-list").outerHeight()
         });
-        $(".users-list .media a").on("click", function(e) {
+        $(".users-list .media a").off().on("click", function(e) {
             $(this).closest(".tab-pane").find(".user-chat").show().end().css({
                 right: sideRight.outerWidth()
             });
             $(".right-wrapper").perfectScrollbar('update');
             e.preventDefault();
         });
-        $(".user-chat .sidebar-back").on("click", function(e) {
+        $(".user-chat .sidebar-back").off().on("click", function(e) {
             $(this).closest(".tab-pane").find(".user-chat").hide().end().css({
                 right: 0
             });
@@ -358,7 +357,7 @@ var Main = function() {
     };
     //Search Box Function
     var setSearchMenu = function() {
-        $('.menu-search > a').on('click', function(e) {
+        $('.menu-search > a').off().on('click', function(e) {
             if ($('.search-box').is(":hidden")) {
                 $('.search-box').css({
                     scale: 0.8,
@@ -383,11 +382,11 @@ var Main = function() {
             e.preventDefault();
         });
      // function to click on searchformButton
-        $("#searchformbutton").on('click',function(e) {
+        $("#searchformbutton").off().on('click',function(e) {
 		 	e.preventDefault();
 		 	var q= $("input:text[name=q]").val();
-		 	if(q){
-			$("#searchform").submit();
+		 	if(q){		
+		 		$("#searchform").submit();
 			}
 		 	
 		});
@@ -408,7 +407,7 @@ var Main = function() {
     // function to allow a button or a link to open a tab
     var runShowTab = function(e) {
         if ($(".show-tab").length) {
-            $('.show-tab').on('click', function(e) {
+            $('.show-tab').off().on('click', function(e) {
                 e.preventDefault();
                 var tabToShow = $(this).attr("href");
                 if ($(tabToShow).length) {
@@ -433,7 +432,7 @@ var Main = function() {
     //function to activate the panel tools
     var runModuleTools = function() {
         // fullscreen
-        $('body').on('click', '.panel-expand', function(e) {
+        $('body').off().on('click', '.panel-expand', function(e) {
             e.preventDefault();
             $('.panel-tools > a, .panel-tools .dropdown').hide();
 
@@ -454,7 +453,6 @@ var Main = function() {
                     });
                 });
             } else {
-
                 backdrop.fadeIn(200, function() {
 
                     $('.panel-tools').append("<a class='panel-expand tmp-tool' href='#'><i class='fa fa-compress'></i></a>");
@@ -470,12 +468,12 @@ var Main = function() {
             }
         });
         // panel close
-        $('body').on('click', '.panel-close', function(e) {
+        $('body').off().on('click', '.panel-close', function(e) {
             $(this).parents(".panel").fadeOut();
             e.preventDefault();
         });
         // panel refresh
-        $('body').on('click', '.panel-refresh', function(e) {
+        $('body').off().on('click', '.panel-refresh', function(e) {
             var el = $(this).parents(".panel");
             el.block({
                 overlayCSS: {
@@ -494,7 +492,7 @@ var Main = function() {
             e.preventDefault();
         });
         // panel collapse
-        $('body').on('click', '.panel-collapse', function(e) {
+        $('body').off().on('click', '.panel-collapse', function(e) {
             e.preventDefault();
             var el = $(this);
             var bodyPanel = jQuery(this).parent().closest(".panel").children(".panel-body");
@@ -513,7 +511,7 @@ var Main = function() {
     var runNavigationMenu = function() {
         if ($("body").hasClass("single-page") == false) {
             $('.main-navigation-menu > li.active').addClass('open');
-            $('.main-navigation-menu > li a').on('click', function() {
+            $('.main-navigation-menu > li a').off().on('click', function() {
 
                 if ($(this).parent().children('ul').hasClass('sub-menu') && ((!$body.hasClass('navigation-small') || $windowWidth < 767) || !$(this).parent().parent().hasClass('main-navigation-menu'))) {
                     if (!$(this).parent().hasClass('open')) {
@@ -599,7 +597,7 @@ var Main = function() {
                 ajaxLoader(url, ajaxContainer);
             }
             $('.main-navigation-menu > li.active').addClass('open');
-            $('.main-navigation-menu > li a').on('click', function(e) {
+            $('.main-navigation-menu > li a').off().on('click', function(e) {
                 e.preventDefault();
                 var $this = $(this);
 
@@ -754,7 +752,7 @@ var Main = function() {
         }).on("mouseleave", function(e) {
             hoverSideBar = false;
         });
-        $(".sb-toggle-left, .closedbar").on("click", function(e) {
+        $(".sb-toggle-left, .closedbar").off().on("click", function(e) {
             if (activeAnimation == false) {
                 if ($windowWidth > 1025) {
                     $body.removeClass("sidebar-mobile-open");
@@ -863,7 +861,7 @@ var Main = function() {
             }
             e.preventDefault();
         });
-        $(".sb-toggle-right").on("click", function(e) {
+        $(".sb-toggle-right").off().on("click", function(e) {
             if (activeAnimation == false) {
                 if ($windowWidth > 1025) {
                     $body.removeClass("sidebar-mobile-open");
@@ -954,7 +952,7 @@ var Main = function() {
     };
     // function to activate the Go-Top button
     var runGoTop = function(e) {
-        $('.go-top').on('click', function(e) {
+        $('.go-top').off().on('click', function(e) {
             $("html, body").animate({
                 scrollTop: 0
             }, "slow");
@@ -971,7 +969,7 @@ var Main = function() {
     //function to avoid closing the dropdown on click
     var runDropdownEnduring = function() {
         if ($('.dropdown-menu.dropdown-enduring').length) {
-            $('.dropdown-menu.dropdown-enduring').click(function(event) {
+            $('.dropdown-menu.dropdown-enduring').off().click(function(event) {
                 event.stopPropagation();
             });
         }
@@ -1116,7 +1114,7 @@ var Main = function() {
     };
 
     var setColorScheme = function() {
-        $('.icons-color a').on('click', function() {
+        $('.icons-color a').off().on('click', function() {
             $('.icons-color img').each(function() {
                 $(this).removeClass('active');
             });
@@ -1138,7 +1136,7 @@ var Main = function() {
         });
     };
     var setBoxedBackgrounds = function() {
-        $('.boxed-patterns a').on('click', function() {
+        $('.boxed-patterns a').off().on('click', function() {
             if ($body.hasClass('layout-boxed')) {
                 var classes = $body.attr("class").split(" ").filter(function(item) {
                     return item.indexOf("bg_style_") === -1 ? item : "";
@@ -1300,7 +1298,7 @@ var Main = function() {
 
     //function to save user settings
     var runSaveSetting = function() {
-        $('.save_style').on('click', function() {
+        $('.save_style').off().on('click', function() {
             var espressoSetting = new Object;
             if ($body.hasClass('layout-boxed')) {
                 espressoSetting.layoutBoxed = true;
@@ -1387,7 +1385,7 @@ var Main = function() {
 
     //function to clear user settings
     var runClearSetting = function() {
-        $('.clear_style').on('click', function() {
+        $('.clear_style').off().on('click', function() {
             $.removeCookie("espresso-setting");
             $body.removeClass("layout-boxed header-default footer-fixed");
             sideLeft.removeClass('slide-default');
@@ -1412,7 +1410,7 @@ var Main = function() {
     };
     //function to set the User Staus (Online/Offline)
     var runStatusButton = function() {
-        $(".btn.status").on("click", function(e) {
+        $(".btn.status").off().on("click", function(e) {
             if ($(this).hasClass("offline")) {
                 $(this).removeClass("offline").find("span").text("Online");
 
@@ -1480,7 +1478,7 @@ var Main = function() {
     };
     var runAjaxSettings = function(){
     	$( document ).one('ajaxComplete', function() {
-    		toastr.success("Ajax completed");
+    		// toastr.success("Ajax completed");
     	});
     };
     
