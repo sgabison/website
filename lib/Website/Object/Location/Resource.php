@@ -55,7 +55,7 @@ class Resource extends \Object\Concrete\Resource {
     public function getReservationsByDate( $start, $end ){
 		$result=array();
 		if($this->model->getId() >0 ):
-		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_11` r join object_query_11 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND o.`start`>= '%e' AND o.`start`<= '%f' AND r.`fieldname` = 'location' " , $this->model->getId(), $start, $end);
+		$sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_11` r join object_query_11 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND o.`start`>= '%d' AND o.`start`<= '%d' AND r.`fieldname` = 'location' " , $this->model->getId(), $start, $end);
 		$data =$this->db->FetchAll($sql);
 		endif;
 		foreach ($data as $key=>$row){
@@ -64,7 +64,18 @@ class Resource extends \Object\Concrete\Resource {
 		}
     	return $result;
     } 
-   
+    public function getReservationsByDateForTables( $start, $end ){
+        $result=array();
+        if($this->model->getId() >0 ):
+        $sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_11` r join object_query_11 o on o.oo_id=r.src_id WHERE ( r.`dest_id` = '%d' AND r.`fieldname` = 'location' AND o.`start`>= '%d' AND o.`start`<= '%d' ) OR ( r.`dest_id` = '%d' AND r.`fieldname` = 'location' AND  o.`end`>= '%d' AND o.`end`<= '%d' ) " , $this->model->getId(), $start, $end, $this->model->getId(), $start, $end);
+        $data =$this->db->FetchAll($sql);
+        endif;
+        foreach ($data as $key=>$row){
+            $loc = \Object\Reservation::getById( $row["src_id"] );
+            if (  $loc instanceof \Object\Reservation ) $result[]= $loc ;
+        }
+        return $result;
+    }   
     public function getServings(){
 		$result=array();
 		if($this->model->getId() >0 ):
@@ -87,6 +98,26 @@ class Resource extends \Object\Concrete\Resource {
         foreach ($data as $key=>$row){
             $loc = \Object\Table::getById( $row["src_id"] );
             if (  $loc instanceof \Object\Table ) $result[]= $loc ;
+        }
+        return $result;
+    }
+
+   public function checkTable($roomid,$tablenr){
+        if($this->model->getId() >0 ):
+        $sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_20` r join object_query_20 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'location' AND o.`salle`= '%s' AND o.`table`='%d'" , $this->model->getId(), $roomid, $tablenr);
+        $data =$this->db->FetchAll($sql);
+        endif;
+        if($data){return true;}else{return false;}
+    }
+
+   public function getTable($roomid,$tablenr){
+        if($this->model->getId() >0 ):
+        $sql = sprintf(" SELECT distinct r.src_id FROM `object_relations_20` r join object_query_20 o on o.oo_id=r.src_id WHERE r.`dest_id` = '%d' AND r.`fieldname` = 'location' AND o.`salle`= '%s' AND o.`table`='%d'" , $this->model->getId(), $roomid, $tablenr);
+        $data =$this->db->FetchAll($sql);
+        endif;
+        foreach ($data as $key=>$row){
+            $loc = \Object\Table::getById( $row["src_id"] );
+            if (  $loc instanceof \Object\Table ) $result= $loc ;
         }
         return $result;
     }

@@ -127,7 +127,8 @@
 								<?php echo strtoupper( $this->translate('TXT_TABLE_LIST') );?>
 							</label>
 							<br>
-							<button class="editor_create_table btn btn-blue"><?php echo $this->translate('CREATE_NEW_TABLE');?></button>						
+							<button class="editor_create_table btn btn-blue"><?php echo $this->translate('CREATE_NEW_TABLE');?></button>
+							<label class="help"><?php echo $this->translate('AT_LEAST_2_TABLES_WARNING');?></label>
 						<table id="tablelist" class="table">
 				        <thead>
 				            <tr>

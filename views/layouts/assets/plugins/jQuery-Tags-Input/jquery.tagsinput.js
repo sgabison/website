@@ -350,5 +350,13 @@
 			f.call(obj, obj, tags[i]);
 		}
 	};
-
+	
+	$.fn.destroyTagsInput = function (value) {
+	    $(this).tagsInput = null;
+	    $(this).next('.tagsinput').remove();
+	    var values = $(this).val();
+	    $(this).val('');
+	    $(this).show();
+	    return values;
+	}
 })(jQuery);

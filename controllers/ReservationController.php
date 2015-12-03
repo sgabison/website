@@ -709,7 +709,7 @@ class ReservationController extends Useraware{
 		$this->view->cancelled=$this->getParam('cancelled');
 		$this->view->arrived=$this->getParam('arrived');
 		$guestid=$this->getParam('guestid');
-		$this->view->allTables=$this->location->getTables();
+		$this->view->allTables=$this->selectedLocation->getTables();
 		$this->view->servings=$this->selectedLocation->getServings();
 		if( $guestid != '' ){
 			$guest=Object\Guest::getById($guestid, 1);
@@ -855,6 +855,17 @@ class ReservationController extends Useraware{
 						$myreservation->setPartysize($_POST['data']['partysize']);
 						$myreservation->setStart( $newdatestart );
 					}
+					//Prework Table input
+					$tableids=explode(',', $_POST['data']['table']);
+					$tablearray=array();
+					foreach($tableids as $tableid){
+						$variable=explode('-', $tableid);
+						$table = $this->selectedLocation->getResource()->getTable($variable[0], $variable[1]);
+						if( $table instanceof Object\Table){
+							array_push($tablearray,$table);
+						}
+					}
+					$myreservation->setTable($tablearray);
 					$myreservation->setArrived($arrived);
 					$myreservation->save();
 					$data=$_POST['data'];
@@ -866,7 +877,7 @@ class ReservationController extends Useraware{
 					$reponse->message='TXT_RESERVATION_LIST';
 					$reponse->success=true;
 					$reponse->row =$data;
-					$reponse->debug= $this->reformatDate($_POST['data']);
+					$reponse->debug= $tablearray;
 				}
 			}else{
 				if( !$calendar ){ $date=new Zend_Date(); $calendar=$date->get('dd-MM-YYYY'); }
@@ -950,9 +961,9 @@ class ReservationController extends Useraware{
 			$i=0;
 			foreach ( $reservation->getTable() as $table ){
 				if( $i==0 ){
-					$resa['table']=$table->getTable();
+					$resa['table']=$table->getSalle().$table->getTable();
 				}else{
-					$resa['table']=$resa['table'].','.$table->getTable();
+					$resa['table']=$resa['table'].','.$table->getSalle().$table->getTable();
 				}
 				$i++;
 			}

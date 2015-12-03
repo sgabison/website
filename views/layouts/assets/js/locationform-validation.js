@@ -250,9 +250,14 @@ var LocationFormValidator = function () {
 	            }, {
 	                label: t("js_table"),
 	                name: "table",
+	                type:  "select",
+	                options: myFunction2()
 	            }, {
 	                label: t("js_seats"),
-	                name: "seats"
+	                name: "seats",
+	                def: "2",
+	                type:  "select",
+	                options: myFunction2()
 	            }, {
 	                label: t("js_description"),
 	                name: "description"
@@ -309,7 +314,6 @@ var LocationFormValidator = function () {
 			  { data: null, defaultContent: '', orderable: false },
 			  { 
 			  	"data": "salle",
-			  	"type": "number",
 			    "render": function ( data, type, row ) {
 			      	return '<span class="btn btn-default">'+t('js_salle')+' '+data+'</span>';
 			    } 
@@ -348,7 +352,15 @@ var LocationFormValidator = function () {
 	var myFunction = function(){
 		var n=$('#nrOfRooms').val();
 		var result=[];
-		for(var i=1;i<=n;i++){
+		for(var i=0;i<n;i++){
+			result.push({"label": String.fromCharCode(65+i), "value": String.fromCharCode(65+i)});
+		}
+		return result;
+	}
+	var myFunction2 = function(){
+		var n=250;
+		var result=[];
+		for(var i=0;i<n;i++){
 			result.push({"label": i, "value": i});
 		}
 		return result;

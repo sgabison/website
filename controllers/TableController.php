@@ -14,81 +14,131 @@ class TableController extends Useraware
     	$reponse = new Reponse();
     	$locationid=$this->getParam('locationid');
         $location=\Object\Location::getById( $locationid, 1);
+        if( !$location instanceof \Object\Location ){ $location=$this->selectedLocation; }
         if( $location instanceof \Object\Location ){
         	$tables=$location->getTables();
-			if( $_POST['action'] ){
-				//if REMOVE
-				if($_POST['action'] =="remove"){
-					foreach( $_POST['id'] as $id){
-						$table=\Object\Table::getById( $id, 1);
-						if( $table instanceof \Object\Table){
-							$table->delete();
-						}
+			if($_GET['action']=="resatable"){
+				$data=array();
+				$resaid=$this->getParam('reservationid');
+				$resa=Object\Reservation::getById($resaid,1);
+				//echo $resa->getStart()->getTimestamp(); echo "====";
+				//echo $resa->getEnd()->getTimestamp(); echo "====";
+				if( $resa instanceof Object\Reservation ){
+					$reservations=$this->selectedLocation->getResource()->getReservationsByDateForTables( $resa->getStart()->getTimestamp(), $resa->getEnd()->getTimestamp(), $resa->getStart()->getTimestamp(), $resa->getEnd()->getTimestamp() );
+					$bookedtables=array();
+					$completetables=array();
+					foreach( $reservations as $reservation){
+						//if( $reservation->getTable() ){
+							//echo $reservation->getStart()->getTimestamp();echo "////";
+							foreach( $reservation->getTable() as $table ){
+								$bookedtables[$reservation->getId()]=$table->getId();
+							}
+						//}
 					}
-					$reponse->message='TXT_TABLE_LIST';
-					$reponse->success=true;
-					$reponse->data ='';	
-				}
-				//if EDIT
-				if($_POST['action'] =="edit"){
-					$table=\Object\Table::getById( $_POST['id'], 1 );
-					if($table instanceof \Object\Table){
-						$table->setSalle($_POST['data']['salle']);
-						$table->setTable($_POST['data']['table']);
-						$table->setSeats($_POST['data']['seats']);
-						$table->setDescription($_POST['data']['description']);
-						$table->save();
-					}
-					$data=$_POST['data'];
-					$data['DT_RowId']="row_".$_POST['data']['id'];
-					$reponse->message='TXT_TABLE_LIST';
-					$reponse->success=true;
-					$reponse->row =$data;	
-				}
-				//if CREATE
-				if($_POST['action'] =="create"){
-					//SET DEFAULT DATA FROM LOCATION
-					$row['salle']=$_POST['data']['salle'];
-					$row['table']=$_POST['data']['table'];
-					$row['seats']=$_POST['data']['seats'];
-					$row['description']=$_POST['data']['description'];
-					$current=Object\Table::getById($row['table'],1);
-					if ($current instanceof \Object\Table) {
-						$error['table']="table";
-						$error['status']="Table already exists";
-						$reponse->fieldErrors = array($error);
-					}else{
-						$result=$location->createTable($row);
-						if ($result instanceof \Object\Table) {
-							$row['DT_RowId']=$result->getId();
-							$row['id']=$result->getId();
-							$row['locationid']=$result->getLocation()->getId();
-							$row['locationname']=$result->getLocation()->getName();
-							$reponse->success = true;
-							$reponse->message = "TXT_CREATE_OK" ;
-							$reponse->row = $row;
-							$reponse->debug = $data;
+					//exit;
+					foreach( $tables as $key=>$table ){
+						$i++;
+						$array=array();
+						$array=$table->toArray();
+						$key=array_search( $table->getId(), $bookedtables );
+						if( $key !== false ){
+							$array['booked']='yes';
+							$array['reservationid']=$key;
 						} else {
+							$array['booked']='no';
+							$array['reservationid']=0;
+						}
+						$array['id']=$table->getId();
+						$array['DT_RowId']=$table->getId();
+				        array_push($data, $array);
+				        array_push($completetables, $table->getId());
+				    }
+//				    var_dump($bookedtables); echo "---------------------";
+//				    var_dump($completetables); echo "////////////////////";
+//				    var_dump(array_diff($completetables,$bookedtables)); echo "=====================";
+//				    var_dump($data); exit;
+					$reponse->message='TXT_TABLE_LIST';
+					$reponse->success=true;
+					$reponse->data =$data;
+				}	
+			}else{
+				if( $_POST['action'] ){
+					//if REMOVE
+					if($_POST['action'] =="remove"){
+						foreach( $_POST['id'] as $id){
+							$table=\Object\Table::getById( $id, 1);
+							if( $table instanceof \Object\Table){
+								$table->delete();
+							}
+						}
+						$reponse->message='TXT_TABLE_LIST';
+						$reponse->success=true;
+						$reponse->data ='';	
+					}
+					//if EDIT
+					if($_POST['action'] =="edit"){
+						$table=\Object\Table::getById( $_POST['id'], 1 );
+						if($table instanceof \Object\Table){
+							$table->setSalle($_POST['data']['salle']);
+							$table->setTable($_POST['data']['table']);
+							$table->setSeats($_POST['data']['seats']);
+							$table->setDescription($_POST['data']['description']);
+							$table->save();
+						}
+						$data=$_POST['data'];
+						$data['DT_RowId']="row_".$_POST['data']['id'];
+						$reponse->message='TXT_TABLE_LIST';
+						$reponse->success=true;
+						$reponse->row =$data;	
+					}
+					//if CREATE
+					if($_POST['action'] =="create"){
+						//SET DEFAULT DATA FROM LOCATION
+						$row['salle']=$_POST['data']['salle'];
+						$row['table']=$_POST['data']['table'];
+						$row['seats']=$_POST['data']['seats'];
+						$row['description']=$_POST['data']['description'];
+						if ( $this->selectedLocation->getResource()->checkTable( $row['salle'], $row['table'] ) ) {
+							$error['table']="table";
+							$error['status']="Table already exists";
+							$reponse->error = "Table already exists/Cette table existe déjà";
 							$reponse->success = false;
 							$reponse->message = "TXT_CREATE_ERROR"  ;
 							$reponse->row = $result;
 							$reponse->debug = $result;
+						}else{
+							$result=$location->createTable($row);
+							if ($result instanceof \Object\Table) {
+								$row['DT_RowId']=$result->getId();
+								$row['id']=$result->getId();
+								$row['locationid']=$result->getLocation()->getId();
+								$row['locationname']=$result->getLocation()->getName();
+								$reponse->success = true;
+								$reponse->message = "TXT_CREATE_OK" ;
+								$reponse->row = $row;
+								$reponse->debug = $data;
+							} else {
+								$reponse->success = false;
+								$reponse->message = "TXT_CREATE_ERROR"  ;
+								$reponse->row = $result;
+								$reponse->debug = $result;
+							}
 						}
 					}
+				}else{
+					$data=array();
+					foreach( $tables as $key=>$table ){
+						$i++;
+						$array=array();
+						$array=$table->toArray();
+						$array['id']=$table->getId();
+						$array['DT_RowId']=$table->getId();;
+				        array_push($data, $array);
+					}
+					$reponse->message='TXT_TABLE_LIST';
+					$reponse->success=true;
+					$reponse->data =$data;	
 				}
-			}else{
-				$data=array();
-				foreach( $tables as $key=>$table ){
-					$i++;
-					$array=array();
-					$array=$table->toArray();
-					$array['id']=$table->getId();
-					$array['DT_RowId']=$table->getId();;
-			        array_push($data, $array);
-				}
-				$reponse->message='TXT_TABLE_LIST';
-				$reponse->success=true;
-				$reponse->data =$data;	
 			}
         } else {
 			$reponse->message='TXT_TABLE_LIST';

@@ -7,6 +7,13 @@ var TableReservationList = function () {
 	var servingid=$('#servingid').val();
 	var guestid=$('#guestid').val(); 
 	var cancelled=$('#cancelled').val(); 
+	var compareSalle=function(a,b) {
+	  if (a.salle < b.salle)
+	    return -1;
+	  if (a.salle > b.salle)
+	    return 1;
+	  return 0;
+	}
 	var runInputLimiter = function() {
 		$('.limited').inputlimiter({
 			remText: 'You only have %n character%s remaining...',
@@ -19,6 +26,29 @@ var TableReservationList = function () {
     }
     var pickerTime = function(){
 		$('#arrivaltime').timepicker({showMeridian: false});
+    }
+    var addTagsInput = function( div ){
+		div.tagsInput({
+			width: 'auto',
+			onRemoveTag: function(value){ console.log('removetag: ',value);$('button[id="'+value+'"]').removeClass('btn-light-orange'); $('button[id="'+value+'"]').addClass('btn-dark-orange'); $('button[id="'+value+'"]').attr("disabled", false); },
+			onAddTag: function(value){ console.log('addtag: ',value)}
+		});
+    }
+    var manageTables = function( variable ){
+    	$('#tagpanel').prepend( "<div class='tags_1'></div>" );
+    	addTagsInput( $('.tags_1') )
+    	$('#partyiszefortable').html( variable );
+		$('.tableallocation').on('hidden.bs.modal', function () {
+			//alert( 'close modal' );
+			//$("#tags_1").destroyTagsInput();
+			$('#tagpanel').html('');
+		});
+    	$('.tableallocationclass').click( function(){
+    		$(this).attr('disabled', true);
+    		$(this).removeClass('btn-dark-orange');
+    		$(this).addClass('btn-light-orange');
+    		$('.tags_1').addTag( $(this).attr("value") );
+    	});
     }
 	var loadFullCalendar = function(){
 		$("#myfullcalendar").fullCalendar({
@@ -282,7 +312,107 @@ var TableReservationList = function () {
 				console.log(this);
 				console.log( $(e.target).html() );
 				console.log( $("table thead tr th").eq($(e.target).index()) );
-				//editor.inline( this );
+			    var that=this;
+			    var $res = $( "#tables" );
+			    var tr = $(this).closest('tr');
+			    var row = table.row( tr );
+			    var classresult;
+			    $res.html('');
+			    $.ajax({
+				  	url: "/data/table/table-list?action=resatable&reservationid="+row.data().id,
+					dataType: 'json',
+					type:'POST', //obligatoire
+					contentType: "application/json; charset=utf-8",
+					success: function(json) {
+						if (json.success || json.success == 'true') {
+							console.log( json.data );
+							json.data.sort(compareSalle);
+							console.log('length: ', json.data.length);
+							var i=0;
+							var j=1;
+							var k;
+							var nexttab=''; var nextcontent=''; var initialvalue=''; var initialbutton=''; var button='';
+							$.each(json.data, function (key, value) {
+								console.log( 'value', value );
+								console.log( key, value.salle, value.table, value.id, value.reservationid );
+								if( value.reservationid == row.data().id){
+									classresult="btn-green";
+								}else{
+									if( value.booked == "yes" ){ classresult="disabled";} else { classresult="btn-dark-orange";}
+								}
+								if(key==0){k=0;}else{k=key-1;}
+								if( (json.data[k].salle !== value.salle) || key==(json.data.length-1) ){
+									if( json.data[key-1].salle  == json.data[0].salle ){
+										nexttab=
+										'<li class="active">'+
+											'<a href="#myTab_example'+j+'" data-toggle="tab">'+
+												'<i class="green fa fa-home"></i> Salle '+json.data[k].salle+
+											'</a>'+
+										'</li>';
+										nextcontent=
+										'<div class="tab-pane fade in active" id="myTab_example'+j+'">'+
+											button+
+										'</div>';
+										j++;
+										button='<button name="tableid" id="'+value.id+'" type="button" class="btn btn-lg '+classresult+' tableallocationclass" order="'+value.reservationid+'" value="'+value.salle+'-'+value.table+'" style="margin:5px">'+value.salle+'-'+value.table+'</button>';
+									}else if(key==(json.data.length-1)){
+										nexttab=nexttab+
+										'<li>'+
+											'<a href="#myTab_example'+j+'" data-toggle="tab">'+
+												'<i class="green fa fa-home"></i> Salle '+value.salle+
+											'</a>'+
+										'</li>';
+										nextcontent=nextcontent+
+										'<div class="tab-pane fade" id="myTab_example'+j+'">'+
+											button+'<button name="tableid" id="'+value.id+'" type="button" class="btn btn-lg '+classresult+' tableallocationclass" order="'+value.reservationid+'" value="'+value.salle+'-'+value.table+'" style="margin:5px">'+value.salle+'-'+value.table+'</button>'+
+										'</div>';
+										j++;
+									}else{
+										nexttab=nexttab+
+										'<li>'+
+											'<a href="#myTab_example'+j+'" data-toggle="tab">'+
+												'<i class="green fa fa-home"></i> Salle '+json.data[k].salle+
+											'</a>'+
+										'</li>';
+										nextcontent=nextcontent+
+										'<div class="tab-pane fade" id="myTab_example'+j+'">'+
+											button+
+										'</div>';
+										j++;
+										button='<button name="tableid" id="'+value.id+'" type="button" class="btn btn-lg '+classresult+' tableallocationclass" order="'+value.reservationid+'" value="'+value.salle+'-'+value.table+'" style="margin:5px">'+value.salle+'-'+value.table+'</button>';
+									}
+								}else{
+									button=button+"<button name=\"tableid\" id=\""+value.id+"\" type=\"button\" class=\"btn btn-lg "+classresult+" tableallocationclass\" order=\""+value.reservationid+"\" value=\""+value.salle+"-"+value.table+"\" style=\"margin:5px\">"+value.salle+"-"+value.table+"</button>";
+								}
+							});
+							var initialsetup = '<div class="tabbable">'+
+								'<ul id="myTab" class="nav nav-tabs">'+
+									nexttab+
+								'</ul>'+
+								'<div class="tab-content">'+
+										nextcontent+
+								'</div>'+
+							'</div>';
+							$res.append( initialsetup );
+						}
+						console.log( "partysize", row.data().partysize);
+						manageTables(row.data().partysize);
+					},
+					error: function (request, status, error) {
+						//alert(error);
+						//alert(JSON.stringify(request));
+						console.log( error );
+					}
+				});
+				$('#allocatenewtable').on('click', function(e){
+					e.preventDefault();
+					editor.edit( $(that).closest('tr'), false ).set( 'table', $.map($('.tag span'),function(e,i){return $(e).text().trim();}) ).submit();
+					//alert( $("#tags_1").destroyTagsInput() );
+					//editor.edit( $(that).closest('tr'), false ).set( 'table', $("#tags_1").destroyTagsInput() ).submit();
+					$('.tableallocation').modal('toggle');
+					toastr.success(t('js_allocatetable'));
+					$('#allocatenewtable').off('click');
+				});
 			} );
 			oTable.on( 'click', 'tbody td.partysize', function(){
 				var that=this;
@@ -446,7 +576,11 @@ var TableReservationList = function () {
 						"data": "table", 
 						'name':"printable",
 						"render": function (data, type, row){
-							return '<a class="btn btn-blue" data-target=".tableallocation" data-toggle="modal"><span class="tablealloc">'+data+'<span></a>';
+							if( data ){
+								return '<a class="btn btn-blue" data-target=".tableallocation" data-toggle="modal" id="tableallocation"><i class="fa fa-table"></i><span class="tablealloc"> '+data+'<span></a>';
+							}else{
+								return '<a class="btn btn-blue" data-target=".tableallocation" data-toggle="modal" id="tableallocation"><i class="fa fa-table"></i><span class="tablealloc"> No table<span></a>';								
+							}
 						}
 					},
 					{ 
@@ -658,7 +792,6 @@ var TableReservationList = function () {
 				initComplete: function(settings, json) {
     				console.log( 'DataTables has finished its initialisation.' );
     				$('.tooltips').tooltip();
-    				//$('.checkbox').iCheck({checkboxClass: 'icheckbox_square-grey'});
   				},
 				tableTools: {
 					sRowSelect: "os",
